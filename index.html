@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daimabye - Belleza y Estilo</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Animaciones (AOS Library) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        // Configuración de Tailwind para modo oscuro
+        tailwind.config = {
+            darkMode: 'class',
+        }
+        // Aplica el modo oscuro guardado en localStorage o según preferencia del sistema
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+
+    <style>
+        /* Estilos personalizados y paleta de colores del logo */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FDF6F6;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D48DA4' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .dark body {
+            background-color: #1a1a1a;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D48DA4' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        h1, h2, h3, .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        .text-brand-primary {
+            color: #D48DA4; /* Rosa principal del logo */
+        }
+        .bg-brand-primary {
+            background-color: #D48DA4;
+        }
+        .border-brand-primary {
+            border-color: #D48DA4;
+        }
+        .bg-brand-secondary {
+            background-color: #F8E8EE; /* Rosa más claro */
+        }
+        .text-brand-dark {
+            color: #4A3A3F; /* Un tono oscuro para el texto */
+        }
+        .btn-primary {
+            @apply bg-gradient-to-br from-pink-400 to-pink-500 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl;
+        }
+        .btn-secondary {
+             @apply bg-white text-brand-primary border border-brand-primary font-bold py-3 px-8 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105 hover:bg-brand-secondary;
+        }
+        .btn-whatsapp {
+            @apply bg-gradient-to-br from-green-400 to-green-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl;
+        }
+        /* Animación para el modal */
+        .modal-enter {
+            animation: fadeIn 0.3s ease-out;
+        }
+        .modal-leave {
+            animation: fadeOut 0.3s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0; transform: scale(0.95); }
+        }
+        .btn-hero {
+            @apply bg-brand-primary text-white font-bold py-4 px-10 rounded-full shadow-xl transform transition-transform duration-300 hover:scale-110;
+            animation: pulse-animation 2s infinite;
+        }
+
+        @keyframes pulse-animation {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(212, 141, 164, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 15px rgba(212, 141, 164, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(212, 141, 164, 0);
+            }
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: #D48DA4; /* brand primary color */
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 20px rgba(74,58,63,0.05);
+            border-left: 4px solid #D48DA4; /* brand primary color */
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 25px rgba(74,58,63,0.1);
+        }
+        .dark .testimonial-card {
+            background-color: #2d2d2d;
+        }
+
+        /* Custom Form Styles */
+        .form-input {
+            @apply mt-1 block w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg shadow-sm transition duration-300;
+            @apply focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary;
+        }
+        .dark .form-input {
+            @apply bg-gray-700 border-gray-600 text-white;
+        }
+        .section-bg-art {
+            position: relative;
+        }
+        .section-bg-art::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 300px;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23F8E8EE' d='M39.3,-48.1C51.1,-36.8,61,-23.4,64.8,-8.1C68.6,7.2,66.4,24.3,57.7,37.3C49,50.3,33.9,59.2,18.8,64.6C3.7,70,-11.4,71.9,-25.6,68.2C-39.8,64.5,-53.1,55.2,-61.7,42.5C-70.2,29.8,-74,13.7,-71.4,-1.1C-68.7,-15.9,-59.7,-29.4,-48.8,-40.4C-37.9,-51.4,-25.1,-59.8,-11.8,-63.3C1.5,-66.8,15.5,-65.2,27.5,-59.5C39.5,-53.8,39.3,-48.1,39.3,-48.1Z' transform='translate(100 100)' /%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-size: contain;
+            opacity: 0.6;
+            z-index: -1;
+        }
+        .dark .section-bg-art::before {
+             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%234A3A3F' d='M39.3,-48.1C51.1,-36.8,61,-23.4,64.8,-8.1C68.6,7.2,66.4,24.3,57.7,37.3C49,50.3,33.9,59.2,18.8,64.6C3.7,70,-11.4,71.9,-25.6,68.2C-39.8,64.5,-53.1,55.2,-61.7,42.5C-70.2,29.8,-74,13.7,-71.4,-1.1C-68.7,-15.9,-59.7,-29.4,-48.8,-40.4C-37.9,-51.4,-25.1,-59.8,-11.8,-63.3C1.5,-66.8,15.5,-65.2,27.5,-59.5C39.5,-53.8,39.3,-48.1,39.3,-48.1Z' transform='translate(100 100)' /%3E%3C/svg%3E");
+             opacity: 0.1;
+        }
+        .wave-container {
+            line-height: 0;
+        }
+        .hero-text-shadow {
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+        }
+    </style>
+</head>
+<body class="text-brand-dark dark:text-gray-200">
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-40 dark:bg-gray-900/80 dark:border-b dark:border-gray-800">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="flex flex-col items-start leading-none text-brand-dark no-underline dark:text-white">
+                <div class="flex items-center">
+                    <span class="font-display text-4xl text-brand-primary" style="font-weight: 500;">Daima</span>
+                    <div class="w-6 h-6 ml-1 -mt-3 text-brand-primary">
+                        <svg viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="10" fill="#FFFFFF" class="dark:fill-gray-900"/>
+                            <path d="M50,10 A20,20 0,0,1 70,30 L50,50 Z" fill="currentColor" transform="rotate(0, 50, 50)"/>
+                            <path d="M50,10 A20,20 0,0,1 70,30 L50,50 Z" fill="currentColor" transform="rotate(72, 50, 50)"/>
+                            <path d="M50,10 A20,20 0,0,1 70,30 L50,50 Z" fill="currentColor" transform="rotate(144, 50, 50)"/>
+                            <path d="M50,10 A20,20 0,0,1 70,30 L50,50 Z" fill="currentColor" transform="rotate(216, 50, 50)"/>
+                            <path d="M50,10 A20,20 0,0,1 70,30 L50,50 Z" fill="currentColor" transform="rotate(288, 50, 50)"/>
+                        </svg>
+                    </div>
+                </div>
+                <span class="text-xs tracking-[0.2em] -mt-2">BELLEZA Y ESTILO</span>
+            </a>
+            <nav class="flex items-center space-x-4">
+                 <a href="https://www.instagram.com/daimabye/" target="_blank" rel="noopener noreferrer" class="text-brand-primary hover:text-brand-dark dark:hover:text-white transition duration-300" aria-label="Instagram de Daimabye">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+                 <!-- Dark Mode Toggle -->
+                <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm-.707 12.122l.707-.707a1 1 0 10-1.414-1.414l-.707.707a1 1 0 001.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                </button>
+                <button onclick="openModal()" class="btn-primary">
+                    Agendar Cita
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="relative min-h-[60vh] md:min-h-[80vh] flex items-center bg-cover bg-center" style="background-image: url('image_6edb07.jpg');">
+            <div class="absolute inset-0" style="background: radial-gradient(circle, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 100%);"></div>
+            <div class="container mx-auto px-6 text-center text-white relative z-20" data-aos="fade-up">
+                <h1 class="text-4xl md:text-7xl font-bold mb-4 leading-tight hero-text-shadow">Realzando tu belleza, celebrando tu estilo</h1>
+                <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto hero-text-shadow">
+                    Experta en maquillaje profesional, pestañas y peinados para que luzcas radiante en cada ocasión especial.
+                </p>
+                <button onclick="openModal()" class="btn-hero text-lg">
+                    Contacta con nosotras
+                </button>
+            </div>
+        </section>
+
+        <!-- Shaped Divider -->
+        <div class="wave-container -mt-20 md:-mt-32 lg:-mt-48 relative z-10 dark:hidden">
+            <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#FDF6F6" fill-opacity="1" d="M0,224L60,213.3C120,203,240,181,360,186.7C480,192,600,224,720,245.3C840,267,960,277,1080,261.3C1200,245,1320,203,1380,181.3L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z" class="dark:fill-gray-900"></path>
+            </svg>
+        </div>
+
+        <!-- Services Section -->
+        <section id="services" class="pb-16 md:pb-24 section-bg-art dark:pt-16">
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-4xl md:text-5xl font-bold text-brand-primary section-title">Nuestros Servicios</h2>
+                    <p class="text-lg mt-4 text-gray-600 dark:text-gray-400">Creamos el look perfecto para ti.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Service Card 1 -->
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center transform transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-brand-primary/30 dark:hover:border-brand-primary/50" data-aos="fade-up" data-aos-delay="100">
+                        <div class="inline-block bg-brand-primary text-white p-4 rounded-full mb-4">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><path d="M12 18h.01"></path><path d="M16 14h.01"></path><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 18h.01"></path><path d="M8 18h.01"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold font-display mb-2 text-brand-dark dark:text-white">Maquillaje Profesional</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Para eventos, sesiones de fotos o cualquier día que quieras sentirte especial. Usamos productos de alta gama para un acabado impecable.</p>
+                    </div>
+                    <!-- Service Card 2 -->
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center transform transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-brand-primary/30 dark:hover:border-brand-primary/50" data-aos="fade-up" data-aos-delay="200">
+                         <div class="inline-block bg-brand-primary text-white p-4 rounded-full mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold font-display mb-2 text-brand-dark dark:text-white">Aplicación de Pestañas</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Consigue una mirada de impacto con nuestras pestañas pelo a pelo o por punto. Diseños personalizados para realzar tus ojos.</p>
+                    </div>
+                    <!-- Service Card 3 -->
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center transform transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-brand-primary/30 dark:hover:border-brand-primary/50" data-aos="fade-up" data-aos-delay="300">
+                         <div class="inline-block bg-brand-primary text-white p-4 rounded-full mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 17.5a2.5 2.5 0 0 0-4.4-1.93l-4.2-2.1a2.5 2.5 0 0 0 0-1.94l4.2-2.1a2.5 2.5 0 1 0-.9-3.92"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold font-display mb-2 text-brand-dark dark:text-white">Peinados y Rizos</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Desde ondas suaves hasta recogidos elegantes, creamos el peinado perfecto que complemente tu look y dure toda la noche.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="py-16 md:py-24 bg-brand-secondary/40 dark:bg-gray-800/20">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-4xl md:text-5xl font-bold text-brand-primary section-title">Nuestra Galería</h2>
+                    <p class="text-lg mt-4 text-gray-600 dark:text-gray-400">Transformaciones que inspiran.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="overflow-hidden rounded-lg" data-aos="fade-up" data-aos-delay="100">
+                        <img class="h-auto max-w-full rounded-lg shadow-md transition-transform duration-300 hover:scale-110" src="image_6edb2e.jpg" alt="Maquillaje con técnica Open Cut">
+                    </div>
+                    <div class="overflow-hidden rounded-lg" data-aos="fade-up" data-aos-delay="200">
+                        <img class="h-auto max-w-full rounded-lg shadow-md transition-transform duration-300 hover:scale-110" src="image_6edb85.jpg" alt="Maquillaje Piel Ébano con técnica de ahumado">
+                    </div>
+                    <div class="overflow-hidden rounded-lg" data-aos="fade-up" data-aos-delay="300">
+                        <img class="h-auto max-w-full rounded-lg shadow-md transition-transform duration-300 hover:scale-110" src="image_6edb68.jpg" alt="Maquillaje con técnica Semi Cut">
+                    </div>
+                     <div class="overflow-hidden rounded-lg" data-aos="fade-up" data-aos-delay="400">
+                        <img class="h-auto max-w-full rounded-lg shadow-md transition-transform duration-300 hover:scale-110" src="image_6edba7.jpg" alt="Retoques de color cenizos en el cabello">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-16 md:py-24 section-bg-art">
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-4xl md:text-5xl font-bold text-brand-primary section-title">Lo que dicen nuestras clientas</h2>
+                    <p class="text-lg mt-4 text-gray-600 dark:text-gray-400">Tu satisfacción es nuestro mayor orgullo.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                        <p class="text-gray-600 dark:text-gray-300 italic mb-4">xd</p>
+                        <div class="flex items-center mt-4">
+                            <div class="font-bold text-brand-dark dark:text-white">- Ana Sofía V.</div>
+                            <div class="ml-auto flex">
+                                <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                        <p class="text-gray-600 dark:text-gray-300 italic mb-4">xd</p>
+                        <div class="flex items-center mt-4">
+                            <div class="font-bold text-brand-dark dark:text-white">- Carla M.</div>
+                            <div class="ml-auto flex">
+                                <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                        <p class="text-gray-600 dark:text-gray-300 italic mb-4">xd</p>
+                        <div class="flex items-center mt-4">
+                            <div class="font-bold text-brand-dark dark:text-white">- Isabel R.</div>
+                            <div class="ml-auto flex">
+                               <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location Section -->
+        <section id="location" class="py-16 md:py-24 bg-white dark:bg-gray-800/20">
+            <div class="container mx-auto px-6">
+                <div class="text-center" data-aos="fade-up">
+                     <h2 class="text-4xl md:text-5xl font-bold text-brand-primary section-title">Encuéntranos</h2>
+                     <div class="w-full max-w-4xl mx-auto mt-8 rounded-2xl overflow-hidden shadow-2xl">
+                        <div class="md:flex">
+                            <div class="md:w-1/2 p-8 md:p-12 text-left bg-brand-secondary dark:bg-gray-800">
+                                <h3 class="text-3xl font-bold font-display mb-4 text-brand-dark dark:text-white">Visítanos en Portoviejo</h3>
+                                <p class="text-lg mb-4 text-gray-600 dark:text-gray-400">
+                                    Estamos convenientemente ubicados para que vengas a consentirte.
+                                </p>
+                                <div class="flex items-center mt-6">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary h-8 w-8 mr-4"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                    <div>
+                                        <p class="font-semibold text-brand-dark dark:text-white">Dirección:</p>
+                                        <p class="text-gray-600 dark:text-gray-400">Av. 15 de Abril, al lado del Shopping, Portoviejo, Manabí.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="md:w-1/2">
+                                <iframe src="https://maps.google.com/maps?q=-1.062071,-80.464144&hl=es&z=18&amp;output=embed" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="grayscale-[30%]"></iframe>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark text-white py-12 dark:bg-gray-900">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex flex-col items-center leading-none text-white no-underline mb-4">
+                <div class="flex items-center">
+                    <span class="font-display text-5xl" style="font-weight: 500;">Daima</span>
+                     <div class="w-8 h-8 ml-1 -mt-4 text-white">
+                        <svg viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="10" fill="#4A3A3F" class="dark:fill-gray-900"/>
+                            <path d="M50,10 A20,20 0,0,1 70,30 L50,50 Z" fill="currentColor" transform="rotate(0, 50, 50)"/>
+                            <path d="M50,10 A20,20 0,0,1 70,30 L50,50 Z" fill="currentColor" transform="rotate(72, 50, 50)"/>
+                            <path d="M50,10 A20,20 0,0,1 70,30 L50,50 Z" fill="currentColor" transform="rotate(144, 50, 50)"/>
+                            <path d="M50,10 A20,20 0,0,1 70,30 L50,50 Z" fill="currentColor" transform="rotate(216, 50, 50)"/>
+                            <path d="M50,10 A20,20 0,0,1 70,30 L50,50 Z" fill="currentColor" transform="rotate(288, 50, 50)"/>
+                        </svg>
+                    </div>
+                </div>
+                <span class="text-sm tracking-[0.2em] -mt-2">BELLEZA Y ESTILO</span>
+            </div>
+             <div class="flex justify-center space-x-6 my-6">
+                 <a href="https://www.instagram.com/daimabye/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-brand-primary transition duration-300" aria-label="Instagram de Daimabye">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                 </a>
+            </div>
+            <p class="text-gray-300">&copy; 2024 Daimabye Belleza y Estilo. Todos los derechos reservados.</p>
+            <p class="mt-2 text-gray-400">Portoviejo, Manabí, Ecuador</p>
+        </div>
+    </footer>
+
+
+    <!-- Modal de Agendamiento -->
+    <div id="booking-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden">
+        <div id="modal-content" class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-lg p-8 relative transform modal-enter">
+            <!-- Botón para cerrar -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 dark:hover:text-white transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            
+            <h2 class="text-3xl font-bold font-display text-brand-primary mb-2">Agenda tu Cita</h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-6">Completa el formulario y te contactaremos a la brevedad.</p>
+            
+            <form id="booking-form" class="space-y-4">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nombre Completo</label>
+                    <input type="text" id="name" name="name" required class="form-input">
+                </div>
+                
+                <div>
+                    <label for="service" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">¿Qué servicio deseas?</label>
+                    <select id="service" name="service" required class="form-input">
+                        <option value="" disabled selected>Selecciona un servicio</option>
+                        <option value="Maquillaje Profesional">Maquillaje Profesional</option>
+                        <option value="Aplicación de Pestañas">Aplicación de Pestañas</option>
+                        <option value="Peinado y Rizos">Peinado y Rizos</option>
+                        <option value="Maquillaje para Quinceañera">Maquillaje para Quinceañera</option>
+                        <option value="Maquillaje para Boda">Maquillaje para Boda</option>
+                        <option value="Colorimetría y Retoques">Colorimetría y Retoques</option>
+                        <option value="Otro (especificar en mensaje)">Otro</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="datetime" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Fecha y Hora preferida</label>
+                    <input type="datetime-local" id="datetime" name="datetime" class="form-input">
+                </div>
+
+                <div>
+                    <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mensaje Adicional</label>
+                    <textarea id="message" name="message" rows="3" placeholder="¿Algún detalle que debamos saber?" class="form-input"></textarea>
+                </div>
+                
+                <div class="pt-4">
+                    <button type="submit" class="w-full btn-whatsapp text-lg">
+                        Enviar por WhatsApp
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Inicializar librería de animaciones
+        AOS.init({
+            duration: 800,
+            once: true,
+        });
+
+        // Lógica del Modal
+        const modal = document.getElementById('booking-modal');
+        const modalContent = document.getElementById('modal-content');
+
+        function openModal() {
+            modal.classList.remove('hidden');
+            modalContent.classList.remove('modal-leave');
+            modalContent.classList.add('modal-enter');
+        }
+
+        function closeModal() {
+            modalContent.classList.add('modal-leave');
+            modalContent.classList.remove('modal-enter');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300); // Coincide con la duración de la animación
+        }
+        
+        // Cierra el modal si se hace clic fuera del contenido
+        modal.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Lógica del Formulario para WhatsApp
+        const bookingForm = document.getElementById('booking-form');
+        bookingForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Número de teléfono del administrador con código de país (Ecuador es +593)
+            const adminPhoneNumber = '593963964792'; 
+
+            // Recopilar datos del formulario
+            const name = document.getElementById('name').value;
+            const service = document.getElementById('service').value;
+            const datetimeInput = document.getElementById('datetime').value;
+            const message = document.getElementById('message').value;
+
+            let formattedDatetime = "No especificada";
+            if (datetimeInput) {
+                const date = new Date(datetimeInput);
+                 formattedDatetime = date.toLocaleString('es-EC', {
+                    dateStyle: 'long',
+                    timeStyle: 'short'
+                });
+            }
+
+            // Crear el mensaje para WhatsApp
+            let whatsappMessage = `¡Hola Daimabye! ✨\n\nQuisiera agendar una cita.\n\n`;
+            whatsappMessage += `*Nombre:* ${name}\n`;
+            whatsappMessage += `*Servicio:* ${service}\n`;
+            whatsappMessage += `*Fecha y Hora:* ${formattedDatetime}\n`;
+            if (message) {
+                whatsappMessage += `*Mensaje Adicional:* ${message}\n`;
+            }
+            whatsappMessage += `\n¡Gracias!`;
+
+            // Codificar el mensaje para la URL
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+
+            // Crear la URL de WhatsApp
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${adminPhoneNumber}&text=${encodedMessage}`;
+            
+            // Abrir WhatsApp en una nueva pestaña
+            window.open(whatsappUrl, '_blank');
+
+            // Limpiar el formulario y cerrar el modal
+            bookingForm.reset();
+            closeModal();
+        });
+
+        // Lógica del Dark Mode Toggle
+        var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+        // Change the icons inside the button based on previous settings
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            themeToggleLightIcon.classList.remove('hidden');
+        } else {
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+
+        var themeToggleButton = document.getElementById('theme-toggle');
+
+        themeToggleButton.addEventListener('click', function() {
+            // toggle icons inside button
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+
+            // if set via local storage previously
+            if (localStorage.getItem('theme')) {
+                if (localStorage.getItem('theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                }
+
+            // if NOT set via local storage previously
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+            }
+        });
+
+    </script>
+
+</body>
+</html>
+
