@@ -164,6 +164,20 @@
         .hero-text-shadow {
             text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
         }
+        /* Animación para la galería */
+        @keyframes gallery-fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        .gallery-enter-active {
+            animation: gallery-fade-in-up 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
     </style>
 </head>
 <body class="text-brand-dark dark:text-gray-200">
@@ -236,35 +250,41 @@
                 </div>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Service Card 1 -->
-                    <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center transform transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-brand-primary/30 dark:hover:border-brand-primary/50" data-aos="fade-up" data-aos-delay="100">
-                        <div class="inline-block bg-brand-primary text-white p-4 rounded-full mb-4">
-                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><path d="M12 18h.01"></path><path d="M16 14h.01"></path><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 18h.01"></path><path d="M8 18h.01"></path></svg>
+                    <a href="#" onclick="showGallery(event)" class="block cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-primary/50 rounded-2xl" data-aos="fade-up" data-aos-delay="100">
+                        <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center transform transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-brand-primary/30 dark:hover:border-brand-primary/50 h-full">
+                            <div class="inline-block bg-brand-primary text-white p-4 rounded-full mb-4">
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><path d="M12 18h.01"></path><path d="M16 14h.01"></path><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 18h.01"></path><path d="M8 18h.01"></path></svg>
+                            </div>
+                            <h3 class="text-2xl font-bold font-display mb-2 text-brand-dark dark:text-white">Maquillaje Profesional</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Para eventos, sesiones de fotos o cualquier día que quieras sentirte especial. Usamos productos de alta gama para un acabado impecable.</p>
                         </div>
-                        <h3 class="text-2xl font-bold font-display mb-2 text-brand-dark dark:text-white">Maquillaje Profesional</h3>
-                        <p class="text-gray-600 dark:text-gray-400">Para eventos, sesiones de fotos o cualquier día que quieras sentirte especial. Usamos productos de alta gama para un acabado impecable.</p>
-                    </div>
+                    </a>
                     <!-- Service Card 2 -->
-                    <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center transform transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-brand-primary/30 dark:hover:border-brand-primary/50" data-aos="fade-up" data-aos-delay="200">
-                         <div class="inline-block bg-brand-primary text-white p-4 rounded-full mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                    <a href="#" onclick="showGallery(event)" class="block cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-primary/50 rounded-2xl" data-aos="fade-up" data-aos-delay="200">
+                        <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center transform transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-brand-primary/30 dark:hover:border-brand-primary/50 h-full">
+                             <div class="inline-block bg-brand-primary text-white p-4 rounded-full mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                            </div>
+                            <h3 class="text-2xl font-bold font-display mb-2 text-brand-dark dark:text-white">Aplicación de Pestañas</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Consigue una mirada de impacto con nuestras pestañas pelo a pelo o por punto. Diseños personalizados para realzar tus ojos.</p>
                         </div>
-                        <h3 class="text-2xl font-bold font-display mb-2 text-brand-dark dark:text-white">Aplicación de Pestañas</h3>
-                        <p class="text-gray-600 dark:text-gray-400">Consigue una mirada de impacto con nuestras pestañas pelo a pelo o por punto. Diseños personalizados para realzar tus ojos.</p>
-                    </div>
+                    </a>
                     <!-- Service Card 3 -->
-                    <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center transform transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-brand-primary/30 dark:hover:border-brand-primary/50" data-aos="fade-up" data-aos-delay="300">
-                         <div class="inline-block bg-brand-primary text-white p-4 rounded-full mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 17.5a2.5 2.5 0 0 0-4.4-1.93l-4.2-2.1a2.5 2.5 0 0 0 0-1.94l4.2-2.1a2.5 2.5 0 1 0-.9-3.92"></path></svg>
+                    <a href="#" onclick="showGallery(event)" class="block cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-primary/50 rounded-2xl" data-aos="fade-up" data-aos-delay="300">
+                        <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center transform transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-brand-primary/30 dark:hover:border-brand-primary/50 h-full">
+                             <div class="inline-block bg-brand-primary text-white p-4 rounded-full mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 17.5a2.5 2.5 0 0 0-4.4-1.93l-4.2-2.1a2.5 2.5 0 0 0 0-1.94l4.2-2.1a2.5 2.5 0 1 0-.9-3.92"></path></svg>
+                            </div>
+                            <h3 class="text-2xl font-bold font-display mb-2 text-brand-dark dark:text-white">Peinados y Rizos</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Desde ondas suaves hasta recogidos elegantes, creamos el peinado perfecto que complemente tu look y dure toda la noche.</p>
                         </div>
-                        <h3 class="text-2xl font-bold font-display mb-2 text-brand-dark dark:text-white">Peinados y Rizos</h3>
-                        <p class="text-gray-600 dark:text-gray-400">Desde ondas suaves hasta recogidos elegantes, creamos el peinado perfecto que complemente tu look y dure toda la noche.</p>
-                    </div>
+                    </a>
                 </div>
             </div>
         </section>
 
         <!-- Gallery Section -->
-        <section id="gallery" class="py-16 md:py-24 bg-brand-secondary/40 dark:bg-gray-800/20">
+        <section id="gallery" class="py-16 md:py-24 bg-brand-secondary/40 dark:bg-gray-800/20 hidden">
             <div class="container mx-auto px-6">
                  <div class="text-center mb-12" data-aos="fade-up">
                     <h2 class="text-4xl md:text-5xl font-bold text-brand-primary section-title">Nuestra Galería</h2>
@@ -560,6 +580,32 @@
                 }
             }
         });
+
+        // Nueva función para mostrar la galería
+        function showGallery(event) {
+            event.preventDefault(); // Evita el comportamiento predeterminado del enlace
+            const gallerySection = document.getElementById('gallery');
+            
+            if (gallerySection.classList.contains('hidden')) {
+                // Muestra la sección de la galería
+                gallerySection.classList.remove('hidden');
+                gallerySection.classList.add('gallery-enter-active');
+
+                // Desplaza suavemente a la sección después de un breve instante
+                setTimeout(() => {
+                    gallerySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 50);
+                
+                // Refresca AOS para que las imágenes dentro de la galería también se animen
+                setTimeout(() => {
+                    AOS.refresh();
+                }, 200);
+
+            } else {
+                // Si la galería ya es visible, solo se desplaza a ella
+                gallerySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
 
     </script>
 
