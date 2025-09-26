@@ -10,7 +10,7 @@
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <!-- Animaciones (AOS Library) -->
@@ -114,6 +114,53 @@
             margin: 1rem auto 0;
             border-radius: 2px;
         }
+        
+        .hero-text-shadow {
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Estilos para las nuevas olas animadas */
+        .waves-container {
+            position:relative;
+            width: 100%;
+            height: 15vh;
+            min-height: 100px;
+            max-height: 250px;
+        }
+        .waves {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .parallax > use {
+            animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
+        }
+        .parallax > use:nth-child(1) {
+            animation-delay: -2s;
+            animation-duration: 7s;
+        }
+        .parallax > use:nth-child(2) {
+            animation-delay: -3s;
+            animation-duration: 10s;
+        }
+        .parallax > use:nth-child(3) {
+            animation-delay: -4s;
+            animation-duration: 13s;
+        }
+        .parallax > use:nth-child(4) {
+            animation-delay: -5s;
+            animation-duration: 20s;
+        }
+        @keyframes move-forever {
+            0% {
+                transform: translate3d(-90px,0,0);
+            }
+            100% { 
+                transform: translate3d(85px,0,0);
+            }
+        }
 
         .testimonial-card {
             background-color: white;
@@ -164,12 +211,7 @@
              background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%235D4945' d='M39.3,-48.1C51.1,-36.8,61,-23.4,64.8,-8.1C68.6,7.2,66.4,24.3,57.7,37.3C49,50.3,33.9,59.2,18.8,64.6C3.7,70,-11.4,71.9,-25.6,68.2C-39.8,64.5,-53.1,55.2,-61.7,42.5C-70.2,29.8,-74,13.7,-71.4,-1.1C-68.7,-15.9,-59.7,-29.4,-48.8,-40.4C-37.9,-51.4,-25.1,-59.8,-11.8,-63.3C1.5,-66.8,15.5,-65.2,27.5,-59.5C39.5,-53.8,39.3,-48.1,39.3,-48.1Z' transform='translate(100 100)' /%3E%3C/svg%3E");
              opacity: 0.1;
         }
-        .wave-container {
-            line-height: 0;
-        }
-        .hero-text-shadow {
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
-        }
+        
         /* Animación para la galería */
         @keyframes gallery-fade-in-up {
             from {
@@ -223,7 +265,7 @@
     <!-- Main Content -->
     <main>
         <!-- Hero Section -->
-        <section class="relative min-h-[60vh] md:min-h-[80vh] flex items-center bg-cover bg-center" style="background-image: url('image_6edb07.jpg');">
+        <section class="relative min-h-[60vh] md:min-h-[80vh] flex items-center bg-cover bg-center overflow-hidden" style="background-image: url('image_6edb07.jpg');">
             <div class="absolute inset-0" style="background: radial-gradient(circle, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 100%);"></div>
             <div class="container mx-auto px-6 text-center text-white relative z-20" data-aos="fade-up">
                 <h1 class="text-4xl md:text-7xl font-bold mb-4 leading-tight hero-text-shadow">Realzando tu belleza, celebrando tu estilo</h1>
@@ -234,17 +276,29 @@
                     Contacta con nosotras
                 </button>
             </div>
+            <!-- Nuevas Olas Animadas -->
+            <div class="absolute bottom-[-1px] left-0 w-full z-10">
+                <div class="waves-container">
+                    <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                        <defs>
+                            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                        </defs>
+                        <g class="parallax">
+                            <!-- Colores que combinan con la paleta de colores. La opacidad crea el efecto de capas. -->
+                            <use xlink:href="#gentle-wave" x="48" y="0" class="fill-[#EADCD8]/50 dark:fill-gray-800/50" />
+                            <use xlink:href="#gentle-wave" x="48" y="3" class="fill-[#EADCD8]/70 dark:fill-gray-800/70" />
+                            <use xlink:href="#gentle-wave" x="48" y="5" class="fill-[#EADCD8] dark:fill-gray-800" />
+                            <!-- La última ola usa el color de fondo de la siguiente sección para una transición suave -->
+                            <use xlink:href="#gentle-wave" x="48" y="7" class="fill-[#F9F1EF] dark:fill-[#1a1a1a]" />
+                        </g>
+                    </svg>
+                </div>
+            </div>
         </section>
 
-        <!-- Shaped Divider -->
-        <div class="wave-container -mt-20 md:-mt-32 lg:-mt-48 relative z-10">
-            <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
-                <path fill="#F9F1EF" fill-opacity="1" d="M0,224L60,213.3C120,203,240,181,360,186.7C480,192,600,224,720,245.3C840,267,960,277,1080,261.3C1200,245,1320,203,1380,181.3L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z" class="dark:fill-gray-900"></path>
-            </svg>
-        </div>
-
         <!-- Services Section -->
-        <section id="services" class="pb-16 md:pb-24 section-bg-art dark:pt-16">
+        <section id="services" class="py-16 md:py-24 section-bg-art">
             <div class="container mx-auto px-6 relative z-10">
                 <div class="text-center mb-12" data-aos="fade-up">
                     <h2 class="text-4xl md:text-5xl font-bold text-brand-primary section-title">Nuestros Servicios</h2>
@@ -659,5 +713,3 @@
 
 </body>
 </html>
-
-
