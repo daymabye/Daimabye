@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daimabye - Belleza y Estilo</title>
+    <title>Daima Belleza Studio</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,7 +11,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <!-- Animaciones (AOS Library) -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -30,36 +30,43 @@
     </script>
 
     <style>
-        /* Estilos personalizados y paleta de colores del logo */
+        /* Estilos personalizados y nueva paleta de colores del logo */
+        :root {
+            --brand-primary: #B99285; /* Rosa dorado del logo */
+            --brand-secondary: #EADCD8; /* Tono de fondo claro */
+            --brand-dark: #5D4945; /* Marrón oscuro para texto */
+            --brand-bg: #F9F1EF; /* Fondo general de la página */
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #FDF6F6;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D48DA4' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-color: var(--brand-bg);
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23B99285' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
         .dark body {
             background-color: #1a1a1a;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D48DA4' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23B99285' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
         h1, h2, h3, .font-display {
             font-family: 'Playfair Display', serif;
         }
         .text-brand-primary {
-            color: #D48DA4; /* Rosa principal del logo */
+            color: var(--brand-primary);
         }
         .bg-brand-primary {
-            background-color: #D48DA4;
+            background-color: var(--brand-primary);
         }
         .border-brand-primary {
-            border-color: #D48DA4;
+            border-color: var(--brand-primary);
         }
         .bg-brand-secondary {
-            background-color: #F8E8EE; /* Rosa más claro */
+            background-color: var(--brand-secondary);
         }
         .text-brand-dark {
-            color: #4A3A3F; /* Un tono oscuro para el texto */
+            color: var(--brand-dark);
         }
         .btn-primary {
-            @apply bg-gradient-to-br from-pink-400 to-pink-500 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl;
+            @apply bg-brand-primary text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl;
         }
         .btn-secondary {
              @apply bg-white text-brand-primary border border-brand-primary font-bold py-3 px-8 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105 hover:bg-brand-secondary;
@@ -68,12 +75,8 @@
             @apply bg-gradient-to-br from-green-400 to-green-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl;
         }
         /* Animación para el modal */
-        .modal-enter {
-            animation: fadeIn 0.3s ease-out;
-        }
-        .modal-leave {
-            animation: fadeOut 0.3s ease-in;
-        }
+        .modal-enter { animation: fadeIn 0.3s ease-out; }
+        .modal-leave { animation: fadeOut 0.3s ease-in; }
         @keyframes fadeIn {
             from { opacity: 0; transform: scale(0.95); }
             to { opacity: 1; transform: scale(1); }
@@ -90,15 +93,15 @@
         @keyframes pulse-animation {
             0% {
                 transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(212, 141, 164, 0.7);
+                box-shadow: 0 0 0 0 rgba(185, 146, 133, 0.7);
             }
             70% {
                 transform: scale(1.05);
-                box-shadow: 0 0 0 15px rgba(212, 141, 164, 0);
+                box-shadow: 0 0 0 15px rgba(185, 146, 133, 0);
             }
             100% {
                 transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(212, 141, 164, 0);
+                box-shadow: 0 0 0 0 rgba(185, 146, 133, 0);
             }
         }
         
@@ -107,7 +110,7 @@
             display: block;
             width: 80px;
             height: 3px;
-            background-color: #D48DA4; /* brand primary color */
+            background-color: var(--brand-primary);
             margin: 1rem auto 0;
             border-radius: 2px;
         }
@@ -116,17 +119,20 @@
             background-color: white;
             padding: 2rem;
             border-radius: 1rem;
-            box-shadow: 0 10px 20px rgba(74,58,63,0.05);
-            border-left: 4px solid #D48DA4; /* brand primary color */
+            box-shadow: 0 10px 20px rgba(93, 73, 69, 0.05);
+            border-left: 4px solid var(--brand-primary);
             transform: translateY(0);
-            transition: all 0.3s ease;
+            transition: all 0.3s ease, opacity 0.7s ease-in-out;
         }
         .testimonial-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 25px rgba(74,58,63,0.1);
+            box-shadow: 0 15px 25px rgba(93, 73, 69, 0.1);
         }
         .dark .testimonial-card {
             background-color: #2d2d2d;
+        }
+        .testimonial-card.fading-out {
+            opacity: 0;
         }
 
         /* Custom Form Styles */
@@ -148,14 +154,14 @@
             transform: translateX(-50%);
             width: 300px;
             height: 300px;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23F8E8EE' d='M39.3,-48.1C51.1,-36.8,61,-23.4,64.8,-8.1C68.6,7.2,66.4,24.3,57.7,37.3C49,50.3,33.9,59.2,18.8,64.6C3.7,70,-11.4,71.9,-25.6,68.2C-39.8,64.5,-53.1,55.2,-61.7,42.5C-70.2,29.8,-74,13.7,-71.4,-1.1C-68.7,-15.9,-59.7,-29.4,-48.8,-40.4C-37.9,-51.4,-25.1,-59.8,-11.8,-63.3C1.5,-66.8,15.5,-65.2,27.5,-59.5C39.5,-53.8,39.3,-48.1,39.3,-48.1Z' transform='translate(100 100)' /%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23EADCD8' d='M39.3,-48.1C51.1,-36.8,61,-23.4,64.8,-8.1C68.6,7.2,66.4,24.3,57.7,37.3C49,50.3,33.9,59.2,18.8,64.6C3.7,70,-11.4,71.9,-25.6,68.2C-39.8,64.5,-53.1,55.2,-61.7,42.5C-70.2,29.8,-74,13.7,-71.4,-1.1C-68.7,-15.9,-59.7,-29.4,-48.8,-40.4C-37.9,-51.4,-25.1,-59.8,-11.8,-63.3C1.5,-66.8,15.5,-65.2,27.5,-59.5C39.5,-53.8,39.3,-48.1,39.3,-48.1Z' transform='translate(100 100)' /%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-size: contain;
             opacity: 0.6;
             z-index: -1;
         }
         .dark .section-bg-art::before {
-             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%234A3A3F' d='M39.3,-48.1C51.1,-36.8,61,-23.4,64.8,-8.1C68.6,7.2,66.4,24.3,57.7,37.3C49,50.3,33.9,59.2,18.8,64.6C3.7,70,-11.4,71.9,-25.6,68.2C-39.8,64.5,-53.1,55.2,-61.7,42.5C-70.2,29.8,-74,13.7,-71.4,-1.1C-68.7,-15.9,-59.7,-29.4,-48.8,-40.4C-37.9,-51.4,-25.1,-59.8,-11.8,-63.3C1.5,-66.8,15.5,-65.2,27.5,-59.5C39.5,-53.8,39.3,-48.1,39.3,-48.1Z' transform='translate(100 100)' /%3E%3C/svg%3E");
+             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%235D4945' d='M39.3,-48.1C51.1,-36.8,61,-23.4,64.8,-8.1C68.6,7.2,66.4,24.3,57.7,37.3C49,50.3,33.9,59.2,18.8,64.6C3.7,70,-11.4,71.9,-25.6,68.2C-39.8,64.5,-53.1,55.2,-61.7,42.5C-70.2,29.8,-74,13.7,-71.4,-1.1C-68.7,-15.9,-59.7,-29.4,-48.8,-40.4C-37.9,-51.4,-25.1,-59.8,-11.8,-63.3C1.5,-66.8,15.5,-65.2,27.5,-59.5C39.5,-53.8,39.3,-48.1,39.3,-48.1Z' transform='translate(100 100)' /%3E%3C/svg%3E");
              opacity: 0.1;
         }
         .wave-container {
@@ -184,23 +190,19 @@
 
     <!-- Header -->
     <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-40 dark:bg-gray-900/80 dark:border-b dark:border-gray-800">
-        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+        <div class="container mx-auto px-6 py-2 flex justify-between items-center">
             <!-- Logo -->
-            <a href="#" class="flex flex-col items-start leading-none text-brand-dark no-underline dark:text-white">
-                <div class="flex items-center">
-                    <span class="font-display text-4xl text-brand-primary" style="font-weight: 500;">Daima</span>
-                    <div class="w-6 h-6 ml-1 -mt-3 text-brand-primary">
-                        <svg viewBox="0 0 100 100">
-                            <circle cx="50" cy="50" r="10" fill="#FFFFFF" class="dark:fill-gray-900"/>
-                            <path d="M50,10 A20,20 0,0,1 70,30 L50,50 Z" fill="currentColor" transform="rotate(0, 50, 50)"/>
-                            <path d="M50,10 A20,20 0,0,1 70,30 L50,50 Z" fill="currentColor" transform="rotate(72, 50, 50)"/>
-                            <path d="M50,10 A20,20 0,0,1 70,30 L50,50 Z" fill="currentColor" transform="rotate(144, 50, 50)"/>
-                            <path d="M50,10 A20,20 0,0,1 70,30 L50,50 Z" fill="currentColor" transform="rotate(216, 50, 50)"/>
-                            <path d="M50,10 A20,20 0,0,1 70,30 L50,50 Z" fill="currentColor" transform="rotate(288, 50, 50)"/>
-                        </svg>
-                    </div>
+            <a href="#" class="flex items-center">
+                <div class="flex items-end">
+                    <span style="font-family: 'Dancing Script', cursive; line-height: 0.8;" class="text-6xl font-normal text-brand-primary">dm</span>
+                    <svg width="55" height="32" viewBox="0 0 75 40" class="text-brand-primary -ml-7 mb-2" fill="currentColor" style="transform: scaleX(-1) rotate(-15deg) translateX(-5px) translateY(5px);">
+                        <path d="M74.7,2.1C70,0.8,65,0,59.8,0C41,0,25.3,10.4,14.9,26.1c-1.9,2.9-3.6,5.9-5,9C8.1,38.6,5.7,40,2.9,40c-0.8,0-1.5-0.1-2.2-0.4c-1.1-0.4-1-1.9,0.2-2.5c1.4-0.7,2.9-1.7,4.2-2.9C1.9,32.3,0,28.6,0,24.6c0-4.8,2.5-9.2,6.7-11.9C18.4,4.2,37.8,0.7,59.8,0.7c4.7,0,9.4,0.6,13.8,1.9C74.6,2.8,75,2.3,74.7,2.1z M6.7,14.5C3.6,16.5,1.8,20.3,1.8,24.6c0,3.3,1.5,6.4,3.9,8.4c-1,1-2.2,1.8-3.4,2.4c-0.2,0.1-0.2,0.2,0,0.2c0.4,0.2,0.8,0.2,1.2,0.2c2.1,0,4-1.1,5.6-3.4c1.3-2.9,2.9-5.7,4.6-8.4C26.1,11.5,41.4,1.8,59.8,1.8C38.2,1.8,18.5,5.2,6.7,14.5z"></path>
+                    </svg>
                 </div>
-                <span class="text-xs tracking-[0.2em] -mt-2">BELLEZA Y ESTILO</span>
+                <div class="ml-1 text-left">
+                    <span class="block font-display text-2xl text-brand-dark dark:text-white" style="line-height: 1;">Daima Belleza</span>
+                    <span class="block text-xs tracking-[0.3em] font-light text-brand-dark/70 dark:text-white/70 mt-1">STUDIO</span>
+                </div>
             </a>
             <nav class="flex items-center space-x-4">
                  <a href="https://www.instagram.com/daimabye/" target="_blank" rel="noopener noreferrer" class="text-brand-primary hover:text-brand-dark dark:hover:text-white transition duration-300" aria-label="Instagram de Daimabye">
@@ -211,7 +213,7 @@
                     <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
                     <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm-.707 12.122l.707-.707a1 1 0 10-1.414-1.414l-.707.707a1 1 0 001.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
                 </button>
-                <button onclick="openModal()" class="btn-primary">
+                <button onclick="openModal()" class="btn-secondary">
                     Agendar Cita
                 </button>
             </nav>
@@ -235,9 +237,9 @@
         </section>
 
         <!-- Shaped Divider -->
-        <div class="wave-container -mt-20 md:-mt-32 lg:-mt-48 relative z-10 dark:hidden">
+        <div class="wave-container -mt-20 md:-mt-32 lg:-mt-48 relative z-10">
             <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
-                <path fill="#FDF6F6" fill-opacity="1" d="M0,224L60,213.3C120,203,240,181,360,186.7C480,192,600,224,720,245.3C840,267,960,277,1080,261.3C1200,245,1320,203,1380,181.3L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z" class="dark:fill-gray-900"></path>
+                <path fill="#F9F1EF" fill-opacity="1" d="M0,224L60,213.3C120,203,240,181,360,186.7C480,192,600,224,720,245.3C840,267,960,277,1080,261.3C1200,245,1320,203,1380,181.3L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z" class="dark:fill-gray-900"></path>
             </svg>
         </div>
 
@@ -314,37 +316,8 @@
                     <h2 class="text-4xl md:text-5xl font-bold text-brand-primary section-title">Lo que dicen nuestras clientas</h2>
                     <p class="text-lg mt-4 text-gray-600 dark:text-gray-400">Tu satisfacción es nuestro mayor orgullo.</p>
                 </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Testimonial 1 -->
-                    <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
-                        <p class="text-gray-600 dark:text-gray-300 italic mb-4">xd</p>
-                        <div class="flex items-center mt-4">
-                            <div class="font-bold text-brand-dark dark:text-white">- Ana Sofía V.</div>
-                            <div class="ml-auto flex">
-                                <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Testimonial 2 -->
-                    <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
-                        <p class="text-gray-600 dark:text-gray-300 italic mb-4">xd</p>
-                        <div class="flex items-center mt-4">
-                            <div class="font-bold text-brand-dark dark:text-white">- Carla M.</div>
-                            <div class="ml-auto flex">
-                                <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Testimonial 3 -->
-                    <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
-                        <p class="text-gray-600 dark:text-gray-300 italic mb-4">xd</p>
-                        <div class="flex items-center mt-4">
-                            <div class="font-bold text-brand-dark dark:text-white">- Isabel R.</div>
-                            <div class="ml-auto flex">
-                               <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            </div>
-                        </div>
-                    </div>
+                <div id="testimonial-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Los testimonios se cargarán aquí dinámicamente -->
                 </div>
             </div>
         </section>
@@ -380,30 +353,25 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-brand-dark text-white py-12 dark:bg-gray-900">
+    <footer class="bg-brand-dark text-white py-8 dark:bg-gray-900">
         <div class="container mx-auto px-6 text-center">
-            <div class="flex flex-col items-center leading-none text-white no-underline mb-4">
-                <div class="flex items-center">
-                    <span class="font-display text-5xl" style="font-weight: 500;">Daima</span>
-                     <div class="w-8 h-8 ml-1 -mt-4 text-white">
-                        <svg viewBox="0 0 100 100">
-                            <circle cx="50" cy="50" r="10" fill="#4A3A3F" class="dark:fill-gray-900"/>
-                            <path d="M50,10 A20,20 0,0,1 70,30 L50,50 Z" fill="currentColor" transform="rotate(0, 50, 50)"/>
-                            <path d="M50,10 A20,20 0,0,1 70,30 L50,50 Z" fill="currentColor" transform="rotate(72, 50, 50)"/>
-                            <path d="M50,10 A20,20 0,0,1 70,30 L50,50 Z" fill="currentColor" transform="rotate(144, 50, 50)"/>
-                            <path d="M50,10 A20,20 0,0,1 70,30 L50,50 Z" fill="currentColor" transform="rotate(216, 50, 50)"/>
-                            <path d="M50,10 A20,20 0,0,1 70,30 L50,50 Z" fill="currentColor" transform="rotate(288, 50, 50)"/>
-                        </svg>
+             <a href="#" class="inline-block mb-4">
+                <div class="flex flex-col items-center">
+                    <div class="flex items-end">
+                         <span style="font-family: 'Dancing Script', cursive; line-height: 0.8;" class="text-6xl font-normal">dm</span>
+                    </div>
+                    <div class="mt-1 text-center">
+                        <span class="block font-display text-2xl" style="line-height: 1;">Daima Belleza</span>
+                        <span class="block text-xs tracking-[0.3em] font-light text-white/70 mt-1">STUDIO</span>
                     </div>
                 </div>
-                <span class="text-sm tracking-[0.2em] -mt-2">BELLEZA Y ESTILO</span>
-            </div>
+            </a>
              <div class="flex justify-center space-x-6 my-6">
                  <a href="https://www.instagram.com/daimabye/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-brand-primary transition duration-300" aria-label="Instagram de Daimabye">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                  </a>
             </div>
-            <p class="text-gray-300">&copy; 2024 Daimabye Belleza y Estilo. Todos los derechos reservados.</p>
+            <p class="text-gray-300">&copy; 2024 Daima Belleza Studio. Todos los derechos reservados.</p>
             <p class="mt-2 text-gray-400">Portoviejo, Manabí, Ecuador</p>
         </div>
     </footer>
@@ -518,7 +486,7 @@
             }
 
             // Crear el mensaje para WhatsApp
-            let whatsappMessage = `¡Hola Daimabye! ✨\n\nQuisiera agendar una cita.\n\n`;
+            let whatsappMessage = `¡Hola Daima! ✨\n\nQuisiera agendar una cita.\n\n`;
             whatsappMessage += `*Nombre:* ${name}\n`;
             whatsappMessage += `*Servicio:* ${service}\n`;
             whatsappMessage += `*Fecha y Hora:* ${formattedDatetime}\n`;
@@ -545,7 +513,6 @@
         var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
         var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 
-        // Change the icons inside the button based on previous settings
         if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             themeToggleLightIcon.classList.remove('hidden');
         } else {
@@ -553,13 +520,9 @@
         }
 
         var themeToggleButton = document.getElementById('theme-toggle');
-
         themeToggleButton.addEventListener('click', function() {
-            // toggle icons inside button
             themeToggleDarkIcon.classList.toggle('hidden');
             themeToggleLightIcon.classList.toggle('hidden');
-
-            // if set via local storage previously
             if (localStorage.getItem('theme')) {
                 if (localStorage.getItem('theme') === 'light') {
                     document.documentElement.classList.add('dark');
@@ -568,8 +531,6 @@
                     document.documentElement.classList.remove('dark');
                     localStorage.setItem('theme', 'light');
                 }
-
-            // if NOT set via local storage previously
             } else {
                 if (document.documentElement.classList.contains('dark')) {
                     document.documentElement.classList.remove('dark');
@@ -581,34 +542,103 @@
             }
         });
 
-        // Nueva función para mostrar la galería
+        // Lógica para mostrar la galería
         function showGallery(event) {
-            event.preventDefault(); // Evita el comportamiento predeterminado del enlace
+            event.preventDefault();
             const gallerySection = document.getElementById('gallery');
-            
             if (gallerySection.classList.contains('hidden')) {
-                // Muestra la sección de la galería
                 gallerySection.classList.remove('hidden');
                 gallerySection.classList.add('gallery-enter-active');
-
-                // Desplaza suavemente a la sección después de un breve instante
                 setTimeout(() => {
                     gallerySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }, 50);
-                
-                // Refresca AOS para que las imágenes dentro de la galería también se animen
-                setTimeout(() => {
-                    AOS.refresh();
-                }, 200);
-
+                setTimeout(() => { AOS.refresh(); }, 200);
             } else {
-                // Si la galería ya es visible, solo se desplaza a ella
                 gallerySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
+        
+        // ---- NUEVA LÓGICA PARA TESTIMONIOS DINÁMICOS ----
+        document.addEventListener('DOMContentLoaded', function() {
+            const testimonialsData = [
+                {
+                    text: "¡El maquillaje fue simplemente perfecto! Duró toda la noche y recibí muchísimos cumplidos. ¡Profesionalismo y talento puro!",
+                    author: "Ana Sofía V."
+                },
+                {
+                    text: "Nunca había probado las pestañas pelo a pelo y el resultado fue increíble. Se ven súper naturales pero marcan una gran diferencia. ¡Totalmente recomendada!",
+                    author: "Carla M."
+                },
+                {
+                    text: "Para mi graduación, me hicieron un peinado con ondas que quedó espectacular. Se nota la dedicación y el cariño que ponen en su trabajo. ¡Volveré sin dudarlo!",
+                    author: "Isabel R."
+                },
+                {
+                    text: "El trato es maravilloso, te hacen sentir cómoda desde el primer momento. Entendió exactamente lo que quería y el resultado superó mis expectativas.",
+                    author: "Valentina G."
+                },
+                {
+                    text: "La mejor experiencia. No solo por el resultado final, que fue un maquillaje precioso, sino por la amabilidad y el buen ambiente. ¡Gracias!",
+                    author: "Daniela P."
+                },
+                {
+                    text: "Necesitaba un look para una sesión de fotos y fue la mejor elección. El maquillaje se veía increíble tanto en persona como en cámara. ¡Una artista!",
+                    author: "Gabriela L."
+                }
+            ];
+
+            const grid = document.getElementById('testimonial-grid');
+            let currentIndex = 0;
+            const testimonialsPerPage = 3;
+
+            function createTestimonialCard(testimonial) {
+                return `
+                    <div class="testimonial-card" data-aos="fade-up">
+                        <p class="text-gray-600 dark:text-gray-300 italic mb-4">"${testimonial.text}"</p>
+                        <div class="flex items-center mt-4">
+                            <div class="font-bold text-brand-dark dark:text-white">- ${testimonial.author}</div>
+                            <div class="ml-auto flex">
+                                ${'<svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>'.repeat(5)}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function updateTestimonials() {
+                const cards = grid.querySelectorAll('.testimonial-card');
+                cards.forEach(card => card.classList.add('fading-out'));
+
+                setTimeout(() => {
+                    grid.innerHTML = '';
+                    const nextTestimonials = [];
+                    for (let i = 0; i < testimonialsPerPage; i++) {
+                        nextTestimonials.push(testimonialsData[(currentIndex + i) % testimonialsData.length]);
+                    }
+                    
+                    nextTestimonials.forEach(testimonial => {
+                        grid.innerHTML += createTestimonialCard(testimonial);
+                    });
+
+                    currentIndex = (currentIndex + testimonialsPerPage) % testimonialsData.length;
+                    
+                    // Refrescar AOS para las nuevas tarjetas
+                     setTimeout(() => { AOS.refresh(); }, 50);
+
+                }, 700); // Esperar que la animación de fade-out termine
+            }
+
+            // Carga inicial
+            updateTestimonials();
+
+            // Ciclo de actualización
+            setInterval(updateTestimonials, 8000); // Cambia cada 8 segundos
+        });
+
 
     </script>
 
 </body>
 </html>
+
 
