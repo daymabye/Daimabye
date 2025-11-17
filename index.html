@@ -339,6 +339,93 @@
             </div>
         </section>
 
+        <!-- Pricing Section -->
+        <section id="precios" class="py-16 md:py-24 bg-brand-secondary/40 dark:bg-gray-800/20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-4xl md:text-5xl font-bold text-brand-primary section-title">Nuestros Paquetes y Precios</h2>
+                    <p class="text-lg mt-4 text-gray-600 dark:text-gray-400">Planes diseñados para cada momento especial.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <!-- Paquete Maquillaje Social -->
+                    <div onclick="openModal()" class="cursor-pointer bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center transform transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-brand-primary/30 dark:hover:border-brand-primary/50 h-full flex flex-col" data-aos="fade-up" data-aos-delay="100">
+                        <h3 class="text-2xl font-bold font-display mb-4 text-brand-dark dark:text-white">Maquillaje Social</h3>
+                        <p class="text-gray-600 dark:text-gray-400 flex-grow">Maquillaje Profesional certificado para eventos, graduaciones, etc.</p>
+                        <div class="mt-6">
+                            <span class="text-4xl font-bold text-brand-primary">$20</span>
+                        </div>
+                    </div>
+
+                    <!-- Paquete Novia -->
+                    <div onclick="openModal()" class="cursor-pointer bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center transform transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-brand-primary/30 dark:hover:border-brand-primary/50 h-full flex flex-col" data-aos="fade-up" data-aos-delay="200">
+                        <h3 class="text-2xl font-bold font-display mb-4 text-brand-dark dark:text-white">Paquete Novia</h3>
+                        <ul class="text-gray-600 dark:text-gray-400 space-y-2 flex-grow">
+                            <li>Maquillaje Profesional Cargado, sellado y a prueba de lágrimas</li>
+                            <li>Peinado de ondas</li>
+                            <li>Tiara tipo corona</li>
+                            <li>Bolsita de retoque</li>
+                        </ul>
+                        <div class="mt-6">
+                            <span class="text-4xl font-bold text-brand-primary">$55</span>
+                        </div>
+                    </div>
+
+                    <!-- Paquete Quinceañera -->
+                    <div onclick="openModal()" class="cursor-pointer bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center transform transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-brand-primary/30 dark:hover:border-brand-primary/50 h-full flex flex-col" data-aos="fade-up" data-aos-delay="300">
+                        <h3 class="text-2xl font-bold font-display mb-4 text-brand-dark dark:text-white">Paquete Quinceañera</h3>
+                        <ul class="text-gray-600 dark:text-gray-400 space-y-2 flex-grow">
+                            <li>Maquillaje Profesional Cargado, sellado y a prueba de lágrimas</li>
+                            <li>Planchado</li>
+                            <li>Tiara larga</li>
+                        </ul>
+                        <div class="mt-6">
+                            <span class="text-4xl font-bold text-brand-primary">$40</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Peinados Section -->
+                <div class="text-center mt-16 mb-12" data-aos="fade-up">
+                    <h2 class="text-4xl md:text-5xl font-bold text-brand-primary section-title">Peinados</h2>
+                     <p class="text-lg mt-4 text-gray-600 dark:text-gray-400">Completa tu look con el peinado perfecto.</p>
+                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                    <!-- Peinado Planchado -->
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg text-center flex flex-col" data-aos="fade-up" data-aos-delay="100">
+                        <h3 class="text-xl font-bold font-display mb-2 text-brand-dark dark:text-white">Planchado</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm flex-grow mb-4">Un look liso, pulido y elegante para cualquier ocasión.</p>
+                        <div class="mt-auto">
+                            <span class="text-3xl font-bold text-brand-primary">$10</span>
+                        </div>
+                    </div>
+                    <!-- Peinado Semirecogido -->
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg text-center flex flex-col" data-aos="fade-up" data-aos-delay="200">
+                        <h3 class="text-xl font-bold font-display mb-2 text-brand-dark dark:text-white">Semirecogido</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm flex-grow mb-4">La combinación perfecta entre elegancia y comodidad, ideal para eventos.</p>
+                        <div class="mt-auto">
+                            <span class="text-3xl font-bold text-brand-primary">$15</span>
+                        </div>
+                    </div>
+                    <!-- Peinado Ondas -->
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg text-center flex flex-col" data-aos="fade-up" data-aos-delay="300">
+                        <h3 class="text-xl font-bold font-display mb-2 text-brand-dark dark:text-white">Ondas</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm flex-grow mb-4">Ondas suaves y naturales que aportan volumen y movimiento a tu cabello.</p>
+                        <div class="mt-auto">
+                            <span class="text-3xl font-bold text-brand-primary">$15</span>
+                        </div>
+                    </div>
+                    <!-- Peinado Ondas de agua -->
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg text-center flex flex-col" data-aos="fade-up" data-aos-delay="400">
+                        <h3 class="text-xl font-bold font-display mb-2 text-brand-dark dark:text-white">Ondas de agua</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm flex-grow mb-4">Un estilo retro y glamoroso con ondas muy marcadas y definidas.</p>
+                        <div class="mt-auto">
+                            <span class="text-3xl font-bold text-brand-primary">$20</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Gallery Section -->
         <section id="gallery" class="py-16 md:py-24 bg-brand-secondary/40 dark:bg-gray-800/20 hidden">
             <div class="container mx-auto px-6">
@@ -440,22 +527,34 @@
             </button>
             
             <h2 class="text-3xl font-bold font-display text-brand-primary mb-2">Agenda tu Cita</h2>
-            <p class="text-gray-600 dark:text-gray-400 mb-6">Completa el formulario y te contactaremos a la brevedad.</p>
+            <p class="text-gray-600 dark:text-gray-300 mb-6">Completa el formulario y te contactaremos a la brevedad.</p>
             
             <form id="booking-form" class="space-y-4">
                 <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nombre Completo</label>
+                    <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Nombre Completo</label>
                     <input type="text" id="name" name="name" required class="form-input">
                 </div>
                 
                 <div>
-                    <label for="service" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">¿Qué servicio deseas?</label>
+                    <label for="service" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">¿Qué servicio deseas?</label>
                     <select id="service" name="service" required class="form-input">
                         <option value="" data-price="0" disabled selected>Selecciona un servicio</option>
-                        <option value="Pestañas pelo a pelo" data-price="5">Pestañas pelo a pelo - $5</option>
-                        <option value="Maquillaje Sencillo" data-price="12">Maquillaje Sencillo - $12</option>
-                        <option value="Maquillaje Social" data-price="15">Maquillaje Social - $15</option>
-                        <option value="Maquillaje Artístico" data-price="15">Maquillaje Artístico - $15</option>
+                        <optgroup label="Maquillaje">
+                            <option value="Maquillaje Social" data-price="20">Maquillaje Social - $20</option>
+                        </optgroup>
+                        <optgroup label="Paquetes">
+                            <option value="Paquete Quinceañera" data-price="40">Paquete Quinceañera - $40</option>
+                            <option value="Paquete Novia" data-price="55">Paquete Novia - $55</option>
+                        </optgroup>
+                        <optgroup label="Peinados">
+                            <option value="Planchado" data-price="10">Planchado - $10</option>
+                            <option value="Ondas" data-price="15">Ondas - $15</option>
+                            <option value="Semirecogido" data-price="15">Semirecogido - $15</option>
+                            <option value="Ondas de agua" data-price="20">Ondas de agua - $20</option>
+                        </optgroup>
+                        <optgroup label="Pestañas">
+                            <option value="Pestañas pelo a pelo" data-price="25">Pestañas pelo a pelo - $25</option>
+                        </optgroup>
                     </select>
                 </div>
 
@@ -464,12 +563,12 @@
                 </div>
 
                 <div>
-                    <label for="datetime" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Fecha y Hora preferida</label>
+                    <label for="datetime" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Fecha y Hora preferida</label>
                     <input type="datetime-local" id="datetime" name="datetime" class="form-input">
                 </div>
 
                 <div>
-                    <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mensaje Adicional</label>
+                    <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Mensaje Adicional</label>
                     <textarea id="message" name="message" rows="3" placeholder="¿Algún detalle que debamos saber?" class="form-input"></textarea>
                 </div>
                 
@@ -497,9 +596,15 @@
         const modalContent = document.getElementById('modal-content');
         const serviceSelect = document.getElementById('service');
         const priceDisplay = document.getElementById('price-display');
+        const bookingForm = document.getElementById('booking-form');
 
 
-        function openModal() {
+        function openModal(serviceValue = null) {
+            if (serviceValue) {
+                serviceSelect.value = serviceValue;
+                serviceSelect.dispatchEvent(new Event('change'));
+            }
+
             modal.classList.remove('hidden');
             modalContent.classList.remove('modal-leave');
             modalContent.classList.add('modal-enter');
@@ -510,6 +615,8 @@
             modalContent.classList.remove('modal-enter');
             setTimeout(() => {
                 modal.classList.add('hidden');
+                bookingForm.reset();
+                priceDisplay.classList.add('opacity-0');
             }, 300); // Coincide con la duración de la animación
         }
         
@@ -533,7 +640,6 @@
         });
 
         // Lógica del Formulario para WhatsApp
-        const bookingForm = document.getElementById('booking-form');
         bookingForm.addEventListener('submit', function(event) {
             event.preventDefault();
 
@@ -577,8 +683,6 @@
             window.open(whatsappUrl, '_blank');
 
             // Limpiar el formulario y cerrar el modal
-            bookingForm.reset();
-            priceDisplay.classList.add('opacity-0');
             closeModal();
         });
 
