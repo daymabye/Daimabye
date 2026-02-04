@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daima Belleza Studio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Animaciones (AOS Library) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        // Configuración de Tailwind para modo oscuro
+        tailwind.config = {
+            darkMode: 'class',
+        }
+        // Aplica el modo oscuro guardado en localStorage o según preferencia del sistema
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+
+    <style>
+        /* Estilos personalizados y nueva paleta de colores del logo */
+        :root {
+            --brand-primary: #B99285; /* Rosa dorado del logo */
+            --brand-secondary: #EADCD8; /* Tono de fondo claro */
+            --brand-dark: #5D4945; /* Marrón oscuro para texto */
+            --brand-bg: #F9F1EF; /* Fondo general de la página */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--brand-bg);
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23B99285' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .dark body {
+            background-color: #1a1a1a;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23B99285' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        /* Transiciones suaves para elementos que cambian de color */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        /* Evitar transiciones en animaciones específicas */
+        .btn-hero, .testimonial-card.fading-out {
+            transition: none;
+        }
+        .btn-hero {
+            animation: pulse-animation 2s infinite;
+            transition: transform 0.3s ease;
+        }
+        
+        /* Transición suave para las olas en modo oscuro */
+        .dark .parallax > use:nth-child(1) {
+            fill: #374151 !important;
+            opacity: 0.5;
+        }
+        .dark .parallax > use:nth-child(2) {
+            fill: #374151 !important;
+            opacity: 0.7;
+        }
+        .dark .parallax > use:nth-child(3) {
+            fill: #374151 !important;
+        }
+        .dark .parallax > use:nth-child(4) {
+            fill: #1a1a1a !important;
+        }
+        h1, h2, h3, .font-display {
+            font-family: 'Playfair Display', serif;
+            transition: color 0.3s ease;
+        }
+        .text-brand-primary {
+            color: var(--brand-primary);
+        }
+        .bg-brand-primary {
+            background-color: var(--brand-primary);
+        }
+        .border-brand-primary {
+            border-color: var(--brand-primary);
+        }
+        .bg-brand-secondary {
+            background-color: var(--brand-secondary);
+        }
+        .text-brand-dark {
+            color: var(--brand-dark);
+        }
+        .btn-primary {
+            @apply bg-brand-primary text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl;
+        }
+        .btn-secondary {
+             @apply bg-white text-brand-primary border border-brand-primary font-bold py-3 px-8 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105 hover:bg-brand-secondary;
+        }
+        .btn-whatsapp {
+            @apply bg-gradient-to-br from-green-400 to-green-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl;
+        }
+        /* Animación para el modal */
+        .modal-enter { animation: fadeIn 0.3s ease-out; }
+        .modal-leave { animation: fadeOut 0.3s ease-in; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0; transform: scale(0.95); }
+        }
+        .btn-hero {
+            @apply bg-brand-primary text-white font-bold py-4 px-10 rounded-full shadow-xl transform transition-transform duration-300 hover:scale-110;
+            animation: pulse-animation 2s infinite;
+        }
+
+        @keyframes pulse-animation {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(185, 146, 133, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 15px rgba(185, 146, 133, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(185, 146, 133, 0);
+            }
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--brand-primary);
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+        
+        .hero-text-shadow {
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+        }
+        
+        /* Estilos para las nuevas olas animadas */
+        .waves-container {
+            position:relative;
+            width: 100%;
+            height: 15vh;
+            min-height: 100px;
+            max-height: 250px;
+        }
+        .waves {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .parallax > use {
+            animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
+        }
+        .parallax > use:nth-child(1) {
+            animation-delay: -2s;
+            animation-duration: 7s;
+        }
+        .parallax > use:nth-child(2) {
+            animation-delay: -3s;
+            animation-duration: 10s;
+        }
+        .parallax > use:nth-child(3) {
+            animation-delay: -4s;
+            animation-duration: 13s;
+        }
+        .parallax > use:nth-child(4) {
+            animation-delay: -5s;
+            animation-duration: 20s;
+        }
+        @keyframes move-forever {
+            0% {
+                transform: translate3d(-90px,0,0);
+            }
+            100% { 
+                transform: translate3d(85px,0,0);
+            }
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 20px rgba(93, 73, 69, 0.05);
+            border-left: 4px solid var(--brand-primary);
+            transform: translateY(0);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.7s ease-in-out, background-color 0.3s ease;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 25px rgba(93, 73, 69, 0.1);
+        }
+        .dark .testimonial-card {
+            background-color: #2d2d2d;
+        }
+        .testimonial-card.fading-out {
+            opacity: 0;
+        }
+
+        /* Custom Form Styles */
+        .form-input {
+            @apply mt-1 block w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg shadow-sm transition duration-300;
+            @apply focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary;
+            color: #1a1a1a;
+        }
+        .dark .form-input {
+            @apply bg-gray-700 border-gray-600;
+            color: #f9f9f9 !important;
+        }
+        .dark .form-input::placeholder {
+            color: #9ca3af;
+        }
+        .dark .form-input option {
+            background-color: #374151;
+            color: #f9f9f9;
+        }
+        .section-bg-art {
+            position: relative;
+        }
+        .section-bg-art::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 300px;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23EADCD8' d='M39.3,-48.1C51.1,-36.8,61,-23.4,64.8,-8.1C68.6,7.2,66.4,24.3,57.7,37.3C49,50.3,33.9,59.2,18.8,64.6C3.7,70,-11.4,71.9,-25.6,68.2C-39.8,64.5,-53.1,55.2,-61.7,42.5C-70.2,29.8,-74,13.7,-71.4,-1.1C-68.7,-15.9,-59.7,-29.4,-48.8,-40.4C-37.9,-51.4,-25.1,-59.8,-11.8,-63.3C1.5,-66.8,15.5,-65.2,27.5,-59.5C39.5,-53.8,39.3,-48.1,39.3,-48.1Z' transform='translate(100 100)' /%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-size: contain;
+            opacity: 0.6;
+            z-index: -1;
+        }
+        .dark .section-bg-art::before {
+             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%235D4945' d='M39.3,-48.1C51.1,-36.8,61,-23.4,64.8,-8.1C68.6,7.2,66.4,24.3,57.7,37.3C49,50.3,33.9,59.2,18.8,64.6C3.7,70,-11.4,71.9,-25.6,68.2C-39.8,64.5,-53.1,55.2,-61.7,42.5C-70.2,29.8,-74,13.7,-71.4,-1.1C-68.7,-15.9,-59.7,-29.4,-48.8,-40.4C-37.9,-51.4,-25.1,-59.8,-11.8,-63.3C1.5,-66.8,15.5,-65.2,27.5,-59.5C39.5,-53.8,39.3,-48.1,39.3,-48.1Z' transform='translate(100 100)' /%3E%3C/svg%3E");
+             opacity: 0.1;
+        }
+        
+        /* Animación para la galería */
+        @keyframes gallery-fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        .gallery-enter-active {
+            animation: gallery-fade-in-up 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+    </style>
+</head>
+<body class="text-brand-dark dark:text-gray-200">
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-40 dark:bg-gray-900/80 dark:border-b dark:border-gray-800">
+        <div class="container mx-auto px-6 py-2 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="flex items-center">
+                <div class="flex items-end">
+                    <span style="font-family: 'Dancing Script', cursive; line-height: 0.8;" class="text-6xl font-normal text-brand-primary">dm</span>
+                    <svg width="55" height="32" viewBox="0 0 75 40" class="text-brand-primary -ml-7 mb-2" fill="currentColor" style="transform: scaleX(-1) rotate(-15deg) translateX(-5px) translateY(5px);">
+                        <path d="M74.7,2.1C70,0.8,65,0,59.8,0C41,0,25.3,10.4,14.9,26.1c-1.9,2.9-3.6,5.9-5,9C8.1,38.6,5.7,40,2.9,40c-0.8,0-1.5-0.1-2.2-0.4c-1.1-0.4-1-1.9,0.2-2.5c1.4-0.7,2.9-1.7,4.2-2.9C1.9,32.3,0,28.6,0,24.6c0-4.8,2.5-9.2,6.7-11.9C18.4,4.2,37.8,0.7,59.8,0.7c4.7,0,9.4,0.6,13.8,1.9C74.6,2.8,75,2.3,74.7,2.1z M6.7,14.5C3.6,16.5,1.8,20.3,1.8,24.6c0,3.3,1.5,6.4,3.9,8.4c-1,1-2.2,1.8-3.4,2.4c-0.2,0.1-0.2,0.2,0,0.2c0.4,0.2,0.8,0.2,1.2,0.2c2.1,0,4-1.1,5.6-3.4c1.3-2.9,2.9-5.7,4.6-8.4C26.1,11.5,41.4,1.8,59.8,1.8C38.2,1.8,18.5,5.2,6.7,14.5z"></path>
+                    </svg>
+                </div>
+                <div class="ml-1 text-left">
+                    <span class="block font-display text-2xl text-brand-dark dark:text-white" style="line-height: 1;">Daima Belleza</span>
+                    <span class="block text-xs tracking-[0.3em] font-light text-brand-dark/70 dark:text-white/70 mt-1">STUDIO</span>
+                </div>
+            </a>
+            <nav class="flex items-center space-x-4">
+                 <a href="https://www.instagram.com/daimabellezastudio/" target="_blank" rel="noopener noreferrer" class="text-brand-primary hover:text-brand-dark dark:hover:text-white transition duration-300" aria-label="Instagram de Daima Belleza Studio">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+                 <!-- Dark Mode Toggle -->
+                <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm-.707 12.122l.707-.707a1 1 0 10-1.414-1.414l-.707.707a1 1 0 001.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                </button>
+                <button onclick="openModal()" class="btn-secondary">
+                    Agendar Cita
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="relative min-h-[60vh] md:min-h-[80vh] flex items-center bg-cover bg-center overflow-hidden" style="background-image: url('image_6edb07.jpg');">
+            <div class="absolute inset-0" style="background: radial-gradient(circle, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 100%);"></div>
+            <div class="container mx-auto px-6 text-center text-white relative z-20" data-aos="fade-up">
+                <h1 class="text-4xl md:text-7xl font-bold mb-4 leading-tight hero-text-shadow">Realzando tu belleza, celebrando tu estilo</h1>
+                <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto hero-text-shadow">
+                    Experta en maquillaje profesional, pestañas y peinados para que luzcas radiante en cada ocasión especial.
+                </p>
+                <button onclick="openModal()" class="btn-hero text-lg">
+                    Contacta con nosotras
+                </button>
+            </div>
+            <!-- Nuevas Olas Animadas -->
+            <div class="absolute bottom-[-1px] left-0 w-full z-10">
+                <div class="waves-container">
+                    <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                        <defs>
+                            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                        </defs>
+                        <g class="parallax">
+                            <!-- Colores que combinan con la paleta de colores. La opacidad crea el efecto de capas. -->
+                            <use xlink:href="#gentle-wave" x="48" y="0" style="fill: #EADCD8; opacity: 0.5; transition: fill 0.3s ease, opacity 0.3s ease;" />
+                            <use xlink:href="#gentle-wave" x="48" y="3" style="fill: #EADCD8; opacity: 0.7; transition: fill 0.3s ease, opacity 0.3s ease;" />
+                            <use xlink:href="#gentle-wave" x="48" y="5" style="fill: #EADCD8; transition: fill 0.3s ease;" />
+                            <!-- La última ola usa el color de fondo de la siguiente sección para una transición suave -->
+                            <use xlink:href="#gentle-wave" x="48" y="7" style="fill: #F9F1EF; transition: fill 0.3s ease;" />
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-16 md:py-24 section-bg-art">
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-4xl md:text-5xl font-bold text-brand-primary section-title">Nuestros Servicios</h2>
+                    <p class="text-lg mt-4 text-gray-600 dark:text-gray-400">Creamos el look perfecto para ti. Haz clic para ver nuestro trabajo.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Service Card 1 -->
+                    <a href="#" onclick="showGallery(event)" class="block cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-primary/50 rounded-2xl" data-aos="fade-up" data-aos-delay="100">
+                        <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center transform transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-brand-primary/30 dark:hover:border-brand-primary/50 h-full">
+                            <div class="inline-block bg-brand-primary text-white p-4 rounded-full mb-4">
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><path d="M12 18h.01"></path><path d="M16 14h.01"></path><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 18h.01"></path><path d="M8 18h.01"></path></svg>
+                            </div>
+                            <h3 class="text-2xl font-bold font-display mb-2 text-brand-dark dark:text-white">Maquillaje Social y Artístico</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Looks para eventos, graduaciones o sesiones fotográficas. También creamos maquillajes vívidos y temáticos.</p>
+                        </div>
+                    </a>
+                    <!-- Service Card 2 -->
+                     <a href="#" onclick="showGallery(event)" class="block cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-primary/50 rounded-2xl" data-aos="fade-up" data-aos-delay="200">
+                        <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center transform transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-brand-primary/30 dark:hover:border-brand-primary/50 h-full">
+                             <div class="inline-block bg-brand-primary text-white p-4 rounded-full mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                            </div>
+                            <h3 class="text-2xl font-bold font-display mb-2 text-brand-dark dark:text-white">Aplicación de Pestañas</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Consigue una mirada de impacto con nuestras pestañas pelo a pelo. Efectos Foxy, Wispy o Clásicas.</p>
+                        </div>
+                    </a>
+                    <!-- Service Card 3 -->
+                    <a href="#" onclick="showGallery(event)" class="block cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-primary/50 rounded-2xl" data-aos="fade-up" data-aos-delay="300">
+                         <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center transform transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-brand-primary/30 dark:hover:border-brand-primary/50 h-full">
+                             <div class="inline-block bg-brand-primary text-white p-4 rounded-full mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 17.5a2.5 2.5 0 0 0-4.4-1.93l-4.2-2.1a2.5 2.5 0 0 0 0-1.94l4.2-2.1a2.5 2.5 0 1 0-.9-3.92"></path></svg>
+                            </div>
+                            <h3 class="text-2xl font-bold font-display mb-2 text-brand-dark dark:text-white">Looks Personalizados</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Creamos maquillajes sencillos y elegantes para realzar tu belleza natural en cualquier ocasión.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="precios" class="py-16 md:py-24 bg-brand-secondary/40 dark:bg-gray-800/20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-4xl md:text-5xl font-bold text-brand-primary section-title">Nuestros Paquetes y Precios</h2>
+                    <p class="text-lg mt-4 text-gray-600 dark:text-gray-400">Planes diseñados para cada momento especial.</p>
+                </div>
+
+                <!-- Combos Section -->
+                <div class="mb-16">
+                    <div class="text-center mb-8" data-aos="fade-up">
+                        <h3 class="text-3xl md:text-4xl font-bold text-brand-primary mb-2">Porque en DAIMA STUDIO amamos consentirte 😍</h3>
+                        <p class="text-lg text-gray-600 dark:text-gray-400">Combos especiales para que luzcas radiante</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-12">
+                        <!-- Combo Consentidor -->
+                        <div onclick="openModal('Combo Consentidor')" class="cursor-pointer bg-gradient-to-br from-pink-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 p-8 rounded-2xl shadow-xl text-center transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border-2 border-brand-primary/20 hover:border-brand-primary/50 h-full flex flex-col relative overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                            <div class="absolute top-0 right-0 bg-brand-primary text-white px-4 py-2 rounded-bl-2xl font-bold text-sm">
+                                ✨ POPULAR
+                            </div>
+                            <div class="mb-4 mt-4">
+                                <span class="text-4xl">✨️☺️</span>
+                            </div>
+                            <h3 class="text-2xl font-bold font-display mb-4 text-brand-dark dark:text-white">Combo Consentidor</h3>
+                            <ul class="text-left text-gray-600 dark:text-gray-400 space-y-3 flex-grow mb-6 text-sm">
+                                <li class="flex items-start">
+                                    <span class="text-brand-primary mr-2 mt-1">💋</span>
+                                    <span>Maquillaje Social Profesional con técnica <strong>Halo Eyes o Foxy Eyes</strong> (a elección)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-brand-primary mr-2 mt-1">💇‍♀️</span>
+                                    <span>Peinado <strong>Ondas Sueltas</strong></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-brand-primary mr-2 mt-1">✨</span>
+                                    <span>Incluye todo lo del paquete profesional</span>
+                                </li>
+                            </ul>
+                            <div class="mt-auto">
+                                <div class="flex items-center justify-center gap-2 mb-2">
+                                    <span class="text-2xl text-gray-400 line-through">$35</span>
+                                    <span class="text-5xl font-bold text-brand-primary">$25</span>
+                                </div>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">¡Ahorra $10!</p>
+                            </div>
+                        </div>
+
+                        <!-- Combo Pasarela -->
+                        <div onclick="openModal('Combo Pasarela')" class="cursor-pointer bg-gradient-to-br from-amber-50 to-rose-50 dark:from-gray-800 dark:to-gray-700 p-8 rounded-2xl shadow-xl text-center transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border-2 border-brand-primary/20 hover:border-brand-primary/50 h-full flex flex-col relative overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                            <div class="absolute top-0 right-0 bg-gradient-to-r from-amber-500 to-rose-500 text-white px-4 py-2 rounded-bl-2xl font-bold text-sm">
+                                👑 PREMIUM
+                            </div>
+                            <div class="mb-4 mt-4">
+                                <span class="text-4xl">💖</span>
+                            </div>
+                            <h3 class="text-2xl font-bold font-display mb-4 text-brand-dark dark:text-white">Combo Pasarela</h3>
+                            <ul class="text-left text-gray-600 dark:text-gray-400 space-y-3 flex-grow mb-6 text-sm">
+                                <li class="flex items-start">
+                                    <span class="text-brand-primary mr-2 mt-1">💋</span>
+                                    <span>Maquillaje Social Profesional con <strong>cualquiera de nuestras técnicas</strong> a elección</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-brand-primary mr-2 mt-1">👑</span>
+                                    <span>Peinado <strong>Ondas de Reina</strong></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-brand-primary mr-2 mt-1">🎁</span>
+                                    <span><strong>Detallito especial</strong> incluido</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-brand-primary mr-2 mt-1">✨</span>
+                                    <span>La experiencia completa de glamour</span>
+                                </li>
+                            </ul>
+                            <div class="mt-auto">
+                                <div class="flex items-center justify-center gap-2 mb-2">
+                                    <span class="text-2xl text-gray-400 line-through">$40</span>
+                                    <span class="text-5xl font-bold text-brand-primary">$35</span>
+                                </div>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">¡Ahorra $5!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <!-- Maquillaje Social Profesional -->
+                    <div onclick="openModal()" class="cursor-pointer bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center transform transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-brand-primary/30 dark:hover:border-brand-primary/50 h-full flex flex-col" data-aos="fade-up" data-aos-delay="100">
+                        <h3 class="text-2xl font-bold font-display mb-4 text-brand-dark dark:text-white">Maquillaje Social Profesional</h3>
+                        <ul class="text-left text-gray-600 dark:text-gray-400 space-y-2 flex-grow mb-4 text-sm">
+                            <li>✨ Pestañas a elección: punto a punto o en banda</li>
+                            <li>✨ Técnica de Halo Eyes o Foxy Eyes</li>
+                            <li>✨ Masaje linfático de 5 min con suero hidratante</li>
+                            <li>✨ Colágeno de ojeras hidratante</li>
+                            <li>✨ Sellado con polvos sueltos + sellador (hasta 5h)</li>
+                        </ul>
+                        <div class="mt-auto">
+                            <span class="text-4xl font-bold text-brand-primary">$20</span>
+                        </div>
+                    </div>
+
+                    <!-- Maquillaje de Graduación Profesional -->
+                    <div onclick="openModal()" class="cursor-pointer bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center transform transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-brand-primary/30 dark:hover:border-brand-primary/50 h-full flex flex-col" data-aos="fade-up" data-aos-delay="200">
+                        <h3 class="text-2xl font-bold font-display mb-4 text-brand-dark dark:text-white">Maquillaje de Graduación Profesional</h3>
+                        <ul class="text-left text-gray-600 dark:text-gray-400 space-y-2 flex-grow mb-4 text-sm">
+                            <li>✨ Pestañas a elección: punto a punto o en banda</li>
+                            <li>✨ Técnicas: Halo Eyes, Semicorte, Corte, Foxy Eyes, Ahumado</li>
+                            <li>✨ Masaje linfático de 5 min con suero hidratante</li>
+                            <li>✨ Colágeno de ojeras hidratante</li>
+                            <li>✨ Triple sellado: crema + polvo + hidratante (hasta 8h)</li>
+                            <li>✨ Detallito especial</li>
+                        </ul>
+                        <div class="mt-auto">
+                            <span class="text-4xl font-bold text-brand-primary">$25</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Peinados Section -->
+                <div class="text-center mt-16 mb-12" data-aos="fade-up">
+                    <h2 class="text-4xl md:text-5xl font-bold text-brand-primary section-title">Peinados</h2>
+                     <p class="text-lg mt-4 text-gray-600 dark:text-gray-400">Completa tu look con el peinado perfecto.</p>
+                </div>
+                <div class="max-w-4xl mx-auto mb-8" data-aos="fade-up">
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
+                        <p class="text-center text-gray-600 dark:text-gray-400 italic">
+                            Toda técnica incluye: <span class="font-semibold text-brand-primary">Preparación del cabello con hidratante capilar + Protector térmico de alta gama + Cera y Fijador de Alta Durabilidad</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
+                    <!-- Peinado Planchado -->
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg text-center flex flex-col" data-aos="fade-up" data-aos-delay="100">
+                        <h3 class="text-xl font-bold font-display mb-2 text-brand-dark dark:text-white">Planchado</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm flex-grow mb-4">Un look liso, pulido y elegante para cualquier ocasión.</p>
+                        <div class="mt-auto">
+                            <span class="text-3xl font-bold text-brand-primary">$10</span>
+                        </div>
+                    </div>
+                    <!-- Peinado Ondas Normales -->
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg text-center flex flex-col" data-aos="fade-up" data-aos-delay="200">
+                        <h3 class="text-xl font-bold font-display mb-2 text-brand-dark dark:text-white">Ondas Normales</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm flex-grow mb-4">Ondas suaves y naturales que aportan volumen y movimiento a tu cabello.</p>
+                        <div class="mt-auto">
+                            <span class="text-3xl font-bold text-brand-primary">$15</span>
+                        </div>
+                    </div>
+                    <!-- Peinado Ondas de Reina / Ondas de agua -->
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg text-center flex flex-col" data-aos="fade-up" data-aos-delay="300">
+                        <h3 class="text-xl font-bold font-display mb-2 text-brand-dark dark:text-white">Ondas de Reina / Ondas de Agua</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm flex-grow mb-4">Un estilo retro y glamoroso con ondas muy marcadas y definidas.</p>
+                        <div class="mt-auto">
+                            <span class="text-3xl font-bold text-brand-primary">$20</span>
+                        </div>
+                    </div>
+                    <!-- Peinado Semirecogido -->
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg text-center flex flex-col" data-aos="fade-up" data-aos-delay="400">
+                        <h3 class="text-xl font-bold font-display mb-2 text-brand-dark dark:text-white">Semirecogido</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm flex-grow mb-4">La combinación perfecta entre elegancia y comodidad, ideal para eventos.</p>
+                        <div class="mt-auto">
+                            <span class="text-3xl font-bold text-brand-primary">$20</span>
+                        </div>
+                    </div>
+                    <!-- Peinado Recogido -->
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg text-center flex flex-col" data-aos="fade-up" data-aos-delay="500">
+                        <h3 class="text-xl font-bold font-display mb-2 text-brand-dark dark:text-white">Recogido</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm flex-grow mb-4">Elegante y sofisticado, perfecto para bodas, galas y eventos formales.</p>
+                        <div class="mt-auto">
+                            <span class="text-3xl font-bold text-brand-primary">$20</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="py-16 md:py-24 bg-brand-secondary/40 dark:bg-gray-800/20 hidden">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-4xl md:text-5xl font-bold text-brand-primary section-title">Nuestra Galería</h2>
+                    <p class="text-lg mt-4 text-gray-600 dark:text-gray-400">Transformaciones que inspiran.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="overflow-hidden rounded-lg" data-aos="fade-up" data-aos-delay="100">
+                        <img class="h-auto max-w-full rounded-lg shadow-md transition-transform duration-300 hover:scale-110" src="image_6edb2e.jpg" alt="Maquillaje con técnica Open Cut">
+                    </div>
+                    <div class="overflow-hidden rounded-lg" data-aos="fade-up" data-aos-delay="200">
+                        <img class="h-auto max-w-full rounded-lg shadow-md transition-transform duration-300 hover:scale-110" src="image_6edb85.jpg" alt="Maquillaje Piel Ébano con técnica de ahumado">
+                    </div>
+                    <div class="overflow-hidden rounded-lg" data-aos="fade-up" data-aos-delay="300">
+                        <img class="h-auto max-w-full rounded-lg shadow-md transition-transform duration-300 hover:scale-110" src="image_6edb68.jpg" alt="Maquillaje con técnica Semi Cut">
+                    </div>
+                     <div class="overflow-hidden rounded-lg" data-aos="fade-up" data-aos-delay="400">
+                        <img class="h-auto max-w-full rounded-lg shadow-md transition-transform duration-300 hover:scale-110" src="image_6edba7.jpg" alt="Retoques de color cenizos en el cabello">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-16 md:py-24 section-bg-art">
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-4xl md:text-5xl font-bold text-brand-primary section-title">Lo que dicen nuestras clientas</h2>
+                    <p class="text-lg mt-4 text-gray-600 dark:text-gray-400">Tu satisfacción es nuestro mayor orgullo.</p>
+                </div>
+                <div id="testimonial-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Los testimonios se cargarán aquí dinámicamente -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Location Section -->
+        <section id="location" class="py-16 md:py-24 bg-white dark:bg-gray-800/20">
+            <div class="container mx-auto px-6">
+                <div class="text-center" data-aos="fade-up">
+                     <h2 class="text-4xl md:text-5xl font-bold text-brand-primary section-title">Encuéntranos</h2>
+                     <div class="w-full max-w-4xl mx-auto mt-8 rounded-2xl overflow-hidden shadow-2xl">
+                        <div class="md:flex">
+                            <div class="md:w-1/2 p-8 md:p-12 text-left bg-brand-secondary dark:bg-gray-800">
+                                <h3 class="text-3xl font-bold font-display mb-4 text-brand-dark dark:text-white">Visítanos en Portoviejo</h3>
+                                <p class="text-lg mb-4 text-gray-600 dark:text-gray-400">
+                                    Estamos convenientemente ubicados para que vengas a consentirte.
+                                </p>
+                                <div class="flex items-center mt-6">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary h-8 w-8 mr-4"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                    <div>
+                                        <p class="font-semibold text-brand-dark dark:text-white">Dirección:</p>
+                                        <p class="text-gray-600 dark:text-gray-400">Av. 15 de Abril, al lado del Shopping, Portoviejo, Manabí.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="md:w-1/2">
+                                <iframe src="https://maps.google.com/maps?q=-1.062071,-80.464144&hl=es&z=18&amp;output=embed" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="grayscale-[30%]"></iframe>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark text-white py-8 dark:bg-gray-900">
+        <div class="container mx-auto px-6 text-center">
+             <a href="#" class="inline-block mb-4">
+                <div class="flex flex-col items-center">
+                    <div class="flex items-end">
+                         <span style="font-family: 'Dancing Script', cursive; line-height: 0.8;" class="text-6xl font-normal">dm</span>
+                    </div>
+                    <div class="mt-1 text-center">
+                        <span class="block font-display text-2xl" style="line-height: 1;">Daima Belleza</span>
+                        <span class="block text-xs tracking-[0.3em] font-light text-white/70 mt-1">STUDIO</span>
+                    </div>
+                </div>
+            </a>
+             <div class="flex justify-center space-x-6 my-6">
+                 <a href="https://www.instagram.com/daimabellezastudio/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-brand-primary transition duration-300" aria-label="Instagram de Daima Belleza Studio">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                 </a>
+            </div>
+            <p class="text-gray-300">&copy; 2024 Daima Belleza Studio. Todos los derechos reservados.</p>
+            <p class="mt-2 text-gray-400">Portoviejo, Manabí, Ecuador</p>
+        </div>
+    </footer>
+
+    <!-- Modal de Agendamiento -->
+    <div id="booking-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden">
+        <div id="modal-content" class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-lg p-8 relative transform modal-enter">
+            <!-- Botón para cerrar -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 dark:hover:text-white transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            
+            <h2 class="text-3xl font-bold font-display text-brand-primary mb-2">Agenda tu Cita</h2>
+            <p class="text-gray-600 dark:text-gray-300 mb-6">Completa el formulario y te contactaremos a la brevedad.</p>
+            
+            <form id="booking-form" class="space-y-4">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Nombre Completo</label>
+                    <input type="text" id="name" name="name" required class="form-input">
+                </div>
+                
+                <div>
+                    <label for="service" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">¿Qué servicio deseas?</label>
+                    <select id="service" name="service" required class="form-input">
+                        <option value="" data-price="0" disabled selected>Selecciona un servicio</option>
+                        <optgroup label="Combos Especiales 😍">
+                            <option value="Combo Consentidor" data-price="25">✨ Combo Consentidor - $25 (Maquillaje + Ondas)</option>
+                            <option value="Combo Pasarela" data-price="35">💖 Combo Pasarela - $35 (Maquillaje + Ondas de Reina + Detallito)</option>
+                        </optgroup>
+                        <optgroup label="Maquillaje">
+                            <option value="Maquillaje Social Profesional" data-price="20">Maquillaje Social Profesional - $20</option>
+                            <option value="Maquillaje de Graduación Profesional" data-price="25">Maquillaje de Graduación Profesional - $25</option>
+                        </optgroup>
+                        <optgroup label="Peinados">
+                            <option value="Planchado" data-price="10">Planchado - $10</option>
+                            <option value="Ondas Normales" data-price="15">Ondas Normales - $15</option>
+                            <option value="Ondas de Reina / Ondas de Agua" data-price="20">Ondas de Reina / Ondas de Agua - $20</option>
+                            <option value="Semirecogido" data-price="20">Semirecogido - $20</option>
+                            <option value="Recogido" data-price="20">Recogido - $20</option>
+                        </optgroup>
+                        <optgroup label="Pestañas">
+                            <option value="Pestañas pelo a pelo" data-price="5">Pestañas pelo a pelo - $5</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div id="price-display" class="text-right font-bold text-xl text-brand-dark dark:text-white transition-opacity duration-300 opacity-0">
+                    <!-- El precio se mostrará aquí -->
+                </div>
+
+                <div>
+                    <label for="datetime" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Fecha y Hora preferida</label>
+                    <input type="datetime-local" id="datetime" name="datetime" class="form-input">
+                </div>
+
+                <div>
+                    <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Mensaje Adicional</label>
+                    <textarea id="message" name="message" rows="3" placeholder="¿Algún detalle que debamos saber?" class="form-input"></textarea>
+                </div>
+                
+                <div class="pt-4">
+                    <button type="submit" class="w-full btn-whatsapp text-lg">
+                        Enviar por WhatsApp
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Inicializar librería de animaciones
+        AOS.init({
+            duration: 800,
+            once: true,
+        });
+
+        // Lógica del Modal
+        const modal = document.getElementById('booking-modal');
+        const modalContent = document.getElementById('modal-content');
+        const serviceSelect = document.getElementById('service');
+        const priceDisplay = document.getElementById('price-display');
+        const bookingForm = document.getElementById('booking-form');
+
+        function openModal(serviceValue = null) {
+            if (serviceValue) {
+                serviceSelect.value = serviceValue;
+                serviceSelect.dispatchEvent(new Event('change'));
+            }
+
+            modal.classList.remove('hidden');
+            modalContent.classList.remove('modal-leave');
+            modalContent.classList.add('modal-enter');
+        }
+
+        function closeModal() {
+            modalContent.classList.add('modal-leave');
+            modalContent.classList.remove('modal-enter');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                bookingForm.reset();
+                priceDisplay.classList.add('opacity-0');
+            }, 300);
+        }
+        
+        // Cierra el modal si se hace clic fuera del contenido
+        modal.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Mostrar precio al seleccionar servicio
+        serviceSelect.addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            const price = selectedOption.getAttribute('data-price');
+            if (price && price > 0) {
+                priceDisplay.textContent = `Total: $${price}`;
+                priceDisplay.classList.remove('opacity-0');
+            } else {
+                priceDisplay.classList.add('opacity-0');
+            }
+        });
+
+        // Lógica del Formulario para WhatsApp
+        bookingForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Número de teléfono del administrador con código de país (Ecuador es +593)
+            const adminPhoneNumber = '593958757109'; 
+
+            // Recopilar datos del formulario
+            const name = document.getElementById('name').value;
+            const service = document.getElementById('service').value;
+            const selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
+            const price = selectedOption.getAttribute('data-price');
+            const datetimeInput = document.getElementById('datetime').value;
+            const message = document.getElementById('message').value;
+
+            let formattedDatetime = "No especificada";
+            if (datetimeInput) {
+                const date = new Date(datetimeInput);
+                 formattedDatetime = date.toLocaleString('es-EC', {
+                    dateStyle: 'long',
+                    timeStyle: 'short'
+                });
+            }
+
+            // Crear el mensaje para WhatsApp
+            let whatsappMessage = `¡Hola Daima! ✨\n\nQuisiera agendar una cita.\n\n`;
+            whatsappMessage += `*Nombre:* ${name}\n`;
+            whatsappMessage += `*Servicio:* ${service} ($${price})\n`;
+            whatsappMessage += `*Fecha y Hora:* ${formattedDatetime}\n`;
+            if (message) {
+                whatsappMessage += `*Mensaje Adicional:* ${message}\n`;
+            }
+            whatsappMessage += `\n¡Gracias!`;
+
+            // Codificar el mensaje para la URL
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+
+            // Crear la URL de WhatsApp
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${adminPhoneNumber}&text=${encodedMessage}`;
+            
+            // Abrir WhatsApp en una nueva pestaña
+            window.open(whatsappUrl, '_blank');
+
+            // Limpiar el formulario y cerrar el modal
+            closeModal();
+        });
+
+        // Lógica del Dark Mode Toggle
+        var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            themeToggleLightIcon.classList.remove('hidden');
+        } else {
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+
+        var themeToggleButton = document.getElementById('theme-toggle');
+        themeToggleButton.addEventListener('click', function() {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+            if (localStorage.getItem('theme')) {
+                if (localStorage.getItem('theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+            }
+        });
+
+        // Lógica para mostrar la galería
+        function showGallery(event) {
+            event.preventDefault();
+            const gallerySection = document.getElementById('gallery');
+            if (gallerySection.classList.contains('hidden')) {
+                gallerySection.classList.remove('hidden');
+                gallerySection.classList.add('gallery-enter-active');
+                setTimeout(() => {
+                    gallerySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 50);
+                setTimeout(() => { AOS.refresh(); }, 200);
+            } else {
+                gallerySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+        
+        // ---- NUEVA LÓGICA PARA TESTIMONIOS DINÁMICOS ----
+        document.addEventListener('DOMContentLoaded', function() {
+            const testimonialsData = [
+                {
+                    text: "¡El maquillaje fue simplemente perfecto! Duró toda la noche y recibí muchísimos cumplidos. ¡Profesionalismo y talento puro!",
+                    author: "Ana Sofía V."
+                },
+                {
+                    text: "Nunca había probado las pestañas pelo a pelo y el resultado fue increíble. Se ven súper naturales pero marcan una gran diferencia. ¡Totalmente recomendada!",
+                    author: "Carla M."
+                },
+                {
+                    text: "Para mi graduación, me hicieron un peinado con ondas que quedó espectacular. Se nota la dedicación y el cariño que ponen en su trabajo. ¡Volveré sin dudarlo!",
+                    author: "Isabel R."
+                },
+                {
+                    text: "El trato es maravilloso, te hacen sentir cómoda desde el primer momento. Entendió exactamente lo que quería y el resultado superó mis expectativas.",
+                    author: "Valentina G."
+                },
+                {
+                    text: "La mejor experiencia. No solo por el resultado final, que fue un maquillaje precioso, sino por la amabilidad y el buen ambiente. ¡Gracias!",
+                    author: "Daniela P."
+                },
+                {
+                    text: "Necesitaba un look para una sesión de fotos y fue la mejor elección. El maquillaje se veía increíble tanto en persona como en cámara. ¡Una artista!",
+                    author: "Gabriela L."
+                }
+            ];
+
+            const grid = document.getElementById('testimonial-grid');
+            let currentIndex = 0;
+            const testimonialsPerPage = 3;
+
+            function createTestimonialCard(testimonial) {
+                return `
+                    <div class="testimonial-card" data-aos="fade-up">
+                        <p class="text-gray-600 dark:text-gray-300 italic mb-4">"${testimonial.text}"</p>
+                        <div class="flex items-center mt-4">
+                            <div class="font-bold text-brand-dark dark:text-white">- ${testimonial.author}</div>
+                            <div class="ml-auto flex">
+                                ${'<svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>'.repeat(5)}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function updateTestimonials() {
+                const cards = grid.querySelectorAll('.testimonial-card');
+                cards.forEach(card => card.classList.add('fading-out'));
+
+                setTimeout(() => {
+                    grid.innerHTML = '';
+                    const nextTestimonials = [];
+                    for (let i = 0; i < testimonialsPerPage; i++) {
+                        nextTestimonials.push(testimonialsData[(currentIndex + i) % testimonialsData.length]);
+                    }
+                    
+                    nextTestimonials.forEach(testimonial => {
+                        grid.innerHTML += createTestimonialCard(testimonial);
+                    });
+
+                    currentIndex = (currentIndex + testimonialsPerPage) % testimonialsData.length;
+                    
+                    setTimeout(() => { AOS.refresh(); }, 50);
+
+                }, 700);
+            }
+
+            // Carga inicial
+            updateTestimonials();
+
+            // Ciclo de actualización
+            setInterval(updateTestimonials, 8000);
+        });
+
+
+    </script>
+
+</body>
+</html>
