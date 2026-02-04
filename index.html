@@ -42,13 +42,45 @@
             font-family: 'Poppins', sans-serif;
             background-color: var(--brand-bg);
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23B99285' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         .dark body {
             background-color: #1a1a1a;
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23B99285' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
+        
+        /* Transiciones suaves para elementos que cambian de color */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        /* Evitar transiciones en animaciones específicas */
+        .btn-hero, .testimonial-card.fading-out {
+            transition: none;
+        }
+        .btn-hero {
+            animation: pulse-animation 2s infinite;
+            transition: transform 0.3s ease;
+        }
+        
+        /* Transición suave para las olas en modo oscuro */
+        .dark .parallax > use:nth-child(1) {
+            fill: #374151 !important;
+            opacity: 0.5;
+        }
+        .dark .parallax > use:nth-child(2) {
+            fill: #374151 !important;
+            opacity: 0.7;
+        }
+        .dark .parallax > use:nth-child(3) {
+            fill: #374151 !important;
+        }
+        .dark .parallax > use:nth-child(4) {
+            fill: #1a1a1a !important;
+        }
         h1, h2, h3, .font-display {
             font-family: 'Playfair Display', serif;
+            transition: color 0.3s ease;
         }
         .text-brand-primary {
             color: var(--brand-primary);
@@ -118,7 +150,7 @@
         .hero-text-shadow {
             text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
         }
-
+        
         /* Estilos para las nuevas olas animadas */
         .waves-container {
             position:relative;
@@ -161,7 +193,7 @@
                 transform: translate3d(85px,0,0);
             }
         }
-
+        
         .testimonial-card {
             background-color: white;
             padding: 2rem;
@@ -169,7 +201,7 @@
             box-shadow: 0 10px 20px rgba(93, 73, 69, 0.05);
             border-left: 4px solid var(--brand-primary);
             transform: translateY(0);
-            transition: all 0.3s ease, opacity 0.7s ease-in-out;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.7s ease-in-out, background-color 0.3s ease;
         }
         .testimonial-card:hover {
             transform: translateY(-8px);
@@ -186,9 +218,18 @@
         .form-input {
             @apply mt-1 block w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg shadow-sm transition duration-300;
             @apply focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary;
+            color: #1a1a1a;
         }
         .dark .form-input {
-            @apply bg-gray-700 border-gray-600 text-white;
+            @apply bg-gray-700 border-gray-600;
+            color: #f9f9f9 !important;
+        }
+        .dark .form-input::placeholder {
+            color: #9ca3af;
+        }
+        .dark .form-input option {
+            background-color: #374151;
+            color: #f9f9f9;
         }
         .section-bg-art {
             position: relative;
@@ -247,7 +288,7 @@
                 </div>
             </a>
             <nav class="flex items-center space-x-4">
-                 <a href="https://www.instagram.com/daimabye/" target="_blank" rel="noopener noreferrer" class="text-brand-primary hover:text-brand-dark dark:hover:text-white transition duration-300" aria-label="Instagram de Daimabye">
+                 <a href="https://www.instagram.com/daimabellezastudio/" target="_blank" rel="noopener noreferrer" class="text-brand-primary hover:text-brand-dark dark:hover:text-white transition duration-300" aria-label="Instagram de Daima Belleza Studio">
                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                 </a>
                  <!-- Dark Mode Toggle -->
@@ -286,11 +327,11 @@
                         </defs>
                         <g class="parallax">
                             <!-- Colores que combinan con la paleta de colores. La opacidad crea el efecto de capas. -->
-                            <use xlink:href="#gentle-wave" x="48" y="0" class="fill-[#EADCD8]/50 dark:fill-gray-800/50" />
-                            <use xlink:href="#gentle-wave" x="48" y="3" class="fill-[#EADCD8]/70 dark:fill-gray-800/70" />
-                            <use xlink:href="#gentle-wave" x="48" y="5" class="fill-[#EADCD8] dark:fill-gray-800" />
+                            <use xlink:href="#gentle-wave" x="48" y="0" style="fill: #EADCD8; opacity: 0.5; transition: fill 0.3s ease, opacity 0.3s ease;" />
+                            <use xlink:href="#gentle-wave" x="48" y="3" style="fill: #EADCD8; opacity: 0.7; transition: fill 0.3s ease, opacity 0.3s ease;" />
+                            <use xlink:href="#gentle-wave" x="48" y="5" style="fill: #EADCD8; transition: fill 0.3s ease;" />
                             <!-- La última ola usa el color de fondo de la siguiente sección para una transición suave -->
-                            <use xlink:href="#gentle-wave" x="48" y="7" class="fill-[#F9F1EF] dark:fill-[#1a1a1a]" />
+                            <use xlink:href="#gentle-wave" x="48" y="7" style="fill: #F9F1EF; transition: fill 0.3s ease;" />
                         </g>
                     </svg>
                 </div>
@@ -346,40 +387,112 @@
                     <h2 class="text-4xl md:text-5xl font-bold text-brand-primary section-title">Nuestros Paquetes y Precios</h2>
                     <p class="text-lg mt-4 text-gray-600 dark:text-gray-400">Planes diseñados para cada momento especial.</p>
                 </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                    <!-- Paquete Maquillaje Social -->
+
+                <!-- Combos Section -->
+                <div class="mb-16">
+                    <div class="text-center mb-8" data-aos="fade-up">
+                        <h3 class="text-3xl md:text-4xl font-bold text-brand-primary mb-2">Porque en DAIMA STUDIO amamos consentirte 😍</h3>
+                        <p class="text-lg text-gray-600 dark:text-gray-400">Combos especiales para que luzcas radiante</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-12">
+                        <!-- Combo Consentidor -->
+                        <div onclick="openModal('Combo Consentidor')" class="cursor-pointer bg-gradient-to-br from-pink-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 p-8 rounded-2xl shadow-xl text-center transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border-2 border-brand-primary/20 hover:border-brand-primary/50 h-full flex flex-col relative overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                            <div class="absolute top-0 right-0 bg-brand-primary text-white px-4 py-2 rounded-bl-2xl font-bold text-sm">
+                                ✨ POPULAR
+                            </div>
+                            <div class="mb-4 mt-4">
+                                <span class="text-4xl">✨️☺️</span>
+                            </div>
+                            <h3 class="text-2xl font-bold font-display mb-4 text-brand-dark dark:text-white">Combo Consentidor</h3>
+                            <ul class="text-left text-gray-600 dark:text-gray-400 space-y-3 flex-grow mb-6 text-sm">
+                                <li class="flex items-start">
+                                    <span class="text-brand-primary mr-2 mt-1">💋</span>
+                                    <span>Maquillaje Social Profesional con técnica <strong>Halo Eyes o Foxy Eyes</strong> (a elección)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-brand-primary mr-2 mt-1">💇‍♀️</span>
+                                    <span>Peinado <strong>Ondas Sueltas</strong></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-brand-primary mr-2 mt-1">✨</span>
+                                    <span>Incluye todo lo del paquete profesional</span>
+                                </li>
+                            </ul>
+                            <div class="mt-auto">
+                                <div class="flex items-center justify-center gap-2 mb-2">
+                                    <span class="text-2xl text-gray-400 line-through">$35</span>
+                                    <span class="text-5xl font-bold text-brand-primary">$25</span>
+                                </div>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">¡Ahorra $10!</p>
+                            </div>
+                        </div>
+
+                        <!-- Combo Pasarela -->
+                        <div onclick="openModal('Combo Pasarela')" class="cursor-pointer bg-gradient-to-br from-amber-50 to-rose-50 dark:from-gray-800 dark:to-gray-700 p-8 rounded-2xl shadow-xl text-center transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl border-2 border-brand-primary/20 hover:border-brand-primary/50 h-full flex flex-col relative overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                            <div class="absolute top-0 right-0 bg-gradient-to-r from-amber-500 to-rose-500 text-white px-4 py-2 rounded-bl-2xl font-bold text-sm">
+                                👑 PREMIUM
+                            </div>
+                            <div class="mb-4 mt-4">
+                                <span class="text-4xl">💖</span>
+                            </div>
+                            <h3 class="text-2xl font-bold font-display mb-4 text-brand-dark dark:text-white">Combo Pasarela</h3>
+                            <ul class="text-left text-gray-600 dark:text-gray-400 space-y-3 flex-grow mb-6 text-sm">
+                                <li class="flex items-start">
+                                    <span class="text-brand-primary mr-2 mt-1">💋</span>
+                                    <span>Maquillaje Social Profesional con <strong>cualquiera de nuestras técnicas</strong> a elección</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-brand-primary mr-2 mt-1">👑</span>
+                                    <span>Peinado <strong>Ondas de Reina</strong></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-brand-primary mr-2 mt-1">🎁</span>
+                                    <span><strong>Detallito especial</strong> incluido</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-brand-primary mr-2 mt-1">✨</span>
+                                    <span>La experiencia completa de glamour</span>
+                                </li>
+                            </ul>
+                            <div class="mt-auto">
+                                <div class="flex items-center justify-center gap-2 mb-2">
+                                    <span class="text-2xl text-gray-400 line-through">$40</span>
+                                    <span class="text-5xl font-bold text-brand-primary">$35</span>
+                                </div>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">¡Ahorra $5!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <!-- Maquillaje Social Profesional -->
                     <div onclick="openModal()" class="cursor-pointer bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center transform transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-brand-primary/30 dark:hover:border-brand-primary/50 h-full flex flex-col" data-aos="fade-up" data-aos-delay="100">
-                        <h3 class="text-2xl font-bold font-display mb-4 text-brand-dark dark:text-white">Maquillaje Social</h3>
-                        <p class="text-gray-600 dark:text-gray-400 flex-grow">Maquillaje Profesional certificado para eventos, graduaciones, etc.</p>
-                        <div class="mt-6">
+                        <h3 class="text-2xl font-bold font-display mb-4 text-brand-dark dark:text-white">Maquillaje Social Profesional</h3>
+                        <ul class="text-left text-gray-600 dark:text-gray-400 space-y-2 flex-grow mb-4 text-sm">
+                            <li>✨ Pestañas a elección: punto a punto o en banda</li>
+                            <li>✨ Técnica de Halo Eyes o Foxy Eyes</li>
+                            <li>✨ Masaje linfático de 5 min con suero hidratante</li>
+                            <li>✨ Colágeno de ojeras hidratante</li>
+                            <li>✨ Sellado con polvos sueltos + sellador (hasta 5h)</li>
+                        </ul>
+                        <div class="mt-auto">
                             <span class="text-4xl font-bold text-brand-primary">$20</span>
                         </div>
                     </div>
 
-                    <!-- Paquete Novia -->
+                    <!-- Maquillaje de Graduación Profesional -->
                     <div onclick="openModal()" class="cursor-pointer bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center transform transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-brand-primary/30 dark:hover:border-brand-primary/50 h-full flex flex-col" data-aos="fade-up" data-aos-delay="200">
-                        <h3 class="text-2xl font-bold font-display mb-4 text-brand-dark dark:text-white">Paquete Novia</h3>
-                        <ul class="text-gray-600 dark:text-gray-400 space-y-2 flex-grow">
-                            <li>Maquillaje Profesional Cargado, sellado y a prueba de lágrimas</li>
-                            <li>Peinado de ondas</li>
-                            <li>Tiara tipo corona</li>
-                            <li>Bolsita de retoque</li>
+                        <h3 class="text-2xl font-bold font-display mb-4 text-brand-dark dark:text-white">Maquillaje de Graduación Profesional</h3>
+                        <ul class="text-left text-gray-600 dark:text-gray-400 space-y-2 flex-grow mb-4 text-sm">
+                            <li>✨ Pestañas a elección: punto a punto o en banda</li>
+                            <li>✨ Técnicas: Halo Eyes, Semicorte, Corte, Foxy Eyes, Ahumado</li>
+                            <li>✨ Masaje linfático de 5 min con suero hidratante</li>
+                            <li>✨ Colágeno de ojeras hidratante</li>
+                            <li>✨ Triple sellado: crema + polvo + hidratante (hasta 8h)</li>
+                            <li>✨ Detallito especial</li>
                         </ul>
-                        <div class="mt-6">
-                            <span class="text-4xl font-bold text-brand-primary">$55</span>
-                        </div>
-                    </div>
-
-                    <!-- Paquete Quinceañera -->
-                    <div onclick="openModal()" class="cursor-pointer bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg text-center transform transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-brand-primary/30 dark:hover:border-brand-primary/50 h-full flex flex-col" data-aos="fade-up" data-aos-delay="300">
-                        <h3 class="text-2xl font-bold font-display mb-4 text-brand-dark dark:text-white">Paquete Quinceañera</h3>
-                        <ul class="text-gray-600 dark:text-gray-400 space-y-2 flex-grow">
-                            <li>Maquillaje Profesional Cargado, sellado y a prueba de lágrimas</li>
-                            <li>Planchado</li>
-                            <li>Tiara larga</li>
-                        </ul>
-                        <div class="mt-6">
-                            <span class="text-4xl font-bold text-brand-primary">$40</span>
+                        <div class="mt-auto">
+                            <span class="text-4xl font-bold text-brand-primary">$25</span>
                         </div>
                     </div>
                 </div>
@@ -389,7 +502,15 @@
                     <h2 class="text-4xl md:text-5xl font-bold text-brand-primary section-title">Peinados</h2>
                      <p class="text-lg mt-4 text-gray-600 dark:text-gray-400">Completa tu look con el peinado perfecto.</p>
                 </div>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                <div class="max-w-4xl mx-auto mb-8" data-aos="fade-up">
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
+                        <p class="text-center text-gray-600 dark:text-gray-400 italic">
+                            Toda técnica incluye: <span class="font-semibold text-brand-primary">Preparación del cabello con hidratante capilar + Protector térmico de alta gama + Cera y Fijador de Alta Durabilidad</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
                     <!-- Peinado Planchado -->
                     <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg text-center flex flex-col" data-aos="fade-up" data-aos-delay="100">
                         <h3 class="text-xl font-bold font-display mb-2 text-brand-dark dark:text-white">Planchado</h3>
@@ -398,26 +519,34 @@
                             <span class="text-3xl font-bold text-brand-primary">$10</span>
                         </div>
                     </div>
-                    <!-- Peinado Semirecogido -->
+                    <!-- Peinado Ondas Normales -->
                     <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg text-center flex flex-col" data-aos="fade-up" data-aos-delay="200">
-                        <h3 class="text-xl font-bold font-display mb-2 text-brand-dark dark:text-white">Semirecogido</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm flex-grow mb-4">La combinación perfecta entre elegancia y comodidad, ideal para eventos.</p>
-                        <div class="mt-auto">
-                            <span class="text-3xl font-bold text-brand-primary">$15</span>
-                        </div>
-                    </div>
-                    <!-- Peinado Ondas -->
-                    <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg text-center flex flex-col" data-aos="fade-up" data-aos-delay="300">
-                        <h3 class="text-xl font-bold font-display mb-2 text-brand-dark dark:text-white">Ondas</h3>
+                        <h3 class="text-xl font-bold font-display mb-2 text-brand-dark dark:text-white">Ondas Normales</h3>
                         <p class="text-gray-600 dark:text-gray-400 text-sm flex-grow mb-4">Ondas suaves y naturales que aportan volumen y movimiento a tu cabello.</p>
                         <div class="mt-auto">
                             <span class="text-3xl font-bold text-brand-primary">$15</span>
                         </div>
                     </div>
-                    <!-- Peinado Ondas de agua -->
-                    <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg text-center flex flex-col" data-aos="fade-up" data-aos-delay="400">
-                        <h3 class="text-xl font-bold font-display mb-2 text-brand-dark dark:text-white">Ondas de agua</h3>
+                    <!-- Peinado Ondas de Reina / Ondas de agua -->
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg text-center flex flex-col" data-aos="fade-up" data-aos-delay="300">
+                        <h3 class="text-xl font-bold font-display mb-2 text-brand-dark dark:text-white">Ondas de Reina / Ondas de Agua</h3>
                         <p class="text-gray-600 dark:text-gray-400 text-sm flex-grow mb-4">Un estilo retro y glamoroso con ondas muy marcadas y definidas.</p>
+                        <div class="mt-auto">
+                            <span class="text-3xl font-bold text-brand-primary">$20</span>
+                        </div>
+                    </div>
+                    <!-- Peinado Semirecogido -->
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg text-center flex flex-col" data-aos="fade-up" data-aos-delay="400">
+                        <h3 class="text-xl font-bold font-display mb-2 text-brand-dark dark:text-white">Semirecogido</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm flex-grow mb-4">La combinación perfecta entre elegancia y comodidad, ideal para eventos.</p>
+                        <div class="mt-auto">
+                            <span class="text-3xl font-bold text-brand-primary">$20</span>
+                        </div>
+                    </div>
+                    <!-- Peinado Recogido -->
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg text-center flex flex-col" data-aos="fade-up" data-aos-delay="500">
+                        <h3 class="text-xl font-bold font-display mb-2 text-brand-dark dark:text-white">Recogido</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm flex-grow mb-4">Elegante y sofisticado, perfecto para bodas, galas y eventos formales.</p>
                         <div class="mt-auto">
                             <span class="text-3xl font-bold text-brand-primary">$20</span>
                         </div>
@@ -508,7 +637,7 @@
                 </div>
             </a>
              <div class="flex justify-center space-x-6 my-6">
-                 <a href="https://www.instagram.com/daimabye/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-brand-primary transition duration-300" aria-label="Instagram de Daimabye">
+                 <a href="https://www.instagram.com/daimabellezastudio/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-brand-primary transition duration-300" aria-label="Instagram de Daima Belleza Studio">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                  </a>
             </div>
@@ -516,7 +645,6 @@
             <p class="mt-2 text-gray-400">Portoviejo, Manabí, Ecuador</p>
         </div>
     </footer>
-
 
     <!-- Modal de Agendamiento -->
     <div id="booking-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden">
@@ -539,18 +667,20 @@
                     <label for="service" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">¿Qué servicio deseas?</label>
                     <select id="service" name="service" required class="form-input">
                         <option value="" data-price="0" disabled selected>Selecciona un servicio</option>
-                        <optgroup label="Maquillaje">
-                            <option value="Maquillaje Social" data-price="20">Maquillaje Social - $20</option>
+                        <optgroup label="Combos Especiales 😍">
+                            <option value="Combo Consentidor" data-price="25">✨ Combo Consentidor - $25 (Maquillaje + Ondas)</option>
+                            <option value="Combo Pasarela" data-price="35">💖 Combo Pasarela - $35 (Maquillaje + Ondas de Reina + Detallito)</option>
                         </optgroup>
-                        <optgroup label="Paquetes">
-                            <option value="Paquete Quinceañera" data-price="40">Paquete Quinceañera - $40</option>
-                            <option value="Paquete Novia" data-price="55">Paquete Novia - $55</option>
+                        <optgroup label="Maquillaje">
+                            <option value="Maquillaje Social Profesional" data-price="20">Maquillaje Social Profesional - $20</option>
+                            <option value="Maquillaje de Graduación Profesional" data-price="25">Maquillaje de Graduación Profesional - $25</option>
                         </optgroup>
                         <optgroup label="Peinados">
                             <option value="Planchado" data-price="10">Planchado - $10</option>
-                            <option value="Ondas" data-price="15">Ondas - $15</option>
-                            <option value="Semirecogido" data-price="15">Semirecogido - $15</option>
-                            <option value="Ondas de agua" data-price="20">Ondas de agua - $20</option>
+                            <option value="Ondas Normales" data-price="15">Ondas Normales - $15</option>
+                            <option value="Ondas de Reina / Ondas de Agua" data-price="20">Ondas de Reina / Ondas de Agua - $20</option>
+                            <option value="Semirecogido" data-price="20">Semirecogido - $20</option>
+                            <option value="Recogido" data-price="20">Recogido - $20</option>
                         </optgroup>
                         <optgroup label="Pestañas">
                             <option value="Pestañas pelo a pelo" data-price="5">Pestañas pelo a pelo - $5</option>
@@ -581,7 +711,6 @@
         </div>
     </div>
 
-
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
@@ -597,7 +726,6 @@
         const serviceSelect = document.getElementById('service');
         const priceDisplay = document.getElementById('price-display');
         const bookingForm = document.getElementById('booking-form');
-
 
         function openModal(serviceValue = null) {
             if (serviceValue) {
@@ -617,7 +745,7 @@
                 modal.classList.add('hidden');
                 bookingForm.reset();
                 priceDisplay.classList.add('opacity-0');
-            }, 300); // Coincide con la duración de la animación
+            }, 300);
         }
         
         // Cierra el modal si se hace clic fuera del contenido
@@ -799,17 +927,16 @@
 
                     currentIndex = (currentIndex + testimonialsPerPage) % testimonialsData.length;
                     
-                    // Refrescar AOS para las nuevas tarjetas
-                     setTimeout(() => { AOS.refresh(); }, 50);
+                    setTimeout(() => { AOS.refresh(); }, 50);
 
-                }, 700); // Esperar que la animación de fade-out termine
+                }, 700);
             }
 
             // Carga inicial
             updateTestimonials();
 
             // Ciclo de actualización
-            setInterval(updateTestimonials, 8000); // Cambia cada 8 segundos
+            setInterval(updateTestimonials, 8000);
         });
 
 
@@ -817,5 +944,3 @@
 
 </body>
 </html>
-
-
