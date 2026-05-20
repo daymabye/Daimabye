@@ -1059,6 +1059,8 @@
       box-shadow: var(--shadow-soft);
       min-height: 18rem;
       transform-origin: center;
+      opacity: 1;
+      transform: none;
     }
 
     .gallery-card img {
@@ -1175,6 +1177,15 @@
       display: grid;
       gap: 0.95rem;
       margin-top: 1.2rem;
+    }
+
+    .contact-card--info {
+      background: linear-gradient(180deg, rgba(255, 253, 251, 0.96), rgba(247, 236, 230, 0.84));
+    }
+
+    .contact-card--info h3,
+    .contact-card--info > p {
+      max-width: 34rem;
     }
 
     .booking-card {
@@ -1295,6 +1306,18 @@
       border-radius: 1.2rem;
       background: rgba(255, 255, 255, 0.72);
       border: 1px solid rgba(141, 94, 78, 0.1);
+    }
+
+    .contact-list a {
+      color: inherit;
+      text-decoration: none;
+      transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+    }
+
+    .contact-list a:hover {
+      transform: translateY(-3px);
+      border-color: rgba(141, 94, 78, 0.18);
+      box-shadow: 0 18px 30px rgba(77, 43, 31, 0.08);
     }
 
     .contact-list strong {
@@ -1620,19 +1643,77 @@
     }
 
     @media (max-width: 820px) {
+      .shell {
+        width: min(100vw - 1.25rem, 1180px);
+      }
+
+      .site-header {
+        backdrop-filter: blur(12px);
+      }
+
+      .header-row {
+        min-height: 4.9rem;
+        gap: 0.75rem;
+      }
+
+      .brand {
+        min-width: 0;
+        gap: 0.65rem;
+      }
+
+      .brand-mark {
+        flex: 0 0 auto;
+      }
+
+      .brand-monogram {
+        font-size: 3.2rem;
+      }
+
+      .brand-wing {
+        width: 2.75rem;
+        height: 1.55rem;
+        margin-left: -1.3rem;
+        margin-bottom: 0.24rem;
+      }
+
+      .brand-copy {
+        min-width: 0;
+      }
+
+      .brand-copy span {
+        font-size: 1.18rem;
+        line-height: 1.05;
+      }
+
+      .brand-copy small,
+      .brand-copy strong {
+        letter-spacing: 0.14em;
+      }
+
+      .brand-copy small {
+        font-size: 0.63rem;
+        margin-top: 0.18rem;
+      }
+
+      .brand-copy strong {
+        font-size: 0.62rem;
+        margin-top: 0.22rem;
+      }
+
       .menu-toggle {
         display: inline-block;
+        flex: 0 0 auto;
       }
 
       .nav-links {
         position: absolute;
-        top: calc(100% + 0.65rem);
-        left: 1rem;
-        right: 1rem;
+        top: calc(100% + 0.45rem);
+        left: 0.625rem;
+        right: 0.625rem;
         display: none;
         flex-direction: column;
         align-items: stretch;
-        padding: 1rem;
+        padding: 0.95rem;
         border-radius: 1.4rem;
         background: rgba(255, 252, 249, 0.96);
         border: 1px solid rgba(141, 94, 78, 0.1);
@@ -1649,16 +1730,43 @@
 
       .hero {
         min-height: auto;
-        padding-top: 0.75rem;
+        padding-top: 0.35rem;
       }
 
       .hero-grid {
         min-height: auto;
-        padding: 1.7rem 0.8rem 5.2rem;
+        width: 100%;
+        padding: 1.45rem 0.15rem 4.95rem;
       }
 
       .hero-copy {
-        padding: 1.9rem 1.2rem 1.25rem;
+        max-width: 100%;
+        padding: 1.55rem 1rem 1.1rem;
+      }
+
+      .eyebrow {
+        justify-content: center;
+        width: fit-content;
+        max-width: 100%;
+        margin-inline: auto;
+        padding-inline: 0.78rem;
+        font-size: 0.66rem;
+        line-height: 1.25;
+        text-align: center;
+      }
+
+      .hero h1 {
+        max-width: 9.8ch;
+        font-size: clamp(2.75rem, 12vw, 4.2rem);
+        line-height: 0.96;
+        letter-spacing: -0.035em;
+      }
+
+      .hero-lead {
+        max-width: 34rem;
+        font-size: 0.98rem;
+        line-height: 1.7;
+        text-align: center;
       }
 
       .hero-mini,
@@ -1668,6 +1776,7 @@
 
       .hero-actions {
         gap: 0.8rem;
+        margin-top: 1.25rem;
       }
 
       .hero-actions .button-primary,
@@ -1676,14 +1785,96 @@
         width: 100%;
       }
 
+      .section-head,
+      .portfolio-head {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0.9rem;
+      }
+
+      .section-head .section-title::after,
+      .portfolio-head .section-title::after {
+        margin-inline: auto;
+      }
+
+      .section-copy,
+      .gallery-note {
+        text-align: center;
+        margin-inline: auto;
+      }
+
       .section {
-        padding: 4.5rem 0;
+        padding: 4rem 0;
       }
 
       .services-grid,
       .pricing-grid,
       .gallery-grid {
         grid-template-columns: 1fr;
+      }
+
+      .story-card,
+      .service-card,
+      .feature-card,
+      .price-card,
+      .contact-card,
+      .quote-card,
+      .faq {
+        padding: 1.35rem;
+      }
+
+      .story-card h3,
+      .quote-card p,
+      .faq summary {
+        text-align: center;
+      }
+
+      .story-badges {
+        justify-content: center;
+      }
+
+      .price-row {
+        align-items: stretch;
+      }
+
+      .price-amount {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .contact-card form,
+      .booking-intro,
+      .contact-list,
+      .location-meta {
+        text-align: left;
+      }
+
+      .contact-card--info {
+        text-align: center;
+      }
+
+      .contact-card--info h3,
+      .contact-card--info > p,
+      .contact-card--info .section-kicker {
+        margin-inline: auto;
+        text-align: center;
+      }
+
+      .contact-card--info .contact-list {
+        gap: 0.9rem;
+      }
+
+      .contact-card--info .location-panel {
+        padding: 1.15rem 1rem;
+      }
+
+      .contact-card--info .location-panel-head {
+        align-items: center;
+      }
+
+      .field label {
+        text-align: left;
       }
 
       .hero-media {
@@ -1703,7 +1894,26 @@
       }
 
       .header-row {
-        min-height: 4.8rem;
+        min-height: 4.55rem;
+      }
+
+      .brand-monogram {
+        font-size: 2.8rem;
+      }
+
+      .brand-wing {
+        width: 2.35rem;
+        height: 1.35rem;
+        margin-left: -1.1rem;
+      }
+
+      .brand-copy span {
+        font-size: 1.02rem;
+      }
+
+      .brand-copy small,
+      .brand-copy strong {
+        font-size: 0.58rem;
       }
 
       .hero h1 {
@@ -1734,9 +1944,14 @@
         border-radius: 1.6rem;
       }
 
+      .eyebrow {
+        font-size: 0.6rem;
+        padding: 0.52rem 0.72rem;
+      }
+
       .hero-lead {
-        font-size: 1rem;
-        line-height: 1.7;
+        font-size: 0.94rem;
+        line-height: 1.65;
       }
 
       .hero-wave {
@@ -1744,13 +1959,27 @@
         height: 9vh;
       }
 
+      .section-title {
+        font-size: clamp(2.1rem, 10vw, 2.8rem);
+      }
+
+      .story-card h3 {
+        font-size: 1.9rem;
+      }
+
+      .quote-card p {
+        font-size: 1.55rem;
+        line-height: 1.12;
+      }
+
       .cta-inline,
       .button-primary,
       .button-secondary,
       .button-ghost {
         width: 100%;
-        font-size: 0.96rem;
-        padding-inline: 1.1rem;
+        min-height: 3.45rem;
+        font-size: 0.92rem;
+        padding-inline: 1rem;
       }
 
       .price-row .button-secondary,
@@ -1770,6 +1999,57 @@
       .inline-icon,
       .booking-icon {
         flex: 0 0 auto;
+      }
+
+      .contact-card--info h3 {
+        font-size: 1.82rem !important;
+        line-height: 1.02;
+      }
+
+      .contact-card--info > p {
+        font-size: 0.94rem;
+        line-height: 1.7;
+      }
+
+      .contact-card--info .contact-list a {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0.8rem;
+        padding: 1.1rem 0.95rem;
+      }
+
+      .contact-card--info .contact-list strong,
+      .contact-card--info .contact-list span {
+        text-align: center;
+      }
+
+      .contact-card--info .contact-icon,
+      .contact-card--info .inline-icon {
+        width: 3.35rem;
+        height: 3.35rem;
+      }
+
+      .contact-card--info .location-panel {
+        text-align: center;
+      }
+
+      .contact-card--info .location-panel-head {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.7rem;
+      }
+
+      .contact-card--info .location-meta div {
+        text-align: center;
+      }
+
+      .service-card li,
+      .price-card li,
+      .contact-list span,
+      .booking-chip span,
+      .metric span {
+        font-size: 0.9rem;
       }
 
       .stack-label {
@@ -1869,7 +2149,7 @@
 
     <section class="section" id="historia">
       <div class="shell">
-        <div class="section-surface reveal">
+        <div class="section-surface is-visible">
           <div class="section-head">
             <div>
               <span class="section-kicker">La firma</span>
@@ -2083,7 +2363,7 @@
 
     <section class="section" id="portafolio">
       <div class="shell">
-        <div class="section-surface reveal">
+        <div class="section-surface is-visible">
           <div class="portfolio-head">
             <div>
               <span class="section-kicker">Portafolio</span>
@@ -2095,9 +2375,168 @@
             Esta sección usa las imágenes públicas descargadas del perfil de Instagram del estudio para que la página no dependa
             de enlaces temporales. Puedes abrir cada foto, leer el contexto del post y saltar al Instagram original.
           </p>
-          <div class="gallery-grid" id="galleryGrid"></div>
-          <div class="gallery-actions">
-            <button class="button-primary" id="loadMoreGallery" type="button">Cargar más looks</button>
+          <div class="gallery-grid" id="galleryGrid">
+            <button type="button" class="gallery-card" data-gallery-index="0">
+              <img src="assets/instagram/DXDd0majhX4.jpg" alt="Graduation Day. Maquillaje profesional para un look de grado." loading="lazy">
+              <div class="gallery-caption">
+                <span>Instagram real</span>
+                <strong>Graduation Day. Maquillaje profesional para un look de grado.</strong>
+              </div>
+            </button>
+            <button type="button" class="gallery-card" data-gallery-index="1">
+              <img src="assets/instagram/DXDd0majhX4-2.jpg" alt="Graduation Day. Maquillaje profesional para un look de grado." loading="lazy">
+              <div class="gallery-caption">
+                <span>Instagram real</span>
+                <strong>Graduation Day. Maquillaje profesional para un look de grado.</strong>
+              </div>
+            </button>
+            <button type="button" class="gallery-card" data-gallery-index="2">
+              <img src="assets/instagram/DUHlmVQjnTy.jpg" alt="Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento." loading="lazy">
+              <div class="gallery-caption">
+                <span>Instagram real</span>
+                <strong>Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento.</strong>
+              </div>
+            </button>
+            <button type="button" class="gallery-card" data-gallery-index="3">
+              <img src="assets/instagram/DUHlmVQjnTy-2.jpg" alt="Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento." loading="lazy">
+              <div class="gallery-caption">
+                <span>Instagram real</span>
+                <strong>Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento.</strong>
+              </div>
+            </button>
+            <button type="button" class="gallery-card" data-gallery-index="4">
+              <img src="assets/instagram/DUHlmVQjnTy-3.jpg" alt="Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento." loading="lazy">
+              <div class="gallery-caption">
+                <span>Instagram real</span>
+                <strong>Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento.</strong>
+              </div>
+            </button>
+            <button type="button" class="gallery-card" data-gallery-index="5">
+              <img src="assets/instagram/DUHlmVQjnTy-4.jpg" alt="Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento." loading="lazy">
+              <div class="gallery-caption">
+                <span>Instagram real</span>
+                <strong>Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento.</strong>
+              </div>
+            </button>
+            <button type="button" class="gallery-card" data-gallery-index="6">
+              <img src="assets/instagram/DUHlmVQjnTy-5.jpg" alt="Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento." loading="lazy">
+              <div class="gallery-caption">
+                <span>Instagram real</span>
+                <strong>Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento.</strong>
+              </div>
+            </button>
+            <button type="button" class="gallery-card" data-gallery-index="7">
+              <img src="assets/instagram/DUHlmVQjnTy-6.jpg" alt="Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento." loading="lazy">
+              <div class="gallery-caption">
+                <span>Instagram real</span>
+                <strong>Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento.</strong>
+              </div>
+            </button>
+            <button type="button" class="gallery-card" data-gallery-index="8">
+              <img src="assets/instagram/DR5aLNBjkOg.jpg" alt="Seguridad y presencia para un día especial de graduación." loading="lazy">
+              <div class="gallery-caption">
+                <span>Instagram real</span>
+                <strong>Seguridad y presencia para un día especial de graduación.</strong>
+              </div>
+            </button>
+            <button type="button" class="gallery-card" data-gallery-index="9">
+              <img src="assets/instagram/DR5aLNBjkOg-2.jpg" alt="Seguridad y presencia para un día especial de graduación." loading="lazy">
+              <div class="gallery-caption">
+                <span>Instagram real</span>
+                <strong>Seguridad y presencia para un día especial de graduación.</strong>
+              </div>
+            </button>
+            <button type="button" class="gallery-card" data-gallery-index="10">
+              <img src="assets/instagram/DR5ZguYDsMI.jpg" alt="Maquillaje de grado con acabado limpio y protagonista." loading="lazy">
+              <div class="gallery-caption">
+                <span>Instagram real</span>
+                <strong>Maquillaje de grado con acabado limpio y protagonista.</strong>
+              </div>
+            </button>
+            <button type="button" class="gallery-card" data-gallery-index="11">
+              <img src="assets/instagram/DR5ZguYDsMI-2.jpg" alt="Maquillaje de grado con acabado limpio y protagonista." loading="lazy">
+              <div class="gallery-caption">
+                <span>Instagram real</span>
+                <strong>Maquillaje de grado con acabado limpio y protagonista.</strong>
+              </div>
+            </button>
+            <button type="button" class="gallery-card" data-gallery-index="12">
+              <img src="assets/instagram/DRN0xM3DvT-.jpg" alt="Looking Stunning. Maquillaje y semirecogido para ocasión especial." loading="lazy">
+              <div class="gallery-caption">
+                <span>Instagram real</span>
+                <strong>Looking Stunning. Maquillaje y semirecogido para ocasión especial.</strong>
+              </div>
+            </button>
+            <button type="button" class="gallery-card" data-gallery-index="13">
+              <img src="assets/instagram/DRN0xM3DvT--2.jpg" alt="Looking Stunning. Maquillaje y semirecogido para ocasión especial." loading="lazy">
+              <div class="gallery-caption">
+                <span>Instagram real</span>
+                <strong>Looking Stunning. Maquillaje y semirecogido para ocasión especial.</strong>
+              </div>
+            </button>
+            <button type="button" class="gallery-card" data-gallery-index="14">
+              <img src="assets/instagram/DP7Dwo_Drem.jpg" alt="Belleza resaltada con un look social profesional." loading="lazy">
+              <div class="gallery-caption">
+                <span>Instagram real</span>
+                <strong>Belleza resaltada con un look social profesional.</strong>
+              </div>
+            </button>
+            <button type="button" class="gallery-card" data-gallery-index="15">
+              <img src="assets/instagram/DP7Dwo_Drem-2.jpg" alt="Belleza resaltada con un look social profesional." loading="lazy">
+              <div class="gallery-caption">
+                <span>Instagram real</span>
+                <strong>Belleza resaltada con un look social profesional.</strong>
+              </div>
+            </button>
+            <button type="button" class="gallery-card" data-gallery-index="16">
+              <img src="assets/instagram/DPETGLOjmwm.jpg" alt="Look listo para brillar en el próximo evento especial." loading="lazy">
+              <div class="gallery-caption">
+                <span>Instagram real</span>
+                <strong>Look listo para brillar en el próximo evento especial.</strong>
+              </div>
+            </button>
+            <button type="button" class="gallery-card" data-gallery-index="17">
+              <img src="assets/instagram/DPETGLOjmwm-2.jpg" alt="Look listo para brillar en el próximo evento especial." loading="lazy">
+              <div class="gallery-caption">
+                <span>Instagram real</span>
+                <strong>Look listo para brillar en el próximo evento especial.</strong>
+              </div>
+            </button>
+            <button type="button" class="gallery-card" data-gallery-index="18">
+              <img src="assets/instagram/DIiQG7Qu-cu.jpg" alt="Look de XV años con glamour y presencia de protagonista." loading="lazy">
+              <div class="gallery-caption">
+                <span>Instagram real</span>
+                <strong>Look de XV años con glamour y presencia de protagonista.</strong>
+              </div>
+            </button>
+            <button type="button" class="gallery-card" data-gallery-index="19">
+              <img src="assets/instagram/DIiQG7Qu-cu-2.jpg" alt="Look de XV años con glamour y presencia de protagonista." loading="lazy">
+              <div class="gallery-caption">
+                <span>Instagram real</span>
+                <strong>Look de XV años con glamour y presencia de protagonista.</strong>
+              </div>
+            </button>
+            <button type="button" class="gallery-card" data-gallery-index="20">
+              <img src="assets/instagram/DIiQG7Qu-cu-3.jpg" alt="Look de XV años con glamour y presencia de protagonista." loading="lazy">
+              <div class="gallery-caption">
+                <span>Instagram real</span>
+                <strong>Look de XV años con glamour y presencia de protagonista.</strong>
+              </div>
+            </button>
+            <button type="button" class="gallery-card" data-gallery-index="21">
+              <img src="assets/instagram/DIiQG7Qu-cu-4.jpg" alt="Look de XV años con glamour y presencia de protagonista." loading="lazy">
+              <div class="gallery-caption">
+                <span>Instagram real</span>
+                <strong>Look de XV años con glamour y presencia de protagonista.</strong>
+              </div>
+            </button>
+            <button type="button" class="gallery-card" data-gallery-index="22">
+              <img src="assets/instagram/DIMQ0MIOXAt.jpg" alt="Maquillaje especializado para piel madura con acabado natural y elegante." loading="lazy">
+              <div class="gallery-caption">
+                <span>Instagram real</span>
+                <strong>Maquillaje especializado para piel madura con acabado natural y elegante.</strong>
+              </div>
+            </button>
           </div>
         </div>
       </div>
@@ -2208,7 +2647,7 @@
             </form>
           </article>
 
-          <article class="contact-card reveal" data-delay="2">
+          <article class="contact-card contact-card--info reveal" data-delay="2">
             <span class="section-kicker">Contacto y ubicación</span>
             <h3 style="font-size:2.1rem; font-family:'Cormorant Garamond', serif; margin-top:0;">Ubicación pública real y accesos útiles.</h3>
             <p>
@@ -2434,17 +2873,33 @@
       }
     ];
 
-    const galleryItems = instagramPosts.flatMap((post) =>
-      post.images.map((src, imageIndex) => ({
-        src,
-        link: post.link,
-        caption: post.caption,
-        title: `Look ${imageIndex + 1} · ${post.shortcode}`,
-      }))
-    );
+    const galleryItems = [
+      { src: "assets/instagram/DXDd0majhX4.jpg", link: "https://www.instagram.com/p/DXDd0majhX4/", caption: "Graduation Day. Maquillaje profesional para un look de grado.", title: "Look 1 · DXDd0majhX4" },
+      { src: "assets/instagram/DXDd0majhX4-2.jpg", link: "https://www.instagram.com/p/DXDd0majhX4/", caption: "Graduation Day. Maquillaje profesional para un look de grado.", title: "Look 2 · DXDd0majhX4" },
+      { src: "assets/instagram/DUHlmVQjnTy.jpg", link: "https://www.instagram.com/p/DUHlmVQjnTy/", caption: "Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento.", title: "Look 1 · DUHlmVQjnTy" },
+      { src: "assets/instagram/DUHlmVQjnTy-2.jpg", link: "https://www.instagram.com/p/DUHlmVQjnTy/", caption: "Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento.", title: "Look 2 · DUHlmVQjnTy" },
+      { src: "assets/instagram/DUHlmVQjnTy-3.jpg", link: "https://www.instagram.com/p/DUHlmVQjnTy/", caption: "Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento.", title: "Look 3 · DUHlmVQjnTy" },
+      { src: "assets/instagram/DUHlmVQjnTy-4.jpg", link: "https://www.instagram.com/p/DUHlmVQjnTy/", caption: "Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento.", title: "Look 4 · DUHlmVQjnTy" },
+      { src: "assets/instagram/DUHlmVQjnTy-5.jpg", link: "https://www.instagram.com/p/DUHlmVQjnTy/", caption: "Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento.", title: "Look 5 · DUHlmVQjnTy" },
+      { src: "assets/instagram/DUHlmVQjnTy-6.jpg", link: "https://www.instagram.com/p/DUHlmVQjnTy/", caption: "Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento.", title: "Look 6 · DUHlmVQjnTy" },
+      { src: "assets/instagram/DR5aLNBjkOg.jpg", link: "https://www.instagram.com/p/DR5aLNBjkOg/", caption: "Seguridad y presencia para un día especial de graduación.", title: "Look 1 · DR5aLNBjkOg" },
+      { src: "assets/instagram/DR5aLNBjkOg-2.jpg", link: "https://www.instagram.com/p/DR5aLNBjkOg/", caption: "Seguridad y presencia para un día especial de graduación.", title: "Look 2 · DR5aLNBjkOg" },
+      { src: "assets/instagram/DR5ZguYDsMI.jpg", link: "https://www.instagram.com/p/DR5ZguYDsMI/", caption: "Maquillaje de grado con acabado limpio y protagonista.", title: "Look 1 · DR5ZguYDsMI" },
+      { src: "assets/instagram/DR5ZguYDsMI-2.jpg", link: "https://www.instagram.com/p/DR5ZguYDsMI/", caption: "Maquillaje de grado con acabado limpio y protagonista.", title: "Look 2 · DR5ZguYDsMI" },
+      { src: "assets/instagram/DRN0xM3DvT-.jpg", link: "https://www.instagram.com/p/DRN0xM3DvT-/", caption: "Looking Stunning. Maquillaje y semirecogido para ocasión especial.", title: "Look 1 · DRN0xM3DvT-" },
+      { src: "assets/instagram/DRN0xM3DvT--2.jpg", link: "https://www.instagram.com/p/DRN0xM3DvT-/", caption: "Looking Stunning. Maquillaje y semirecogido para ocasión especial.", title: "Look 2 · DRN0xM3DvT-" },
+      { src: "assets/instagram/DP7Dwo_Drem.jpg", link: "https://www.instagram.com/p/DP7Dwo_Drem/", caption: "Belleza resaltada con un look social profesional.", title: "Look 1 · DP7Dwo_Drem" },
+      { src: "assets/instagram/DP7Dwo_Drem-2.jpg", link: "https://www.instagram.com/p/DP7Dwo_Drem/", caption: "Belleza resaltada con un look social profesional.", title: "Look 2 · DP7Dwo_Drem" },
+      { src: "assets/instagram/DPETGLOjmwm.jpg", link: "https://www.instagram.com/p/DPETGLOjmwm/", caption: "Look listo para brillar en el próximo evento especial.", title: "Look 1 · DPETGLOjmwm" },
+      { src: "assets/instagram/DPETGLOjmwm-2.jpg", link: "https://www.instagram.com/p/DPETGLOjmwm/", caption: "Look listo para brillar en el próximo evento especial.", title: "Look 2 · DPETGLOjmwm" },
+      { src: "assets/instagram/DIiQG7Qu-cu.jpg", link: "https://www.instagram.com/p/DIiQG7Qu-cu/", caption: "Look de XV años con glamour y presencia de protagonista.", title: "Look 1 · DIiQG7Qu-cu" },
+      { src: "assets/instagram/DIiQG7Qu-cu-2.jpg", link: "https://www.instagram.com/p/DIiQG7Qu-cu/", caption: "Look de XV años con glamour y presencia de protagonista.", title: "Look 2 · DIiQG7Qu-cu" },
+      { src: "assets/instagram/DIiQG7Qu-cu-3.jpg", link: "https://www.instagram.com/p/DIiQG7Qu-cu/", caption: "Look de XV años con glamour y presencia de protagonista.", title: "Look 3 · DIiQG7Qu-cu" },
+      { src: "assets/instagram/DIiQG7Qu-cu-4.jpg", link: "https://www.instagram.com/p/DIiQG7Qu-cu/", caption: "Look de XV años con glamour y presencia de protagonista.", title: "Look 4 · DIiQG7Qu-cu" },
+      { src: "assets/instagram/DIMQ0MIOXAt.jpg", link: "https://www.instagram.com/p/DIMQ0MIOXAt/", caption: "Maquillaje especializado para piel madura con acabado natural y elegante.", title: "Look 1 · DIMQ0MIOXAt" },
+    ];
 
     const galleryGrid = document.getElementById("galleryGrid");
-    const loadMoreGallery = document.getElementById("loadMoreGallery");
     const lightbox = document.getElementById("lightbox");
     const lightboxImage = document.getElementById("lightboxImage");
     const lightboxText = document.getElementById("lightboxText");
@@ -2457,33 +2912,14 @@
     const menuToggle = document.getElementById("menuToggle");
     const navLinks = document.getElementById("navLinks");
 
-    let renderedCount = 0;
     let activeIndex = 0;
-    const batchSize = 12;
 
-    function renderGallery() {
-      const nextItems = galleryItems.slice(renderedCount, renderedCount + batchSize);
-      nextItems.forEach((item, index) => {
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "gallery-card reveal";
-        button.dataset.delay = String((index % 4) + 1);
-        button.innerHTML = `
-          <img src="${item.src}" alt="${item.caption}">
-          <div class="gallery-caption">
-            <span>Instagram real</span>
-            <strong>${item.caption}</strong>
-          </div>
-        `;
-        button.addEventListener("click", () => openLightbox(renderedCount + index));
-        galleryGrid.appendChild(button);
+    function bindExistingGalleryCards() {
+      const existingCards = galleryGrid.querySelectorAll("[data-gallery-index]");
+      existingCards.forEach((card) => {
+        const index = Number(card.getAttribute("data-gallery-index"));
+        card.addEventListener("click", () => openLightbox(index));
       });
-
-      renderedCount += nextItems.length;
-      revealOnScroll(nextItems.length ? galleryGrid.querySelectorAll(".gallery-card.reveal:not(.is-visible)") : []);
-      if (renderedCount >= galleryItems.length) {
-        loadMoreGallery.style.display = "none";
-      }
     }
 
     function openLightbox(index) {
@@ -2579,11 +3015,10 @@
     }
 
     year.textContent = new Date().getFullYear();
-    renderGallery();
+    bindExistingGalleryCards();
     revealOnScroll();
     setupHeroParallax();
 
-    loadMoreGallery.addEventListener("click", renderGallery);
     lightboxClose.addEventListener("click", closeLightbox);
     lightbox.addEventListener("click", (event) => {
       if (event.target === lightbox) closeLightbox();
