@@ -7,24 +7,8 @@
     <meta name="description" content="Maquillaje profesional y peinados para que luzcas espectacular.">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-    #brush-canvas {
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        pointer-events: none;
-        z-index: 0;
-        opacity: 0.82;
-    }
-    body > * { position: relative; z-index: 1; }
-    header { z-index: 100 !important; }
-    .modal-overlay { z-index: 9999 !important; }
-    .sticky-wa { z-index: 9998 !important; }
-    </style>
 </head>
 <body>
-    <canvas id="brush-canvas"></canvas>
     <header id="header">
         <a href="#" class="brand">
             <div class="brand-mark" aria-hidden="true">
@@ -39,19 +23,14 @@
             </div>
         </a>
         <nav>
-            <ul class="nav-links" id="navLinks">
+            <ul class="nav-links">
                 <li><a href="#home">Inicio</a></li>
                 <li><a href="#services">Servicios</a></li>
-                <li><a href="#pricing">Precios</a></li>
                 <li><a href="#gallery">Portafolio</a></li>
                 <li><a href="#about">Sobre Mí</a></li>
-                <li class="nav-cta-mobile"><a href="https://wa.me/5930958757109?text=Hola%20Daima%20Belleza%2C%20quiero%20agendar%20mi%20cita." class="btn btn-primary" target="_blank">Agendar Cita</a></li>
             </ul>
         </nav>
-        <a href="https://wa.me/5930958757109?text=Hola%20Daima%20Belleza%2C%20quiero%20agendar%20mi%20cita." class="btn btn-primary nav-cta-desktop" target="_blank">Agendar Cita</a>
-        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
-            <span></span><span></span><span></span>
-        </button>
+        <a href="https://wa.me/5930958757109?text=Hola%20Daima%20Belleza%2C%20quiero%20agendar%20mi%20cita." class="btn btn-primary" target="_blank">Agendar Cita</a>
     </header>
 
     <main>
@@ -60,7 +39,7 @@
             <div class="hero-container">
                 <div class="hero-content reveal">
                     <span class="text-small hero-subtitle">Portoviejo, Ecuador</span>
-                    <h1 class="title-xl">Realza tu belleza natural</h1>
+                    <h1 class="title-xl">Realza tu <span class="text-italic">belleza</span> natural</h1>
                     <p>Experta en maquillaje profesional, novias y peinados. Un look impecable, duradero y fotogénico para tus momentos más importantes.</p>
                     <div class="hero-buttons">
                         <a href="https://wa.me/5930958757109?text=Hola%20Daima%20Belleza%2C%20quiero%20agendar%20mi%20cita." class="btn btn-primary" target="_blank">Reservar Ahora</a>
@@ -187,8 +166,8 @@
         <!-- About Section -->
         <section id="about" class="section about">
             <div class="about-container">
-                <div class="about-image reveal">
-                    <img src="assets/instagram/story-feature-signature.jpg" alt="Daima Belleza, maquilladora profesional">
+                <div class="about-image reveal" style="display: flex; justify-content: center; align-items: center;">
+                    <iframe src="https://www.instagram.com/p/DZ53dOVDqb_/embed" width="100%" height="520" frameborder="0" scrolling="no" allowtransparency="true" style="max-width: 400px; border-radius: var(--radius); box-shadow: 0 20px 40px rgba(0,0,0,0.1);"></iframe>
                 </div>
                 <div class="about-content reveal">
                     <span class="text-small hero-subtitle">Conóceme</span>
@@ -261,22 +240,6 @@
             if (window.scrollY > 50) header.classList.add('scrolled');
             else header.classList.remove('scrolled');
         });
-
-        // Mobile Menu Toggle
-        const menuToggle = document.getElementById('menuToggle');
-        const navLinks = document.getElementById('navLinks');
-        menuToggle.addEventListener('click', () => {
-            const isOpen = navLinks.classList.toggle('open');
-            menuToggle.classList.toggle('open', isOpen);
-            menuToggle.setAttribute('aria-expanded', isOpen);
-            document.body.style.overflow = isOpen ? 'hidden' : '';
-        });
-        navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-            navLinks.classList.remove('open');
-            menuToggle.classList.remove('open');
-            menuToggle.setAttribute('aria-expanded', false);
-            document.body.style.overflow = '';
-        }));
 
         // Modal Logic (Placed before observers to guarantee it runs)
         const modal = document.getElementById('bookingModal');
@@ -355,8 +318,5 @@
             document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
         }
     </script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="3d-bg.js"></script>
 </body>
 </html>
