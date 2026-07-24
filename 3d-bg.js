@@ -19,6 +19,7 @@
   let W, H, isMobile;
   let mouseX = 0, mouseY = 0, curX = 0, curY = 0;
   let scrollY = 0, docRange = 1;
+  let rafId = null;
   const reducedMotion = window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -36,7 +37,7 @@
     camera.position.set(0, 0.15, 7);
 
     try {
-      renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: !isMobile });
     } catch (e) { return; }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 1.85));
     renderer.setSize(W, H);
@@ -54,6 +55,8 @@
     updateDocRange();
     window.addEventListener('resize', onResize);
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('load', updateDocRange);
+    document.addEventListener('visibilitychange', onVisibilityChange);
     if (!isMobile) window.addEventListener('mousemove', onMouse, { passive: true });
 
     if (reducedMotion) {
@@ -319,7 +322,7 @@
   }
 
   function animate() {
-    requestAnimationFrame(animate);
+    rafId = requestAnimationFrame(animate);
     const t = clock.getElapsedTime();
     const scrollT = scrollY / docRange; // 0..1
 
@@ -358,6 +361,16 @@
   function onMouse(e) {
     mouseX = (e.clientX / W - 0.5) * 2;
     mouseY = (e.clientY / H - 0.5) * 2;
+  }
+
+  // Backgrounded tab: stop the render loop (saves battery/CPU); resume on return.
+  function onVisibilityChange() {
+    if (document.hidden) {
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      rafId = null;
+    } else if (rafId === null && !reducedMotion) {
+      animate();
+    }
   }
 
   function boot() {
