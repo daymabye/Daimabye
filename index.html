@@ -1,3048 +1,341 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daima Belleza Studio | Makeup & Hairstyle en Portoviejo</title>
-  <meta
-    name="description"
-    content="Daima Belleza Studio en Portoviejo. Maquillaje profesional, peinados, looks para graduación, XV años y eventos especiales con reserva por WhatsApp."
-  >
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #f9f1ef;
-      --bg-soft: #fff9f7;
-      --surface: rgba(255, 255, 255, 0.82);
-      --surface-strong: #fffdfb;
-      --line: rgba(185, 146, 133, 0.16);
-      --line-strong: rgba(185, 146, 133, 0.28);
-      --text: #5d4945;
-      --muted: #7f6761;
-      --brand: #b99285;
-      --brand-deep: #8b6d64;
-      --brand-soft: #eadcd8;
-      --accent: #f0cfc4;
-      --shadow: 0 24px 80px rgba(77, 43, 31, 0.12);
-      --shadow-soft: 0 18px 48px rgba(77, 43, 31, 0.08);
-      --radius-xl: 34px;
-      --radius-lg: 24px;
-      --radius-md: 18px;
-      --container: min(1180px, calc(100vw - 2rem));
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      font-family: "Poppins", sans-serif;
-      color: var(--text);
-      background-color: var(--bg);
-      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23B99285' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      overflow-x: hidden;
-    }
-
-    .ambient {
-      display: none;
-    }
-
-    body::before,
-    body::after {
-      content: "";
-      position: fixed;
-      inset: auto;
-      width: 32rem;
-      height: 32rem;
-      border-radius: 999px;
-      filter: blur(88px);
-      pointer-events: none;
-      z-index: -2;
-    }
-
-    body::before {
-      top: -12rem;
-      right: -8rem;
-      background: rgba(243, 191, 172, 0.24);
-    }
-
-    body::after {
-      bottom: -14rem;
-      left: -9rem;
-      background: rgba(190, 143, 121, 0.2);
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button,
-    input,
-    select,
-    textarea {
-      font: inherit;
-    }
-
-    .shell {
-      width: var(--container);
-      margin: 0 auto;
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(18px);
-      background: rgba(255, 255, 255, 0.8);
-      border-bottom: 1px solid rgba(185, 146, 133, 0.12);
-    }
-
-    .header-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.25rem;
-      min-height: 5.4rem;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.95rem;
-    }
-
-    .brand-mark {
-      display: flex;
-      align-items: end;
-      color: var(--brand);
-      animation: floatSoft 8s ease-in-out infinite;
-    }
-
-    .brand-monogram {
-      font-family: "Dancing Script", cursive;
-      font-size: 4.1rem;
-      line-height: 0.8;
-      font-weight: 400;
-    }
-
-    .brand-wing {
-      width: 3.5rem;
-      height: 2rem;
-      margin-left: -1.7rem;
-      margin-bottom: 0.35rem;
-      fill: currentColor;
-      transform: scaleX(-1) rotate(-15deg) translateX(-5px) translateY(5px);
-    }
-
-    .brand-copy strong,
-    .section-kicker,
-    .eyebrow,
-    .gallery-caption span {
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-
-    .brand-copy strong {
-      display: block;
-      margin-top: 0.28rem;
-      font-size: 0.72rem;
-      color: var(--brand-deep);
-      letter-spacing: 0.18em;
-    }
-
-    .brand-copy span {
-      display: block;
-      margin-top: 0;
-      font-family: "Playfair Display", serif;
-      font-size: 1.7rem;
-      font-weight: 700;
-      line-height: 1;
-    }
-
-    .brand-copy small {
-      display: block;
-      margin-top: 0.35rem;
-      color: var(--muted);
-      font-size: 0.72rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 1.1rem;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .nav-links a {
-      position: relative;
-      padding: 0.32rem 0;
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 1px;
-      transform: scaleX(0);
-      transform-origin: center;
-      background: var(--brand);
-      transition: transform 180ms ease;
-    }
-
-    .nav-links a:hover::after,
-    .nav-links a:focus-visible::after {
-      transform: scaleX(1);
-    }
-
-    .cta-inline,
-    .button-primary,
-    .button-secondary,
-    .button-ghost,
-    .floating-wa {
-      transition:
-        transform 180ms ease,
-        box-shadow 180ms ease,
-        background 180ms ease,
-        border-color 180ms ease;
-    }
-
-    .cta-inline {
-      padding: 0.95rem 1.4rem;
-      border-radius: 999px;
-      color: #fff;
-      font-weight: 700;
-      font-size: 0.96rem;
-      line-height: 1.2;
-      text-align: center;
-      background: linear-gradient(135deg, var(--brand), #a78175);
-      box-shadow: 0 16px 34px rgba(141, 94, 78, 0.22);
-    }
-
-    .cta-inline:hover,
-    .button-primary:hover,
-    .button-secondary:hover,
-    .button-ghost:hover,
-    .floating-wa:hover,
-    .gallery-card:hover,
-    .service-card:hover,
-    .feature-card:hover,
-    .price-card:hover,
-    .story-card:hover {
-      transform: translateY(-3px);
-    }
-
-    .button-primary::before,
-    .cta-inline::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      transform: translateX(-110%);
-      background: linear-gradient(100deg, transparent, rgba(255,255,255,0.35), transparent);
-      transition: transform 500ms ease;
-    }
-
-    .button-primary,
-    .cta-inline {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .button-primary:hover::before,
-    .cta-inline:hover::before {
-      transform: translateX(110%);
-    }
-
-    .menu-toggle {
-      display: none;
-      width: 3rem;
-      height: 3rem;
-      border: 0;
-      border-radius: 1rem;
-      background: rgba(255, 255, 255, 0.72);
-      color: var(--brand-deep);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .menu-toggle span,
-    .menu-toggle::before,
-    .menu-toggle::after {
-      content: "";
-      display: block;
-      width: 1.2rem;
-      height: 2px;
-      margin: 0.22rem auto;
-      background: currentColor;
-      border-radius: 999px;
-      transition: transform 180ms ease, opacity 180ms ease;
-    }
-
-    .hero {
-      position: relative;
-      min-height: calc(100vh - 5.4rem);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      overflow: hidden;
-      padding: 1rem 0 0;
-      background:
-        radial-gradient(circle at 18% 16%, rgba(244, 210, 199, 0.68), transparent 24%),
-        radial-gradient(circle at 84% 20%, rgba(234, 209, 201, 0.5), transparent 26%),
-        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.92), rgba(255,255,255,0) 38%),
-        linear-gradient(180deg, #fffaf8 0%, #fdf4f0 34%, #f9efeb 100%);
-    }
-
-    .hero::before,
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: auto;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .hero::before {
-      top: 2.5rem;
-      left: -4rem;
-      width: 22rem;
-      height: 22rem;
-      border-radius: 54% 46% 61% 39% / 45% 44% 56% 55%;
-      background: linear-gradient(145deg, rgba(240, 207, 196, 0.38), rgba(255,255,255,0.08));
-      filter: blur(2px);
-      opacity: 0.9;
-    }
-
-    .hero::after {
-      top: 3rem;
-      right: -5rem;
-      width: 26rem;
-      height: 18rem;
-      border-radius: 58% 42% 48% 52% / 41% 52% 48% 59%;
-      background: linear-gradient(145deg, rgba(234, 220, 216, 0.72), rgba(255,255,255,0.08));
-      filter: blur(2px);
-      opacity: 0.9;
-    }
-
-    .hero-grid {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: min(920px, calc(100vw - 2rem));
-      min-height: calc(100vh - 5.4rem);
-      padding: 1.8rem 1rem 5.8rem;
-    }
-
-    .hero-copy {
-      max-width: 52rem;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-      padding: 2.25rem 2rem 1.5rem;
-      border-radius: 2.2rem;
-      background: linear-gradient(180deg, rgba(255,255,255,0.38), rgba(255,255,255,0.12));
-      border: 1px solid rgba(185, 146, 133, 0.08);
-      box-shadow: 0 24px 60px rgba(185, 146, 133, 0.08);
-      backdrop-filter: blur(6px);
-    }
-
-    .hero-backdrop {
-      display: none;
-    }
-
-    .hero-wave {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      width: 100%;
-      height: 11vh;
-      min-height: 72px;
-      max-height: 135px;
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    .hero-ornament {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.34;
-      background-image:
-        linear-gradient(120deg, transparent 0 46%, rgba(185, 146, 133, 0.08) 46% 47%, transparent 47% 100%),
-        radial-gradient(circle at 50% 50%, rgba(185, 146, 133, 0.18) 0 1px, transparent 1.2px);
-      background-size: 100% 100%, 36px 36px;
-      mask-image: linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.1) 70%, transparent);
-    }
-
-    .hero-wave svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-      vertical-align: bottom;
-    }
-
-    .parallax > use {
-      animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
-    }
-
-    .parallax > use:nth-child(1) {
-      animation-delay: -2s;
-      animation-duration: 7s;
-    }
-
-    .parallax > use:nth-child(2) {
-      animation-delay: -3s;
-      animation-duration: 10s;
-    }
-
-    .parallax > use:nth-child(3) {
-      animation-delay: -4s;
-      animation-duration: 13s;
-    }
-
-    .parallax > use:nth-child(4) {
-      animation-delay: -5s;
-      animation-duration: 20s;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 0.74rem;
-      font-weight: 800;
-      color: var(--brand-deep);
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid rgba(185, 146, 133, 0.16);
-      border-radius: 999px;
-      padding: 0.6rem 0.9rem;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 0.55rem;
-      height: 0.55rem;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--accent), var(--brand));
-      box-shadow: 0 0 0 7px rgba(244, 197, 180, 0.22);
-    }
-
-    .hero h1,
-    .section-title,
-    .quote-card p,
-    .story-card h3,
-    .faq summary {
-      font-family: "Playfair Display", serif;
-    }
-
-    .hero h1 {
-      margin: 0.9rem auto 1rem;
-      font-size: clamp(3.4rem, 7vw, 6.4rem);
-      line-height: 0.92;
-      letter-spacing: -0.04em;
-      max-width: 10.5ch;
-      margin-inline: auto;
-      color: var(--brand-deep);
-      text-shadow: none;
-    }
-
-    .hero h1 span {
-      display: block;
-      color: var(--brand);
-      position: relative;
-    }
-
-    .hero h1 span::after {
-      display: none;
-    }
-
-    .hero-lead {
-      max-width: 44rem;
-      margin-inline: auto;
-      margin-top: 0;
-      color: var(--muted);
-      font-size: 1.1rem;
-      line-height: 1.8;
-      animation: introFade 900ms ease 180ms both;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.9rem;
-      margin-top: 1.45rem;
-      animation: introFade 900ms ease 300ms both;
-    }
-
-    .button-primary,
-    .button-secondary,
-    .button-ghost {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.65rem;
-      padding: 1rem 1.4rem;
-      min-height: 3.7rem;
-      border-radius: 999px;
-      font-weight: 800;
-      font-size: 1rem;
-      line-height: 1.2;
-      text-align: center;
-      white-space: normal;
-      border: 1px solid transparent;
-      cursor: pointer;
-    }
-
-    .button-primary {
-      color: #fff;
-      background: linear-gradient(135deg, var(--brand), var(--brand-deep));
-      box-shadow: 0 16px 34px rgba(141, 94, 78, 0.24);
-    }
-
-    .button-secondary {
-      color: var(--brand);
-      background: rgba(255, 255, 255, 0.92);
-      border-color: rgba(185, 146, 133, 0.18);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .button-ghost {
-      color: var(--brand-deep);
-      background: rgba(255, 255, 255, 0.5);
-      border-color: rgba(185, 146, 133, 0.2);
-    }
-
-    .hero-mini {
-      margin-top: 1.35rem;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-      max-width: 44rem;
-      margin-inline: auto;
-      animation: introFade 900ms ease 420ms both;
-    }
-
-    .stat-chip {
-      padding: 1.1rem 1.15rem;
-      border-radius: var(--radius-md);
-      background: rgba(255, 255, 255, 0.74);
-      border: 1px solid rgba(185, 146, 133, 0.12);
-      box-shadow: var(--shadow-soft);
-      transition: transform 220ms ease, box-shadow 220ms ease;
-    }
-
-    .stat-chip:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 44px rgba(77, 43, 31, 0.12);
-    }
-
-    .stat-chip strong,
-    .price-amount strong,
-    .metric strong {
-      display: block;
-      font-size: 1.65rem;
-      font-weight: 800;
-      color: var(--brand-deep);
-      line-height: 1;
-    }
-
-    .stat-chip span,
-    .metric span {
-      display: block;
-      margin-top: 0.35rem;
-      color: var(--muted);
-      font-size: 0.92rem;
-      line-height: 1.5;
-    }
-
-    .hero-media {
-      display: none;
-    }
-
-    .hero-orbit {
-      position: absolute;
-      inset: 6% 4% 10% 14%;
-      border-radius: 50%;
-      border: 1px solid rgba(141, 94, 78, 0.12);
-      opacity: 0.8;
-      animation: spinSlow 36s linear infinite;
-    }
-
-    .hero-orbit::before,
-    .hero-orbit::after {
-      content: "";
-      position: absolute;
-      border-radius: 999px;
-      background: rgba(244, 197, 180, 0.22);
-    }
-
-    .hero-orbit::before {
-      width: 7rem;
-      height: 7rem;
-      top: -1.5rem;
-      right: 3rem;
-    }
-
-    .hero-orbit::after {
-      width: 4.2rem;
-      height: 4.2rem;
-      bottom: 4rem;
-      left: 0.6rem;
-    }
-
-    .photo-stack {
-      position: absolute;
-      border-radius: 2.4rem;
-      overflow: hidden;
-      border: 1px solid rgba(141, 94, 78, 0.12);
-      box-shadow: var(--shadow);
-      background: var(--surface-strong);
-      transition: transform 280ms ease, box-shadow 280ms ease;
-    }
-
-    .photo-stack img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .photo-stack:hover {
-      transform: translateY(-6px) rotate(0deg) !important;
-      box-shadow: 0 28px 72px rgba(77, 43, 31, 0.22);
-    }
-
-    .stack-main {
-      inset: 0 0 5rem 8%;
-      animation: floatCard 9s ease-in-out infinite;
-    }
-
-    .stack-secondary {
-      width: 14rem;
-      height: 17rem;
-      right: -0.5rem;
-      top: 2rem;
-      transform: rotate(7deg);
-      animation: floatCardAlt 11s ease-in-out infinite;
-    }
-
-    .stack-tertiary {
-      width: 13.2rem;
-      height: 16rem;
-      left: 0;
-      bottom: 0;
-      transform: rotate(-8deg);
-      animation: floatCard 10s ease-in-out infinite -2s;
-    }
-
-    .stack-label {
-      position: absolute;
-      right: 1.5rem;
-      bottom: 1.5rem;
-      max-width: 15rem;
-      padding: 1rem 1.15rem;
-      border-radius: 1.25rem;
-      backdrop-filter: blur(20px);
-      background: rgba(255, 252, 249, 0.82);
-      border: 1px solid rgba(141, 94, 78, 0.12);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .stack-label strong {
-      display: block;
-      font-size: 1rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .stack-label span {
-      color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.55;
-    }
-
-    .section {
-      padding: 6rem 0;
-    }
-
-    .section-surface {
-      position: relative;
-      margin: 1.5rem auto 0;
-      padding: 1.6rem;
-      border-radius: calc(var(--radius-xl) + 0.4rem);
-      background: rgba(255, 255, 255, 0.68);
-      border: 1px solid rgba(185, 146, 133, 0.12);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .section-surface::after {
-      display: none;
-    }
-
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .section-kicker {
-      display: block;
-      color: var(--brand-deep);
-      font-size: 0.74rem;
-      font-weight: 800;
-      margin-bottom: 0.8rem;
-    }
-
-    .section-title {
-      margin: 0;
-      font-size: clamp(2.4rem, 4vw, 4rem);
-      line-height: 0.95;
-      letter-spacing: -0.03em;
-    }
-
-    .section-title::after {
-      content: "";
-      display: block;
-      width: 80px;
-      height: 3px;
-      background-color: var(--brand);
-      margin: 1rem auto 0;
-      border-radius: 2px;
-    }
-
-    .section-head .section-title::after,
-    .portfolio-head .section-title::after {
-      margin-left: 0;
-    }
-
-    .section-copy,
-    .feature-card p,
-    .story-card p,
-    .price-card p,
-    .faq p,
-    .contact-card p,
-    .gallery-note,
-    .footer-copy {
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
-    .story-grid,
-    .services-grid,
-    .features-grid,
-    .pricing-grid,
-    .contact-grid {
-      display: grid;
-      gap: 1.4rem;
-    }
-
-    .story-grid {
-      grid-template-columns: 1.1fr 0.9fr;
-    }
-
-    .story-card,
-    .service-card,
-    .feature-card,
-    .price-card,
-    .contact-card,
-    .quote-card {
-      position: relative;
-      overflow: hidden;
-      border-radius: var(--radius-xl);
-      background: rgba(255, 255, 255, 0.95);
-      border: 1px solid rgba(185, 146, 133, 0.1);
-      box-shadow: var(--shadow-soft);
-      transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease;
-    }
-
-    .story-card:hover,
-    .service-card:hover,
-    .feature-card:hover,
-    .price-card:hover,
-    .contact-card:hover,
-    .quote-card:hover {
-      box-shadow: 0 24px 54px rgba(77, 43, 31, 0.14);
-      border-color: rgba(141, 94, 78, 0.2);
-    }
-
-    .story-card {
-      padding: 2rem;
-      min-height: 100%;
-    }
-
-    .story-card figure {
-      margin: 0;
-      border-radius: 1.8rem;
-      overflow: hidden;
-    }
-
-    .story-card figure img {
-      aspect-ratio: 4 / 5;
-      object-fit: cover;
-    }
-
-    .story-card--feature figure img {
-      aspect-ratio: 5 / 7;
-      object-position: center top;
-    }
-
-    .story-card h3 {
-      margin: 0 0 0.8rem;
-      font-size: 2.25rem;
-      line-height: 1;
-    }
-
-    .story-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-      margin-top: 1.2rem;
-    }
-
-    .story-badges span,
-    .feature-tag,
-    .price-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      padding: 0.65rem 0.82rem;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.84);
-      border: 1px solid rgba(141, 94, 78, 0.1);
-      color: var(--brand-deep);
-      font-size: 0.84rem;
-      font-weight: 700;
-    }
-
-    .metrics {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-
-    .metric {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 9.5rem;
-      padding: 1.2rem 1rem 1.1rem;
-      border-radius: 1.4rem;
-      text-align: center;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(248, 238, 234, 0.82));
-      border: 1px solid rgba(141, 94, 78, 0.1);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
-      transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
-    }
-
-    .metric::before {
-      content: "";
-      width: 2.25rem;
-      height: 2px;
-      margin-bottom: 0.75rem;
-      border-radius: 999px;
-      background: linear-gradient(90deg, rgba(185, 146, 133, 0.1), rgba(185, 146, 133, 0.95), rgba(185, 146, 133, 0.1));
-    }
-
-    .metric:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 18px 34px rgba(77, 43, 31, 0.08), inset 0 1px 0 rgba(255,255,255,0.7);
-      border-color: rgba(141, 94, 78, 0.18);
-    }
-
-    .metric strong {
-      width: 100%;
-      text-align: center;
-      margin-bottom: 0.45rem;
-      font-size: 1.45rem;
-      line-height: 1.05;
-    }
-
-    .metric span {
-      max-width: 18ch;
-      margin: 0 auto;
-      text-align: center;
-      font-size: 0.92rem;
-      line-height: 1.55;
-    }
-
-    .quote-card {
-      padding: 1.8rem;
-      background: linear-gradient(160deg, rgba(255, 250, 247, 0.96), rgba(234, 220, 216, 0.85));
-    }
-
-    .quote-card p {
-      margin: 0 0 1rem;
-      font-size: 2rem;
-      line-height: 1.08;
-    }
-
-    .quote-card strong {
-      color: var(--brand-deep);
-      font-size: 0.95rem;
-    }
-
-    .services-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .service-card,
-    .feature-card,
-    .price-card,
-    .contact-card {
-      padding: 1.7rem;
-    }
-
-    .service-card::before,
-    .feature-card::before,
-    .price-card::before,
-    .contact-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), transparent 52%);
-      pointer-events: none;
-    }
-
-    .service-icon,
-    .feature-icon {
-      width: 3.65rem;
-      height: 3.65rem;
-      border-radius: 1rem;
-      display: grid;
-      place-items: center;
-      margin-bottom: 1rem;
-      color: var(--brand-deep);
-      background: linear-gradient(135deg, rgba(244, 197, 180, 0.68), rgba(255, 255, 255, 0.86));
-      border: 1px solid rgba(141, 94, 78, 0.1);
-      font-size: 1.45rem;
-      font-weight: 800;
-      transition: transform 220ms ease;
-    }
-
-    .service-card:hover .service-icon,
-    .feature-card:hover .feature-icon {
-      transform: rotate(-8deg) scale(1.06);
-    }
-
-    .service-card h3,
-    .feature-card h3,
-    .price-card h3,
-    .contact-card h3 {
-      margin: 0 0 0.75rem;
-      font-size: 1.18rem;
-    }
-
-    .service-card ul,
-    .price-card ul {
-      padding: 0;
-      margin: 1rem 0 0;
-      list-style: none;
-      display: grid;
-      gap: 0.7rem;
-      color: var(--muted);
-    }
-
-    .service-card li,
-    .price-card li {
-      display: flex;
-      gap: 0.65rem;
-      align-items: start;
-      font-size: 0.94rem;
-      line-height: 1.6;
-    }
-
-    .bullet {
-      width: 0.45rem;
-      height: 0.45rem;
-      border-radius: 999px;
-      margin-top: 0.55rem;
-      flex: 0 0 auto;
-      background: linear-gradient(135deg, var(--accent), var(--brand));
-      box-shadow: 0 0 0 6px rgba(244, 197, 180, 0.18);
-    }
-
-    .features-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    .pricing-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .price-card.featured {
-      background: linear-gradient(180deg, rgba(240, 229, 224, 0.92), rgba(255, 252, 249, 0.96));
-    }
-
-    .price-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 1.4rem;
-    }
-
-    .price-amount {
-      display: flex;
-      align-items: end;
-      gap: 0.8rem;
-    }
-
-    .price-amount small {
-      color: var(--muted);
-      text-decoration: line-through;
-      font-weight: 700;
-    }
-
-    .price-amount strong {
-      font-size: 3rem;
-    }
-
-    .price-strip {
-      margin-top: 1.4rem;
-      padding: 1rem 1.1rem;
-      border-radius: 1.2rem;
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid rgba(141, 94, 78, 0.1);
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .portfolio-head {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-bottom: 1.2rem;
-    }
-
-    .gallery-note {
-      margin: 0 0 1.8rem;
-      max-width: 42rem;
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .gallery-card {
-      position: relative;
-      border: 0;
-      padding: 0;
-      border-radius: 1.6rem;
-      overflow: hidden;
-      cursor: pointer;
-      background: var(--surface-strong);
-      box-shadow: var(--shadow-soft);
-      min-height: 18rem;
-      transform-origin: center;
-      opacity: 1;
-      transform: none;
-    }
-
-    .gallery-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 300ms ease, filter 300ms ease;
-    }
-
-    .gallery-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(140deg, rgba(255,255,255,0.34), transparent 34%, transparent 72%, rgba(255,255,255,0.12));
-      opacity: 0;
-      transition: opacity 260ms ease;
-      pointer-events: none;
-    }
-
-    .gallery-card:hover img {
-      transform: scale(1.05);
-      filter: saturate(1.08);
-    }
-
-    .gallery-card:hover::after {
-      opacity: 1;
-    }
-
-    .gallery-caption {
-      position: absolute;
-      inset: auto 0 0;
-      padding: 1rem;
-      color: #fff;
-      background: linear-gradient(180deg, transparent, rgba(20, 12, 9, 0.76));
-      text-align: left;
-    }
-
-    .gallery-caption span {
-      font-size: 0.68rem;
-      font-weight: 800;
-      color: rgba(255, 236, 227, 0.86);
-    }
-
-    .gallery-caption strong {
-      display: block;
-      margin-top: 0.45rem;
-      font-size: 0.96rem;
-      line-height: 1.4;
-    }
-
-    .gallery-actions {
-      display: flex;
-      justify-content: center;
-      margin-top: 1.6rem;
-    }
-
-    .faq-grid {
-      display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
-      gap: 1.4rem;
-      align-items: start;
-    }
-
-    .faq-stack {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .faq {
-      padding: 1.3rem 1.35rem;
-      border-radius: 1.4rem;
-      background: rgba(255, 255, 255, 0.74);
-      border: 1px solid rgba(141, 94, 78, 0.1);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .faq summary {
-      list-style: none;
-      cursor: pointer;
-      font-size: 1.5rem;
-      line-height: 1.1;
-      padding-right: 1.8rem;
-      position: relative;
-    }
-
-    .faq summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .faq summary::after {
-      content: "+";
-      position: absolute;
-      right: 0;
-      top: 0;
-      color: var(--brand-deep);
-      font-weight: 700;
-      font-size: 1.4rem;
-    }
-
-    .faq[open] summary::after {
-      content: "−";
-    }
-
-    .faq p {
-      margin: 0.9rem 0 0;
-      font-size: 0.95rem;
-    }
-
-    .contact-grid {
-      grid-template-columns: 0.95fr 1.05fr;
-    }
-
-    .contact-card form {
-      display: grid;
-      gap: 0.95rem;
-      margin-top: 1.2rem;
-    }
-
-    .contact-card--info {
-      background: linear-gradient(180deg, rgba(255, 253, 251, 0.96), rgba(247, 236, 230, 0.84));
-    }
-
-    .contact-card--info h3,
-    .contact-card--info > p {
-      max-width: 34rem;
-    }
-
-    .booking-card {
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255, 247, 242, 0.86));
-    }
-
-    .booking-intro {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.8rem;
-      margin-top: 1.2rem;
-      margin-bottom: 1.15rem;
-    }
-
-    .booking-chip {
-      padding: 0.95rem;
-      border-radius: 1.1rem;
-      background: rgba(255,255,255,0.82);
-      border: 1px solid rgba(141, 94, 78, 0.1);
-    }
-
-    .booking-chip strong {
-      display: block;
-      margin-top: 0.4rem;
-      font-size: 0.96rem;
-    }
-
-    .booking-chip span {
-      color: var(--muted);
-      font-size: 0.84rem;
-      line-height: 1.55;
-    }
-
-    .booking-icon {
-      width: 3rem;
-      height: 3rem;
-      display: inline-grid;
-      place-items: center;
-      border-radius: 0.9rem;
-      color: var(--brand-deep);
-      background: linear-gradient(135deg, rgba(244, 197, 180, 0.82), rgba(255,255,255,0.9));
-      box-shadow: var(--shadow-soft);
-    }
-
-    .booking-icon svg,
-    .contact-icon svg,
-    .inline-icon svg {
-      width: 1.45rem;
-      height: 1.45rem;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 1.9;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .field {
-      display: grid;
-      gap: 0.45rem;
-    }
-
-    .field label {
-      font-size: 0.86rem;
-      font-weight: 700;
-      color: var(--brand-deep);
-    }
-
-    .field input,
-    .field select,
-    .field textarea {
-      width: 100%;
-      padding: 0.95rem 1rem;
-      border-radius: 1rem;
-      border: 1px solid rgba(141, 94, 78, 0.16);
-      background: rgba(255, 255, 255, 0.8);
-      color: var(--text);
-      outline: none;
-      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
-    }
-
-    .field input:focus,
-    .field select:focus,
-    .field textarea:focus {
-      border-color: rgba(141, 94, 78, 0.54);
-      box-shadow: 0 0 0 4px rgba(244, 197, 180, 0.18);
-      transform: translateY(-1px);
-    }
-
-    .booking-submit {
-      width: 100%;
-      margin-top: 0.3rem;
-      justify-content: center;
-      gap: 0.8rem;
-      font-size: 1rem;
-      padding: 1.1rem 1.2rem;
-    }
-
-    .booking-footnote {
-      margin: 0.1rem 0 0;
-      color: var(--muted);
-      font-size: 0.84rem;
-      line-height: 1.6;
-    }
-
-    .contact-list {
-      display: grid;
-      gap: 1rem;
-      margin-top: 1.4rem;
-    }
-
-    .contact-list a,
-    .contact-list div {
-      display: flex;
-      align-items: start;
-      gap: 0.9rem;
-      padding: 1rem 1.05rem;
-      border-radius: 1.2rem;
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid rgba(141, 94, 78, 0.1);
-    }
-
-    .contact-list a {
-      color: inherit;
-      text-decoration: none;
-      transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
-    }
-
-    .contact-list a:hover {
-      transform: translateY(-3px);
-      border-color: rgba(141, 94, 78, 0.18);
-      box-shadow: 0 18px 30px rgba(77, 43, 31, 0.08);
-    }
-
-    .contact-list strong {
-      display: block;
-      margin-bottom: 0.24rem;
-      font-size: 0.96rem;
-    }
-
-    .contact-icon {
-      width: 3.2rem;
-      height: 3.2rem;
-      border-radius: 0.95rem;
-      flex: 0 0 auto;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, rgba(244, 197, 180, 0.7), rgba(255, 255, 255, 0.9));
-      color: var(--brand-deep);
-      font-weight: 800;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .contact-list span {
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    .location-panel {
-      margin-top: 1.25rem;
-      padding: 1.15rem;
-      border-radius: 1.25rem;
-      background: linear-gradient(180deg, rgba(255,255,255,0.86), rgba(247, 234, 226, 0.72));
-      border: 1px solid rgba(141, 94, 78, 0.1);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .location-panel-head {
-      display: flex;
-      align-items: center;
-      gap: 0.85rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .inline-icon {
-      width: 3.2rem;
-      height: 3.2rem;
-      display: inline-grid;
-      place-items: center;
-      border-radius: 1rem;
-      color: var(--brand-deep);
-      background: linear-gradient(135deg, rgba(244, 197, 180, 0.78), rgba(255,255,255,0.92));
-    }
-
-    .location-meta {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.75rem;
-      margin: 0.85rem 0 1rem;
-    }
-
-    .location-meta div {
-      padding: 0.85rem 0.95rem;
-      border-radius: 1rem;
-      background: rgba(255,255,255,0.75);
-      border: 1px solid rgba(141, 94, 78, 0.08);
-    }
-
-    .location-meta strong {
-      display: block;
-      margin-bottom: 0.25rem;
-      font-size: 0.83rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--brand-deep);
-    }
-
-    .location-meta span {
-      color: var(--muted);
-      font-size: 0.92rem;
-      line-height: 1.55;
-    }
-
-    .footer {
-      padding: 2rem 0 3rem;
-    }
-
-    .footer-box {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      padding: 1.2rem 1.3rem;
-      border-radius: 1.5rem;
-      background: rgba(255, 255, 255, 0.64);
-      border: 1px solid rgba(141, 94, 78, 0.1);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .footer-copy {
-      margin: 0;
-      font-size: 0.92rem;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .floating-wa {
-      position: fixed;
-      right: 1rem;
-      bottom: 1rem;
-      z-index: 14;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 3.8rem;
-      height: 3.8rem;
-      border-radius: 999px;
-      border: 0;
-      color: #fff;
-      background: linear-gradient(135deg, #26d367, #169c4e);
-      box-shadow: 0 18px 36px rgba(22, 156, 78, 0.28);
-      animation: pulseFloat 3s ease-in-out infinite;
-    }
-
-    .lightbox {
-      position: fixed;
-      inset: 0;
-      z-index: 30;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-      background: rgba(18, 10, 7, 0.84);
-      backdrop-filter: blur(18px);
-    }
-
-    .lightbox.is-open {
-      display: flex;
-    }
-
-    .lightbox-panel {
-      width: min(1100px, 100%);
-      display: grid;
-      grid-template-columns: 0.9fr 0.7fr;
-      gap: 1rem;
-      align-items: stretch;
-    }
-
-    .lightbox-media,
-    .lightbox-copy {
-      border-radius: 1.8rem;
-      overflow: hidden;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .lightbox-media img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      max-height: 84vh;
-    }
-
-    .lightbox-copy {
-      padding: 1.5rem;
-      color: #fff5ef;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .lightbox-copy h3 {
-      margin: 0;
-      font-size: 1.5rem;
-    }
-
-    .lightbox-copy p {
-      margin: 0;
-      line-height: 1.8;
-      color: rgba(255, 240, 232, 0.84);
-    }
-
-    .lightbox-controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-top: auto;
-    }
-
-    .lightbox-close {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      width: 3rem;
-      height: 3rem;
-      border: 0;
-      border-radius: 999px;
-      color: #fff;
-      background: rgba(255, 255, 255, 0.12);
-      cursor: pointer;
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(34px);
-      transition: opacity 700ms ease, transform 700ms ease;
-    }
-
-    .reveal.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .reveal[data-delay="1"] { transition-delay: 80ms; }
-    .reveal[data-delay="2"] { transition-delay: 160ms; }
-    .reveal[data-delay="3"] { transition-delay: 240ms; }
-    .reveal[data-delay="4"] { transition-delay: 320ms; }
-
-    @keyframes introFade {
-      from {
-        opacity: 0;
-        transform: translateY(24px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes slowZoom {
-      from { transform: scale(1.02); }
-      to { transform: scale(1.1); }
-    }
-
-    @keyframes move-forever {
-      0% { transform: translate3d(-90px,0,0); }
-      100% { transform: translate3d(85px,0,0); }
-    }
-
-    @keyframes floatSoft {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-    }
-
-    @keyframes floatCard {
-      0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
-      50% { transform: translate3d(0, -10px, 0) rotate(1.5deg); }
-    }
-
-    @keyframes floatCardAlt {
-      0%, 100% { transform: translate3d(0, 0, 0) rotate(7deg); }
-      50% { transform: translate3d(0, -12px, 0) rotate(3deg); }
-    }
-
-    @keyframes spinSlow {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    @keyframes surfaceSweep {
-      0%, 100% { transform: translateX(-110%); opacity: 0; }
-      18% { opacity: 1; }
-      40% { transform: translateX(110%); opacity: 0.8; }
-      100% { opacity: 0; }
-    }
-
-    @keyframes pulseFloat {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-4px) scale(1.04); }
-    }
-
-    @keyframes drift {
-      0%, 100% { transform: translate3d(0, 0, 0); }
-      25% { transform: translate3d(12px, -18px, 0); }
-      50% { transform: translate3d(-10px, -28px, 0); }
-      75% { transform: translate3d(8px, -10px, 0); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation: none !important;
-        transition: none !important;
-        scroll-behavior: auto !important;
-      }
-    }
-
-    @media (max-width: 1080px) {
-      .hero-grid,
-      .story-grid,
-      .faq-grid,
-      .contact-grid,
-      .lightbox-panel {
-        grid-template-columns: 1fr;
-      }
-
-      .services-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .features-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .gallery-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
-      .hero-media {
-        min-height: 36rem;
-      }
-
-      .booking-intro,
-      .location-meta {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 820px) {
-      .shell {
-        width: min(100vw - 1.25rem, 1180px);
-      }
-
-      .site-header {
-        backdrop-filter: blur(12px);
-      }
-
-      .header-row {
-        min-height: 4.9rem;
-        gap: 0.75rem;
-      }
-
-      .brand {
-        min-width: 0;
-        gap: 0.65rem;
-      }
-
-      .brand-mark {
-        flex: 0 0 auto;
-      }
-
-      .brand-monogram {
-        font-size: 3.2rem;
-      }
-
-      .brand-wing {
-        width: 2.75rem;
-        height: 1.55rem;
-        margin-left: -1.3rem;
-        margin-bottom: 0.24rem;
-      }
-
-      .brand-copy {
-        min-width: 0;
-      }
-
-      .brand-copy span {
-        font-size: 1.18rem;
-        line-height: 1.05;
-      }
-
-      .brand-copy small,
-      .brand-copy strong {
-        letter-spacing: 0.14em;
-      }
-
-      .brand-copy small {
-        font-size: 0.63rem;
-        margin-top: 0.18rem;
-      }
-
-      .brand-copy strong {
-        font-size: 0.62rem;
-        margin-top: 0.22rem;
-      }
-
-      .menu-toggle {
-        display: inline-block;
-        flex: 0 0 auto;
-      }
-
-      .nav-links {
-        position: absolute;
-        top: calc(100% + 0.45rem);
-        left: 0.625rem;
-        right: 0.625rem;
-        display: none;
-        flex-direction: column;
-        align-items: stretch;
-        padding: 0.95rem;
-        border-radius: 1.4rem;
-        background: rgba(255, 252, 249, 0.96);
-        border: 1px solid rgba(141, 94, 78, 0.1);
-        box-shadow: var(--shadow-soft);
-      }
-
-      .nav-links.is-open {
-        display: flex;
-      }
-
-      .nav-links .cta-inline {
-        text-align: center;
-      }
-
-      .hero {
-        min-height: auto;
-        padding-top: 0.35rem;
-      }
-
-      .hero-grid {
-        min-height: auto;
-        width: 100%;
-        padding: 1.45rem 0.15rem 4.95rem;
-      }
-
-      .hero-copy {
-        max-width: 100%;
-        padding: 1.55rem 1rem 1.1rem;
-      }
-
-      .eyebrow {
-        justify-content: center;
-        width: fit-content;
-        max-width: 100%;
-        margin-inline: auto;
-        padding-inline: 0.78rem;
-        font-size: 0.66rem;
-        line-height: 1.25;
-        text-align: center;
-      }
-
-      .hero h1 {
-        max-width: 9.8ch;
-        font-size: clamp(2.75rem, 12vw, 4.2rem);
-        line-height: 0.96;
-        letter-spacing: -0.035em;
-      }
-
-      .hero-lead {
-        max-width: 34rem;
-        font-size: 0.98rem;
-        line-height: 1.7;
-        text-align: center;
-      }
-
-      .hero-mini,
-      .metrics {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-actions {
-        gap: 0.8rem;
-        margin-top: 1.25rem;
-      }
-
-      .hero-actions .button-primary,
-      .hero-actions .button-secondary,
-      .hero-actions .button-ghost {
-        width: 100%;
-      }
-
-      .section-head,
-      .portfolio-head {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 0.9rem;
-      }
-
-      .section-head .section-title::after,
-      .portfolio-head .section-title::after {
-        margin-inline: auto;
-      }
-
-      .section-copy,
-      .gallery-note {
-        text-align: center;
-        margin-inline: auto;
-      }
-
-      .section {
-        padding: 4rem 0;
-      }
-
-      .services-grid,
-      .pricing-grid,
-      .gallery-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .story-card,
-      .service-card,
-      .feature-card,
-      .price-card,
-      .contact-card,
-      .quote-card,
-      .faq {
-        padding: 1.35rem;
-      }
-
-      .story-card h3,
-      .quote-card p,
-      .faq summary {
-        text-align: center;
-      }
-
-      .story-badges {
-        justify-content: center;
-      }
-
-      .price-row {
-        align-items: stretch;
-      }
-
-      .price-amount {
-        width: 100%;
-        justify-content: center;
-      }
-
-      .contact-card form,
-      .booking-intro,
-      .contact-list,
-      .location-meta {
-        text-align: left;
-      }
-
-      .contact-card--info {
-        text-align: center;
-      }
-
-      .contact-card--info h3,
-      .contact-card--info > p,
-      .contact-card--info .section-kicker {
-        margin-inline: auto;
-        text-align: center;
-      }
-
-      .contact-card--info .contact-list {
-        gap: 0.9rem;
-      }
-
-      .contact-card--info .location-panel {
-        padding: 1.15rem 1rem;
-      }
-
-      .contact-card--info .location-panel-head {
-        align-items: center;
-      }
-
-      .field label {
-        text-align: left;
-      }
-
-      .hero-media {
-        min-height: 31rem;
-      }
-
-      .stack-secondary,
-      .stack-tertiary {
-        width: 10rem;
-        height: 12.5rem;
-      }
-    }
-
-    @media (max-width: 560px) {
-      .shell {
-        width: min(100vw - 1.1rem, 1180px);
-      }
-
-      .header-row {
-        min-height: 4.55rem;
-      }
-
-      .brand-monogram {
-        font-size: 2.8rem;
-      }
-
-      .brand-wing {
-        width: 2.35rem;
-        height: 1.35rem;
-        margin-left: -1.1rem;
-      }
-
-      .brand-copy span {
-        font-size: 1.02rem;
-      }
-
-      .brand-copy small,
-      .brand-copy strong {
-        font-size: 0.58rem;
-      }
-
-      .hero h1 {
-        font-size: 3rem;
-        max-width: 9.4ch;
-      }
-
-      .section-surface,
-      .story-card,
-      .service-card,
-      .feature-card,
-      .price-card,
-      .contact-card,
-      .quote-card {
-        border-radius: 1.5rem;
-      }
-
-      .hero-media {
-        min-height: 27rem;
-      }
-
-      .hero-grid {
-        padding: 1.35rem 0.35rem 4.8rem;
-      }
-
-      .hero-copy {
-        padding: 1.55rem 0.95rem 1.05rem;
-        border-radius: 1.6rem;
-      }
-
-      .eyebrow {
-        font-size: 0.6rem;
-        padding: 0.52rem 0.72rem;
-      }
-
-      .hero-lead {
-        font-size: 0.94rem;
-        line-height: 1.65;
-      }
-
-      .hero-wave {
-        min-height: 60px;
-        height: 9vh;
-      }
-
-      .section-title {
-        font-size: clamp(2.1rem, 10vw, 2.8rem);
-      }
-
-      .story-card h3 {
-        font-size: 1.9rem;
-      }
-
-      .quote-card p {
-        font-size: 1.55rem;
-        line-height: 1.12;
-      }
-
-      .cta-inline,
-      .button-primary,
-      .button-secondary,
-      .button-ghost {
-        width: 100%;
-        min-height: 3.45rem;
-        font-size: 0.92rem;
-        padding-inline: 1rem;
-      }
-
-      .price-row .button-secondary,
-      .gallery-actions .button-primary,
-      .location-panel .button-secondary,
-      .lightbox-controls .button-primary,
-      .lightbox-controls .button-secondary {
-        width: 100%;
-      }
-
-      .contact-list a,
-      .contact-list div {
-        gap: 0.75rem;
-      }
-
-      .contact-icon,
-      .inline-icon,
-      .booking-icon {
-        flex: 0 0 auto;
-      }
-
-      .contact-card--info h3 {
-        font-size: 1.82rem !important;
-        line-height: 1.02;
-      }
-
-      .contact-card--info > p {
-        font-size: 0.94rem;
-        line-height: 1.7;
-      }
-
-      .contact-card--info .contact-list a {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 0.8rem;
-        padding: 1.1rem 0.95rem;
-      }
-
-      .contact-card--info .contact-list strong,
-      .contact-card--info .contact-list span {
-        text-align: center;
-      }
-
-      .contact-card--info .contact-icon,
-      .contact-card--info .inline-icon {
-        width: 3.35rem;
-        height: 3.35rem;
-      }
-
-      .contact-card--info .location-panel {
-        text-align: center;
-      }
-
-      .contact-card--info .location-panel-head {
-        flex-direction: column;
-        align-items: center;
-        gap: 0.7rem;
-      }
-
-      .contact-card--info .location-meta div {
-        text-align: center;
-      }
-
-      .service-card li,
-      .price-card li,
-      .contact-list span,
-      .booking-chip span,
-      .metric span {
-        font-size: 0.9rem;
-      }
-
-      .stack-label {
-        right: 0.85rem;
-        left: 0.85rem;
-        bottom: 0.85rem;
-        max-width: none;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daima Belleza | Maquillaje y Peinados</title>
+    <meta name="description" content="Maquillaje profesional y peinados para que luzcas espectacular.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+    #brush-canvas {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.82;
+    }
+    body > * { position: relative; z-index: 1; }
+    header { z-index: 100 !important; }
+    .modal-overlay { z-index: 9999 !important; }
+    .sticky-wa { z-index: 9998 !important; }
+    </style>
 </head>
 <body>
-  <div class="ambient" aria-hidden="true">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-  <header class="site-header">
-    <div class="shell header-row">
-      <a class="brand" href="#inicio" aria-label="Ir al inicio">
-        <div class="brand-mark" aria-hidden="true">
-          <span class="brand-monogram">dm</span>
-          <svg class="brand-wing" viewBox="0 0 75 40">
-            <path d="M74.7,2.1C70,0.8,65,0,59.8,0C41,0,25.3,10.4,14.9,26.1c-1.9,2.9-3.6,5.9-5,9C8.1,38.6,5.7,40,2.9,40c-0.8,0-1.5-0.1-2.2-0.4c-1.1-0.4-1-1.9,0.2-2.5c1.4-0.7,2.9-1.7,4.2-2.9C1.9,32.3,0,28.6,0,24.6c0-4.8,2.5-9.2,6.7-11.9C18.4,4.2,37.8,0.7,59.8,0.7c4.7,0,9.4,0.6,13.8,1.9C74.6,2.8,75,2.3,74.7,2.1z M6.7,14.5C3.6,16.5,1.8,20.3,1.8,24.6c0,3.3,1.5,6.4,3.9,8.4c-1,1-2.2,1.8-3.4,2.4c-0.2,0.1-0.2,0.2,0,0.2c0.4,0.2,0.8,0.2,1.2,0.2c2.1,0,4-1.1,5.6-3.4c1.3-2.9,2.9-5.7,4.6-8.4C26.1,11.5,41.4,1.8,59.8,1.8C38.2,1.8,18.5,5.2,6.7,14.5z"></path>
-          </svg>
-        </div>
-        <div class="brand-copy">
-          <span>Daima Belleza Studio</span>
-          <small>STUDIO</small>
-          <strong>Portoviejo · Ecuador</strong>
-        </div>
-      </a>
-
-      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
-        <span></span>
-      </button>
-
-      <nav class="nav-links" id="navLinks">
-        <a href="#historia">Estudio</a>
-        <a href="#servicios">Servicios</a>
-        <a href="#portafolio">Portafolio</a>
-        <a href="#agenda">Agenda</a>
-        <a class="cta-inline" href="https://wa.me/5930958757109?text=Hola%20Daima%20Belleza%20Studio%2C%20quiero%20agendar%20mi%20cita." target="_blank" rel="noopener noreferrer">Reservar por WhatsApp</a>
-      </nav>
-    </div>
-  </header>
-
-  <main id="inicio">
-    <section class="hero">
-      <div class="hero-backdrop" aria-hidden="true"></div>
-      <div class="hero-ornament" aria-hidden="true"></div>
-      <div class="shell hero-grid">
-        <div class="reveal hero-copy" data-delay="1">
-          <div class="eyebrow">Makeup · Hairstyle · Eventos especiales</div>
-          <h1>Realzando tu belleza, <span>celebrando tu estilo</span>.</h1>
-          <p class="hero-lead">
-            Experta en maquillaje profesional, pestañas y peinados para que luzcas radiante en graduaciones, XV años, bodas y cada ocasión especial.
-          </p>
-
-          <div class="hero-actions">
-            <a class="button-primary" href="https://wa.me/5930958757109?text=Hola%20Daima%20Belleza%20Studio%2C%20quiero%20agendar%20mi%20cita." target="_blank" rel="noopener noreferrer">Contacta con nosotras</a>
-            <a class="button-secondary" href="#portafolio">Ver portafolio</a>
-            <a class="button-ghost" href="https://www.instagram.com/daimabellezastudio/" target="_blank" rel="noopener noreferrer">Instagram</a>
-          </div>
-
-          <div class="hero-mini">
-            <div class="stat-chip">
-              <strong>14</strong>
-              <span>Looks recientes del Instagram público</span>
+    <canvas id="brush-canvas"></canvas>
+    <header id="header">
+        <a href="#" class="brand">
+            <div class="brand-mark" aria-hidden="true">
+                <span class="brand-monogram">dm</span>
+                <svg class="brand-wing" viewBox="0 0 75 40">
+                    <path d="M74.7,2.1C70,0.8,65,0,59.8,0C41,0,25.3,10.4,14.9,26.1c-1.9,2.9-3.6,5.9-5,9C8.1,38.6,5.7,40,2.9,40c-0.8,0-1.5-0.1-2.2-0.4c-1.1-0.4-1-1.9,0.2-2.5c1.4-0.7,2.9-1.7,4.2-2.9C1.9,32.3,0,28.6,0,24.6c0-4.8,2.5-9.2,6.7-11.9C18.4,4.2,37.8,0.7,59.8,0.7c4.7,0,9.4,0.6,13.8,1.9C74.6,2.8,75,2.3,74.7,2.1z M6.7,14.5C3.6,16.5,1.8,20.3,1.8,24.6c0,3.3,1.5,6.4,3.9,8.4c-1,1-2.2,1.8-3.4,2.4c-0.2,0.1-0.2,0.2,0,0.2c0.4,0.2,0.8,0.2,1.2,0.2c2.1,0,4-1.1,5.6-3.4c1.3-2.9,2.9-5.7,4.6-8.4C26.1,11.5,41.4,1.8,59.8,1.8C38.2,1.8,18.5,5.2,6.7,14.5z"></path>
+                </svg>
             </div>
-            <div class="stat-chip">
-              <strong>429</strong>
-              <span>Seguidores visibles en el perfil</span>
+            <div class="brand-text">
+                <span class="brand-title">Daima</span>
+                <span class="brand-subtitle">Belleza</span>
             </div>
-            <div class="stat-chip">
-              <strong>Av. 15</strong>
-              <span>Referencia pública: Av. 15 de Abril</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="hero-wave" aria-hidden="true">
-        <svg viewBox="0 24 150 28" preserveAspectRatio="none">
-          <defs>
-            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18 58-18 88-18 58 18 88 18v44h-352z"></path>
-          </defs>
-          <g class="parallax">
-            <use href="#gentle-wave" x="48" y="0" style="fill:#efe1db;opacity:.72"></use>
-            <use href="#gentle-wave" x="48" y="2.5" style="fill:#ecddd7;opacity:.86"></use>
-            <use href="#gentle-wave" x="48" y="5" style="fill:#eadcd8"></use>
-            <use href="#gentle-wave" x="48" y="6.4" style="fill:#f9f1ef"></use>
-          </g>
-        </svg>
-      </div>
-    </section>
-
-    <section class="section" id="historia">
-      <div class="shell">
-        <div class="section-surface is-visible">
-          <div class="section-head">
-            <div>
-              <span class="section-kicker">La firma</span>
-              <h2 class="section-title">Una página más completa, con personalidad y con el trabajo al frente.</h2>
-            </div>
-            <p class="section-copy" style="max-width: 27rem;">
-              El nuevo sitio toma la identidad del Instagram real del estudio y la convierte en una experiencia editorial:
-              más estructura, más claridad y un portafolio que realmente muestra el trabajo.
-            </p>
-          </div>
-
-          <div class="story-grid">
-            <article class="story-card">
-              <h3>Realzar, no disfrazar.</h3>
-              <p>
-                La bio pública del estudio marca muy bien la dirección: maquillaje y peinado pensados para que el look se vea
-                trabajado, femenino y listo para cámara, evento o celebración.
-              </p>
-              <div class="story-badges">
-                <span>Makeup profesional</span>
-                <span>Hair styling</span>
-                <span>Portoviejo · Av. 15 de Abril</span>
-              </div>
-              <div class="metrics">
-                <div class="metric">
-                  <strong>Graduación</strong>
-                  <span>Uno de los enfoques más visibles del portafolio.</span>
-                </div>
-                <div class="metric">
-                  <strong>Eventos</strong>
-                  <span>Bodas, fiestas, XV años y ocasiones especiales.</span>
-                </div>
-                <div class="metric">
-                  <strong>WhatsApp</strong>
-                  <span>Reserva directa y rápida sin formularios pesados.</span>
-                </div>
-              </div>
-            </article>
-
-            <div style="display:grid; gap:1.4rem;">
-              <article class="story-card story-card--feature">
-                <figure>
-                  <img src="assets/instagram/story-feature-signature.jpg" alt="Reconocimiento profesional de Daima Belleza Studio en Portoviejo">
-                </figure>
-              </article>
-              <article class="quote-card">
-                <p>“Yo te maquillo. Makeup - Hairstyle. Portoviejo-Ec.”</p>
-                <strong>Tomado del perfil público de Instagram del estudio.</strong>
-              </article>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="servicios">
-      <div class="shell">
-        <div class="section-head reveal">
-          <div>
-            <span class="section-kicker">Servicios</span>
-            <h2 class="section-title">Una oferta clara, bien presentada y lista para reservar.</h2>
-          </div>
-          <p class="section-copy" style="max-width: 28rem;">
-            Mantengo los servicios y precios que ya estaban publicados, pero con una estructura más limpia y mucho más fácil de recorrer.
-          </p>
-        </div>
-
-        <div class="services-grid">
-          <article class="service-card reveal" data-delay="1">
-            <div class="service-icon">01</div>
-            <h3>Maquillaje social profesional</h3>
-            <p class="section-copy">
-              Para eventos, sesiones, salidas especiales y looks donde quieres verte impecable sin perder frescura.
-            </p>
-            <ul>
-              <li><span class="bullet"></span><span>Pestañas a elección: punto a punto o en banda.</span></li>
-              <li><span class="bullet"></span><span>Técnica Halo Eyes o Foxy Eyes.</span></li>
-              <li><span class="bullet"></span><span>Masaje linfático y colágeno de ojeras hidratante.</span></li>
-              <li><span class="bullet"></span><span>Sellado con polvos sueltos y fijador de hasta 5 horas.</span></li>
+        </a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#services">Servicios</a></li>
+                <li><a href="#gallery">Portafolio</a></li>
+                <li><a href="#about">Sobre Mí</a></li>
             </ul>
-          </article>
+        </nav>
+        <a href="https://wa.me/5930958757109?text=Hola%20Daima%20Belleza%2C%20quiero%20agendar%20mi%20cita." class="btn btn-primary" target="_blank">Agendar Cita</a>
+    </header>
 
-          <article class="service-card reveal" data-delay="2">
-            <div class="service-icon">02</div>
-            <h3>Maquillaje de graduación</h3>
-            <p class="section-copy">
-              Un servicio más completo para un día que suele terminar en fotos, abrazos, baile y muchas horas fuera.
-            </p>
-            <ul>
-              <li><span class="bullet"></span><span>Pestañas a elección y técnicas como semicorte, corte o ahumado.</span></li>
-              <li><span class="bullet"></span><span>Triple sellado para mayor durabilidad.</span></li>
-              <li><span class="bullet"></span><span>Detallito especial para cerrar la experiencia.</span></li>
-              <li><span class="bullet"></span><span>Acabado listo para flash, video y celebración.</span></li>
-            </ul>
-          </article>
-
-          <article class="service-card reveal" data-delay="3">
-            <div class="service-icon">03</div>
-            <h3>Peinados y combinación completa</h3>
-            <p class="section-copy">
-              Desde planchado y ondas suaves hasta ondas de reina, semirecogidos y recogidos para elevar todo el look.
-            </p>
-            <ul>
-              <li><span class="bullet"></span><span>Preparación del cabello con hidratante y protector térmico.</span></li>
-              <li><span class="bullet"></span><span>Cera y fijación de alta durabilidad.</span></li>
-              <li><span class="bullet"></span><span>Combos listos para quien quiere salir maquillada y peinada.</span></li>
-              <li><span class="bullet"></span><span>Ideal para graduación, fiestas y XV años.</span></li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="shell">
-        <div class="features-grid">
-          <article class="feature-card reveal" data-delay="1">
-            <div class="feature-icon">✦</div>
-            <h3>Acabado fotogénico</h3>
-            <p>El portafolio muestra looks pensados para verse bien en retrato, video y luz de evento.</p>
-          </article>
-          <article class="feature-card reveal" data-delay="2">
-            <div class="feature-icon">✦</div>
-            <h3>Atención directa</h3>
-            <p>La reserva baja directo a WhatsApp para que no haya fricción ni pasos innecesarios.</p>
-          </article>
-          <article class="feature-card reveal" data-delay="3">
-            <div class="feature-icon">✦</div>
-            <h3>Portafolio real</h3>
-            <p>La galería usa imágenes descargadas del Instagram público del estudio, no placeholders.</p>
-          </article>
-          <article class="feature-card reveal" data-delay="4">
-            <div class="feature-icon">✦</div>
-            <h3>Marca más fuerte</h3>
-            <p>Tipografía, color, ritmo visual y CTA alineados para que la página se sienta mucho más premium.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="shell">
-        <div class="section-head reveal">
-          <div>
-            <span class="section-kicker">Precios</span>
-            <h2 class="section-title">Paquetes y favoritos del catálogo.</h2>
-          </div>
-          <p class="section-copy" style="max-width: 29rem;">
-            Los combos se ven mejor cuando se entienden rápido. Aquí están resumidos con su lógica comercial y CTA directa.
-          </p>
-        </div>
-
-        <div class="pricing-grid">
-          <article class="price-card featured reveal" data-delay="1">
-            <span class="price-tag">Popular</span>
-            <h3>Combo Consentidor</h3>
-            <p>Maquillaje social profesional con técnica Halo Eyes o Foxy Eyes más peinado en ondas sueltas.</p>
-            <ul>
-              <li><span class="bullet"></span><span>Incluye todo lo del paquete profesional.</span></li>
-              <li><span class="bullet"></span><span>Perfecto para graduaciones y eventos sociales.</span></li>
-            </ul>
-            <div class="price-row">
-              <div class="price-amount">
-                <small>$35</small>
-                <strong>$25</strong>
-              </div>
-              <a class="button-secondary" href="https://wa.me/5930958757109?text=Hola%20Daima%2C%20quiero%20agendar%20el%20Combo%20Consentidor." target="_blank" rel="noopener noreferrer">Reservar</a>
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-container">
+                <div class="hero-content reveal">
+                    <span class="text-small hero-subtitle">Portoviejo, Ecuador</span>
+                    <h1 class="title-xl">Realza tu <span class="text-italic">belleza</span> natural</h1>
+                    <p>Experta en maquillaje profesional, novias y peinados. Un look impecable, duradero y fotogénico para tus momentos más importantes.</p>
+                    <div class="hero-buttons">
+                        <a href="https://wa.me/5930958757109?text=Hola%20Daima%20Belleza%2C%20quiero%20agendar%20mi%20cita." class="btn btn-primary" target="_blank">Reservar Ahora</a>
+                        <a href="#gallery" class="btn btn-outline">Ver Portafolio</a>
+                    </div>
+                </div>
+                <div class="hero-image reveal">
+                    <img src="assets/profile_new.jpg" alt="Daima Makeup Artist">
+                </div>
             </div>
-          </article>
+        </section>
 
-          <article class="price-card featured reveal" data-delay="2">
-            <span class="price-tag">Premium</span>
-            <h3>Combo Pasarela</h3>
-            <p>Maquillaje social profesional con técnica a elección y peinado en ondas de reina.</p>
-            <ul>
-              <li><span class="bullet"></span><span>Incluye detallito especial y experiencia completa de glamour.</span></li>
-              <li><span class="bullet"></span><span>Pensado para quien quiere un look de impacto.</span></li>
-            </ul>
-            <div class="price-row">
-              <div class="price-amount">
-                <small>$40</small>
-                <strong>$35</strong>
-              </div>
-              <a class="button-secondary" href="https://wa.me/5930958757109?text=Hola%20Daima%2C%20quiero%20agendar%20el%20Combo%20Pasarela." target="_blank" rel="noopener noreferrer">Reservar</a>
+        <!-- Services Section -->
+        <section id="services" class="section">
+            <div class="section-header reveal">
+                <span class="text-small hero-subtitle">Lo que ofrezco</span>
+                <h2 class="title-lg">Servicios Exclusivos</h2>
             </div>
-          </article>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <i class="fa-solid fa-sparkles service-icon"></i>
+                    <h3 class="title-md">Maquillaje Social</h3>
+                    <p>Ideal para eventos, graduaciones y fiestas. Un look duradero que resalta tus mejores facciones con productos de alta gama y técnicas avanzadas.</p>
+                </div>
+                <div class="service-card reveal">
+                    <i class="fa-solid fa-ring service-icon"></i>
+                    <h3 class="title-md">Novias</h3>
+                    <p>Diseño de imagen nupcial completo. Prueba de maquillaje y peinado para que brilles con luz propia, con acabado a prueba de lágrimas y fotos.</p>
+                </div>
+                <div class="service-card reveal">
+                    <i class="fa-solid fa-scissors service-icon"></i>
+                    <h3 class="title-md">Peinados</h3>
+                    <p>Desde ondas glamorosas de Hollywood hasta recogidos elegantes y románticos. El complemento perfecto para un maquillaje impecable.</p>
+                </div>
+            </div>
+        </section>
 
-          <article class="price-card reveal" data-delay="3">
-            <h3>Maquillajes principales</h3>
-            <ul>
-              <li><span class="bullet"></span><span>Maquillaje Social Profesional: <strong>$20</strong></span></li>
-              <li><span class="bullet"></span><span>Maquillaje de Graduación Profesional: <strong>$25</strong></span></li>
-            </ul>
-            <div class="price-strip">Ambos servicios mantienen el enfoque de larga duración, pestañas a elección y acabado listo para cámara.</div>
-          </article>
+        <!-- Pricing / Plans Section -->
+        <section id="pricing" class="section" style="background-color: var(--c-surface);">
+            <div class="section-header reveal">
+                <span class="text-small hero-subtitle">Inversión en ti</span>
+                <h2 class="title-lg">Planes & Paquetes</h2>
+            </div>
+            <div class="pricing-grid">
+                <!-- Plan 1 -->
+                <div class="pricing-card reveal">
+                    <h3 class="title-md">Maquillaje Social</h3>
+                    <p class="price">$20</p>
+                    <ul class="pricing-features">
+                        <li><i class="fa-solid fa-check"></i> Pestañas a elección</li>
+                        <li><i class="fa-solid fa-check"></i> Técnica Halo o Foxy Eyes</li>
+                        <li><i class="fa-solid fa-check"></i> Sellado de alta duración</li>
+                    </ul>
+                    <button class="btn btn-outline btn-book-plan" data-plan="Maquillaje Social" style="width: 100%;">Elegir Plan</button>
+                </div>
+                <!-- Plan 2 -->
+                <div class="pricing-card popular reveal">
+                    <div class="popular-badge">Más pedido</div>
+                    <h3 class="title-md">Combo Consentidor</h3>
+                    <p class="price">$25 <span class="price-old">$35</span></p>
+                    <ul class="pricing-features">
+                        <li><i class="fa-solid fa-check"></i> Maquillaje Social Profesional</li>
+                        <li><i class="fa-solid fa-check"></i> Peinado en ondas sueltas</li>
+                        <li><i class="fa-solid fa-check"></i> Ideal para eventos sociales</li>
+                    </ul>
+                    <button class="btn btn-primary btn-book-plan" data-plan="Combo Consentidor" style="width: 100%;">Elegir Plan</button>
+                </div>
+                <!-- Plan 3 -->
+                <div class="pricing-card reveal">
+                    <h3 class="title-md">Combo Pasarela</h3>
+                    <p class="price">$35 <span class="price-old">$40</span></p>
+                    <ul class="pricing-features">
+                        <li><i class="fa-solid fa-check"></i> Maquillaje técnica a elección</li>
+                        <li><i class="fa-solid fa-check"></i> Peinado ondas de reina</li>
+                        <li><i class="fa-solid fa-check"></i> Look de impacto garantizado</li>
+                    </ul>
+                    <button class="btn btn-outline btn-book-plan" data-plan="Combo Pasarela" style="width: 100%;">Elegir Plan</button>
+                </div>
+                <!-- Plan 4 -->
+                <div class="pricing-card reveal">
+                    <h3 class="title-md">Maquillaje de Grado</h3>
+                    <p class="price">$25</p>
+                    <ul class="pricing-features">
+                        <li><i class="fa-solid fa-check"></i> Pestañas a elección</li>
+                        <li><i class="fa-solid fa-check"></i> Triple sellado de duración</li>
+                        <li><i class="fa-solid fa-check"></i> Acabado fotogénico flash</li>
+                    </ul>
+                    <button class="btn btn-outline btn-book-plan" data-plan="Maquillaje de Grado" style="width: 100%;">Elegir Plan</button>
+                </div>
+                <!-- Plan 5 -->
+                <div class="pricing-card reveal">
+                    <h3 class="title-md">Peinados</h3>
+                    <p class="price" style="font-size: 2rem;">$10 - $20</p>
+                    <ul class="pricing-features" style="text-align: left; padding-left: 2rem;">
+                        <li><i class="fa-solid fa-check"></i> Planchado: <strong>$10</strong></li>
+                        <li><i class="fa-solid fa-check"></i> Ondas Normales: <strong>$15</strong></li>
+                        <li><i class="fa-solid fa-check"></i> Ondas de Reina / Agua: <strong>$20</strong></li>
+                        <li><i class="fa-solid fa-check"></i> Semirecogido / Recogido: <strong>$20</strong></li>
+                    </ul>
+                    <button class="btn btn-outline btn-book-plan" data-plan="Servicio de Peinado" style="width: 100%;">Elegir Plan</button>
+                </div>
+            </div>
+        </section>
 
-          <article class="price-card reveal" data-delay="4">
-            <h3>Peinados</h3>
-            <ul>
-              <li><span class="bullet"></span><span>Planchado: <strong>$10</strong></span></li>
-              <li><span class="bullet"></span><span>Ondas Normales: <strong>$15</strong></span></li>
-              <li><span class="bullet"></span><span>Ondas de Reina / de Agua: <strong>$20</strong></span></li>
-              <li><span class="bullet"></span><span>Semirecogido: <strong>$20</strong></span></li>
-              <li><span class="bullet"></span><span>Recogido: <strong>$20</strong></span></li>
-            </ul>
-            <div class="price-strip">Toda técnica incluye preparación capilar, protector térmico, cera y fijador de alta durabilidad.</div>
-          </article>
+        <!-- Gallery Section -->
+        <section id="gallery" class="section">
+            <div class="section-header reveal">
+                <span class="text-small hero-subtitle">Inspiración</span>
+                <h2 class="title-lg">Mi Portafolio</h2>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item reveal"><img src="assets/instagram/DXDd0majhX4.jpg" alt="Makeup 1"><div class="gallery-overlay"><span>Look Social</span></div></div>
+                <div class="gallery-item reveal"><img src="assets/instagram/DR5aLNBjkOg.jpg" alt="Makeup 2"><div class="gallery-overlay"><span>Ondas & Glam</span></div></div>
+                <div class="gallery-item reveal"><img src="assets/instagram/DUHlmVQjnTy.jpg" alt="Makeup 3"><div class="gallery-overlay"><span>Maquillaje de Grado</span></div></div>
+                <div class="gallery-item reveal"><img src="assets/instagram/DRN0xM3DvT-.jpg" alt="Makeup 4"><div class="gallery-overlay"><span>Elegancia</span></div></div>
+                <div class="gallery-item reveal"><img src="assets/instagram/DIiQG7Qu-cu.jpg" alt="Makeup 5"><div class="gallery-overlay"><span>XV Años</span></div></div>
+                <div class="gallery-item reveal"><img src="assets/instagram/DIMQ0MIOXAt.jpg" alt="Makeup 6"><div class="gallery-overlay"><span>Piel Madura</span></div></div>
+            </div>
+            <div style="text-align: center; margin-top: 4rem;" class="reveal">
+                <a href="https://www.instagram.com/daimabellezastudio/" target="_blank" class="btn btn-outline">Ver más en Instagram</a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section about">
+            <div class="about-container">
+                <div class="about-image reveal" style="display: flex; justify-content: center; align-items: center;">
+                    <iframe src="https://www.instagram.com/p/DZ53dOVDqb_/embed" width="100%" height="520" frameborder="0" scrolling="no" allowtransparency="true" style="max-width: 400px; border-radius: var(--radius); box-shadow: 0 20px 40px rgba(0,0,0,0.1);"></iframe>
+                </div>
+                <div class="about-content reveal">
+                    <span class="text-small hero-subtitle">Conóceme</span>
+                    <h2 class="title-lg" style="margin-bottom: 2rem;">Hola, soy Daima</h2>
+                    <p>Con años de experiencia en el mundo de la belleza, mi verdadera pasión es hacer que cada mujer se sienta segura, empoderada y hermosa frente al espejo.</p>
+                    <p>Me especializo en técnicas modernas de maquillaje que <strong>realzan tu belleza natural</strong> en lugar de disfrazarla. Mi enfoque es crear pieles luminosas, miradas impactantes y peinados que duren toda la noche.</p>
+                    <p>Utilizo productos de la más alta calidad para garantizar un acabado perfecto y a prueba de fotos. ¡Estaré encantada de atenderte y crear el look de tus sueños en mi estudio en Portoviejo!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-brand">
+            <div class="brand-mark" aria-hidden="true">
+                <span class="brand-monogram">dm</span>
+                <svg class="brand-wing" viewBox="0 0 75 40">
+                    <path d="M74.7,2.1C70,0.8,65,0,59.8,0C41,0,25.3,10.4,14.9,26.1c-1.9,2.9-3.6,5.9-5,9C8.1,38.6,5.7,40,2.9,40c-0.8,0-1.5-0.1-2.2-0.4c-1.1-0.4-1-1.9,0.2-2.5c1.4-0.7,2.9-1.7,4.2-2.9C1.9,32.3,0,28.6,0,24.6c0-4.8,2.5-9.2,6.7-11.9C18.4,4.2,37.8,0.7,59.8,0.7c4.7,0,9.4,0.6,13.8,1.9C74.6,2.8,75,2.3,74.7,2.1z M6.7,14.5C3.6,16.5,1.8,20.3,1.8,24.6c0,3.3,1.5,6.4,3.9,8.4c-1,1-2.2,1.8-3.4,2.4c-0.2,0.1-0.2,0.2,0,0.2c0.4,0.2,0.8,0.2,1.2,0.2c2.1,0,4-1.1,5.6-3.4c1.3-2.9,2.9-5.7,4.6-8.4C26.1,11.5,41.4,1.8,59.8,1.8C38.2,1.8,18.5,5.2,6.7,14.5z"></path>
+                </svg>
+            </div>
+            <h2 style="margin-top: 1rem; color: white;">Daima Belleza</h2>
         </div>
-      </div>
-    </section>
-
-    <section class="section" id="portafolio">
-      <div class="shell">
-        <div class="section-surface is-visible">
-          <div class="portfolio-head">
-            <div>
-              <span class="section-kicker">Portafolio</span>
-              <h2 class="section-title">Una galería real, amplia y lista para explorarse.</h2>
-            </div>
-            <a class="button-secondary" href="https://www.instagram.com/daimabellezastudio/" target="_blank" rel="noopener noreferrer">Ver Instagram completo</a>
-          </div>
-          <p class="gallery-note">
-            Esta sección usa las imágenes públicas descargadas del perfil de Instagram del estudio para que la página no dependa
-            de enlaces temporales. Puedes abrir cada foto, leer el contexto del post y saltar al Instagram original.
-          </p>
-          <div class="gallery-grid" id="galleryGrid">
-            <button type="button" class="gallery-card" data-gallery-index="0">
-              <img src="assets/instagram/DXDd0majhX4.jpg" alt="Graduation Day. Maquillaje profesional para un look de grado." loading="lazy">
-              <div class="gallery-caption">
-                <span>Instagram real</span>
-                <strong>Graduation Day. Maquillaje profesional para un look de grado.</strong>
-              </div>
-            </button>
-            <button type="button" class="gallery-card" data-gallery-index="1">
-              <img src="assets/instagram/DXDd0majhX4-2.jpg" alt="Graduation Day. Maquillaje profesional para un look de grado." loading="lazy">
-              <div class="gallery-caption">
-                <span>Instagram real</span>
-                <strong>Graduation Day. Maquillaje profesional para un look de grado.</strong>
-              </div>
-            </button>
-            <button type="button" class="gallery-card" data-gallery-index="2">
-              <img src="assets/instagram/DUHlmVQjnTy.jpg" alt="Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento." loading="lazy">
-              <div class="gallery-caption">
-                <span>Instagram real</span>
-                <strong>Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento.</strong>
-              </div>
-            </button>
-            <button type="button" class="gallery-card" data-gallery-index="3">
-              <img src="assets/instagram/DUHlmVQjnTy-2.jpg" alt="Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento." loading="lazy">
-              <div class="gallery-caption">
-                <span>Instagram real</span>
-                <strong>Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento.</strong>
-              </div>
-            </button>
-            <button type="button" class="gallery-card" data-gallery-index="4">
-              <img src="assets/instagram/DUHlmVQjnTy-3.jpg" alt="Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento." loading="lazy">
-              <div class="gallery-caption">
-                <span>Instagram real</span>
-                <strong>Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento.</strong>
-              </div>
-            </button>
-            <button type="button" class="gallery-card" data-gallery-index="5">
-              <img src="assets/instagram/DUHlmVQjnTy-4.jpg" alt="Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento." loading="lazy">
-              <div class="gallery-caption">
-                <span>Instagram real</span>
-                <strong>Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento.</strong>
-              </div>
-            </button>
-            <button type="button" class="gallery-card" data-gallery-index="6">
-              <img src="assets/instagram/DUHlmVQjnTy-5.jpg" alt="Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento." loading="lazy">
-              <div class="gallery-caption">
-                <span>Instagram real</span>
-                <strong>Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento.</strong>
-              </div>
-            </button>
-            <button type="button" class="gallery-card" data-gallery-index="7">
-              <img src="assets/instagram/DUHlmVQjnTy-6.jpg" alt="Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento." loading="lazy">
-              <div class="gallery-caption">
-                <span>Instagram real</span>
-                <strong>Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento.</strong>
-              </div>
-            </button>
-            <button type="button" class="gallery-card" data-gallery-index="8">
-              <img src="assets/instagram/DR5aLNBjkOg.jpg" alt="Seguridad y presencia para un día especial de graduación." loading="lazy">
-              <div class="gallery-caption">
-                <span>Instagram real</span>
-                <strong>Seguridad y presencia para un día especial de graduación.</strong>
-              </div>
-            </button>
-            <button type="button" class="gallery-card" data-gallery-index="9">
-              <img src="assets/instagram/DR5aLNBjkOg-2.jpg" alt="Seguridad y presencia para un día especial de graduación." loading="lazy">
-              <div class="gallery-caption">
-                <span>Instagram real</span>
-                <strong>Seguridad y presencia para un día especial de graduación.</strong>
-              </div>
-            </button>
-            <button type="button" class="gallery-card" data-gallery-index="10">
-              <img src="assets/instagram/DR5ZguYDsMI.jpg" alt="Maquillaje de grado con acabado limpio y protagonista." loading="lazy">
-              <div class="gallery-caption">
-                <span>Instagram real</span>
-                <strong>Maquillaje de grado con acabado limpio y protagonista.</strong>
-              </div>
-            </button>
-            <button type="button" class="gallery-card" data-gallery-index="11">
-              <img src="assets/instagram/DR5ZguYDsMI-2.jpg" alt="Maquillaje de grado con acabado limpio y protagonista." loading="lazy">
-              <div class="gallery-caption">
-                <span>Instagram real</span>
-                <strong>Maquillaje de grado con acabado limpio y protagonista.</strong>
-              </div>
-            </button>
-            <button type="button" class="gallery-card" data-gallery-index="12">
-              <img src="assets/instagram/DRN0xM3DvT-.jpg" alt="Looking Stunning. Maquillaje y semirecogido para ocasión especial." loading="lazy">
-              <div class="gallery-caption">
-                <span>Instagram real</span>
-                <strong>Looking Stunning. Maquillaje y semirecogido para ocasión especial.</strong>
-              </div>
-            </button>
-            <button type="button" class="gallery-card" data-gallery-index="13">
-              <img src="assets/instagram/DRN0xM3DvT--2.jpg" alt="Looking Stunning. Maquillaje y semirecogido para ocasión especial." loading="lazy">
-              <div class="gallery-caption">
-                <span>Instagram real</span>
-                <strong>Looking Stunning. Maquillaje y semirecogido para ocasión especial.</strong>
-              </div>
-            </button>
-            <button type="button" class="gallery-card" data-gallery-index="14">
-              <img src="assets/instagram/DP7Dwo_Drem.jpg" alt="Belleza resaltada con un look social profesional." loading="lazy">
-              <div class="gallery-caption">
-                <span>Instagram real</span>
-                <strong>Belleza resaltada con un look social profesional.</strong>
-              </div>
-            </button>
-            <button type="button" class="gallery-card" data-gallery-index="15">
-              <img src="assets/instagram/DP7Dwo_Drem-2.jpg" alt="Belleza resaltada con un look social profesional." loading="lazy">
-              <div class="gallery-caption">
-                <span>Instagram real</span>
-                <strong>Belleza resaltada con un look social profesional.</strong>
-              </div>
-            </button>
-            <button type="button" class="gallery-card" data-gallery-index="16">
-              <img src="assets/instagram/DPETGLOjmwm.jpg" alt="Look listo para brillar en el próximo evento especial." loading="lazy">
-              <div class="gallery-caption">
-                <span>Instagram real</span>
-                <strong>Look listo para brillar en el próximo evento especial.</strong>
-              </div>
-            </button>
-            <button type="button" class="gallery-card" data-gallery-index="17">
-              <img src="assets/instagram/DPETGLOjmwm-2.jpg" alt="Look listo para brillar en el próximo evento especial." loading="lazy">
-              <div class="gallery-caption">
-                <span>Instagram real</span>
-                <strong>Look listo para brillar en el próximo evento especial.</strong>
-              </div>
-            </button>
-            <button type="button" class="gallery-card" data-gallery-index="18">
-              <img src="assets/instagram/DIiQG7Qu-cu.jpg" alt="Look de XV años con glamour y presencia de protagonista." loading="lazy">
-              <div class="gallery-caption">
-                <span>Instagram real</span>
-                <strong>Look de XV años con glamour y presencia de protagonista.</strong>
-              </div>
-            </button>
-            <button type="button" class="gallery-card" data-gallery-index="19">
-              <img src="assets/instagram/DIiQG7Qu-cu-2.jpg" alt="Look de XV años con glamour y presencia de protagonista." loading="lazy">
-              <div class="gallery-caption">
-                <span>Instagram real</span>
-                <strong>Look de XV años con glamour y presencia de protagonista.</strong>
-              </div>
-            </button>
-            <button type="button" class="gallery-card" data-gallery-index="20">
-              <img src="assets/instagram/DIiQG7Qu-cu-3.jpg" alt="Look de XV años con glamour y presencia de protagonista." loading="lazy">
-              <div class="gallery-caption">
-                <span>Instagram real</span>
-                <strong>Look de XV años con glamour y presencia de protagonista.</strong>
-              </div>
-            </button>
-            <button type="button" class="gallery-card" data-gallery-index="21">
-              <img src="assets/instagram/DIiQG7Qu-cu-4.jpg" alt="Look de XV años con glamour y presencia de protagonista." loading="lazy">
-              <div class="gallery-caption">
-                <span>Instagram real</span>
-                <strong>Look de XV años con glamour y presencia de protagonista.</strong>
-              </div>
-            </button>
-            <button type="button" class="gallery-card" data-gallery-index="22">
-              <img src="assets/instagram/DIMQ0MIOXAt.jpg" alt="Maquillaje especializado para piel madura con acabado natural y elegante." loading="lazy">
-              <div class="gallery-caption">
-                <span>Instagram real</span>
-                <strong>Maquillaje especializado para piel madura con acabado natural y elegante.</strong>
-              </div>
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="shell">
-        <div class="faq-grid">
-          <div class="reveal">
-            <span class="section-kicker">Proceso</span>
-            <h2 class="section-title">Reserva simple, respuesta directa y menos vueltas.</h2>
-            <p class="section-copy">
-              La página también queda preparada para convertir mejor: CTA visibles, servicios claros y una reserva guiada a WhatsApp
-              con mensaje prellenado para no perder tiempo.
-            </p>
-          </div>
-
-          <div class="faq-stack">
-            <details class="faq reveal" data-delay="1" open>
-              <summary>¿Cómo se agenda?</summary>
-              <p>Escoges el servicio, dejas tu nombre y fecha tentativa, y el formulario abre WhatsApp con el mensaje listo para enviar.</p>
-            </details>
-            <details class="faq reveal" data-delay="2">
-              <summary>¿Qué tipo de trabajos se muestran?</summary>
-              <p>Principalmente maquillaje social, maquillaje de grado, peinados y looks de eventos especiales tomados del Instagram público del estudio.</p>
-            </details>
-            <details class="faq reveal" data-delay="3">
-              <summary>¿Dónde está ubicado el estudio?</summary>
-              <p>La información pública del perfil indica Portoviejo, Ecuador, con referencia en Av. 15 de Abril.</p>
-            </details>
-            <details class="faq reveal" data-delay="4">
-              <summary>¿Se puede seguir ampliando?</summary>
-              <p>Sí. La galería ya quedó preparada para seguir sumando más imágenes, nuevas secciones o una página adicional si luego se quiere escalar el sitio.</p>
-            </details>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="agenda">
-      <div class="shell">
-        <div class="contact-grid">
-          <article class="contact-card booking-card reveal" data-delay="1">
-            <span class="section-kicker">Agenda tu cita</span>
-            <h3 style="font-size:2.1rem; font-family:'Cormorant Garamond', serif; margin-top:0;">Reserva clara, directa y bien presentada.</h3>
-            <p>
-              Elige el servicio, deja tus datos clave y abre WhatsApp con el mensaje ya organizado. Así se ve más profesional y te toma menos tiempo agendar.
-            </p>
-
-            <div class="booking-intro">
-              <div class="booking-chip">
-                <div class="booking-icon">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6V3m8 3V3M4 10h16"/><rect x="3" y="5" width="18" height="16" rx="2"/><path d="m9 16 2 2 4-4"/></svg>
-                </div>
-                <strong>Fecha tentativa</strong>
-                <span>Indica el día o el horario que tienes en mente.</span>
-              </div>
-              <div class="booking-chip">
-                <div class="booking-icon">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/></svg>
-                </div>
-                <strong>Mensaje listo</strong>
-                <span>La web arma el texto para que no escribas todo desde cero.</span>
-              </div>
-              <div class="booking-chip">
-                <div class="booking-icon">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.89.33 1.76.61 2.6a2 2 0 0 1-.45 2.11L8 9.7a16 16 0 0 0 6.29 6.29l1.27-1.27a2 2 0 0 1 2.11-.45c.84.28 1.71.49 2.6.61A2 2 0 0 1 22 16.92Z"/></svg>
-                </div>
-                <strong>Respuesta directa</strong>
-                <span>Todo cae al canal principal del estudio por WhatsApp.</span>
-              </div>
-            </div>
-
-            <form id="bookingForm">
-              <div class="field">
-                <label for="name">Tu nombre</label>
-                <input id="name" name="name" type="text" placeholder="Ej. María José" required>
-              </div>
-              <div class="field">
-                <label for="service">Servicio</label>
-                <select id="service" name="service" required>
-                  <option value="">Selecciona un servicio</option>
-                  <option>Combo Consentidor</option>
-                  <option>Combo Pasarela</option>
-                  <option>Maquillaje Social Profesional</option>
-                  <option>Maquillaje de Graduación Profesional</option>
-                  <option>Planchado</option>
-                  <option>Ondas Normales</option>
-                  <option>Ondas de Reina / Ondas de Agua</option>
-                  <option>Semirecogido</option>
-                  <option>Recogido</option>
-                  <option>Consulta personalizada</option>
-                </select>
-              </div>
-              <div class="field">
-                <label for="date">Fecha tentativa</label>
-                <input id="date" name="date" type="text" placeholder="Ej. 15 de junio en la tarde">
-              </div>
-              <div class="field">
-                <label for="message">Detalles extra</label>
-                <textarea id="message" name="message" rows="4" placeholder="Cuéntanos si es graduación, boda, fiesta o el tipo de look que buscas."></textarea>
-              </div>
-              <button class="button-primary booking-submit" type="submit">
-                <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20" style="stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-                <span>Enviar reserva a WhatsApp</span>
-              </button>
-              <p class="booking-footnote">WhatsApp del estudio: +593 095 875 7109</p>
-            </form>
-          </article>
-
-          <article class="contact-card contact-card--info reveal" data-delay="2">
-            <span class="section-kicker">Contacto y ubicación</span>
-            <h3 style="font-size:2.1rem; font-family:'Cormorant Garamond', serif; margin-top:0;">Ubicación pública real y accesos útiles.</h3>
-            <p>
-              Esta información sale del perfil público del estudio y ahora aparece de forma visible en la web, incluyendo la referencia real de ubicación.
-            </p>
-
-            <div class="contact-list">
-              <a href="https://wa.me/5930958757109?text=Hola%20Daima%20Belleza%20Studio%2C%20quiero%20agendar%20mi%20cita." target="_blank" rel="noopener noreferrer">
-                <div class="contact-icon">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.05 4.94A9.86 9.86 0 0 0 12.02 2C6.57 2 2.13 6.43 2.12 11.89c0 1.75.46 3.45 1.32 4.96L2 22l5.3-1.39a9.87 9.87 0 0 0 4.72 1.2h.01c5.45 0 9.89-4.44 9.9-9.89a9.8 9.8 0 0 0-2.88-6.97Z"/><path d="M8.5 8.8c.2-.5.4-.5.6-.5h.5c.2 0 .5 0 .7.4.2.4.8 1.9.8 2 0 .2 0 .4-.1.5l-.4.5c-.2.2-.3.4-.1.7.2.3.8 1.2 1.7 1.9 1.2.9 2.2 1.2 2.5 1.3.3.1.5.1.7-.1l.8-.9c.2-.2.4-.2.7-.1.3.1 1.8.8 2.1.9.3.2.5.2.5.4 0 .2 0 1-.4 1.8-.4.8-2 1.5-2.7 1.5-.7 0-1.6 0-4.4-1.4-3.4-1.8-5.5-5.1-5.7-5.4-.2-.3-1.4-1.9-1.4-3.6 0-1.8.9-2.7 1.2-3.1Z"/></svg>
-                </div>
-                <div>
-                  <strong>WhatsApp</strong>
-                  <span>Respuesta directa para cotización y agenda.</span>
-                </div>
-              </a>
-
-              <a href="https://www.instagram.com/daimabellezastudio/" target="_blank" rel="noopener noreferrer">
-                <div class="contact-icon">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg>
-                </div>
-                <div>
-                  <strong>@daimabellezastudio</strong>
-                  <span>Portafolio en vivo, highlights y publicaciones recientes.</span>
-                </div>
-              </a>
-
-              <a href="https://www.google.com/maps?q=-1.06718,-80.4513" target="_blank" rel="noopener noreferrer">
-                <div class="contact-icon">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z"/><circle cx="12" cy="11" r="2.5"/></svg>
-                </div>
-                <div>
-                  <strong>Abrir ubicación</strong>
-                  <span>Ver referencia pública del estudio en mapas.</span>
-                </div>
-              </a>
-            </div>
-
-            <div class="location-panel">
-              <div class="location-panel-head">
-                <div class="inline-icon">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z"/><circle cx="12" cy="11" r="2.5"/></svg>
-                </div>
-                <div>
-                  <strong style="display:block; font-size:1.02rem;">Ubicación pública real del perfil</strong>
-                  <span style="color:var(--muted);">Referencia visible al 20 de mayo de 2026.</span>
-                </div>
-              </div>
-              <div class="location-meta">
-                <div>
-                  <strong>Ciudad</strong>
-                  <span>Portoviejo, Ecuador</span>
-                </div>
-                <div>
-                  <strong>Dirección pública</strong>
-                  <span>Av. 15 de Abril</span>
-                </div>
-              </div>
-              <a class="button-secondary" href="https://www.google.com/maps?q=-1.06718,-80.4513" target="_blank" rel="noopener noreferrer">Abrir en Google Maps</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="shell">
-      <div class="footer-box">
-        <p class="footer-copy">© <span id="year"></span> Daima Belleza Studio. Makeup · Hairstyle · Portoviejo.</p>
         <div class="footer-links">
-          <a href="#historia">Estudio</a>
-          <a href="#servicios">Servicios</a>
-          <a href="#portafolio">Portafolio</a>
-          <a href="#agenda">Agenda</a>
+            <a href="https://www.instagram.com/daimabellezastudio/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://wa.me/5930958757109?text=Hola%20Daima%20Belleza%2C%20quiero%20agendar%20mi%20cita." target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://www.tiktok.com/@daimapromakeup?_r=1&_t=ZS-97lUbR3bLSH" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
         </div>
-      </div>
-    </div>
-  </footer>
-
-  <a class="floating-wa" href="https://wa.me/5930958757109?text=Hola%20Daima%20Belleza%20Studio%2C%20quiero%20agendar%20mi%20cita." target="_blank" rel="noopener noreferrer" aria-label="Abrir WhatsApp">
-    <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="currentColor">
-      <path d="M19.05 4.94A9.86 9.86 0 0 0 12.02 2C6.57 2 2.13 6.43 2.12 11.89c0 1.75.46 3.45 1.32 4.96L2 22l5.3-1.39a9.87 9.87 0 0 0 4.72 1.2h.01c5.45 0 9.89-4.44 9.9-9.89A9.8 9.8 0 0 0 19.05 4.94Zm-7.03 15.2h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.15.83.84-3.07-.2-.31a8.21 8.21 0 0 1-1.27-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.55-3.7 8.24-8.22 8.24Zm4.52-6.15c-.25-.12-1.48-.73-1.71-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.98-.14.16-.29.18-.54.06a6.7 6.7 0 0 1-1.97-1.21 7.41 7.41 0 0 1-1.37-1.7c-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.43l-.47-.01c-.16 0-.43.06-.65.31-.23.25-.87.85-.87 2.06 0 1.2.89 2.37 1.01 2.54.12.16 1.75 2.67 4.23 3.74.59.25 1.05.41 1.41.53.59.19 1.12.16 1.54.1.47-.07 1.48-.61 1.69-1.21.21-.6.21-1.11.14-1.21-.06-.1-.22-.16-.47-.29Z"/>
-    </svg>
-  </a>
-
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Cerrar galería">×</button>
-    <div class="lightbox-panel">
-      <div class="lightbox-media">
-        <img id="lightboxImage" src="" alt="">
-      </div>
-      <div class="lightbox-copy">
-        <span class="section-kicker" style="color:#ffdfd2;">Instagram portfolio</span>
-        <h3 id="lightboxTitle">Daima Belleza Studio</h3>
-        <p id="lightboxText"></p>
-        <div class="lightbox-controls">
-          <a class="button-primary" id="lightboxLink" href="#" target="_blank" rel="noopener noreferrer">Ver post original</a>
-          <button class="button-secondary" id="lightboxNext" type="button">Siguiente foto</button>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Daima Belleza. Todos los derechos reservados. Portoviejo, Ecuador.</p>
         </div>
-      </div>
+    </footer>
+
+    <!-- Sticky Mobile CTA -->
+    <a href="https://wa.me/5930958757109?text=Hola%20Daima%2C%20quiero%20agendar%20mi%20cita." class="sticky-wa" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Booking Modal -->
+    <div class="modal-overlay" id="bookingModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <div class="modal-header">
+                <h3>Reserva tu Cita</h3>
+                <p id="modalPlanName">Plan Seleccionado</p>
+            </div>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label for="userName">Tu Nombre Completo</label>
+                    <input type="text" id="userName" placeholder="Ej: María Pérez" required>
+                </div>
+                <div class="form-group">
+                    <label for="userEmail">Correo Electrónico</label>
+                    <input type="email" id="userEmail" placeholder="correo@ejemplo.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="userDate">Elige tu Fecha</label>
+                    <input type="date" id="userDate" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                    <i class="fa-brands fa-whatsapp" style="margin-right: 0.5rem; font-size: 1.2rem;"></i> Enviar a WhatsApp
+                </button>
+            </form>
+        </div>
     </div>
-  </div>
 
-  <script>
-    const whatsappBase = "https://wa.me/5930958757109";
-    const instagramPosts = [
-      {
-        shortcode: "DYDkQDgjq5A",
-        caption: "DAIMA se hace conocer. Gracias al instituto de formación artesanal que ha apoyado su crecimiento profesional.",
-        link: "https://www.instagram.com/p/DYDkQDgjq5A/",
-        images: ["assets/instagram/DYDkQDgjq5A.jpg"]
-      },
-      {
-        shortcode: "DYDUSyyAdJg",
-        caption: "Alajuela.",
-        link: "https://www.instagram.com/p/DYDUSyyAdJg/",
-        images: [
-          "assets/instagram/DYDUSyyAdJg.jpg",
-          "assets/instagram/DYDUSyyAdJg-2.jpg",
-          "assets/instagram/DYDUSyyAdJg-3.jpg",
-          "assets/instagram/DYDUSyyAdJg-4.jpg"
-        ]
-      },
-      {
-        shortcode: "DYDT1HMgbNM",
-        caption: "Plaza Central Portoviejo. Una serie amplia del estudio fuera de set.",
-        link: "https://www.instagram.com/p/DYDT1HMgbNM/",
-        images: [
-          "assets/instagram/DYDT1HMgbNM.jpg",
-          "assets/instagram/DYDT1HMgbNM-2.jpg",
-          "assets/instagram/DYDT1HMgbNM-3.jpg",
-          "assets/instagram/DYDT1HMgbNM-4.jpg",
-          "assets/instagram/DYDT1HMgbNM-5.jpg",
-          "assets/instagram/DYDT1HMgbNM-6.jpg",
-          "assets/instagram/DYDT1HMgbNM-7.jpg",
-          "assets/instagram/DYDT1HMgbNM-8.jpg"
-        ]
-      },
-      {
-        shortcode: "DXDd0majhX4",
-        caption: "Graduation Day. Maquillaje profesional para un look de grado.",
-        link: "https://www.instagram.com/p/DXDd0majhX4/",
-        images: [
-          "assets/instagram/DXDd0majhX4.jpg",
-          "assets/instagram/DXDd0majhX4-2.jpg"
-        ]
-      },
-      {
-        shortcode: "DUHlmVQjnTy",
-        caption: "Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento.",
-        link: "https://www.instagram.com/p/DUHlmVQjnTy/",
-        images: [
-          "assets/instagram/DUHlmVQjnTy.jpg",
-          "assets/instagram/DUHlmVQjnTy-2.jpg",
-          "assets/instagram/DUHlmVQjnTy-3.jpg",
-          "assets/instagram/DUHlmVQjnTy-4.jpg",
-          "assets/instagram/DUHlmVQjnTy-5.jpg",
-          "assets/instagram/DUHlmVQjnTy-6.jpg"
-        ]
-      },
-      {
-        shortcode: "DR5aLNBjkOg",
-        caption: "Seguridad y presencia para un día especial de graduación.",
-        link: "https://www.instagram.com/p/DR5aLNBjkOg/",
-        images: [
-          "assets/instagram/DR5aLNBjkOg.jpg",
-          "assets/instagram/DR5aLNBjkOg-2.jpg"
-        ]
-      },
-      {
-        shortcode: "DR5ZguYDsMI",
-        caption: "Maquillaje de grado con acabado limpio y protagonista.",
-        link: "https://www.instagram.com/p/DR5ZguYDsMI/",
-        images: [
-          "assets/instagram/DR5ZguYDsMI.jpg",
-          "assets/instagram/DR5ZguYDsMI-2.jpg"
-        ]
-      },
-      {
-        shortcode: "DRN0xM3DvT-",
-        caption: "Looking Stunning. Maquillaje y semirecogido para ocasión especial.",
-        link: "https://www.instagram.com/p/DRN0xM3DvT-/",
-        images: [
-          "assets/instagram/DRN0xM3DvT-.jpg",
-          "assets/instagram/DRN0xM3DvT--2.jpg"
-        ]
-      },
-      {
-        shortcode: "DP7Dwo_Drem",
-        caption: "Belleza resaltada con un look social profesional.",
-        link: "https://www.instagram.com/p/DP7Dwo_Drem/",
-        images: [
-          "assets/instagram/DP7Dwo_Drem.jpg",
-          "assets/instagram/DP7Dwo_Drem-2.jpg"
-        ]
-      },
-      {
-        shortcode: "DPETGLOjmwm",
-        caption: "Look listo para brillar en el próximo evento especial.",
-        link: "https://www.instagram.com/p/DPETGLOjmwm/",
-        images: [
-          "assets/instagram/DPETGLOjmwm.jpg",
-          "assets/instagram/DPETGLOjmwm-2.jpg"
-        ]
-      },
-      {
-        shortcode: "DIiQG7Qu-cu",
-        caption: "Look de XV años con glamour y presencia de protagonista.",
-        link: "https://www.instagram.com/p/DIiQG7Qu-cu/",
-        images: [
-          "assets/instagram/DIiQG7Qu-cu.jpg",
-          "assets/instagram/DIiQG7Qu-cu-2.jpg",
-          "assets/instagram/DIiQG7Qu-cu-3.jpg",
-          "assets/instagram/DIiQG7Qu-cu-4.jpg"
-        ]
-      },
-      {
-        shortcode: "DIMQ0MIOXAt",
-        caption: "Maquillaje especializado para piel madura con acabado natural y elegante.",
-        link: "https://www.instagram.com/p/DIMQ0MIOXAt/",
-        images: ["assets/instagram/DIMQ0MIOXAt.jpg"]
-      }
-    ];
-
-    const galleryItems = [
-      { src: "assets/instagram/DXDd0majhX4.jpg", link: "https://www.instagram.com/p/DXDd0majhX4/", caption: "Graduation Day. Maquillaje profesional para un look de grado.", title: "Look 1 · DXDd0majhX4" },
-      { src: "assets/instagram/DXDd0majhX4-2.jpg", link: "https://www.instagram.com/p/DXDd0majhX4/", caption: "Graduation Day. Maquillaje profesional para un look de grado.", title: "Look 2 · DXDd0majhX4" },
-      { src: "assets/instagram/DUHlmVQjnTy.jpg", link: "https://www.instagram.com/p/DUHlmVQjnTy/", caption: "Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento.", title: "Look 1 · DUHlmVQjnTy" },
-      { src: "assets/instagram/DUHlmVQjnTy-2.jpg", link: "https://www.instagram.com/p/DUHlmVQjnTy/", caption: "Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento.", title: "Look 2 · DUHlmVQjnTy" },
-      { src: "assets/instagram/DUHlmVQjnTy-3.jpg", link: "https://www.instagram.com/p/DUHlmVQjnTy/", caption: "Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento.", title: "Look 3 · DUHlmVQjnTy" },
-      { src: "assets/instagram/DUHlmVQjnTy-4.jpg", link: "https://www.instagram.com/p/DUHlmVQjnTy/", caption: "Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento.", title: "Look 4 · DUHlmVQjnTy" },
-      { src: "assets/instagram/DUHlmVQjnTy-5.jpg", link: "https://www.instagram.com/p/DUHlmVQjnTy/", caption: "Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento.", title: "Look 5 · DUHlmVQjnTy" },
-      { src: "assets/instagram/DUHlmVQjnTy-6.jpg", link: "https://www.instagram.com/p/DUHlmVQjnTy/", caption: "Before and After. Maquillaje y ondas naturales para resaltar la belleza del evento.", title: "Look 6 · DUHlmVQjnTy" },
-      { src: "assets/instagram/DR5aLNBjkOg.jpg", link: "https://www.instagram.com/p/DR5aLNBjkOg/", caption: "Seguridad y presencia para un día especial de graduación.", title: "Look 1 · DR5aLNBjkOg" },
-      { src: "assets/instagram/DR5aLNBjkOg-2.jpg", link: "https://www.instagram.com/p/DR5aLNBjkOg/", caption: "Seguridad y presencia para un día especial de graduación.", title: "Look 2 · DR5aLNBjkOg" },
-      { src: "assets/instagram/DR5ZguYDsMI.jpg", link: "https://www.instagram.com/p/DR5ZguYDsMI/", caption: "Maquillaje de grado con acabado limpio y protagonista.", title: "Look 1 · DR5ZguYDsMI" },
-      { src: "assets/instagram/DR5ZguYDsMI-2.jpg", link: "https://www.instagram.com/p/DR5ZguYDsMI/", caption: "Maquillaje de grado con acabado limpio y protagonista.", title: "Look 2 · DR5ZguYDsMI" },
-      { src: "assets/instagram/DRN0xM3DvT-.jpg", link: "https://www.instagram.com/p/DRN0xM3DvT-/", caption: "Looking Stunning. Maquillaje y semirecogido para ocasión especial.", title: "Look 1 · DRN0xM3DvT-" },
-      { src: "assets/instagram/DRN0xM3DvT--2.jpg", link: "https://www.instagram.com/p/DRN0xM3DvT-/", caption: "Looking Stunning. Maquillaje y semirecogido para ocasión especial.", title: "Look 2 · DRN0xM3DvT-" },
-      { src: "assets/instagram/DP7Dwo_Drem.jpg", link: "https://www.instagram.com/p/DP7Dwo_Drem/", caption: "Belleza resaltada con un look social profesional.", title: "Look 1 · DP7Dwo_Drem" },
-      { src: "assets/instagram/DP7Dwo_Drem-2.jpg", link: "https://www.instagram.com/p/DP7Dwo_Drem/", caption: "Belleza resaltada con un look social profesional.", title: "Look 2 · DP7Dwo_Drem" },
-      { src: "assets/instagram/DPETGLOjmwm.jpg", link: "https://www.instagram.com/p/DPETGLOjmwm/", caption: "Look listo para brillar en el próximo evento especial.", title: "Look 1 · DPETGLOjmwm" },
-      { src: "assets/instagram/DPETGLOjmwm-2.jpg", link: "https://www.instagram.com/p/DPETGLOjmwm/", caption: "Look listo para brillar en el próximo evento especial.", title: "Look 2 · DPETGLOjmwm" },
-      { src: "assets/instagram/DIiQG7Qu-cu.jpg", link: "https://www.instagram.com/p/DIiQG7Qu-cu/", caption: "Look de XV años con glamour y presencia de protagonista.", title: "Look 1 · DIiQG7Qu-cu" },
-      { src: "assets/instagram/DIiQG7Qu-cu-2.jpg", link: "https://www.instagram.com/p/DIiQG7Qu-cu/", caption: "Look de XV años con glamour y presencia de protagonista.", title: "Look 2 · DIiQG7Qu-cu" },
-      { src: "assets/instagram/DIiQG7Qu-cu-3.jpg", link: "https://www.instagram.com/p/DIiQG7Qu-cu/", caption: "Look de XV años con glamour y presencia de protagonista.", title: "Look 3 · DIiQG7Qu-cu" },
-      { src: "assets/instagram/DIiQG7Qu-cu-4.jpg", link: "https://www.instagram.com/p/DIiQG7Qu-cu/", caption: "Look de XV años con glamour y presencia de protagonista.", title: "Look 4 · DIiQG7Qu-cu" },
-      { src: "assets/instagram/DIMQ0MIOXAt.jpg", link: "https://www.instagram.com/p/DIMQ0MIOXAt/", caption: "Maquillaje especializado para piel madura con acabado natural y elegante.", title: "Look 1 · DIMQ0MIOXAt" },
-    ];
-
-    const galleryGrid = document.getElementById("galleryGrid");
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImage = document.getElementById("lightboxImage");
-    const lightboxText = document.getElementById("lightboxText");
-    const lightboxTitle = document.getElementById("lightboxTitle");
-    const lightboxLink = document.getElementById("lightboxLink");
-    const lightboxClose = document.getElementById("lightboxClose");
-    const lightboxNext = document.getElementById("lightboxNext");
-    const bookingForm = document.getElementById("bookingForm");
-    const year = document.getElementById("year");
-    const menuToggle = document.getElementById("menuToggle");
-    const navLinks = document.getElementById("navLinks");
-
-    let activeIndex = 0;
-
-    function bindExistingGalleryCards() {
-      const existingCards = galleryGrid.querySelectorAll("[data-gallery-index]");
-      existingCards.forEach((card) => {
-        const index = Number(card.getAttribute("data-gallery-index"));
-        card.addEventListener("click", () => openLightbox(index));
-      });
-    }
-
-    function openLightbox(index) {
-      activeIndex = index;
-      const item = galleryItems[activeIndex];
-      lightboxImage.src = item.src;
-      lightboxImage.alt = item.caption;
-      lightboxText.textContent = item.caption;
-      lightboxTitle.textContent = item.title;
-      lightboxLink.href = item.link;
-      lightbox.classList.add("is-open");
-      lightbox.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-    }
-
-    function closeLightbox() {
-      lightbox.classList.remove("is-open");
-      lightbox.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-    }
-
-    function nextLightboxItem() {
-      activeIndex = (activeIndex + 1) % galleryItems.length;
-      openLightbox(activeIndex);
-    }
-
-    function buildWhatsAppMessage(event) {
-      event.preventDefault();
-      const name = document.getElementById("name").value.trim();
-      const service = document.getElementById("service").value;
-      const date = document.getElementById("date").value.trim();
-      const message = document.getElementById("message").value.trim();
-
-      const text = [
-        "Hola Daima Belleza Studio, quiero agendar una cita.",
-        `Nombre: ${name}`,
-        `Servicio: ${service}`,
-        date ? `Fecha tentativa: ${date}` : null,
-        message ? `Detalles: ${message}` : null
-      ].filter(Boolean).join("\n");
-
-      const url = `${whatsappBase}?text=${encodeURIComponent(text)}`;
-      window.open(url, "_blank", "noopener,noreferrer");
-    }
-
-    function revealOnScroll(targetElements) {
-      const elements = targetElements && targetElements.length ? targetElements : document.querySelectorAll(".reveal");
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("is-visible");
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.18 }
-      );
-
-      elements.forEach((element) => observer.observe(element));
-    }
-
-    function setupHeroParallax() {
-      const heroMedia = document.querySelector(".hero-media");
-      if (!heroMedia || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-      const layers = heroMedia.querySelectorAll(".photo-stack, .stack-label");
-
-      heroMedia.addEventListener("mousemove", (event) => {
-        const rect = heroMedia.getBoundingClientRect();
-        const x = (event.clientX - rect.left) / rect.width - 0.5;
-        const y = (event.clientY - rect.top) / rect.height - 0.5;
-
-        layers.forEach((layer, index) => {
-          const depth = (index + 1) * 8;
-          const moveX = x * depth;
-          const moveY = y * depth * -1;
-          layer.style.transform += "";
-          layer.style.translate = `${moveX}px ${moveY}px`;
+    <script>
+        // Header Scroll
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
         });
-      });
 
-      heroMedia.addEventListener("mouseleave", () => {
-        layers.forEach((layer) => {
-          layer.style.translate = "0 0";
+        // Modal Logic (Placed before observers to guarantee it runs)
+        const modal = document.getElementById('bookingModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        const bookingForm = document.getElementById('bookingForm');
+        const modalPlanName = document.getElementById('modalPlanName');
+        let selectedPlan = '';
+
+        document.querySelectorAll('.btn-book-plan').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                selectedPlan = this.getAttribute('data-plan');
+                modalPlanName.textContent = selectedPlan;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // prevent background scrolling
+            });
         });
-      });
-    }
 
-    function toggleMenu() {
-      const isOpen = navLinks.classList.toggle("is-open");
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-    }
+        const closeModal = () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        };
 
-    year.textContent = new Date().getFullYear();
-    bindExistingGalleryCards();
-    revealOnScroll();
-    setupHeroParallax();
+        closeModalBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
 
-    lightboxClose.addEventListener("click", closeLightbox);
-    lightbox.addEventListener("click", (event) => {
-      if (event.target === lightbox) closeLightbox();
-    });
-    lightboxNext.addEventListener("click", nextLightboxItem);
-    bookingForm.addEventListener("submit", buildWhatsAppMessage);
-    menuToggle.addEventListener("click", toggleMenu);
+        // Handle Form Submit to WhatsApp
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('userName').value.trim();
+            const email = document.getElementById('userEmail').value.trim();
+            const date = document.getElementById('userDate').value;
+            
+            // Format date for better reading
+            let formattedDate = date;
+            try {
+                formattedDate = new Date(date).toLocaleDateString('es-ES', { 
+                    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+                });
+            } catch (err) {}
 
-    document.querySelectorAll("#navLinks a").forEach((link) => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("is-open");
-        menuToggle.setAttribute("aria-expanded", "false");
-      });
-    });
+            const text = `Hola Daima Belleza,\nQuiero agendar el plan: *${selectedPlan}*.\n\n` +
+                         `*Mis Datos:*\n` +
+                         `Nombre: ${name}\n` +
+                         `Correo: ${email}\n` +
+                         `Fecha de cita: ${formattedDate}`;
 
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") closeLightbox();
-      if (event.key === "ArrowRight" && lightbox.classList.contains("is-open")) nextLightboxItem();
-    });
-  </script>
+            const url = `https://wa.me/5930958757109?text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+            closeModal();
+            bookingForm.reset();
+        });
+
+        // Reveal Animations
+        try {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal').forEach(el => {
+                observer.observe(el);
+            });
+        } catch (e) {
+            // Fallback if IntersectionObserver is not supported
+            document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+        }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="3d-bg.js"></script>
 </body>
 </html>
