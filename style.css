@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+/* Las fuentes se piden con <link> desde el <head>. Un @import aquí encadenaba
+   HTML → CSS → CSS de fuentes → woff2 antes de poder pintar una sola letra. */
 
 :root {
   --c-bg: #FCFBFA;
@@ -65,9 +65,17 @@ h1, h2, h3, h4 {
 .title-lg { font-size: clamp(1.8rem, 5vw, 3rem); letter-spacing: -0.01em; }
 .title-md { font-size: 1.5rem; }
 
-.text-italic { font-style: italic; color: var(--c-accent-dark); }
-.text-muted { color: var(--c-text-muted); }
 .text-small { font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; }
+
+/* Iconos SVG en línea (sustituyen a Font Awesome). Escalan con font-size, igual que hacía
+   la fuente de iconos, para no tener que retocar cada sitio donde se usaban. */
+.icon {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  vertical-align: -0.125em;
+  flex-shrink: 0;
+}
 
 /* Buttons */
 .btn {
@@ -594,7 +602,7 @@ footer {
   gap: 0.5rem;
 }
 
-.pricing-features i {
+.pricing-features .icon {
   color: var(--c-accent-dark);
 }
 

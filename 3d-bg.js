@@ -593,20 +593,33 @@
     }
   }
 
-  function boot() {
-    if (typeof THREE === 'undefined') {
-      const s = document.createElement('script');
-      s.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
-      s.onload = init;
-      document.head.appendChild(s);
-    } else {
-      init();
-    }
+  /** ¿Merece la pena gastar ~589 KB en un adorno? En estos casos no. */
+  function shouldSkipBackground() {
+    const net = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    if (!net) return false;
+    if (net.saveData) return true;                       // el visitante pidió ahorro de datos
+    return /(^|-)2g$/.test(net.effectiveType || '');      // 2g y slow-2g
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', boot);
-  } else {
-    boot();
+  function loadThree() {
+    if (typeof THREE !== 'undefined') { init(); return; }
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+    s.async = true;
+    s.onload = init;
+    document.head.appendChild(s);
   }
+
+  function boot() {
+    if (shouldSkipBackground()) return;
+    /* Se espera al 'load' y luego a un hueco de inactividad: así la librería nunca compite
+       con el texto ni con la foto del hero, que son lo que el visitante realmente espera. */
+    const start = () => (window.requestIdleCallback || ((fn) => setTimeout(fn, 200)))(
+      loadThree, { timeout: 3000 }
+    );
+    if (document.readyState === 'complete') start();
+    else window.addEventListener('load', start, { once: true });
+  }
+
+  boot();
 })();
