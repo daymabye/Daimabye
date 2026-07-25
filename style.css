@@ -814,12 +814,23 @@ footer {
      fuera de la primera pantalla, que es justo la acción que debe verse sin desplazar. */
   .hero-buttons { gap: 0.6rem; flex-wrap: nowrap; }
   .hero-buttons .btn { flex: 1 1 0; width: auto; padding-inline: 1rem; white-space: nowrap; }
+  /* Al acortar el hero, la foto quedó en una caja APAISADA (351x280) y un retrato ahí se
+     recorta a la altura de la frente: se veía media cara. La solución no es estirarla de
+     alto —eso devolvería los botones fuera de pantalla— sino ESTRECHARLA y darle forma
+     vertical: cabe el rostro entero y el hero sigue siendo corto. */
   .hero-image {
-    height: 30vh;
-    min-height: 220px;
-    max-height: 280px;
-    border-radius: 100px 100px 10px 10px;
+    width: min(64%, 250px);
+    margin-inline: auto;
+    aspect-ratio: 4 / 5;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    /* 999px se recorta solo a la mitad del ancho: cúpula perfecta sea cual sea el tamaño. */
+    border-radius: 999px 999px 12px 12px;
   }
+  /* En una caja 4/5 el retrato entra casi completo, así que se centra en vez de anclarlo
+     abajo (el 68% existe para las cajas anchas de escritorio). */
+  .hero-image img { object-position: 50% 45%; }
 
   .services-grid, .pricing-grid { gap: 1.25rem; }
   .service-card, .pricing-card { padding: 2rem 1.5rem; }
