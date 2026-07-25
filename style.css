@@ -288,6 +288,11 @@ header.scrolled {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* Default 50% center crops the mouth/chin out on common laptop heights
+     (~768-900px tall viewports) since the portrait photo is taller than the
+     nearly-square frame. Anchoring lower keeps eyes+nose+mouth in frame
+     across breakpoints (verified at desktop/laptop/phone heights). */
+  object-position: 50% 68%;
 }
 
 /* Services */
@@ -490,10 +495,14 @@ footer {
 }
 
 /* Responsive */
-/* Pricing */
+/* Pricing — flex-wrap + justify-center so an incomplete last row (e.g. 5 cards:
+   3 + 2) centers itself instead of hugging the left edge like a leftover CSS
+   Grid row does. Fixed-ish basis (no grow) keeps every card the same width
+   whether its row has 3 items or 2. */
 .pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
@@ -509,6 +518,7 @@ footer {
   transition: var(--transition);
   display: flex;
   flex-direction: column;
+  flex: 0 1 320px;
 }
 
 .pricing-card:hover {

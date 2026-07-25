@@ -1,20 +1,20 @@
 /* ================================================
-   DAIMA BELLEZA — 3D Makeup Brushes Background v3
-   Three.js r128 (UMD global) — several floating brushes,
-   scroll-reactive motion, subtle PBR gold reflections.
+   DAIMA BELLEZA — 3D Beauty Objects Background v4
+   Three.js r128 (UMD global) — floating lipsticks & perfume
+   bottles, scroll-reactive motion, subtle PBR gold reflections.
    ================================================ */
 
 (function () {
   'use strict';
 
   const PALETTES = [
-    { handle: 0x4a2f2a, gold: 0xd9b47a, goldDeep: 0xb5905c, dark: 0x8a5a50, mid: 0xd8ab97, tip: 0xf6e8da }, // rosewood
-    { handle: 0x6b4c4c, gold: 0xc9a96e, goldDeep: 0xa1855c, dark: 0x9c6f66, mid: 0xe0bcae, tip: 0xf8ede2 }, // mauve
-    { handle: 0x35302c, gold: 0xe8cf9c, goldDeep: 0xc2a56e, dark: 0x7d6560, mid: 0xcbaea0, tip: 0xf3e6da }, // espresso
+    { handle: 0x4a2f2a, gold: 0xd9b47a, goldDeep: 0xb5905c, glass: 0xb85c4a, lip: 0xb23a4e }, // rosewood
+    { handle: 0x6b4c4c, gold: 0xc9a96e, goldDeep: 0xa1855c, glass: 0xa8425a, lip: 0xc2536a }, // mauve
+    { handle: 0x35302c, gold: 0xe8cf9c, goldDeep: 0xc2a56e, glass: 0x8a5a34, lip: 0x8f3348 }, // espresso
   ];
 
   let scene, camera, renderer, clock;
-  let brushes = [];
+  let props = [];
   let sparkA, sparkB;
   let W, H, isMobile;
   let mouseX = 0, mouseY = 0, curX = 0, curY = 0;
@@ -49,7 +49,7 @@
 
     buildEnvironment();
     buildLights();
-    buildBrushField();
+    buildPropsField();
     buildSparkles();
 
     updateDocRange();
@@ -126,144 +126,118 @@
     scene.add(glow);
   }
 
-  /* ---------- one reusable brush factory ---------- */
-  function createBrush(palette, strandCount) {
+  /* ---------- lipstick factory: gold case + glossy colored bullet ---------- */
+  function createLipstick(palette) {
     const group = new THREE.Group();
-
-    const handlePts = [
-      [0.000, -3.30], [0.055, -3.29], [0.095, -3.24], [0.125, -3.14],
-      [0.145, -2.95], [0.150, -2.60], [0.138, -2.10], [0.120, -1.55],
-      [0.112, -1.05], [0.116, -0.65], [0.128, -0.32], [0.138, -0.10],
-      [0.140,  0.00]
-    ].map(p => new THREE.Vector2(p[0], p[1]));
-
-    const handleMat = new THREE.MeshPhysicalMaterial({
-      color: palette.handle, metalness: 0.0, roughness: 0.32,
-      clearcoat: 1.0, clearcoatRoughness: 0.12, envMapIntensity: 1.0
-    });
-    group.add(new THREE.Mesh(new THREE.LatheGeometry(handlePts, 32), handleMat));
 
     const goldMat = new THREE.MeshPhysicalMaterial({
       color: palette.gold, metalness: 1.0, roughness: 0.18, envMapIntensity: 1.35
     });
-    const baseRing = new THREE.Mesh(new THREE.TorusGeometry(0.132, 0.014, 10, 32), goldMat);
-    baseRing.rotation.x = Math.PI / 2;
-    baseRing.position.y = -3.02;
-    group.add(baseRing);
 
-    const ferrulePts = [
-      [0.140, 0.00], [0.150, 0.06], [0.138, 0.10],
-      [0.152, 0.16], [0.140, 0.20],
-      [0.152, 0.30], [0.155, 0.55], [0.150, 0.78], [0.146, 0.86]
+    const casePts = [
+      [0.000, -1.60], [0.088, -1.58], [0.098, -1.52], [0.100, -1.45],
+      [0.100, -0.65], [0.094, -0.60], [0.100, -0.55], [0.100, 0.00]
     ].map(p => new THREE.Vector2(p[0], p[1]));
-    group.add(new THREE.Mesh(new THREE.LatheGeometry(ferrulePts, 32), goldMat));
+    group.add(new THREE.Mesh(new THREE.LatheGeometry(casePts, 28), goldMat));
 
-    const lip = new THREE.Mesh(
-      new THREE.TorusGeometry(0.143, 0.008, 8, 32),
-      new THREE.MeshStandardMaterial({ color: palette.goldDeep, metalness: 1, roughness: 0.35 })
+    const rim = new THREE.Mesh(
+      new THREE.TorusGeometry(0.100, 0.010, 8, 28),
+      new THREE.MeshStandardMaterial({ color: palette.goldDeep, metalness: 1, roughness: 0.32 })
     );
-    lip.rotation.x = Math.PI / 2;
-    lip.position.y = 0.86;
-    group.add(lip);
+    rim.rotation.x = Math.PI / 2;
+    rim.position.y = 0.00;
+    group.add(rim);
 
-    buildBristles(group, palette, strandCount);
+    const bulletMat = new THREE.MeshPhysicalMaterial({
+      color: palette.lip, metalness: 0.05, roughness: 0.22,
+      clearcoat: 1.0, clearcoatRoughness: 0.08, envMapIntensity: 1.1
+    });
+    const bulletPts = [
+      [0.060, 0.00], [0.070, 0.04], [0.072, 0.32], [0.062, 0.52],
+      [0.032, 0.66], [0.000, 0.71]
+    ].map(p => new THREE.Vector2(p[0], p[1]));
+    group.add(new THREE.Mesh(new THREE.LatheGeometry(bulletPts, 28), bulletMat));
 
+    group.scale.setScalar(1.45);
     return group;
   }
 
-  function buildBristles(group, palette, strandCount) {
-    const R0 = 0.148, yBase = 0.85, domeH = 0.62, domeR = 0.19;
+  /* ---------- perfume bottle factory: glass flacon + gold cap ---------- */
+  function createPerfumeBottle(palette) {
+    const group = new THREE.Group();
 
-    const domePts = [new THREE.Vector2(R0 * 0.9, yBase)];
-    for (let i = 1; i <= 8; i++) {
-      const t = i / 8;
-      const r = Math.cos(t * Math.PI / 2) * domeR + (1 - t) * (R0 * 0.9 - domeR) * 0.3;
-      domePts.push(new THREE.Vector2(Math.max(r, 0.001) * Math.sin(Math.PI / 2 * (1 - t) + t * 1.2), yBase + t * domeH));
-    }
-    domePts.push(new THREE.Vector2(0, yBase + domeH + 0.02));
-    const domeMat = new THREE.MeshStandardMaterial({ color: palette.mid, roughness: 0.95, metalness: 0 });
-    group.add(new THREE.Mesh(new THREE.LatheGeometry(domePts, 24), domeMat));
-
-    const strandGeo = new THREE.CylinderGeometry(0.0042, 0.0008, 1, 4, 4);
-    strandGeo.translate(0, 0.5, 0);
-
-    const pos = strandGeo.attributes.position;
-    const colors = new Float32Array(pos.count * 3);
-    const cDark = new THREE.Color(palette.dark);
-    const cMid  = new THREE.Color(palette.mid);
-    const cTip  = new THREE.Color(palette.tip);
-    const tmp = new THREE.Color();
-    for (let i = 0; i < pos.count; i++) {
-      const t = pos.getY(i);
-      if (t < 0.5) tmp.copy(cDark).lerp(cMid, t / 0.5);
-      else tmp.copy(cMid).lerp(cTip, (t - 0.5) / 0.5);
-      colors[i * 3] = tmp.r; colors[i * 3 + 1] = tmp.g; colors[i * 3 + 2] = tmp.b;
-    }
-    strandGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-    const strandMat = new THREE.MeshStandardMaterial({
-      color: 0xffffff, vertexColors: true, roughness: 0.9, metalness: 0.0, envMapIntensity: 0.45
+    const goldMat = new THREE.MeshPhysicalMaterial({
+      color: palette.gold, metalness: 1.0, roughness: 0.18, envMapIntensity: 1.35
+    });
+    const glassMat = new THREE.MeshPhysicalMaterial({
+      color: palette.glass, metalness: 0.0, roughness: 0.08, transparent: true, opacity: 0.85,
+      clearcoat: 1.0, clearcoatRoughness: 0.05, envMapIntensity: 1.25
     });
 
-    const strands = new THREE.InstancedMesh(strandGeo, strandMat, strandCount);
-    const dummy = new THREE.Object3D();
-    const axis = new THREE.Vector3();
-    const q = new THREE.Quaternion();
+    const body = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.60, 0.20), glassMat);
+    body.position.y = 0.30;
+    group.add(body);
 
-    for (let i = 0; i < strandCount; i++) {
-      const rr = Math.sqrt(Math.random());
-      const r = rr * R0 * 0.96;
-      const th = Math.random() * Math.PI * 2;
+    const baseRing = new THREE.Mesh(
+      new THREE.TorusGeometry(0.19, 0.012, 8, 4),
+      new THREE.MeshStandardMaterial({ color: palette.goldDeep, metalness: 1, roughness: 0.35 })
+    );
+    baseRing.rotation.x = Math.PI / 2;
+    baseRing.rotation.z = Math.PI / 4;
+    baseRing.position.y = 0.01;
+    baseRing.scale.set(1, 1.06, 1);
+    group.add(baseRing);
 
-      dummy.position.set(Math.cos(th) * r, yBase + 0.01, Math.sin(th) * r);
+    const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.06, 0.12, 20), goldMat);
+    neck.position.y = 0.66;
+    group.add(neck);
 
-      const flare = rr * rr * 0.42 + (Math.random() - 0.5) * 0.07;
-      axis.set(Math.sin(th), 0, -Math.cos(th));
-      q.setFromAxisAngle(axis, flare);
-      dummy.quaternion.copy(q);
+    const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.095, 0.10, 0.20, 20), goldMat);
+    cap.position.y = 0.82;
+    group.add(cap);
 
-      const L = (0.92 - 0.38 * rr * rr) * (0.88 + Math.random() * 0.22);
-      dummy.scale.set(1, L, 1);
+    const capTop = new THREE.Mesh(new THREE.SphereGeometry(0.095, 16, 12, 0, Math.PI * 2, 0, Math.PI / 2), goldMat);
+    capTop.position.y = 0.92;
+    group.add(capTop);
 
-      dummy.updateMatrix();
-      strands.setMatrixAt(i, dummy.matrix);
-    }
-    group.add(strands);
+    group.scale.setScalar(3.0);
+    return group;
   }
 
-  /* ---------- scatter several brushes around the viewport ---------- */
-  function buildBrushField() {
+  /* ---------- scatter several beauty objects around the viewport ---------- */
+  function buildPropsField() {
     const desktopLayout = [
-      { x:  2.35, y:  0.30, z: -0.6,  scale: 1.10, rotZ: -0.42, spin: 1.0,  drift: 0.55, pal: 0 },
-      { x: -2.75, y: -1.35, z: -2.2,  scale: 0.62, rotZ:  2.35, spin: -0.7, drift: 0.35, pal: 1 },
-      { x:  3.55, y: -2.05, z: -2.6,  scale: 0.5,  rotZ:  0.85, spin: 0.55, drift: -0.4, pal: 2 },
-      { x: -3.35, y:  1.85, z: -2.8,  scale: 0.48, rotZ: -1.6,  spin: -0.9, drift: 0.5,  pal: 2 },
-      { x:  0.15, y:  2.55, z: -3.2,  scale: 0.4,  rotZ:  1.15, spin: 0.65, drift: -0.3, pal: 1 },
-      { x: -0.9,  y: -2.7,  z: -3.4,  scale: 0.42, rotZ: -2.1,  spin: -0.5, drift: 0.42, pal: 0 },
+      { x:  2.35, y:  0.30, z: -0.6,  scale: 1.10, rotZ: -0.42, spin: 1.0,  drift: 0.55, pal: 0, type: 'lipstick' },
+      { x: -2.75, y: -1.35, z: -2.2,  scale: 0.62, rotZ:  2.35, spin: -0.7, drift: 0.35, pal: 1, type: 'bottle' },
+      { x:  3.55, y: -2.05, z: -2.6,  scale: 0.5,  rotZ:  0.85, spin: 0.55, drift: -0.4, pal: 2, type: 'lipstick' },
+      { x: -3.35, y:  1.85, z: -2.8,  scale: 0.48, rotZ: -1.6,  spin: -0.9, drift: 0.5,  pal: 2, type: 'bottle' },
+      { x:  0.15, y:  2.55, z: -3.2,  scale: 0.4,  rotZ:  1.15, spin: 0.65, drift: -0.3, pal: 1, type: 'lipstick' },
+      { x: -0.9,  y: -2.7,  z: -3.4,  scale: 0.42, rotZ: -2.1,  spin: -0.5, drift: 0.42, pal: 0, type: 'bottle' },
     ];
     const mobileLayout = [
-      { x:  1.15, y:  0.35, z: -0.7, scale: 0.78, rotZ: -0.42, spin: 1.0,  drift: 0.5,  pal: 0 },
-      { x: -1.55, y: -1.9,  z: -2.3, scale: 0.42, rotZ:  1.9,  spin: -0.7, drift: 0.4,  pal: 1 },
-      { x:  1.6,  y:  1.95, z: -2.4, scale: 0.4,  rotZ: -1.4,  spin: 0.6,  drift: -0.35,pal: 2 },
+      { x:  1.15, y:  0.35, z: -0.7, scale: 0.78, rotZ: -0.42, spin: 1.0,  drift: 0.5,  pal: 0, type: 'lipstick' },
+      { x: -1.55, y: -1.9,  z: -2.3, scale: 0.42, rotZ:  1.9,  spin: -0.7, drift: 0.4,  pal: 1, type: 'bottle' },
+      { x:  1.6,  y:  1.95, z: -2.4, scale: 0.4,  rotZ: -1.4,  spin: 0.6,  drift: -0.35,pal: 2, type: 'lipstick' },
     ];
 
     const layout = isMobile ? mobileLayout : desktopLayout;
-    const strandCount = isMobile ? 140 : 220;
 
     layout.forEach((cfg) => {
-      const b = createBrush(PALETTES[cfg.pal], strandCount);
-      b.scale.setScalar(cfg.scale);
+      const b = cfg.type === 'bottle'
+        ? createPerfumeBottle(PALETTES[cfg.pal])
+        : createLipstick(PALETTES[cfg.pal]);
+      b.scale.multiplyScalar(cfg.scale);
       b.position.set(cfg.x, cfg.y, cfg.z);
       b.rotation.set(0.12, Math.random() * Math.PI * 2, cfg.rotZ);
       const far = cfg.z < -1.8;
       b.traverse(o => {
         if (o.material) {
           o.material = o.material.clone();
-          o.material.transparent = far;
-          o.material.opacity = far ? 0.55 : 1;
+          o.material.transparent = far || !!o.material.transparent;
+          o.material.opacity = far ? 0.55 : (o.material.opacity ?? 1);
         }
       });
-      brushes.push({
+      props.push({
         group: b,
         baseX: cfg.x, baseY: cfg.y, baseZ: cfg.z,
         baseRotY: b.rotation.y, baseRotZ: cfg.rotZ,
@@ -332,13 +306,13 @@
     camera.position.y = 0.15 - curY * 0.12;
     camera.lookAt(0.3, 0, 0);
 
-    brushes.forEach((b) => {
+    props.forEach((b) => {
       const g = b.group;
       // idle float
       g.position.y = b.baseY + Math.sin(t * 0.5 + b.phase) * 0.18
                       + (scrollT - 0.5) * b.drift * 2.4; // gentle scroll drift
       g.position.x = b.baseX + curX * 0.25 * (b.baseZ > -1.5 ? 1 : 0.4);
-      // scroll spins the brush like a whisked wand
+      // scroll spins the object like it's being twirled
       g.rotation.y = b.baseRotY + t * 0.15 * Math.sign(b.spin) + scrollT * Math.PI * 2 * b.spin;
       g.rotation.z = b.baseRotZ + Math.sin(t * 0.3 + b.phase) * 0.07;
     });
