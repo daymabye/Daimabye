@@ -713,10 +713,17 @@ footer {
     display: flex;
     flex-wrap: nowrap;
     justify-content: flex-start;
+    /* Natural card heights. Stretching every card to the tallest one left a big
+       dead gap above the CTA, and in a one-card-at-a-time carousel the aligned
+       buttons that stretching buys you are never seen side by side anyway. */
+    align-items: flex-start;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    /* overflow-x:auto also clips vertically, which beheaded the "Más pedido"
+       badge sitting at top:-12px. This padding gives it room. */
+    padding-top: 1.25rem;
     padding-bottom: 0.5rem;
     margin: 0 -5%;
     padding-left: 5%;
@@ -724,9 +731,16 @@ footer {
   }
   .pricing-grid::-webkit-scrollbar { display: none; }
   .pricing-card {
-    flex: 0 0 82%;
+    flex: 0 0 86%;
     scroll-snap-align: center;
   }
+  /* Let the CTA sit right under the last feature instead of being pushed to the
+     bottom of an over-tall card. */
+  .pricing-features {
+    flex-grow: 0;
+    margin-bottom: 1.75rem;
+  }
+  .price { margin: 1rem 0; }
 
   /* Swipe affordance: without it the peeking card is the only hint there's more */
   .pricing-hint {
@@ -858,4 +872,164 @@ footer {
   appearance: none;
   color: var(--c-text);
   cursor: pointer;
+}
+
+/* ============================================================
+   MICRO-ANIMACIONES — lenguaje de maquillaje
+   Todo con transform/opacity (compositado en GPU) para que el
+   celular no sufra, y con estados :active porque en táctil no
+   existe :hover.
+   ============================================================ */
+
+/* --- Botones: barrido de brillo, como el destello de un gloss --- */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg,
+    transparent 38%, rgba(255, 255, 255, 0.55) 50%, transparent 62%);
+  transform: translateX(-130%);
+  pointer-events: none;
+  /* Above the fill (a negative z-index would bury it behind the button's own
+     background); passing over the label is what sells it as a gloss. */
+  z-index: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover::after { animation: gloss-sweep 0.75s ease-out; }
+}
+/* En celular el barrido se dispara al tocar. */
+.btn:active::after { animation: gloss-sweep 0.6s ease-out; }
+.btn:active { transform: scale(0.97); }
+
+@keyframes gloss-sweep {
+  from { transform: translateX(-130%); }
+  to   { transform: translateX(130%); }
+}
+
+/* --- Logo: el delineado se "dibuja" al cargar, como trazar un ala --- */
+@keyframes wing-draw {
+  from { opacity: 0; transform: rotate(10deg) translateX(-10px) scaleX(0.35); }
+  to   { opacity: 1; transform: rotate(10deg) translateX(0) scaleX(1); }
+}
+
+.brand-wing {
+  transform-origin: left center;
+  animation: wing-draw 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+}
+
+@keyframes monogram-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.brand-monogram {
+  display: inline-block;
+  animation: monogram-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.brand:active .brand-wing { transform: rotate(10deg) scale(1.12); }
+
+/* --- Etiquetas de sección: trazo de labial que se pinta al aparecer --- */
+.hero-subtitle {
+  position: relative;
+}
+
+.hero-subtitle::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.45rem;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--c-accent), var(--c-accent-dark));
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.25s;
+}
+
+.reveal.active .hero-subtitle::after { transform: scaleX(1); }
+
+/* --- Iconos de servicio: flotan como si estuvieran en el aire --- */
+@keyframes icon-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-7px); }
+}
+
+.service-icon {
+  display: inline-block;
+  animation: icon-float 4.5s ease-in-out infinite;
+}
+
+.service-card:nth-child(2) .service-icon { animation-delay: 0.6s; }
+.service-card:nth-child(3) .service-icon { animation-delay: 1.2s; }
+
+/* --- Insignia "Más pedido": latido suave para atraer la vista --- */
+@keyframes badge-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(181, 156, 130, 0.5); }
+  70%  { box-shadow: 0 0 0 10px rgba(181, 156, 130, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(181, 156, 130, 0); }
+}
+
+.popular-badge {
+  animation: badge-pulse 3s ease-out infinite;
+}
+
+/* --- Galería: destello diagonal al tocar/pasar --- */
+.gallery-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg,
+    transparent 40%, rgba(255, 255, 255, 0.28) 50%, transparent 60%);
+  transform: translateX(-130%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .gallery-item:hover::after { animation: gloss-sweep 0.9s ease-out; }
+}
+.gallery-item:active::after { animation: gloss-sweep 0.7s ease-out; }
+
+/* --- WhatsApp flotante: anillo que late, como un timbre --- */
+@keyframes wa-ring {
+  0%   { box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3), 0 0 0 0 rgba(37, 211, 102, 0.45); }
+  70%  { box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3), 0 0 0 14px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3), 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+.sticky-wa {
+  animation: wa-ring 2.6s ease-out infinite;
+}
+
+.sticky-wa:active { transform: scale(0.93); }
+
+/* --- Tarjetas: entrada escalonada, no todas de golpe --- */
+.services-grid .reveal:nth-child(2),
+.gallery-grid .reveal:nth-child(2) { transition-delay: 0.08s; }
+.services-grid .reveal:nth-child(3),
+.gallery-grid .reveal:nth-child(3) { transition-delay: 0.16s; }
+.gallery-grid .reveal:nth-child(4) { transition-delay: 0.24s; }
+.gallery-grid .reveal:nth-child(5) { transition-delay: 0.32s; }
+.gallery-grid .reveal:nth-child(6) { transition-delay: 0.40s; }
+
+/* Retroalimentación táctil en las tarjetas (en táctil no hay hover que las eleve). */
+.service-card:active,
+.pricing-card:active { transform: scale(0.985); }
+
+/* --- Respeto por quien pide menos movimiento --- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
