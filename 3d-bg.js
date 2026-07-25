@@ -506,8 +506,10 @@
       /* `scrollSmooth` is the eased position (a steady drift down the page);
          `scrollKick` is how HARD you are scrolling right now, which briefly
          spins the props so the background reacts to the gesture itself. */
-      scrollSmooth += (targetScrollT - scrollSmooth) * 0.12;
-      scrollKick += (delta * 40 - scrollKick) * 0.14;
+      // Low lerp factors on purpose: the props trail the page instead of
+      // snapping to it, which is what makes the drift feel weightless.
+      scrollSmooth += (targetScrollT - scrollSmooth) * 0.045;
+      scrollKick += (delta * 16 - scrollKick) * 0.06;
     } else {
       scrollSmooth = targetScrollT;
       scrollKick = 0;
@@ -541,25 +543,23 @@
   function applyPropTransforms(t) {
     props.forEach((b) => {
       const g = b.group;
-      /* Amplitudes are deliberately large. Spreading a single rotation over a
-         ~5500px page meant a normal flick moved everything by a couple of
-         degrees and the background looked frozen; these values make a short
-         swipe visibly tumble and lift the props. */
-      g.position.y = b.baseY + Math.sin(t * 0.5 + b.phase) * 0.18
-                      + (scrollSmooth - 0.5) * b.drift * 7.5;
+      /* Tuned for grace over spectacle: enough travel that scrolling clearly
+         moves the scene, slow enough that it reads as floating rather than
+         spinning. Roughly one turn across the whole page. */
+      g.position.y = b.baseY + Math.sin(t * 0.35 + b.phase) * 0.16
+                      + (scrollSmooth - 0.5) * b.drift * 4.0;
       g.position.x = b.baseX + curX * 0.25 * (b.baseZ > -1.5 ? 1 : 0.4)
-                      + Math.sin(scrollSmooth * Math.PI * 2 + b.phase) * b.drift * 0.9;
-      // ~3 turns across the page, plus a kick while the finger is still moving
-      g.rotation.y = b.baseRotY + t * 0.15 * Math.sign(b.spin)
-                      + scrollSmooth * Math.PI * 6 * b.spin
-                      + scrollKick * b.spin * 2.2;
-      g.rotation.z = b.baseRotZ + Math.sin(t * 0.3 + b.phase) * 0.07
-                      + scrollSmooth * Math.PI * 0.9 * b.spin
-                      + scrollKick * 0.5;
-      // Tumble on X too — rotation on a single axis reads as a slow twirl,
-      // two axes read as something actually falling through the page.
-      g.rotation.x = b.baseRotX + scrollSmooth * Math.PI * 1.4 * b.drift
-                      + scrollKick * 0.35;
+                      + Math.sin(scrollSmooth * Math.PI * 2 + b.phase) * b.drift * 0.5;
+      g.rotation.y = b.baseRotY + t * 0.1 * Math.sign(b.spin)
+                      + scrollSmooth * Math.PI * 2.2 * b.spin
+                      + scrollKick * b.spin * 0.9;
+      g.rotation.z = b.baseRotZ + Math.sin(t * 0.22 + b.phase) * 0.06
+                      + scrollSmooth * Math.PI * 0.35 * b.spin
+                      + scrollKick * 0.2;
+      // A little tumble on X as well: turning on one axis alone reads as a
+      // mechanical twirl, two axes read as something drifting through the page.
+      g.rotation.x = b.baseRotX + scrollSmooth * Math.PI * 0.5 * b.drift
+                      + scrollKick * 0.15;
     });
 
     if (sparkA) { sparkA.rotation.y = t * 0.03 + scrollSmooth * 0.6; sparkA.rotation.z = t * 0.008; }
