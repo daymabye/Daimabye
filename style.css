@@ -45,6 +45,10 @@ body {
 
 img {
   max-width: 100%;
+  /* Los atributos width/height del HTML (que reservan espacio y evitan saltos de maquetación)
+     el navegador los aplica como CSS. Sin este `height: auto`, `max-width` encoge el ancho pero
+     la altura se queda clavada en el valor del atributo y la imagen sale deformada. */
+  height: auto;
   display: block;
 }
 
@@ -439,8 +443,11 @@ header.scrolled {
   position: relative;
   z-index: 1;
   border-radius: var(--radius);
-  aspect-ratio: 4/5;
-  object-fit: cover;
+  /* A diferencia del resto, esta imagen es un GRÁFICO CON TEXTO (la cita y el reconocimiento
+     de la Alcaldía de Portoviejo). Encajarla en un 4/5 con object-fit: cover se comía las
+     palabras por los lados, así que aquí manda la proporción real de la imagen: se ve entera. */
+  width: 100%;
+  height: auto;
 }
 
 .about-content {
