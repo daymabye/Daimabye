@@ -26,7 +26,7 @@
   let mouseX = 0, mouseY = 0, curX = 0, curY = 0;
   let scrollY = 0, docRange = 1;
   let scrollSmooth = 0, lastScrollT = 0, scrollKick = 0;
-  let rafId = null;
+  let rafId = null, staticFrameId = null;
   const reducedMotion = window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -488,21 +488,44 @@
 
   function onScroll() {
     scrollY = window.scrollY || window.pageYOffset || 0;
+    /* Reduced-motion users get no idle animation, but scrolling is a direct
+       user gesture rather than autoplay, so the props still follow it. Without
+       this the background froze completely for anyone with the OS setting on —
+       which looks identical to the feature being broken. */
+    if (reducedMotion && staticFrameId === null) {
+      staticFrameId = requestAnimationFrame(renderScrollFrame);
+    }
+  }
+
+  /** Advance the scroll-derived state. `eased` off = snap (single-frame draw). */
+  function updateScrollState(eased) {
+    const targetScrollT = scrollY / docRange;
+    const delta = targetScrollT - lastScrollT;
+    lastScrollT = targetScrollT;
+    if (eased) {
+      /* `scrollSmooth` is the eased position (a steady drift down the page);
+         `scrollKick` is how HARD you are scrolling right now, which briefly
+         spins the props so the background reacts to the gesture itself. */
+      scrollSmooth += (targetScrollT - scrollSmooth) * 0.12;
+      scrollKick += (delta * 40 - scrollKick) * 0.14;
+    } else {
+      scrollSmooth = targetScrollT;
+      scrollKick = 0;
+    }
+  }
+
+  function renderScrollFrame() {
+    staticFrameId = null;
+    updateScrollState(false);
+    applyPropTransforms(0);
+    renderer.render(scene, camera);
   }
 
   function animate() {
     rafId = requestAnimationFrame(animate);
     const t = clock.getElapsedTime();
 
-    /* Scroll drives the scene twice over: `scrollSmooth` is the eased position
-       (a steady drift down the page) and `scrollKick` is how HARD you are
-       scrolling right now, which briefly spins the props so the background
-       visibly reacts to the gesture instead of only to the offset. */
-    const targetScrollT = scrollY / docRange;
-    const delta = targetScrollT - lastScrollT;
-    lastScrollT = targetScrollT;
-    scrollSmooth += (targetScrollT - scrollSmooth) * 0.09;
-    scrollKick += (delta * 26 - scrollKick) * 0.12;
+    updateScrollState(true);
 
     curX += (mouseX - curX) * 0.03;
     curY += (mouseY - curY) * 0.03;
@@ -510,25 +533,37 @@
     camera.position.y = 0.15 - curY * 0.12;
     camera.lookAt(0.3, 0, 0);
 
+    applyPropTransforms(t);
+    renderer.render(scene, camera);
+  }
+
+  /** Pose every prop from the current scroll state. `t` = 0 freezes the idle sway. */
+  function applyPropTransforms(t) {
     props.forEach((b) => {
       const g = b.group;
-      // idle float + steady drift as the page scrolls
+      /* Amplitudes are deliberately large. Spreading a single rotation over a
+         ~5500px page meant a normal flick moved everything by a couple of
+         degrees and the background looked frozen; these values make a short
+         swipe visibly tumble and lift the props. */
       g.position.y = b.baseY + Math.sin(t * 0.5 + b.phase) * 0.18
-                      + (scrollSmooth - 0.5) * b.drift * 2.6;
-      g.position.x = b.baseX + curX * 0.25 * (b.baseZ > -1.5 ? 1 : 0.4);
-      // full turn across the page, plus an extra nudge while actively scrolling
+                      + (scrollSmooth - 0.5) * b.drift * 7.5;
+      g.position.x = b.baseX + curX * 0.25 * (b.baseZ > -1.5 ? 1 : 0.4)
+                      + Math.sin(scrollSmooth * Math.PI * 2 + b.phase) * b.drift * 0.9;
+      // ~3 turns across the page, plus a kick while the finger is still moving
       g.rotation.y = b.baseRotY + t * 0.15 * Math.sign(b.spin)
-                      + scrollSmooth * Math.PI * 2 * b.spin
-                      + scrollKick * b.spin * 1.6;
+                      + scrollSmooth * Math.PI * 6 * b.spin
+                      + scrollKick * b.spin * 2.2;
       g.rotation.z = b.baseRotZ + Math.sin(t * 0.3 + b.phase) * 0.07
+                      + scrollSmooth * Math.PI * 0.9 * b.spin
+                      + scrollKick * 0.5;
+      // Tumble on X too — rotation on a single axis reads as a slow twirl,
+      // two axes read as something actually falling through the page.
+      g.rotation.x = b.baseRotX + scrollSmooth * Math.PI * 1.4 * b.drift
                       + scrollKick * 0.35;
-      g.rotation.x = b.baseRotX + scrollKick * 0.22;
     });
 
     if (sparkA) { sparkA.rotation.y = t * 0.03 + scrollSmooth * 0.6; sparkA.rotation.z = t * 0.008; }
     if (sparkB) { sparkB.rotation.y = -t * 0.045 - scrollSmooth * 0.4; }
-
-    renderer.render(scene, camera);
   }
 
   function onResize() {
@@ -538,6 +573,9 @@
     camera.updateProjectionMatrix();
     renderer.setSize(W, H);
     updateDocRange();
+    // No render loop is running in reduced-motion mode, so redraw explicitly or
+    // the canvas keeps the pre-resize image.
+    if (reducedMotion) renderScrollFrame();
   }
 
   function onMouse(e) {
