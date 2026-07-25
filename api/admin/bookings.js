@@ -23,7 +23,9 @@ export default async function handler(req, res) {
       await Promise.all(
         blobs.map(async (b) => {
           try {
-            const r = await get(b.pathname, { access: 'private' });
+            // `useCache: false` es imprescindible aquí: con la caché activada, tras confirmar
+            // una cita el panel seguía mostrando el estado viejo servido desde el CDN.
+            const r = await get(b.pathname, { access: 'private', useCache: false });
             if (!r?.stream) return null;
             return await new Response(r.stream).json();
           } catch (err) {
