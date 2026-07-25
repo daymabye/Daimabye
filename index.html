@@ -308,12 +308,21 @@
                     <input type="email" id="userEmail" placeholder="correo@ejemplo.com" required>
                 </div>
                 <div class="form-group">
+                    <label for="userPhone">Tu WhatsApp</label>
+                    <input type="tel" id="userPhone" placeholder="Ej: 0958757109" inputmode="tel" required>
+                </div>
+                <div class="form-group">
                     <label for="userDate">Elige tu Fecha</label>
                     <input type="date" id="userDate" required>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                <div class="form-group">
+                    <label for="userSector">Sector o barrio <span class="opcional">(opcional)</span></label>
+                    <input type="text" id="userSector" placeholder="Ej: Av. 15 de Abril, Los Tamarindos">
+                </div>
+                <button type="submit" class="btn btn-primary" id="bookingSubmit" style="width: 100%; margin-top: 1rem;">
                     <svg class="icon" aria-hidden="true" style="margin-right:0.5rem;font-size:1.2rem"><use href="#i-whatsapp"/></svg> Enviar a WhatsApp
                 </button>
+                <p class="form-nota">Tus datos se guardan solo para que Daima pueda atender tu cita.</p>
             </form>
         </div>
     </div>
@@ -370,17 +379,24 @@
         });
 
         // Handle Form Submit to WhatsApp
-        bookingForm.addEventListener('submit', (e) => {
+        bookingForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            const boton = document.getElementById('bookingSubmit');
             const name = document.getElementById('userName').value.trim();
             const email = document.getElementById('userEmail').value.trim();
+            const phone = document.getElementById('userPhone').value.trim();
             const date = document.getElementById('userDate').value;
-            
-            // Format date for better reading
+            const sector = document.getElementById('userSector').value.trim();
+
+            // La ventana de WhatsApp se abre AHORA, dentro del gesto del usuario. Si se abriera
+            // después de esperar al servidor, el navegador la trataría como emergente y la
+            // bloquearía — la clienta se quedaría sin poder reservar.
+            const ventana = window.open('', '_blank');
+
             let formattedDate = date;
             try {
-                formattedDate = new Date(date).toLocaleDateString('es-ES', { 
-                    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+                formattedDate = new Date(date + 'T12:00:00').toLocaleDateString('es-ES', {
+                    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
                 });
             } catch (err) {}
 
@@ -388,10 +404,30 @@
                          `*Mis Datos:*\n` +
                          `Nombre: ${name}\n` +
                          `Correo: ${email}\n` +
+                         `WhatsApp: ${phone}\n` +
+                         (sector ? `Sector: ${sector}\n` : '') +
                          `Fecha de cita: ${formattedDate}`;
-
             const url = `https://wa.me/5930958757109?text=${encodeURIComponent(text)}`;
-            window.open(url, '_blank');
+
+            boton.disabled = true;
+            // Guardar la cita no debe impedir reservar: si el registro falla, la clienta
+            // igualmente llega a WhatsApp y no pierde su reserva.
+            try {
+                await fetch('/api/booking', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        nombre: name, correo: email, telefono: phone,
+                        plan: selectedPlan, fecha: date, sector
+                    }),
+                });
+            } catch (err) {
+                console.warn('No se pudo registrar la cita:', err);
+            } finally {
+                boton.disabled = false;
+            }
+
+            if (ventana) ventana.location = url; else window.open(url, '_blank');
             closeModal();
             bookingForm.reset();
         });

@@ -1,0 +1,10 @@
+{
+  "name": "daima-web",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Sitio de Daima Belleza Studio: landing estática + funciones para reservas y panel de administración.",
+  "dependencies": {
+    "@vercel/blob": "^2.6.1"
+  }
+}

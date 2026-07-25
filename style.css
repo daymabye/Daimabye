@@ -913,6 +913,19 @@ footer {
   cursor: pointer;
 }
 
+.form-group .opcional {
+  font-weight: 400;
+  color: var(--c-text-muted);
+}
+
+.form-nota {
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--c-text-muted);
+}
+
 /* ============================================================
    MICRO-ANIMACIONES — lenguaje de maquillaje
    Todo con transform/opacity (compositado en GPU) para que el

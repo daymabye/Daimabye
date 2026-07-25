@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Panel de citas · Daima Belleza</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#2D2926">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+:root{
+  --bg:#FCFBFA; --surface:#FFFFFF; --text:#2D2926; --muted:#7A7571;
+  --accent:#D1BBA4; --accent-dark:#B59C82; --border:#EBE6E0;
+  --radius:14px;
+  --f-sans:'Inter',system-ui,sans-serif; --f-serif:'Playfair Display',serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--f-sans);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--f-serif);font-weight:400;line-height:1.2}
+button{font-family:inherit;cursor:pointer}
+
+/* ---------- Acceso ---------- */
+.gate{min-height:100dvh;display:grid;place-items:center;padding:1.5rem}
+.gate-card{width:100%;max-width:400px;background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:2.5rem 2rem;box-shadow:0 24px 60px rgba(45,41,38,.07)}
+.gate-brand{text-align:center;margin-bottom:2rem}
+.gate-brand h1{font-size:1.75rem}
+.gate-brand p{font-size:.75rem;text-transform:uppercase;letter-spacing:.18em;color:var(--muted);margin-top:.35rem}
+.field{margin-bottom:1.1rem}
+.field label{display:block;font-size:.8rem;font-weight:500;margin-bottom:.4rem}
+.field input{width:100%;padding:.85rem 1rem;border:1px solid var(--border);border-radius:9px;
+  font-family:inherit;font-size:1rem;background:var(--bg);color:var(--text)}
+.field input:focus{outline:none;border-color:var(--accent-dark)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.85rem 1.5rem;
+  border:1px solid transparent;border-radius:100px;font-size:.8rem;font-weight:500;
+  text-transform:uppercase;letter-spacing:.1em;transition:all .25s ease}
+.btn-primary{background:var(--text);color:var(--bg);width:100%}
+.btn-primary:hover:not(:disabled){background:var(--accent-dark)}
+.btn-primary:disabled{opacity:.55;cursor:not-allowed}
+.btn-ghost{background:transparent;border-color:var(--border);color:var(--text)}
+.btn-ghost:hover{border-color:var(--text)}
+.alert{background:#FBEAEA;border:1px solid #E7C3C3;color:#8C2F2F;border-radius:9px;
+  padding:.7rem .9rem;font-size:.85rem;margin-bottom:1rem}
+
+/* ---------- Panel ---------- */
+.panel{display:none}
+.panel.on{display:block}
+.topbar{position:sticky;top:0;z-index:20;display:flex;flex-wrap:wrap;gap:1rem;align-items:center;
+  justify-content:space-between;padding:1rem 5%;background:rgba(252,251,250,.92);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.topbar h1{font-size:1.3rem}
+.topbar .who{font-size:.75rem;color:var(--muted)}
+.wrap{padding:2rem 5% 5rem;max-width:1400px;margin:0 auto}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1rem;margin-bottom:2rem}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem}
+.stat .n{font-family:var(--f-serif);font-size:2rem;line-height:1}
+.stat .l{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-top:.4rem}
+
+.section-title{display:flex;align-items:baseline;gap:.75rem;margin:0 0 .85rem}
+.section-title h2{font-size:1.4rem}
+.section-title span{font-size:.75rem;color:var(--muted)}
+
+#mapa{height:380px;border-radius:var(--radius);border:1px solid var(--border);margin-bottom:.6rem;z-index:1}
+.nota{font-size:.75rem;color:var(--muted);margin-bottom:2rem}
+
+.toolbar{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1rem}
+.toolbar input{flex:1 1 240px;padding:.7rem 1rem;border:1px solid var(--border);border-radius:100px;
+  font-family:inherit;font-size:.9rem;background:var(--surface)}
+.toolbar input:focus{outline:none;border-color:var(--accent-dark)}
+
+.tabla-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)}
+table{width:100%;border-collapse:collapse;font-size:.875rem}
+th{text-align:left;font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);
+  font-weight:600;padding:.9rem 1rem;border-bottom:1px solid var(--border);white-space:nowrap;background:var(--surface)}
+td{padding:.9rem 1rem;border-bottom:1px solid var(--border);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#FAF7F4}
+.nombre{font-weight:500}
+.sub{display:block;font-size:.78rem;color:var(--muted)}
+.pill{display:inline-block;padding:.2rem .65rem;border-radius:100px;font-size:.72rem;
+  background:#F4EDE6;color:var(--accent-dark);white-space:nowrap}
+.mono{font-variant-numeric:tabular-nums}
+a.enlace{color:var(--accent-dark);text-decoration:none}
+a.enlace:hover{text-decoration:underline}
+.vacio{padding:3.5rem 1rem;text-align:center;color:var(--muted)}
+.vacio strong{display:block;font-family:var(--f-serif);font-size:1.3rem;color:var(--text);margin-bottom:.4rem}
+
+@media (max-width:700px){
+  .wrap{padding:1.5rem 4% 4rem}
+  .topbar{padding:.85rem 4%}
+  #mapa{height:300px}
+}
+</style>
+</head>
+<body>
+
+<!-- ---------- Acceso ---------- -->
+<section class="gate" id="gate">
+  <div class="gate-card">
+    <div class="gate-brand">
+      <h1>Daima Belleza</h1>
+      <p>Panel de citas</p>
+    </div>
+    <div id="error" class="alert" hidden></div>
+    <form id="formLogin" novalidate>
+      <div class="field">
+        <label for="correo">Correo</label>
+        <input type="email" id="correo" autocomplete="username" required autofocus>
+      </div>
+      <div class="field">
+        <label for="clave">Contraseña</label>
+        <input type="password" id="clave" autocomplete="current-password" required>
+      </div>
+      <button class="btn btn-primary" id="btnEntrar" type="submit">Entrar</button>
+    </form>
+  </div>
+</section>
+
+<!-- ---------- Panel ---------- -->
+<div class="panel" id="panel">
+  <header class="topbar">
+    <div>
+      <h1>Citas agendadas</h1>
+      <span class="who" id="quien"></span>
+    </div>
+    <div style="display:flex;gap:.5rem">
+      <button class="btn btn-ghost" id="btnCSV" type="button">Descargar CSV</button>
+      <button class="btn btn-ghost" id="btnSalir" type="button">Salir</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="stats" id="stats"></div>
+
+    <div class="section-title">
+      <h2>Mapa de calor</h2>
+      <span>de dónde llegan las reservas</span>
+    </div>
+    <div id="mapa"></div>
+    <p class="nota">
+      Ubicación <strong>aproximada</strong>, deducida de la conexión a internet de cada clienta
+      (precisión a nivel de ciudad). No es su dirección exacta.
+    </p>
+
+    <div class="section-title">
+      <h2>Detalle</h2>
+      <span id="conteo"></span>
+    </div>
+    <div class="toolbar">
+      <input type="search" id="buscar" placeholder="Buscar por nombre, correo, plan, ciudad…" aria-label="Buscar citas">
+    </div>
+    <div class="tabla-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Quién</th><th>Contacto</th><th>Plan</th><th>Fecha pedida</th>
+            <th>Sector</th><th>Desde</th><th>Dispositivo</th><th>Reservó</th><th>Notas</th>
+          </tr>
+        </thead>
+        <tbody id="filas"></tbody>
+      </table>
+      <div class="vacio" id="vacio" hidden>
+        <strong>Todavía no hay reservas</strong>
+        Cuando alguien agende desde la web, aparecerá aquí al instante.
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+<script>
+const $ = (id) => document.getElementById(id);
+let CITAS = [];
+let mapa = null, capaCalor = null;
+
+/* --------- Acceso --------- */
+$('formLogin').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = $('btnEntrar'), err = $('error');
+  err.hidden = true;
+  btn.disabled = true; btn.textContent = 'Entrando…';
+  try {
+    const r = await fetch('/api/admin/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ correo: $('correo').value, clave: $('clave').value }),
+    });
+    const data = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(data.error || 'No se pudo entrar');
+    $('quien').textContent = data.correo || '';
+    await abrirPanel();
+  } catch (ex) {
+    err.textContent = ex.message;
+    err.hidden = false;
+  } finally {
+    btn.disabled = false; btn.textContent = 'Entrar';
+  }
+});
+
+$('btnSalir').addEventListener('click', async () => {
+  await fetch('/api/admin/logout', { method: 'POST' });
+  location.reload();
+});
+
+/* Si ya hay cookie válida, se entra directo (evita pedir la clave en cada visita). */
+(async function sesionExistente() {
+  try {
+    const r = await fetch('/api/admin/bookings');
+    if (r.ok) { await abrirPanel(await r.json()); }
+  } catch {}
+})();
+
+async function abrirPanel(previo) {
+  const datos = previo || await (await fetch('/api/admin/bookings')).json();
+  CITAS = datos.citas || [];
+  $('gate').style.display = 'none';
+  $('panel').classList.add('on');
+  pintarStats();
+  pintarTabla(CITAS);
+  dibujarMapa(CITAS);
+}
+
+/* --------- Resumen --------- */
+function pintarStats() {
+  const ahora = new Date();
+  const esteMes = CITAS.filter((c) => {
+    const d = new Date(c.creadaEn);
+    return d.getMonth() === ahora.getMonth() && d.getFullYear() === ahora.getFullYear();
+  }).length;
+
+  const porPlan = {};
+  CITAS.forEach((c) => { porPlan[c.plan] = (porPlan[c.plan] || 0) + 1; });
+  const favorito = Object.entries(porPlan).sort((a, b) => b[1] - a[1])[0];
+  const movil = CITAS.filter((c) => c.dispositivo === 'Móvil').length;
+  const pctMovil = CITAS.length ? Math.round((movil / CITAS.length) * 100) : 0;
+
+  $('stats').innerHTML = [
+    ['Reservas en total', CITAS.length],
+    ['Este mes', esteMes],
+    ['Plan más pedido', favorito ? favorito[0] : '—'],
+    ['Reservan desde el móvil', CITAS.length ? pctMovil + '%' : '—'],
+  ].map(([l, n]) => `<div class="stat"><div class="n">${escapar(String(n))}</div><div class="l">${l}</div></div>`).join('');
+}
+
+/* --------- Tabla --------- */
+$('buscar').addEventListener('input', (e) => {
+  const q = e.target.value.trim().toLowerCase();
+  pintarTabla(!q ? CITAS : CITAS.filter((c) =>
+    [c.nombre, c.correo, c.plan, c.sector, c.instagram, c.origen?.ciudad]
+      .filter(Boolean).join(' ').toLowerCase().includes(q)));
+});
+
+function pintarTabla(lista) {
+  $('conteo').textContent = lista.length === CITAS.length
+    ? `${CITAS.length} en total`
+    : `${lista.length} de ${CITAS.length}`;
+  $('vacio').hidden = lista.length > 0;
+
+  $('filas').innerHTML = lista.map((c) => {
+    const ciudad = [c.origen?.ciudad, c.origen?.pais].filter(Boolean).join(', ') || '—';
+    const ig = c.instagram
+      ? `<a class="enlace sub" href="https://instagram.com/${encodeURIComponent(c.instagram)}" target="_blank" rel="noopener">@${escapar(c.instagram)}</a>`
+      : '';
+    const tel = c.telefono
+      ? `<a class="enlace sub" href="https://wa.me/${c.telefono.replace(/\D/g, '')}" target="_blank" rel="noopener">${escapar(c.telefono)}</a>`
+      : '';
+    return `<tr>
+      <td><span class="nombre">${escapar(c.nombre)}</span>${ig}</td>
+      <td><a class="enlace" href="mailto:${escapar(c.correo)}">${escapar(c.correo)}</a>${tel}</td>
+      <td><span class="pill">${escapar(c.plan)}</span></td>
+      <td class="mono">${fechaCorta(c.fecha)}</td>
+      <td>${escapar(c.sector) || '—'}</td>
+      <td>${escapar(ciudad)}</td>
+      <td>${escapar(c.dispositivo || '—')}</td>
+      <td class="mono">${cuando(c.creadaEn)}</td>
+      <td>${escapar(c.notas) || '—'}</td>
+    </tr>`;
+  }).join('');
+}
+
+/* --------- Mapa de calor --------- */
+function dibujarMapa(lista) {
+  const puntos = lista
+    .filter((c) => Number.isFinite(c.origen?.lat) && Number.isFinite(c.origen?.lon))
+    .map((c) => [c.origen.lat, c.origen.lon, 1]);
+
+  if (!mapa) {
+    mapa = L.map('mapa', { scrollWheelZoom: false });
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; OpenStreetMap &copy; CARTO', maxZoom: 19,
+    }).addTo(mapa);
+  }
+  if (capaCalor) mapa.removeLayer(capaCalor);
+
+  if (!puntos.length) {
+    // Sin datos aún: se encuadra Portoviejo para que el mapa no salga en blanco.
+    mapa.setView([-1.05458, -80.45445], 12);
+    return;
+  }
+  capaCalor = L.heatLayer(puntos, { radius: 34, blur: 22, maxZoom: 12 }).addTo(mapa);
+  mapa.fitBounds(L.latLngBounds(puntos.map((p) => [p[0], p[1]])).pad(0.45));
+  if (mapa.getZoom() > 12) mapa.setZoom(12);
+}
+
+/* --------- CSV --------- */
+$('btnCSV').addEventListener('click', () => {
+  const cab = ['Nombre','Correo','Teléfono','Instagram','Plan','Fecha pedida','Sector','Ciudad','País','Dispositivo','Reservó el','Notas'];
+  const filas = CITAS.map((c) => [
+    c.nombre, c.correo, c.telefono, c.instagram, c.plan, c.fecha, c.sector,
+    c.origen?.ciudad, c.origen?.pais, c.dispositivo, c.creadaEn, c.notas,
+  ]);
+  const csv = [cab, ...filas]
+    .map((f) => f.map((v) => `"${String(v ?? '').replace(/"/g, '""')}"`).join(','))
+    .join('\r\n');
+  // BOM para que Excel abra bien las tildes
+  const url = URL.createObjectURL(new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' }));
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `citas-daima-${new Date().toISOString().slice(0, 10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+/* --------- Utilidades --------- */
+function escapar(s) {
+  return String(s ?? '').replace(/[&<>"']/g, (m) =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+}
+function fechaCorta(iso) {
+  if (!iso) return '—';
+  const d = new Date(iso + (iso.length === 10 ? 'T12:00:00' : ''));
+  return isNaN(d) ? escapar(iso) : d.toLocaleDateString('es-EC', { day: '2-digit', month: 'short', year: 'numeric' });
+}
+function cuando(iso) {
+  const d = new Date(iso);
+  if (isNaN(d)) return '—';
+  return d.toLocaleString('es-EC', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+}
+</script>
+</body>
+</html>
