@@ -372,11 +372,19 @@ header.scrolled {
   margin: 0 auto;
 }
 
+/* Cada pieza del portafolio es un enlace a su publicación en Instagram. Es un <a>, así que
+   necesita `display: block` para comportarse como la tarjeta que era. */
 .gallery-item {
+  display: block;
   position: relative;
   aspect-ratio: 4/5;
   border-radius: var(--radius);
   overflow: hidden;
+}
+
+.gallery-item:focus-visible {
+  outline: 2px solid var(--c-accent-dark);
+  outline-offset: 3px;
 }
 
 .gallery-item img {
@@ -389,26 +397,42 @@ header.scrolled {
 .gallery-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
+  background: linear-gradient(to top, rgba(0,0,0,0.68) 0%, rgba(0,0,0,0.15) 45%, transparent 70%);
   /* Visible by DEFAULT. Revealing the caption on :hover alone hid it forever on
      touch devices — phones never fire hover, so the labels were dead weight. */
   opacity: 1;
   transition: var(--transition);
   display: flex;
-  align-items: flex-end;
-  padding: 2rem;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 0.4rem;
+  padding: 1.5rem;
 }
 
-.gallery-overlay span {
+.gallery-label {
   color: white;
   font-family: var(--f-serif);
   font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+/* Deja claro que la foto lleva a algún sitio; sin esto parece decorativa. */
+.gallery-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 /* Pointer devices keep the original reveal-on-hover behaviour. */
 @media (hover: hover) and (pointer: fine) {
   .gallery-overlay { opacity: 0; }
-  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .gallery-item:hover .gallery-overlay,
+  .gallery-item:focus-visible .gallery-overlay { opacity: 1; }
   .gallery-item:hover img { transform: scale(1.05); }
 }
 
