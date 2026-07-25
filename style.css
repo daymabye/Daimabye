@@ -812,6 +812,12 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  /* El formulario creció con los campos nuevos y ya no cabe en una pantalla de móvil:
+     sin este relleno (y sin el scroll de abajo) el título y el botón quedaban pegados
+     a los bordes, incluso cortados. También se respeta la zona segura del iPhone. */
+  padding: max(1.25rem, env(safe-area-inset-top)) 1rem max(1.25rem, env(safe-area-inset-bottom));
+  overflow-y: auto;
+  overscroll-behavior: contain;
   z-index: 2000;
   opacity: 0;
   pointer-events: none;
@@ -825,14 +831,24 @@ footer {
 
 .modal-content {
   background: var(--c-surface);
-  width: 90%;
+  width: 100%;
   max-width: 500px;
   border-radius: var(--radius);
   padding: 2.5rem;
   position: relative;
+  /* `margin: auto` centra la tarjeta cuando cabe y la deja crecer con aire arriba y abajo
+     cuando no; el scroll vive en el overlay, así el botón nunca queda fuera de alcance. */
+  margin: auto;
   transform: translateY(20px);
   transition: transform 0.3s ease;
   box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 480px) {
+  .modal-content { padding: 2rem 1.35rem; }
+  .modal-header { margin-bottom: 1.5rem; }
+  .modal-header h3 { font-size: 1.65rem; }
+  .form-group { margin-bottom: 1.15rem; }
 }
 
 .modal-overlay.active .modal-content {
