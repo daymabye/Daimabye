@@ -24,7 +24,7 @@
   let sparkA, sparkB;
   let W, H, isMobile;
   let mouseX = 0, mouseY = 0, curX = 0, curY = 0;
-  let scrollY = 0, docRange = 1;
+  let scrollY = 0;
   let scrollSmooth = 0, lastScrollT = 0, scrollKick = 0;
   let rafId = null, staticFrameId = null;
   const reducedMotion = window.matchMedia &&
@@ -59,13 +59,11 @@
     buildPropsField();
     buildSparkles();
 
-    updateDocRange();
     scrollY = window.scrollY || window.pageYOffset || 0;
-    scrollSmooth = lastScrollT = scrollY / docRange;
+    scrollSmooth = lastScrollT = scrollY / 1200;
 
     window.addEventListener('resize', onResize);
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('load', updateDocRange);
     document.addEventListener('visibilitychange', onVisibilityChange);
     if (!isMobile) window.addEventListener('mousemove', onMouse, { passive: true });
 
@@ -482,10 +480,6 @@
     sparkB = mk(Math.round(40 * n), 0.05, 0.7, 13);
   }
 
-  function updateDocRange() {
-    docRange = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
-  }
-
   function onScroll() {
     scrollY = window.scrollY || window.pageYOffset || 0;
     /* Reduced-motion users get no idle animation, but scrolling is a direct
@@ -499,19 +493,25 @@
 
   /** Advance the scroll-derived state. `eased` off = snap (single-frame draw). */
   function updateScrollState(eased) {
-    const targetScrollT = scrollY / docRange;
-    const delta = targetScrollT - lastScrollT;
-    lastScrollT = targetScrollT;
+    /* Se mide en PÍXELES recorridos, no como fracción del alto total de la página.
+       Antes era scrollY/docRange, y docRange cambia solo: cuando entran las imágenes
+       diferidas o cuando el móvil esconde la barra de direcciones. Al cambiar el divisor,
+       toda la escena se recolocaba de golpe y los objetos pegaban saltos — eso era lo que
+       se veía "bugueado" y repitiéndose raro. Contando píxeles el movimiento es estable
+       pase lo que pase con el alto del documento. */
+    const avance = scrollY / 1200;
+    const delta = avance - lastScrollT;
+    lastScrollT = avance;
     if (eased) {
-      /* `scrollSmooth` is the eased position (a steady drift down the page);
-         `scrollKick` is how HARD you are scrolling right now, which briefly
-         spins the props so the background reacts to the gesture itself. */
-      // Low lerp factors on purpose: the props trail the page instead of
-      // snapping to it, which is what makes the drift feel weightless.
-      scrollSmooth += (targetScrollT - scrollSmooth) * 0.045;
-      scrollKick += (delta * 16 - scrollKick) * 0.06;
+      /* `scrollSmooth` sigue al scroll con retardo (por eso flota en vez de ir pegado);
+         `scrollKick` mide la fuerza del gesto actual y da un empujón momentáneo. */
+      scrollSmooth += (avance - scrollSmooth) * 0.045;
+      /* Un salto grande —volver arriba de golpe, pulsar un enlace del menú— generaba un
+         latigazo enorme. Se acota el empujón para que nunca dispare la escena. */
+      const objetivo = Math.max(-1, Math.min(1, delta * 14));
+      scrollKick += (objetivo - scrollKick) * 0.06;
     } else {
-      scrollSmooth = targetScrollT;
+      scrollSmooth = avance;
       scrollKick = 0;
     }
   }
@@ -543,27 +543,29 @@
   function applyPropTransforms(t) {
     props.forEach((b) => {
       const g = b.group;
-      /* Tuned for grace over spectacle: enough travel that scrolling clearly
-         moves the scene, slow enough that it reads as floating rather than
-         spinning. Roughly one turn across the whole page. */
+      /* `scrollSmooth` ya no va de 0 a 1: cuenta píxeles/1200, así que crece sin techo.
+         Por eso los desplazamientos usan senos —quedan ACOTADOS— y solo el giro avanza
+         de forma continua. Antes, multiplicar una fracción por un factor grande hacía que
+         al final de la página los objetos salieran volando fuera de cuadro. */
       g.position.y = b.baseY + Math.sin(t * 0.35 + b.phase) * 0.16
-                      + (scrollSmooth - 0.5) * b.drift * 4.0;
+                      + Math.sin(scrollSmooth * 0.85 + b.phase) * b.drift * 1.7;
       g.position.x = b.baseX + curX * 0.25 * (b.baseZ > -1.5 ? 1 : 0.4)
-                      + Math.sin(scrollSmooth * Math.PI * 2 + b.phase) * b.drift * 0.5;
+                      + Math.sin(scrollSmooth * 0.55 + b.phase) * b.drift * 0.6;
+      // Giro continuo: ~una vuelta por cada 2400px recorridos.
       g.rotation.y = b.baseRotY + t * 0.1 * Math.sign(b.spin)
-                      + scrollSmooth * Math.PI * 2.2 * b.spin
-                      + scrollKick * b.spin * 0.9;
+                      + scrollSmooth * Math.PI * 0.5 * b.spin
+                      + scrollKick * b.spin * 0.5;
       g.rotation.z = b.baseRotZ + Math.sin(t * 0.22 + b.phase) * 0.06
-                      + scrollSmooth * Math.PI * 0.35 * b.spin
-                      + scrollKick * 0.2;
-      // A little tumble on X as well: turning on one axis alone reads as a
-      // mechanical twirl, two axes read as something drifting through the page.
-      g.rotation.x = b.baseRotX + scrollSmooth * Math.PI * 0.5 * b.drift
-                      + scrollKick * 0.15;
+                      + Math.sin(scrollSmooth * 0.6) * 0.22 * b.spin
+                      + scrollKick * 0.12;
+      // Un poco de vuelco en X también: girar sobre un solo eje parece un molinillo
+      // mecánico; sobre dos, parece algo que flota de verdad.
+      g.rotation.x = b.baseRotX + Math.sin(scrollSmooth * 0.4) * 0.35 * b.drift
+                      + scrollKick * 0.1;
     });
 
-    if (sparkA) { sparkA.rotation.y = t * 0.03 + scrollSmooth * 0.6; sparkA.rotation.z = t * 0.008; }
-    if (sparkB) { sparkB.rotation.y = -t * 0.045 - scrollSmooth * 0.4; }
+    if (sparkA) { sparkA.rotation.y = t * 0.03 + Math.sin(scrollSmooth * 0.5) * 0.5; sparkA.rotation.z = t * 0.008; }
+    if (sparkB) { sparkB.rotation.y = -t * 0.045 - Math.sin(scrollSmooth * 0.42) * 0.35; }
   }
 
   function onResize() {
@@ -572,7 +574,6 @@
     camera.aspect = W / H;
     camera.updateProjectionMatrix();
     renderer.setSize(W, H);
-    updateDocRange();
     // No render loop is running in reduced-motion mode, so redraw explicitly or
     // the canvas keeps the pre-resize image.
     if (reducedMotion) renderScrollFrame();

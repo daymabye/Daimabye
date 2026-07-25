@@ -694,50 +694,120 @@ footer {
   .nav-cta-desktop { display: none; }
   .menu-toggle { display: flex; }
 
+  /* Menú a pantalla completa. Antes entraba deslizándose entero desde arriba y los enlaces
+     aparecían de golpe, apretados en el centro: se veía tosco. Ahora el panel aparece con un
+     fundido suave y cada enlace entra escalonado. */
+  /* El header lleva `backdrop-filter`, y un filtro convierte al elemento en el marco de
+     referencia de sus hijos `position: fixed`. Por eso este menú se medía contra el header
+     (77px de alto) en vez de contra la pantalla, y los primeros enlaces quedaban cortados
+     arriba. Con el menú abierto se quita el filtro —tapado por el panel, no se nota— y el
+     overlay vuelve a referirse a la ventana. */
+  body.menu-abierto header {
+    backdrop-filter: none;
+    background: transparent;
+    border-bottom-color: transparent;
+  }
+
   .nav-links {
     position: fixed;
     inset: 0;
-    top: 0;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    background: rgba(252, 251, 250, 0.98);
-    backdrop-filter: blur(16px);
-    transform: translateY(-100%);
+    /* Centrado con márgenes automáticos en vez de `justify-content: center`: si la lista no
+       cabe, los márgenes se anulan y nada se sale por arriba (con `center` el desbordamiento
+       se reparte a los dos lados y la parte de arriba queda inalcanzable). */
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 0;
+    /* Deja libre la franja del header para que el logo y la X sigan visibles. */
+    padding: calc(5.5rem + env(safe-area-inset-top)) 8% calc(2.5rem + env(safe-area-inset-bottom));
+    background: rgba(252, 251, 250, 0.985);
+    backdrop-filter: blur(20px);
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
-    transition: var(--transition);
+    transition: opacity 0.35s ease, visibility 0.35s;
+    overflow-y: auto;
     z-index: 99;
   }
   .nav-links.open {
-    transform: translateY(0);
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
   }
-  /* Roomy tap rows: the bare links were only 24px tall. */
-  .nav-links a {
-    font-size: 1.25rem;
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    padding: 0 0.5rem;
+
+  /* Cada enlace en su propia línea, separado por un filete: se lee como una lista real
+     y da un objetivo táctil mucho más ancho que el texto suelto de antes. */
+  .nav-links > li {
+    border-bottom: 1px solid var(--c-border);
+    opacity: 0;
+    transform: translateY(14px);
   }
-  .nav-cta-mobile { display: block; margin-top: 1rem; }
+  /* Centra el grupo cuando sobra sitio; cuando no, los `auto` valen 0 y nada se recorta. */
+  .nav-links > li:first-child { margin-top: auto; }
+  .nav-links > li:last-child { margin-bottom: auto; }
+  .nav-links.open > li {
+    animation: nav-entra 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .nav-links.open > li:nth-child(1) { animation-delay: 0.05s; }
+  .nav-links.open > li:nth-child(2) { animation-delay: 0.10s; }
+  .nav-links.open > li:nth-child(3) { animation-delay: 0.15s; }
+  .nav-links.open > li:nth-child(4) { animation-delay: 0.20s; }
+  .nav-links.open > li:nth-child(5) { animation-delay: 0.25s; }
+  .nav-links.open > li:nth-child(6) { animation-delay: 0.32s; }
+
+  @keyframes nav-entra {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .nav-links > li.nav-cta-mobile { border-bottom: none; }
+  /* Filas amplias: el enlace ocupa todo el ancho, así se puede tocar en cualquier parte
+     de la línea y no solo sobre las letras. */
+  .nav-links a {
+    font-family: var(--f-serif);
+    font-size: 1.6rem;
+    text-transform: none;
+    letter-spacing: 0;
+    display: flex;
+    align-items: center;
+    min-height: 64px;
+    width: 100%;
+  }
+  /* El subrayado animado del escritorio no aporta nada en una lista a pantalla completa. */
+  .nav-links a::after { display: none; }
+  .nav-links a:active { color: var(--c-accent-dark); }
+
+  .nav-cta-mobile { display: block; margin-top: 1.75rem; }
+  .nav-cta-mobile a {
+    justify-content: center;
+    font-family: var(--f-sans);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    min-height: 56px;
+  }
 
   .section { padding: 3.5rem 5%; }
   .section-header { margin-bottom: 2.5rem; }
 
+  /* El hero móvil medía 1084px en una pantalla de 844: se abría el sitio y solo se veía un
+     hueco y la foto — el titular y los botones de reservar quedaban por debajo del borde.
+     Se recorta el relleno superior (el header ya ocupa 77px) y se limita la altura de la
+     foto para que el mensaje y al menos un botón entren en la primera pantalla. */
   .hero {
     min-height: auto;
-    padding: 6.5rem 5% 2.5rem;
+    padding: 4.75rem 5% 2rem;
   }
-  .hero-container { gap: 2rem; }
-  .hero-content p { margin: 1.25rem 0 1.75rem; }
-  .hero-buttons .btn { width: 100%; }
+  .hero-container { gap: 1.25rem; }
+  .hero-content p { margin: 0.85rem 0 1.35rem; font-size: 1rem; }
+  .hero-subtitle { margin-bottom: 0.85rem; }
+  /* Los dos botones comparten fila: apilados sumaban 124px y empujaban el de "Reservar"
+     fuera de la primera pantalla, que es justo la acción que debe verse sin desplazar. */
+  .hero-buttons { gap: 0.6rem; flex-wrap: nowrap; }
+  .hero-buttons .btn { flex: 1 1 0; width: auto; padding-inline: 1rem; white-space: nowrap; }
   .hero-image {
-    height: 46vh;
-    min-height: 320px;
+    height: 30vh;
+    min-height: 220px;
+    max-height: 280px;
     border-radius: 100px 100px 10px 10px;
   }
 

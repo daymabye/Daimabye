@@ -370,6 +370,10 @@
             const isOpen = navLinks.classList.toggle('open');
             menuToggle.classList.toggle('open', isOpen);
             menuToggle.setAttribute('aria-expanded', isOpen);
+            // El CSS usa esta clase para quitarle el backdrop-filter al header mientras el
+            // menú está abierto; con el filtro puesto, el overlay se medía contra el header
+            // en vez de contra la pantalla y cortaba los primeros enlaces.
+            document.body.classList.toggle('menu-abierto', isOpen);
             document.body.style.overflow = isOpen ? 'hidden' : '';
         });
         navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
