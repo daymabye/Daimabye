@@ -7,10 +7,11 @@
  */
 import crypto from 'node:crypto';
 import { put } from '@vercel/blob';
+import { enviarCorreo, correoParaClienta, correoParaAdmin } from '../lib/email.js';
 
 const LARGOS = {
   nombre: 80, correo: 120, telefono: 30, instagram: 40,
-  plan: 60, fecha: 20, sector: 80, notas: 500,
+  plan: 60, fecha: 20, hora: 40, sector: 80, notas: 500,
 };
 
 const CORREO_VALIDO = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
@@ -45,7 +46,11 @@ export default async function handler(req, res) {
     instagram: campo('instagram').replace(/^@+/, ''),
     plan: campo('plan') || 'Consulta general',
     fecha: campo('fecha'),
+    hora: campo('hora'),
     sector: campo('sector'),
+    // Toda cita nace SIN confirmar: la administradora la acepta desde el panel.
+    estado: 'en_proceso',
+    historial: [{ estado: 'en_proceso', en: new Date().toISOString() }],
     notas: campo('notas'),
     // Vercel añade estas cabeceras: ubicación APROXIMADA (nivel ciudad) de la conexión.
     // No es la dirección de la clienta y así se etiqueta en el panel.
@@ -70,6 +75,20 @@ export default async function handler(req, res) {
   } catch (err) {
     console.error('[booking] no se pudo guardar la cita:', err);
     return res.status(500).json({ error: 'No se pudo guardar la reserva' });
+  }
+
+  // Los correos van DESPUÉS de guardar y no pueden tumbar la reserva: si el proveedor falla,
+  // la cita ya está a salvo y la administradora la ve igual en el panel.
+  const base = `https://${req.headers['x-forwarded-host'] || req.headers.host}`;
+  try {
+    const aClienta = correoParaClienta(cita);
+    const aAdmin = correoParaAdmin(cita, `${base}/admin`);
+    await Promise.allSettled([
+      enviarCorreo({ para: cita.correo, ...aClienta }),
+      enviarCorreo({ para: process.env.ADMIN_NOTIFY_EMAIL || process.env.ADMIN_EMAIL, ...aAdmin }),
+    ]);
+  } catch (err) {
+    console.error('[booking] fallo al notificar por correo:', err);
   }
 
   return res.status(201).json({ ok: true, id: cita.id });

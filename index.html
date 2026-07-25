@@ -312,8 +312,36 @@
                     <input type="tel" id="userPhone" placeholder="Ej: 0958757109" inputmode="tel" required>
                 </div>
                 <div class="form-group">
-                    <label for="userDate">Elige tu Fecha</label>
-                    <input type="date" id="userDate" required>
+                    <label for="userPlan">Servicio</label>
+                    <select id="userPlan" required>
+                        <option value="Maquillaje Social">Maquillaje Social — $20</option>
+                        <option value="Maquillaje de Grado">Maquillaje de Grado — $25</option>
+                        <option value="Combo Consentidor">Combo Consentidor — $25</option>
+                        <option value="Combo Pasarela">Combo Pasarela — $35</option>
+                        <option value="Planchado">Planchado — $10</option>
+                        <option value="Ondas Normales">Ondas Normales — $15</option>
+                        <option value="Ondas de Reina / Agua">Ondas de Reina / Agua — $20</option>
+                        <option value="Semirecogido">Semirecogido — $20</option>
+                        <option value="Recogido">Recogido — $20</option>
+                        <option value="Novias">Novias — a convenir</option>
+                        <option value="Consulta personalizada">Consulta personalizada</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="userDate">Fecha</label>
+                        <input type="date" id="userDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userTime">Hora <span class="opcional">(aprox.)</span></label>
+                        <select id="userTime">
+                            <option value="">Sin preferencia</option>
+                            <option>Mañana (8:00 – 12:00)</option>
+                            <option>Mediodía (12:00 – 15:00)</option>
+                            <option>Tarde (15:00 – 19:00)</option>
+                            <option>Noche (19:00 en adelante)</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="userSector">Sector o barrio <span class="opcional">(opcional)</span></label>
@@ -363,6 +391,12 @@
                 e.preventDefault();
                 selectedPlan = this.getAttribute('data-plan');
                 modalPlanName.textContent = selectedPlan;
+                // El selector arranca en el plan de la tarjeta pulsada, pero la clienta puede
+                // cambiarlo sin cerrar el formulario. "Servicio de Peinado" no es una opción
+                // concreta: en ese caso se deja que elija cuál.
+                const sel = document.getElementById('userPlan');
+                const existe = [...sel.options].some(o => o.value === selectedPlan);
+                sel.value = existe ? selectedPlan : 'Planchado';
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden'; // prevent background scrolling
             });
@@ -387,11 +421,8 @@
             const phone = document.getElementById('userPhone').value.trim();
             const date = document.getElementById('userDate').value;
             const sector = document.getElementById('userSector').value.trim();
-
-            // La ventana de WhatsApp se abre AHORA, dentro del gesto del usuario. Si se abriera
-            // después de esperar al servidor, el navegador la trataría como emergente y la
-            // bloquearía — la clienta se quedaría sin poder reservar.
-            const ventana = window.open('', '_blank');
+            const hora = document.getElementById('userTime').value;
+            const plan = document.getElementById('userPlan').value || selectedPlan;
 
             let formattedDate = date;
             try {
@@ -400,34 +431,38 @@
                 });
             } catch (err) {}
 
-            const text = `Hola Daima Belleza,\nQuiero agendar el plan: *${selectedPlan}*.\n\n` +
+            const text = `Hola Daima Belleza,\nQuiero agendar el plan: *${plan}*.\n\n` +
                          `*Mis Datos:*\n` +
                          `Nombre: ${name}\n` +
                          `Correo: ${email}\n` +
                          `WhatsApp: ${phone}\n` +
                          (sector ? `Sector: ${sector}\n` : '') +
-                         `Fecha de cita: ${formattedDate}`;
+                         `Fecha de cita: ${formattedDate}` +
+                         (hora ? `\nHora preferida: ${hora}` : '');
             const url = `https://wa.me/5930958757109?text=${encodeURIComponent(text)}`;
 
             boton.disabled = true;
-            // Guardar la cita no debe impedir reservar: si el registro falla, la clienta
-            // igualmente llega a WhatsApp y no pierde su reserva.
+            /* `keepalive` es lo que hace que esto funcione de verdad. Al abrir WhatsApp el
+               navegador congela esta página (en el móvil incluso cambia de app), y una petición
+               normal se cancelaba a medio camino: la cita se perdía. Con keepalive el navegador
+               se compromete a terminar el envío aunque la página deje de estar en primer plano.
+               Por eso tampoco se espera (`await`) antes de abrir WhatsApp. */
             try {
-                await fetch('/api/booking', {
+                fetch('/api/booking', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
+                    keepalive: true,
                     body: JSON.stringify({
                         nombre: name, correo: email, telefono: phone,
-                        plan: selectedPlan, fecha: date, sector
+                        plan, fecha: date, hora, sector
                     }),
-                });
+                }).catch((err) => console.warn('No se pudo registrar la cita:', err));
             } catch (err) {
                 console.warn('No se pudo registrar la cita:', err);
-            } finally {
-                boton.disabled = false;
             }
 
-            if (ventana) ventana.location = url; else window.open(url, '_blank');
+            boton.disabled = false;
+            window.open(url, '_blank');
             closeModal();
             bookingForm.reset();
         });

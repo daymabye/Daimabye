@@ -891,20 +891,46 @@ footer {
   color: var(--c-text);
 }
 
-.form-group input {
+.form-group input,
+.form-group select {
   width: 100%;
   padding: 1rem;
   border: 1px solid var(--c-border);
   border-radius: 8px;
   font-family: var(--f-sans);
+  /* 1rem = 16px: por debajo de eso, iOS hace zoom automático al tocar el campo. */
   font-size: 1rem;
   transition: border-color 0.3s;
   background: var(--c-bg);
+  color: var(--c-text);
 }
 
-.form-group input:focus {
+.form-group select {
+  appearance: none;
+  cursor: pointer;
+  /* Flecha propia: la nativa cambia de aspecto en cada navegador. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%237A7571' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' d='M1 1.5 6 6.5l5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 12px;
+  padding-right: 2.5rem;
+}
+
+.form-group input:focus,
+.form-group select:focus {
   outline: none;
   border-color: var(--c-accent-dark);
+}
+
+/* Fecha y hora comparten fila en pantallas con sitio; se apilan en móvil. */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 420px) {
+  .form-row { grid-template-columns: 1fr; gap: 0; }
 }
 
 .form-group input[type="date"] {

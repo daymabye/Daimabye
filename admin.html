@@ -83,6 +83,23 @@ tbody tr:hover{background:#FAF7F4}
 .sub{display:block;font-size:.78rem;color:var(--muted)}
 .pill{display:inline-block;padding:.2rem .65rem;border-radius:100px;font-size:.72rem;
   background:#F4EDE6;color:var(--accent-dark);white-space:nowrap}
+.estado{display:inline-block;padding:.25rem .7rem;border-radius:100px;font-size:.7rem;
+  font-weight:600;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+.estado.en_proceso{background:#FDF3E0;color:#8A6410}
+.estado.confirmada{background:#E7F4EC;color:#1F6B3F}
+.estado.rechazada{background:#F3EFEE;color:#7A7571}
+.acciones{display:flex;gap:.35rem;flex-wrap:wrap}
+.mini{padding:.35rem .75rem;border-radius:100px;font-size:.7rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:.05em;border:1px solid var(--border);
+  background:var(--surface);color:var(--text);transition:all .2s ease;white-space:nowrap}
+.mini:hover:not(:disabled){border-color:var(--text)}
+.mini:disabled{opacity:.45;cursor:not-allowed}
+.mini.si{background:#1F6B3F;border-color:#1F6B3F;color:#fff}
+.mini.si:hover:not(:disabled){background:#18572F}
+.filtros{display:flex;gap:.4rem;flex-wrap:wrap}
+.filtro{padding:.55rem 1rem;border-radius:100px;border:1px solid var(--border);
+  background:var(--surface);font-size:.78rem;color:var(--muted);transition:all .2s ease}
+.filtro.activo{background:var(--text);border-color:var(--text);color:var(--bg)}
 .mono{font-variant-numeric:tabular-nums}
 a.enlace{color:var(--accent-dark);text-decoration:none}
 a.enlace:hover{text-decoration:underline}
@@ -152,13 +169,19 @@ a.enlace:hover{text-decoration:underline}
     </div>
     <div class="toolbar">
       <input type="search" id="buscar" placeholder="Buscar por nombre, correo, plan, ciudad…" aria-label="Buscar citas">
+      <div class="filtros" id="filtros">
+        <button class="filtro activo" data-estado="todas" type="button">Todas</button>
+        <button class="filtro" data-estado="en_proceso" type="button">En proceso</button>
+        <button class="filtro" data-estado="confirmada" type="button">Confirmadas</button>
+        <button class="filtro" data-estado="rechazada" type="button">Rechazadas</button>
+      </div>
     </div>
     <div class="tabla-wrap">
       <table>
         <thead>
           <tr>
-            <th>Quién</th><th>Contacto</th><th>Plan</th><th>Fecha pedida</th>
-            <th>Sector</th><th>Desde</th><th>Dispositivo</th><th>Reservó</th><th>Notas</th>
+            <th>Estado</th><th>Acciones</th><th>Quién</th><th>Contacto</th><th>Plan</th>
+            <th>Fecha pedida</th><th>Sector</th><th>Desde</th><th>Dispositivo</th><th>Reservó</th><th>Notas</th>
           </tr>
         </thead>
         <tbody id="filas"></tbody>
@@ -221,8 +244,7 @@ async function abrirPanel(previo) {
   $('gate').style.display = 'none';
   $('panel').classList.add('on');
   pintarStats();
-  pintarTabla(CITAS);
-  dibujarMapa(CITAS);
+  aplicarFiltros();
 }
 
 /* --------- Resumen --------- */
@@ -236,23 +258,73 @@ function pintarStats() {
   const porPlan = {};
   CITAS.forEach((c) => { porPlan[c.plan] = (porPlan[c.plan] || 0) + 1; });
   const favorito = Object.entries(porPlan).sort((a, b) => b[1] - a[1])[0];
-  const movil = CITAS.filter((c) => c.dispositivo === 'Móvil').length;
-  const pctMovil = CITAS.length ? Math.round((movil / CITAS.length) * 100) : 0;
+  const pendientes = CITAS.filter((c) => (c.estado || 'en_proceso') === 'en_proceso').length;
+  const confirmadas = CITAS.filter((c) => c.estado === 'confirmada').length;
 
+  // Lo pendiente va primero: es lo único que exige una acción suya.
   $('stats').innerHTML = [
-    ['Reservas en total', CITAS.length],
+    ['Esperando respuesta', pendientes],
+    ['Confirmadas', confirmadas],
     ['Este mes', esteMes],
     ['Plan más pedido', favorito ? favorito[0] : '—'],
-    ['Reservan desde el móvil', CITAS.length ? pctMovil + '%' : '—'],
   ].map(([l, n]) => `<div class="stat"><div class="n">${escapar(String(n))}</div><div class="l">${l}</div></div>`).join('');
 }
 
-/* --------- Tabla --------- */
-$('buscar').addEventListener('input', (e) => {
-  const q = e.target.value.trim().toLowerCase();
-  pintarTabla(!q ? CITAS : CITAS.filter((c) =>
-    [c.nombre, c.correo, c.plan, c.sector, c.instagram, c.origen?.ciudad]
-      .filter(Boolean).join(' ').toLowerCase().includes(q)));
+/* --------- Filtros y búsqueda --------- */
+let filtroEstado = 'todas';
+
+$('buscar').addEventListener('input', aplicarFiltros);
+$('filtros').addEventListener('click', (e) => {
+  const b = e.target.closest('.filtro');
+  if (!b) return;
+  filtroEstado = b.dataset.estado;
+  document.querySelectorAll('.filtro').forEach((f) => f.classList.toggle('activo', f === b));
+  aplicarFiltros();
+});
+
+function aplicarFiltros() {
+  const q = $('buscar').value.trim().toLowerCase();
+  let lista = CITAS;
+  if (filtroEstado !== 'todas') {
+    lista = lista.filter((c) => (c.estado || 'en_proceso') === filtroEstado);
+  }
+  if (q) {
+    lista = lista.filter((c) =>
+      [c.nombre, c.correo, c.plan, c.sector, c.instagram, c.origen?.ciudad]
+        .filter(Boolean).join(' ').toLowerCase().includes(q));
+  }
+  pintarTabla(lista);
+  dibujarMapa(lista);
+}
+
+/* --------- Confirmar / rechazar --------- */
+document.addEventListener('click', async (e) => {
+  const boton = e.target.closest('[data-accion]');
+  if (!boton) return;
+  const { id, accion } = boton.dataset;
+
+  // Se bloquean los dos botones de la fila mientras viaja la petición: sin esto un doble
+  // clic mandaría dos cambios de estado y dos correos a la clienta.
+  const fila = boton.closest('tr');
+  fila.querySelectorAll('[data-accion]').forEach((b) => (b.disabled = true));
+  boton.textContent = '…';
+
+  try {
+    const r = await fetch('/api/admin/estado', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, estado: accion }),
+    });
+    if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error || 'No se pudo actualizar');
+    const cita = CITAS.find((c) => c.id === id);
+    if (cita) cita.estado = accion;
+    pintarStats();
+    aplicarFiltros();
+  } catch (ex) {
+    alert(ex.message);
+    fila.querySelectorAll('[data-accion]').forEach((b) => (b.disabled = false));
+    aplicarFiltros();
+  }
 });
 
 function pintarTabla(lista) {
@@ -269,11 +341,21 @@ function pintarTabla(lista) {
     const tel = c.telefono
       ? `<a class="enlace sub" href="https://wa.me/${c.telefono.replace(/\D/g, '')}" target="_blank" rel="noopener">${escapar(c.telefono)}</a>`
       : '';
+    const estado = c.estado || 'en_proceso';
+    const etiqueta = { en_proceso: 'En proceso', confirmada: 'Confirmada', rechazada: 'Rechazada' }[estado];
+    const acciones = estado === 'confirmada'
+      ? `<button class="mini" data-accion="rechazada" data-id="${escapar(c.id)}">Cancelar</button>`
+      : estado === 'rechazada'
+        ? `<button class="mini si" data-accion="confirmada" data-id="${escapar(c.id)}">Aceptar</button>`
+        : `<button class="mini si" data-accion="confirmada" data-id="${escapar(c.id)}">Aceptar</button>
+           <button class="mini" data-accion="rechazada" data-id="${escapar(c.id)}">Rechazar</button>`;
     return `<tr>
+      <td><span class="estado ${estado}">${etiqueta}</span></td>
+      <td><div class="acciones">${acciones}</div></td>
       <td><span class="nombre">${escapar(c.nombre)}</span>${ig}</td>
       <td><a class="enlace" href="mailto:${escapar(c.correo)}">${escapar(c.correo)}</a>${tel}</td>
       <td><span class="pill">${escapar(c.plan)}</span></td>
-      <td class="mono">${fechaCorta(c.fecha)}</td>
+      <td class="mono">${fechaCorta(c.fecha)}${c.hora ? `<span class="sub">${escapar(c.hora)}</span>` : ''}</td>
       <td>${escapar(c.sector) || '—'}</td>
       <td>${escapar(ciudad)}</td>
       <td>${escapar(c.dispositivo || '—')}</td>
@@ -309,10 +391,10 @@ function dibujarMapa(lista) {
 
 /* --------- CSV --------- */
 $('btnCSV').addEventListener('click', () => {
-  const cab = ['Nombre','Correo','Teléfono','Instagram','Plan','Fecha pedida','Sector','Ciudad','País','Dispositivo','Reservó el','Notas'];
+  const cab = ['Estado','Nombre','Correo','Teléfono','Instagram','Plan','Fecha pedida','Hora','Sector','Ciudad','País','Dispositivo','Reservó el','Notas'];
   const filas = CITAS.map((c) => [
-    c.nombre, c.correo, c.telefono, c.instagram, c.plan, c.fecha, c.sector,
-    c.origen?.ciudad, c.origen?.pais, c.dispositivo, c.creadaEn, c.notas,
+    c.estado || 'en_proceso', c.nombre, c.correo, c.telefono, c.instagram, c.plan,
+    c.fecha, c.hora, c.sector, c.origen?.ciudad, c.origen?.pais, c.dispositivo, c.creadaEn, c.notas,
   ]);
   const csv = [cab, ...filas]
     .map((f) => f.map((v) => `"${String(v ?? '').replace(/"/g, '""')}"`).join(','))
