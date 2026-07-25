@@ -252,12 +252,24 @@ header.scrolled {
   width: 22px;
   height: 1.5px;
   background-color: var(--c-text);
-  transition: var(--transition);
+  border-radius: 2px;
+  /* Transición propia en vez de la genérica de 0.6s: en un control que respondes con el
+     dedo, medio segundo se siente pastoso.
+     Solo se animan `transform` y `opacity`, que la GPU compone sin recalcular la maquetación.
+     Antes animaba `width` de la raya central y, si la transición se interrumpía, la raya se
+     quedaba colapsada y el icono aparecía con dos rayas en vez de tres. */
+  transition:
+    transform 0.34s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.18s ease;
+  transform-origin: center;
 }
 
+/* Las rayas de arriba y abajo cierran la X; la del medio se recoge hacia el centro. */
 .menu-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-.menu-toggle.open span:nth-child(2) { opacity: 0; }
+.menu-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0.1); }
 .menu-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+.menu-toggle:active span { background-color: var(--c-accent-text); }
 
 /* Hero */
 .hero {
@@ -813,7 +825,17 @@ footer {
   /* Los dos botones comparten fila: apilados sumaban 124px y empujaban el de "Reservar"
      fuera de la primera pantalla, que es justo la acción que debe verse sin desplazar. */
   .hero-buttons { gap: 0.6rem; flex-wrap: nowrap; }
-  .hero-buttons .btn { flex: 1 1 0; width: auto; padding-inline: 1rem; white-space: nowrap; }
+  .hero-buttons .btn {
+    flex: 1 1 0;
+    /* `min-width: 0` es la pieza clave: por defecto un elemento flex no encoge por debajo
+       del ancho de su contenido, así que con `nowrap` los dos botones sumaban 362px en
+       351 disponibles y la fila se salía por la derecha (20px de margen a la izquierda
+       contra 9px a la derecha). Ahora pueden ceder y la fila queda centrada de verdad. */
+    min-width: 0;
+    width: auto;
+    padding-inline: 0.7rem;
+    white-space: nowrap;
+  }
   /* Al acortar el hero, la foto quedó en una caja APAISADA (351x280) y un retrato ahí se
      recorta a la altura de la frente: se veía media cara. La solución no es estirarla de
      alto —eso devolvería los botones fuera de pantalla— sino ESTRECHARLA y darle forma
