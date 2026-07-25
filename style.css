@@ -5,9 +5,19 @@
   --c-bg: #FCFBFA;
   --c-surface: #FFFFFF;
   --c-text: #2D2926;
-  --c-text-muted: #7A7571;
+  /* El gris de apoyo daba 4.41 sobre el fondo crema, justo por debajo del mínimo legible
+     de 4.5. Este tono es prácticamente idéntico a la vista y ya cumple (4.53). */
+  --c-text-muted: #78736F;
   --c-accent: #D1BBA4;
   --c-accent-dark: #B59C82;
+  /* El dorado de marca es precioso pero como TEXTO sobre crema solo daba 2.53: ilegible para
+     mucha gente. Se separan tres usos en vez de oscurecerlo todo (en el pie oscuro el dorado
+     claro es justo el que funciona):
+       --c-accent-dark  decorativo y sobre fondos oscuros
+       --c-accent-icon  iconos y trazos sobre crema  (3.02, el mínimo para gráficos)
+       --c-accent-text  texto pequeño sobre crema     (4.51, el mínimo para texto) */
+  --c-accent-icon: #A58E76;
+  --c-accent-text: #84715E;
   --c-border: #EBE6E0;
   
   --f-sans: 'Inter', sans-serif;
@@ -278,7 +288,7 @@ header.scrolled {
 .hero-subtitle {
   display: inline-block;
   margin-bottom: 1.5rem;
-  color: var(--c-accent-dark);
+  color: var(--c-accent-text);
 }
 
 .hero-content p {
@@ -353,7 +363,7 @@ header.scrolled {
 
 .service-icon {
   font-size: 2.5rem;
-  color: var(--c-accent-dark);
+  color: var(--c-accent-icon);
   margin-bottom: 1.5rem;
 }
 
@@ -634,7 +644,7 @@ footer {
 }
 
 .pricing-features .icon {
-  color: var(--c-accent-dark);
+  color: var(--c-accent-icon);
 }
 
 /* Only meaningful for the mobile swipe strip; the desktop grid shows everything. */
@@ -961,7 +971,7 @@ footer {
 }
 
 .modal-header p {
-  color: var(--c-accent-dark);
+  color: var(--c-accent-text);
   font-weight: 500;
 }
 
