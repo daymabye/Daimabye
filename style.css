@@ -132,6 +132,7 @@ header.scrolled {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  min-height: 44px;
 }
 
 .brand-mark {
@@ -215,8 +216,9 @@ header.scrolled {
   justify-content: center;
   align-items: center;
   gap: 5px;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
+  margin-right: -0.5rem;
   background: none;
   border: none;
   cursor: pointer;
@@ -238,6 +240,9 @@ header.scrolled {
 /* Hero */
 .hero {
   min-height: 100vh;
+  /* dvh tracks the *visible* viewport, so the hero doesn't get pushed under
+     iOS Safari's collapsing URL bar (the classic 100vh mobile jump). */
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   padding: 8rem 5% 4rem;
@@ -324,10 +329,14 @@ header.scrolled {
   transition: var(--transition);
 }
 
-.service-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.03);
-  border-color: var(--c-accent);
+/* Lift only on real pointers: on touch, :hover latches after a tap and leaves
+   the card stuck in its raised state until you tap elsewhere. */
+@media (hover: hover) and (pointer: fine) {
+  .service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.03);
+    border-color: var(--c-accent);
+  }
 }
 
 .service-icon {
@@ -365,29 +374,30 @@ header.scrolled {
   transition: transform 1s ease;
 }
 
-.gallery-item:hover img {
-  transform: scale(1.05);
-}
-
 .gallery-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
-  opacity: 0;
+  /* Visible by DEFAULT. Revealing the caption on :hover alone hid it forever on
+     touch devices — phones never fire hover, so the labels were dead weight. */
+  opacity: 1;
   transition: var(--transition);
   display: flex;
   align-items: flex-end;
   padding: 2rem;
 }
 
-.gallery-item:hover .gallery-overlay {
-  opacity: 1;
-}
-
 .gallery-overlay span {
   color: white;
   font-family: var(--f-serif);
   font-size: 1.5rem;
+}
+
+/* Pointer devices keep the original reveal-on-hover behaviour. */
+@media (hover: hover) and (pointer: fine) {
+  .gallery-overlay { opacity: 0; }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .gallery-item:hover img { transform: scale(1.05); }
 }
 
 /* About Section */
@@ -469,6 +479,12 @@ footer {
   font-size: 1.5rem;
   color: var(--c-bg);
   transition: var(--transition);
+  /* 44px minimum tap area — the bare glyphs were only 21px wide. */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
 }
 
 .footer-links a:hover {
@@ -521,10 +537,12 @@ footer {
   flex: 0 1 320px;
 }
 
-.pricing-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-  border-color: var(--c-accent);
+@media (hover: hover) and (pointer: fine) {
+  .pricing-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+    border-color: var(--c-accent);
+  }
 }
 
 .pricing-card.popular {
@@ -580,11 +598,15 @@ footer {
   color: var(--c-accent-dark);
 }
 
+/* Only meaningful for the mobile swipe strip; the desktop grid shows everything. */
+.pricing-hint { display: none; }
+
 /* Sticky WhatsApp */
 .sticky-wa {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  /* Clear the iPhone home-indicator bar instead of sitting under it. */
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  right: calc(20px + env(safe-area-inset-right, 0px));
   width: 60px;
   height: 60px;
   background-color: #25D366;
@@ -654,7 +676,14 @@ footer {
     opacity: 1;
     pointer-events: auto;
   }
-  .nav-links a { font-size: 1.25rem; }
+  /* Roomy tap rows: the bare links were only 24px tall. */
+  .nav-links a {
+    font-size: 1.25rem;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 0.5rem;
+  }
   .nav-cta-mobile { display: block; margin-top: 1rem; }
 
   .section { padding: 3.5rem 5%; }
@@ -676,19 +705,40 @@ footer {
   .services-grid, .pricing-grid { gap: 1.25rem; }
   .service-card, .pricing-card { padding: 2rem 1.5rem; }
 
-  /* Pricing becomes a horizontal snap-scroll strip to avoid a tall stack */
+  /* Pricing becomes a horizontal snap-scroll strip to avoid a tall stack.
+     `flex-wrap: nowrap` is REQUIRED here: the base rule wraps (so an incomplete
+     desktop row centers), and without resetting it the cards wrapped into a
+     2300px-tall stack and the snap-scroll silently did nothing. */
   .pricing-grid {
     display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
     padding-bottom: 0.5rem;
     margin: 0 -5%;
     padding-left: 5%;
     padding-right: 5%;
   }
+  .pricing-grid::-webkit-scrollbar { display: none; }
   .pricing-card {
     flex: 0 0 82%;
     scroll-snap-align: center;
+  }
+
+  /* Swipe affordance: without it the peeking card is the only hint there's more */
+  .pricing-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--c-text-muted);
   }
 
   .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 0.85rem; }
@@ -738,14 +788,22 @@ footer {
 
 .modal-close {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
+  top: 0.75rem;
+  right: 0.75rem;
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
+  line-height: 1;
   color: var(--c-text-muted);
   cursor: pointer;
   transition: color 0.3s;
+  /* Was a 14x27 hit area — too small to close reliably with a thumb. */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
 }
 
 .modal-close:hover {
