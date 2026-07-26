@@ -6,7 +6,12 @@
  */
 import { list, get, put } from '@vercel/blob';
 import { leerSesion } from '../../lib/auth.js';
-import { enviarCorreo, correoCitaConfirmada, correoCitaRechazada } from '../../lib/email.js';
+import {
+  enviarCorreo,
+  correoCitaConfirmada,
+  correoCitaRechazada,
+  correoCitaReprogramar,
+} from '../../lib/email.js';
 import { llamarServicio } from '../../lib/whatsapp.js';
 
 /**
@@ -21,9 +26,15 @@ async function avisarPorWhatsapp(cita, estado) {
   if (!destino) return;
 
   const cuando = [cita.fecha, cita.hora].filter(Boolean).join(' a las ');
-  const texto = estado === 'confirmada'
-    ? `Hola${cita.nombre ? ' ' + String(cita.nombre).split(' ')[0] : ''}! Tu cita de ${cita.plan || 'belleza'}${cuando ? ` para el ${cuando}` : ''} quedo CONFIRMADA. Te esperamos en el estudio.`
-    : `Hola${cita.nombre ? ' ' + String(cita.nombre).split(' ')[0] : ''}, lamentablemente no podemos tomar tu cita${cuando ? ` del ${cuando}` : ''}. Escribenos y buscamos otro horario que te sirva.`;
+  const saludo = `Hola${cita.nombre ? ' ' + String(cita.nombre).split(' ')[0] : ''}`;
+
+  const MENSAJES = {
+    confirmada: `${saludo}! Tu cita de ${cita.plan || 'belleza'}${cuando ? ` para el ${cuando}` : ''} quedo CONFIRMADA. Te esperamos en el estudio.`,
+    rechazada: `${saludo}, lamentablemente no podemos tomar tu cita${cuando ? ` del ${cuando}` : ''}. Escribenos y buscamos otro horario que te sirva.`,
+    reprogramar: `${saludo}, necesitamos mover tu cita de ${cita.plan || 'belleza'}${cuando ? ` del ${cuando}` : ''}. Tu reserva sigue en pie: dime que otro dia y hora te quedan bien y la reagendo enseguida.`,
+  };
+  const texto = MENSAJES[estado];
+  if (!texto) return;
 
   try {
     await llamarServicio('notificar', { metodo: 'POST', cuerpo: { destino, texto } });
@@ -32,7 +43,7 @@ async function avisarPorWhatsapp(cita, estado) {
   }
 }
 
-const PERMITIDOS = new Set(['en_proceso', 'confirmada', 'rechazada']);
+const PERMITIDOS = new Set(['en_proceso', 'confirmada', 'rechazada', 'reprogramar']);
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -73,6 +84,7 @@ export default async function handler(req, res) {
     if (estado !== anterior && cita.correo) {
       const plantilla = estado === 'confirmada' ? correoCitaConfirmada
         : estado === 'rechazada' ? correoCitaRechazada
+        : estado === 'reprogramar' ? correoCitaReprogramar
         : null;
       if (plantilla) {
         const { asunto, html } = plantilla(cita);

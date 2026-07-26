@@ -113,6 +113,7 @@ input,textarea,select{font-family:inherit;font-size:16px} /* 16px evita el zoom 
 .estado.en_proceso{background:var(--warn-bg);color:var(--warn)}
 .estado.confirmada{background:var(--ok-bg);color:var(--ok)}
 .estado.rechazada{background:#F3EFEE;color:var(--muted)}
+.estado.reprogramar{background:#EAF0F8;color:#3B5C86}
 .pill{display:inline-block;padding:.2rem .6rem;border-radius:100px;font-size:.72rem;
   background:#F4EDE6;color:var(--accent-dark)}
 .mini{min-height:40px;padding:.45rem 1rem;border-radius:100px;font-size:.7rem;font-weight:600;
@@ -323,6 +324,7 @@ a.enlace{color:var(--accent-dark);text-decoration:none;word-break:break-all;
           <button class="filtro activo" data-estado="todas" type="button">Todas</button>
           <button class="filtro" data-estado="en_proceso" type="button">En proceso</button>
           <button class="filtro" data-estado="confirmada" type="button">Confirmadas</button>
+          <button class="filtro" data-estado="reprogramar" type="button">A reprogramar</button>
           <button class="filtro" data-estado="rechazada" type="button">Rechazadas</button>
         </div>
       </div>
@@ -538,14 +540,22 @@ function pintarCitas(lista) {
   $('vacioCitas').hidden = lista.length > 0;
   $('listaCitas').innerHTML = lista.map((c) => {
     const estado = c.estado || 'en_proceso';
-    const etiqueta = { en_proceso: 'En proceso', confirmada: 'Confirmada', rechazada: 'Rechazada' }[estado] || estado;
+    const etiqueta = {
+      en_proceso: 'En proceso', confirmada: 'Confirmada',
+      rechazada: 'Rechazada', reprogramar: 'A reprogramar',
+    }[estado] || estado;
     const tel = String(c.telefono || '').replace(/\D/g, '');
-    const acciones = estado === 'confirmada'
-      ? `<button class="mini" data-accion="rechazada" data-id="${escapar(c.id)}">Cancelar</button>`
-      : estado === 'rechazada'
-        ? `<button class="mini si" data-accion="confirmada" data-id="${escapar(c.id)}">Aceptar</button>`
-        : `<button class="mini si" data-accion="confirmada" data-id="${escapar(c.id)}">Aceptar</button>
-           <button class="mini" data-accion="rechazada" data-id="${escapar(c.id)}">Rechazar</button>`;
+
+    const aceptar = `<button class="mini si" data-accion="confirmada" data-id="${escapar(c.id)}">Aceptar</button>`;
+    const mover = `<button class="mini" data-accion="reprogramar" data-id="${escapar(c.id)}">Reprogramar</button>`;
+    const rechazar = `<button class="mini" data-accion="rechazada" data-id="${escapar(c.id)}">Rechazar</button>`;
+
+    // Reprogramar se ofrece siempre que la cita siga viva: es lo que se necesita cuando
+    // hay que mover una hora sin perder a la clienta.
+    const acciones = estado === 'confirmada' ? `${mover}${rechazar}`
+      : estado === 'rechazada' ? aceptar
+      : estado === 'reprogramar' ? `${aceptar}${rechazar}`
+      : `${aceptar}${mover}${rechazar}`;
     return `<article class="card">
       <div class="card-top">
         <div>

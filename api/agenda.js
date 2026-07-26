@@ -39,8 +39,11 @@ export default async function handler(req, res) {
       )
     ).filter(Boolean);
 
+    // Una cita rechazada o pendiente de reprogramar ya no ocupa el sitio: su hueco vuelve
+    // a estar libre para que otra clienta lo pueda tomar.
+    const LIBERAN = new Set(['rechazada', 'reprogramar']);
     const ocupados = citas
-      .filter((c) => (c.estado || 'en_proceso') !== 'rechazada')
+      .filter((c) => !LIBERAN.has(c.estado || 'en_proceso'))
       .filter((c) => c.fechaISO && c.hora24)
       .map((c) => ({
         id: c.id,
