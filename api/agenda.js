@@ -48,6 +48,9 @@ export default async function handler(req, res) {
       .map((c) => ({
         id: c.id,
         nombre: c.nombre,
+        // Sirve para reconocer que un "choque" es en realidad la cita de la misma persona,
+        // cuando confirma dos veces seguidas.
+        contacto: c.telefono || '',
         fecha: c.fechaISO,
         hora: c.hora24,
         duracion: Number(c.duracionMin) || DURACION_POR_DEFECTO,
