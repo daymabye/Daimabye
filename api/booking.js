@@ -17,6 +17,27 @@ const LARGOS = {
 
 const CORREO_VALIDO = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
+
+/** Deja "2026-08-15" tal cual; cualquier otra cosa, vacia. */
+function normalizarFecha(v) {
+  return /^\d{4}-\d{2}-\d{2}$/.test(String(v || '').trim()) ? String(v).trim() : '';
+}
+
+/** "20:00", "8:00 PM" y "8 pm" -> "20:00". Los rangos aproximados de la web quedan vacios. */
+function normalizarHora(v) {
+  const t = String(v || '').trim().toLowerCase();
+  if (/\d{1,2}\s*[:.]?\d{0,2}\s*[-–]/.test(t)) return ''; // es un rango, no una hora
+  const m = t.match(/^(\d{1,2})(?:[:.](\d{2}))?\s*(am|pm|a\.m\.|p\.m\.)?$/);
+  if (!m) return '';
+  let h = Number(m[1]);
+  const min = m[2] ? Number(m[2]) : 0;
+  const sufijo = (m[3] || '').replace(/\./g, '');
+  if (sufijo.startsWith('p') && h < 12) h += 12;
+  if (sufijo.startsWith('a') && h === 12) h = 0;
+  if (h > 23 || min > 59) return '';
+  return `${String(h).padStart(2, '0')}:${String(min).padStart(2, '0')}`;
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -50,8 +71,11 @@ export default async function handler(req, res) {
     hora: campo('hora'),
     // Fecha y hora normalizadas: lo de arriba es como lo dijo la clienta ("el sabado a
     // las 4"), esto es lo que permite saber si un horario ya esta ocupado.
-    fechaISO: /^\d{4}-\d{2}-\d{2}$/.test(campo('fechaISO')) ? campo('fechaISO') : '',
-    hora24: /^\d{2}:\d{2}$/.test(campo('hora24')) ? campo('hora24') : '',
+    // Si no vienen normalizadas, se deducen: el formulario de la web ya manda la fecha en
+    // formato ISO porque usa un selector de fecha. La hora de la web es un rango aproximado
+    // ("Tarde 15:00-19:00"), asi que ahi no hay hora exacta que bloquear, y se deja vacia.
+    fechaISO: normalizarFecha(campo('fechaISO')) || normalizarFecha(campo('fecha')),
+    hora24: normalizarHora(campo('hora24')) || normalizarHora(campo('hora')),
     duracionMin: Number.parseInt(cuerpo.duracionMin, 10) > 0 ? Number.parseInt(cuerpo.duracionMin, 10) : 60,
     sector: campo('sector'),
     // Toda cita nace SIN confirmar: la administradora la acepta desde el panel.
