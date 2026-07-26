@@ -7,6 +7,30 @@
 import { list, get, put } from '@vercel/blob';
 import { leerSesion } from '../../lib/auth.js';
 import { enviarCorreo, correoCitaConfirmada, correoCitaRechazada } from '../../lib/email.js';
+import { llamarServicio } from '../../lib/whatsapp.js';
+
+/**
+ * Aviso por WhatsApp a la clienta, en paralelo al correo.
+ *
+ * Muchas clientas escriben por WhatsApp y nunca abren el correo: si solo se les avisa por
+ * mail, se quedan sin saber si su cita quedo confirmada. Si falla, no pasa nada mas: el
+ * estado de la cita ya esta guardado.
+ */
+async function avisarPorWhatsapp(cita, estado) {
+  const destino = String(cita.telefono || '').trim();
+  if (!destino) return;
+
+  const cuando = [cita.fecha, cita.hora].filter(Boolean).join(' a las ');
+  const texto = estado === 'confirmada'
+    ? `Hola${cita.nombre ? ' ' + String(cita.nombre).split(' ')[0] : ''}! Tu cita de ${cita.plan || 'belleza'}${cuando ? ` para el ${cuando}` : ''} quedo CONFIRMADA. Te esperamos en el estudio.`
+    : `Hola${cita.nombre ? ' ' + String(cita.nombre).split(' ')[0] : ''}, lamentablemente no podemos tomar tu cita${cuando ? ` del ${cuando}` : ''}. Escribenos y buscamos otro horario que te sirva.`;
+
+  try {
+    await llamarServicio('notificar', { metodo: 'POST', cuerpo: { destino, texto } });
+  } catch (err) {
+    console.error('[estado] no se pudo avisar por WhatsApp:', err?.message || err);
+  }
+}
 
 const PERMITIDOS = new Set(['en_proceso', 'confirmada', 'rechazada']);
 
@@ -54,6 +78,12 @@ export default async function handler(req, res) {
         const { asunto, html } = plantilla(cita);
         await enviarCorreo({ para: cita.correo, asunto, html }).catch(() => false);
       }
+    }
+
+    // El aviso por WhatsApp va aparte del correo: no depende de que la clienta haya
+    // dado un correo valido, solo de que tengamos su numero.
+    if (estado !== anterior && estado !== 'en_proceso') {
+      await avisarPorWhatsapp(cita, estado);
     }
 
     return res.status(200).json({ ok: true, estado });

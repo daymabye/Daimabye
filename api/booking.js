@@ -12,6 +12,7 @@ import { enviarCorreo, correoParaClienta, correoParaAdmin } from '../lib/email.j
 const LARGOS = {
   nombre: 80, correo: 120, telefono: 30, instagram: 40,
   plan: 60, fecha: 20, hora: 40, sector: 80, notas: 500,
+  fechaISO: 10, hora24: 5,
 };
 
 const CORREO_VALIDO = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
@@ -47,6 +48,11 @@ export default async function handler(req, res) {
     plan: campo('plan') || 'Consulta general',
     fecha: campo('fecha'),
     hora: campo('hora'),
+    // Fecha y hora normalizadas: lo de arriba es como lo dijo la clienta ("el sabado a
+    // las 4"), esto es lo que permite saber si un horario ya esta ocupado.
+    fechaISO: /^\d{4}-\d{2}-\d{2}$/.test(campo('fechaISO')) ? campo('fechaISO') : '',
+    hora24: /^\d{2}:\d{2}$/.test(campo('hora24')) ? campo('hora24') : '',
+    duracionMin: Number.parseInt(cuerpo.duracionMin, 10) > 0 ? Number.parseInt(cuerpo.duracionMin, 10) : 60,
     sector: campo('sector'),
     // Toda cita nace SIN confirmar: la administradora la acepta desde el panel.
     estado: 'en_proceso',
