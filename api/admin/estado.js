@@ -51,8 +51,13 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Método no permitido' });
   }
 
+  // Dos formas de entrar: sesión de navegador (panel) o el token interno que ya usa el
+  // bot de WhatsApp para /api/agenda - así /cancelar y /confirmar pueden escribir el
+  // estado real sin pedirle a Daima que abra el panel.
   const sesion = leerSesion(req, process.env.SESSION_SECRET || '');
-  if (!sesion) return res.status(401).json({ error: 'No autorizado' });
+  const tokenBot = String(req.headers.authorization || '').replace(/^Bearer\s+/i, '');
+  const esBot = Boolean(process.env.WHATSAPP_API_TOKEN) && tokenBot === process.env.WHATSAPP_API_TOKEN;
+  if (!sesion && !esBot) return res.status(401).json({ error: 'No autorizado' });
 
   const { id = '', estado = '' } = (req.body && typeof req.body === 'object') ? req.body : {};
   if (!id) return res.status(400).json({ error: 'Falta el id de la cita' });
