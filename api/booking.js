@@ -115,15 +115,16 @@ export default async function handler(req, res) {
     console.error('[booking] fallo al notificar por correo:', correoMotivo);
   }
 
-  // Que el correo no salga no anula la reserva, pero SI tiene que quedar constancia: sin
-  // esto la cita se veia normal en el panel y nadie sabia que la clienta no fue avisada.
+  // Se anota el resultado real del correo, salga bien o mal: con solo registrar los
+  // fallos, un envio exitoso se quedaba en el valor por defecto (false) en la base de
+  // datos, y el panel/consultas futuras no podian distinguir "se mando" de "nunca se supo".
   if (!correoEnviado) {
     console.warn('[booking] la clienta NO recibio el correo:', cita.correo, '|', correoMotivo);
-    try {
-      await actualizarCita(cita.id, { correoEnviado, correoMotivo });
-    } catch (err) {
-      console.error('[booking] no se pudo anotar el fallo del correo:', err);
-    }
+  }
+  try {
+    await actualizarCita(cita.id, { correoEnviado, correoMotivo });
+  } catch (err) {
+    console.error('[booking] no se pudo anotar el resultado del correo:', err);
   }
 
   // Quien llama (el bot de WhatsApp) necesita saberlo para no prometerle a la clienta un
