@@ -6,7 +6,7 @@
  *
  * Solo salen las citas que de verdad ocupan el sitio: las rechazadas se ignoran.
  */
-import { list, get } from '@vercel/blob';
+import { listarCitas } from '../lib/db-citas.js';
 
 const DURACION_POR_DEFECTO = 60;
 
@@ -23,21 +23,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { blobs } = await list({ prefix: 'citas/', limit: 1000 });
-
-    const citas = (
-      await Promise.all(
-        blobs.map(async (b) => {
-          try {
-            const r = await get(b.pathname, { access: 'private', useCache: false });
-            if (!r?.stream) return null;
-            return await new Response(r.stream).json();
-          } catch {
-            return null;
-          }
-        })
-      )
-    ).filter(Boolean);
+    const citas = await listarCitas();
 
     // Una cita rechazada o pendiente de reprogramar ya no ocupa el sitio: su hueco vuelve
     // a estar libre para que otra clienta lo pueda tomar.
@@ -48,13 +34,13 @@ export default async function handler(req, res) {
       .map((c) => ({
         id: c.id,
         nombre: c.nombre,
-        // Sirve para reconocer que un "choque" es en realidad la cita de la misma persona,
-        // cuando confirma dos veces seguidas.
+        plan: c.plan || "",
         contacto: c.telefono || '',
         fecha: c.fechaISO,
         hora: c.hora24,
         duracion: Number(c.duracionMin) || DURACION_POR_DEFECTO,
         estado: c.estado || 'en_proceso',
+        correo: c.correo || '',
       }));
 
     res.setHeader('Cache-Control', 'no-store');

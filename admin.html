@@ -6,6 +6,9 @@
 <title>Panel · Daima Belleza</title>
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#2D2926">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;600&display=swap">
@@ -73,13 +76,13 @@ input,textarea,select{font-family:inherit;font-size:16px} /* 16px evita el zoom 
 .vista.on{display:block}
 
 /* ---------- Navegacion inferior (pulgar) ---------- */
-.nav{position:fixed;left:0;right:0;bottom:0;z-index:40;display:grid;grid-template-columns:repeat(3,1fr);
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:40;display:grid;grid-template-columns:repeat(4,1fr);
   background:rgba(252,251,250,.97);backdrop-filter:blur(12px);border-top:1px solid var(--border);
   padding-bottom:env(safe-area-inset-bottom)}
 .nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;
-  min-height:60px;background:none;border:none;font-size:.65rem;letter-spacing:.04em;color:var(--muted);
-  text-transform:uppercase;position:relative}
-.nav button svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.6}
+  min-height:60px;background:none;border:none;font-size:.62rem;letter-spacing:.02em;color:var(--muted);
+  text-transform:uppercase;position:relative;padding:0 .2rem}
+.nav button svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.6}
 .nav button.on{color:var(--text)}
 .nav .badge{position:absolute;top:8px;right:calc(50% - 22px);min-width:17px;height:17px;padding:0 4px;
   border-radius:9px;background:var(--bad);color:#fff;font-size:.62rem;font-weight:600;
@@ -184,6 +187,29 @@ a.enlace{color:var(--accent-dark);text-decoration:none;word-break:break-all;
 .hilo-top .titulo strong{display:block;font-size:.95rem;overflow:hidden;
   text-overflow:ellipsis;white-space:nowrap}
 .hilo-top .titulo small{font-size:.7rem;color:var(--muted)}
+.tag{display:inline-flex;align-items:center;gap:.25rem;font-size:.68rem;font-weight:600;
+  padding:.1rem .4rem;border-radius:100px;background:var(--border);color:var(--muted);white-space:nowrap}
+.tag.vip{background:#F6EDDA;color:#8A6A2F}
+.tag.frecuente{background:#EAF3EC;color:#3D6B48}
+.tag.perdida{background:#F1EEF6;color:#5F5378}
+@media (prefers-color-scheme:dark){
+  .tag.vip{background:#3B3018;color:#E8CE9A}
+  .tag.frecuente{background:#22392A;color:#A8D3B3}
+  .tag.perdida{background:#2E2A3A;color:#C3B8DE}
+}
+.ficha{flex-shrink:0;border-bottom:1px solid var(--border);background:var(--surface);
+  padding:.7rem 1rem;font-size:.8rem;display:none}
+.ficha.on{display:block}
+.ficha .lineas{color:var(--text);line-height:1.5;white-space:pre-wrap}
+.ficha .lineas b{color:var(--muted);font-weight:600}
+.ficha .gps{display:flex;align-items:center;gap:.5rem;margin-top:.5rem;flex-wrap:wrap}
+.ficha .gps a{display:inline-flex;align-items:center;gap:.35rem;text-decoration:none;
+  background:var(--ok);color:#fff;padding:.35rem .7rem;border-radius:100px;font-size:.75rem;font-weight:600}
+.ficha .gps span{color:var(--muted);font-size:.75rem}
+.ficha .cabecera{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-bottom:.35rem}
+.ficha .cabecera strong{font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.ficha .cabecera button{background:none;border:none;color:var(--muted);font-size:.72rem;
+  text-decoration:underline;padding:0;cursor:pointer}
 .hilo-msgs{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.5rem;
   -webkit-overflow-scrolling:touch}
 .msg{max-width:82%;padding:.6rem .85rem;border-radius:14px;font-size:.9rem;
@@ -203,6 +229,20 @@ a.enlace{color:var(--accent-dark);text-decoration:none;word-break:break-all;
 .escribir button{width:46px;height:46px;border-radius:50%;background:var(--text);color:var(--bg);
   border:none;flex-shrink:0;display:grid;place-items:center;font-size:1.1rem}
 .escribir button:disabled{opacity:.4}
+
+.editor{border-top:1px solid var(--border);margin-top:.75rem;padding-top:.75rem;display:none}
+.editor.on{display:block}
+.editor label{display:block;font-size:.72rem;color:var(--muted);margin:.5rem 0 .2rem}
+.editor input,.editor select{width:100%;font-size:16px;padding:.55rem .65rem;
+  border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--text)}
+.editor .par{display:flex;gap:.5rem}
+.editor .par>div{flex:1}
+.editor .opciones{display:flex;flex-wrap:wrap;gap:.9rem;margin:.7rem 0 .2rem;font-size:.78rem}
+.editor .opciones label{display:flex;align-items:center;gap:.35rem;margin:0;color:var(--text)}
+.editor .opciones input{width:auto}
+.aviso-correo{display:flex;gap:.4rem;align-items:flex-start;background:#FDF3F2;color:#8C3A31;
+  border-radius:10px;padding:.5rem .6rem;font-size:.75rem;margin-top:.6rem;line-height:1.4}
+@media (prefers-color-scheme:dark){.aviso-correo{background:#3A211E;color:#F0B5AC}}
 
 /* ---------- Ajustes ---------- */
 .ajuste{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
@@ -231,6 +271,26 @@ a.enlace{color:var(--accent-dark);text-decoration:none;word-break:break-all;
   background:var(--bg);color:var(--text)}
 .agregar input:focus{outline:none;border-color:var(--accent-dark)}
 
+.agregar-producto{display:flex;flex-direction:column;gap:.7rem}
+.agregar-producto label{display:flex;flex-direction:column;gap:.3rem;font-size:.8rem;color:var(--muted)}
+.agregar-producto input,.agregar-producto textarea{padding:.7rem .9rem;border:1px solid var(--border);
+  border-radius:10px;background:var(--bg);color:var(--text);font:inherit}
+.agregar-producto input:focus,.agregar-producto textarea:focus{outline:none;border-color:var(--accent-dark)}
+.agregar-producto textarea{resize:vertical}
+.prod-preview{width:100%;max-width:220px;border-radius:var(--radius);border:1px solid var(--border)}
+
+.cards-producto{display:grid;grid-template-columns:1fr;gap:.75rem}
+.card.producto{display:flex;gap:.85rem;align-items:flex-start;padding:.85rem}
+.card.producto.oculto{opacity:.55}
+.prod-thumb{width:64px;height:64px;border-radius:10px;object-fit:cover;flex-shrink:0;background:var(--bg)}
+.prod-sin-foto{display:flex;align-items:center;justify-content:center;font-size:.65rem;
+  color:var(--muted);text-align:center;border:1px dashed var(--border)}
+.prod-info{flex:1;min-width:0}
+.prod-precio{color:var(--accent-dark);font-weight:700;font-size:.95rem;margin:.15rem 0}
+.prod-desc{font-size:.8rem;color:var(--muted);word-break:break-word}
+.card.producto .acciones{flex-direction:column;align-items:flex-end;flex-shrink:0}
+.card.producto .acciones .btn{flex:0 0 auto}
+
 #mapa{height:260px;border-radius:var(--radius);border:1px solid var(--border);margin-bottom:.5rem;z-index:1}
 .nota{font-size:.72rem;color:var(--muted);margin-bottom:1.5rem}
 .tabla-wrap{display:none}
@@ -246,7 +306,7 @@ a.enlace{color:var(--accent-dark);text-decoration:none;word-break:break-all;
   .toolbar{grid-template-columns:1fr auto;align-items:center}
   #mapa{height:360px}
   .panel.on{padding-bottom:0}
-  .nav{position:sticky;top:0;bottom:auto;grid-template-columns:repeat(3,auto);
+  .nav{position:sticky;top:0;bottom:auto;grid-template-columns:repeat(4,auto);
     justify-content:center;gap:.5rem;border-top:none;border-bottom:1px solid var(--border);z-index:29}
   .nav button{flex-direction:row;gap:.5rem;min-height:52px;padding:0 1.25rem;font-size:.72rem}
   .nav .badge{position:static;margin-left:.15rem}
@@ -307,6 +367,10 @@ a.enlace{color:var(--accent-dark);text-decoration:none;word-break:break-all;
       WhatsApp
       <span class="badge" id="badgeWa" hidden>0</span>
     </button>
+    <button type="button" data-vista="tienda">
+      <svg viewBox="0 0 24 24"><path d="M3 9l1.5-5h15L21 9M3 9v11a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9M3 9h18M8 13a3 3 0 0 0 6 0"/></svg>
+      Tienda
+    </button>
     <button type="button" data-vista="ajustes">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-2.9 1.2 2 2 0 1 1-4 0 1.7 1.7 0 0 0-2.9-1.2l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.7 1.7 0 0 0 3 15a2 2 0 1 1 0-4 1.7 1.7 0 0 0 1.2-2.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1A1.7 1.7 0 0 0 10 4.6a2 2 0 1 1 4 0 1.7 1.7 0 0 0 2.9 1.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1A1.7 1.7 0 0 0 21 11a2 2 0 1 1 0 4z"/></svg>
       Ajustes
@@ -360,6 +424,11 @@ a.enlace{color:var(--accent-dark);text-decoration:none;word-break:break-all;
       </div>
     </section>
 
+    <!-- ---------- Vista: Tienda ---------- -->
+    <section class="vista" id="vista-tienda">
+      <div id="tienda"><div class="cargando">Cargando…</div></div>
+    </section>
+
     <!-- ---------- Vista: Ajustes ---------- -->
     <section class="vista" id="vista-ajustes">
       <div id="ajustes"><div class="cargando">Cargando…</div></div>
@@ -376,6 +445,7 @@ a.enlace{color:var(--accent-dark);text-decoration:none;word-break:break-all;
       <small id="hiloSub"></small>
     </div>
   </div>
+  <div class="ficha" id="hiloFicha"></div>
   <div class="hilo-msgs" id="hiloMsgs"></div>
   <div class="hilo-pie">
     <div class="hilo-aviso" id="hiloAviso"></div>
@@ -479,7 +549,7 @@ async function abrirPanel(previo) {
 }
 
 /* ============ Navegación ============ */
-const TITULOS = { citas: 'Citas', whatsapp: 'WhatsApp', ajustes: 'Ajustes' };
+const TITULOS = { citas: 'Citas', whatsapp: 'WhatsApp', tienda: 'Tienda', ajustes: 'Ajustes' };
 $('nav').addEventListener('click', (e) => {
   const b = e.target.closest('[data-vista]');
   if (!b) return;
@@ -489,6 +559,7 @@ $('nav').addEventListener('click', (e) => {
   $('tituloVista').textContent = TITULOS[v];
   $('btnCSV').hidden = v !== 'citas';
   if (v === 'whatsapp') { refrescarConexion(); refrescarChats(); }
+  if (v === 'tienda') cargarProductos();
   if (v === 'ajustes') cargarAjustes();
   if (v === 'citas') setTimeout(() => mapa && mapa.invalidateSize(), 60);
   window.scrollTo(0, 0);
@@ -549,6 +620,7 @@ function pintarCitas(lista) {
     const aceptar = `<button class="mini si" data-accion="confirmada" data-id="${escapar(c.id)}">Aceptar</button>`;
     const mover = `<button class="mini" data-accion="reprogramar" data-id="${escapar(c.id)}">Reprogramar</button>`;
     const rechazar = `<button class="mini" data-accion="rechazada" data-id="${escapar(c.id)}">Rechazar</button>`;
+    const editar = `<button class="mini" data-editar="${escapar(c.id)}">Editar</button>`;
 
     // Reprogramar se ofrece siempre que la cita siga viva: es lo que se necesita cuando
     // hay que mover una hora sin perder a la clienta.
@@ -556,6 +628,13 @@ function pintarCitas(lista) {
       : estado === 'rechazada' ? aceptar
       : estado === 'reprogramar' ? `${aceptar}${rechazar}`
       : `${aceptar}${mover}${rechazar}`;
+
+    // El correo que tomo el bot pudo salir mal, o el proveedor pudo rechazarlo. Si la
+    // clienta no fue avisada por mail hay que verlo aqui, no en los logs del servidor.
+    const fallo = c.correoEnviado === false
+      ? `<div class="aviso-correo"><span>⚠️</span><span><strong>No le llegó el correo.</strong>
+           ${escapar(c.correoMotivo || '')} Ya se le confirmó por WhatsApp.</span></div>`
+      : '';
     return `<article class="card">
       <div class="card-top">
         <div>
@@ -572,10 +651,87 @@ function pintarCitas(lista) {
         ${c.notas ? `<div><dt>Notas</dt><dd>${escapar(c.notas)}</dd></div>` : ''}
         <div><dt>Reservó</dt><dd>${cuando(c.creadaEn)}</dd></div>
       </dl>
-      <div class="acciones">${acciones}</div>
+      ${fallo}
+      <div class="acciones">${acciones}${editar}</div>
+      <form class="editor" data-form="${escapar(c.id)}">
+        <div class="par">
+          <div><label>Nombre</label><input name="nombre" value="${escapar(c.nombre || '')}" maxlength="80"></div>
+          <div><label>Servicio</label><input name="plan" value="${escapar(c.plan || '')}" maxlength="60"></div>
+        </div>
+        <label>Correo</label>
+        <input name="correo" type="email" inputmode="email" value="${escapar(c.correo || '')}" maxlength="120">
+        <div class="par">
+          <div><label>Fecha</label><input name="fechaISO" type="date" value="${escapar(c.fechaISO || '')}"></div>
+          <div><label>Hora</label><input name="hora24" type="time" value="${escapar(c.hora24 || '')}"></div>
+        </div>
+        <label>Sector</label>
+        <input name="sector" value="${escapar(c.sector || '')}" maxlength="80">
+        <div class="opciones">
+          <label><input type="checkbox" name="reenviarCorreo"> Reenviar el correo</label>
+          <label><input type="checkbox" name="avisarPorWhatsapp" checked> Avisarle por WhatsApp</label>
+        </div>
+        <div class="acciones" style="margin-top:.6rem">
+          <button class="mini si" type="submit">Guardar</button>
+          <button class="mini" type="button" data-cancelar="${escapar(c.id)}">Cancelar</button>
+        </div>
+      </form>
     </article>`;
   }).join('');
 }
+
+/* ---- Editar una cita ---- */
+document.addEventListener('click', (e) => {
+  const abrir = e.target.closest('[data-editar]');
+  if (abrir) {
+    const f = document.querySelector(`[data-form="${CSS.escape(abrir.dataset.editar)}"]`);
+    if (f) f.classList.toggle('on');
+    return;
+  }
+  const cerrar = e.target.closest('[data-cancelar]');
+  if (cerrar) {
+    const f = document.querySelector(`[data-form="${CSS.escape(cerrar.dataset.cancelar)}"]`);
+    if (f) f.classList.remove('on');
+  }
+});
+
+document.addEventListener('submit', async (e) => {
+  const form = e.target.closest('[data-form]');
+  if (!form) return;
+  e.preventDefault();
+
+  const id = form.dataset.form;
+  const datos = new FormData(form);
+  const cuerpo = { id };
+  // Solo viaja lo que cambio de verdad: asi el historial de la cita no se llena de ruido.
+  const antes = CITAS.find((c) => c.id === id) || {};
+  for (const campo of ['nombre', 'plan', 'correo', 'fechaISO', 'hora24', 'sector']) {
+    const v = String(datos.get(campo) || '').trim();
+    if (v && v !== String(antes[campo] || '')) cuerpo[campo] = v;
+  }
+  cuerpo.reenviarCorreo = datos.get('reenviarCorreo') === 'on';
+  cuerpo.avisarPorWhatsapp = datos.get('avisarPorWhatsapp') === 'on';
+
+  const guardar = form.querySelector('[type="submit"]');
+  guardar.disabled = true;
+  guardar.textContent = 'Guardando…';
+  try {
+    const r = await api('/api/admin/editar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(cuerpo),
+    });
+    Object.assign(antes, r.cita || {});
+    if (cuerpo.reenviarCorreo && r.correoEnviado === false) {
+      alert('Se guardó, pero el correo no salió:\n\n' + (r.correoMotivo || ''));
+    }
+    aplicarFiltros();
+    pintarStats();
+  } catch (ex) {
+    alert(ex.message);
+    guardar.disabled = false;
+    guardar.textContent = 'Guardar';
+  }
+});
 
 document.addEventListener('click', async (e) => {
   const boton = e.target.closest('[data-accion]');
@@ -607,11 +763,19 @@ document.addEventListener('click', async (e) => {
 async function refrescarConexion() {
   const caja = $('conexion');
   try {
-    const e = await api('/api/admin/whatsapp/estado');
+    const e = await api('/api/admin/whatsapp?tipo=estado');
     if (e.conectado) {
+      // Un bloqueo de la protección antiban se nota solo en que el bot deja de contestar.
+      // Ya pasó una vez y no había forma de verlo sin entrar al servidor: ahora se avisa.
+      const bloqueo = e.envios?.bloqueado
+        ? `<div class="aviso-correo" style="margin-top:.6rem"><span>⚠️</span><span>
+             <strong>Los envíos están bloqueados.</strong> La protección antispam llegó a su
+             tope de ${escapar(String(e.envios.topeHoy))} mensajes hoy (${escapar(String(e.envios.enviadosHoy))} enviados).
+             El bot recibe pero no puede contestar.</span></div>`
+        : '';
       caja.innerHTML = `
         <div class="conexion-cab"><span class="punto on"></span><strong>Conectado</strong></div>
-        <p>Atendiendo desde el ${escapar(e.numero || 'número del estudio')}.</p>`;
+        <p>Atendiendo desde el ${escapar(e.numero || 'número del estudio')}.</p>${bloqueo}`;
     } else if (e.codigo) {
       caja.innerHTML = `
         <div class="conexion-cab"><span class="punto off"></span><strong>Falta vincular</strong></div>
@@ -637,7 +801,7 @@ $('conexion').addEventListener('click', async (e) => {
   const b = e.target.closest('#btnCodigo');
   b.disabled = true; b.textContent = 'Pidiendo…';
   try {
-    await api('/api/admin/whatsapp/estado', {
+    await api('/api/admin/whatsapp?tipo=estado', {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}',
     });
     await refrescarConexion();
@@ -650,7 +814,7 @@ $('conexion').addEventListener('click', async (e) => {
 /* ============ WhatsApp: lista de chats ============ */
 async function refrescarChats() {
   try {
-    const d = await api('/api/admin/whatsapp/conversaciones');
+    const d = await api('/api/admin/whatsapp?tipo=conversaciones');
     CHATS = d.conversaciones || [];
   } catch {
     CHATS = [];
@@ -673,11 +837,13 @@ async function refrescarChats() {
       <span class="chat-cuerpo">
         <span class="chat-nombre">
           <span>${escapar(quien)}</span>
+          ${c.clienta ? `<span class="tag ${escapar(c.clienta.clave)}" title="${escapar(c.clienta.texto)}">${c.clienta.emoji}</span>` : ''}
           ${c.no_leidos ? `<span class="contador">${c.no_leidos}</span>` : ''}
         </span>
         <span class="chat-ultimo">${escapar(c.ultimo_mensaje || '')}</span>
         <span class="chat-meta">
           <span class="etiqueta${c.modo === 'manual' ? ' manual' : ''}">${c.modo === 'manual' ? 'La atiendes tú' : 'Bot'}</span>
+          ${c.clienta ? `<span class="etiqueta">${escapar(c.clienta.texto)}</span>` : ''}
           <span class="etiqueta">${cuando(c.actualizado_en)}</span>
         </span>
       </span>
@@ -699,7 +865,10 @@ async function abrirHilo(jid) {
   $('hiloMsgs').innerHTML = '<div class="cargando">Cargando…</div>';
   $('hilo').classList.add('on');
   document.body.style.overflow = 'hidden';
+  $('hiloFicha').classList.remove('on');
+  $('hiloFicha').innerHTML = '';
   await cargarMensajes();
+  cargarFicha();
   timerHilo = setInterval(cargarMensajes, 5000);
 }
 
@@ -716,7 +885,7 @@ async function cargarMensajes() {
   if (!jidAbierto) return;
   let msgs;
   try {
-    const d = await api(`/api/admin/whatsapp/mensajes?jid=${encodeURIComponent(jidAbierto)}`);
+    const d = await api(`/api/admin/whatsapp?tipo=mensajes&jid=${encodeURIComponent(jidAbierto)}`);
     msgs = d.mensajes || [];
   } catch (ex) {
     $('hiloMsgs').innerHTML = `<div class="vacio">${escapar(ex.message)}</div>`;
@@ -740,6 +909,56 @@ async function cargarMensajes() {
        <button class="mini" id="btnModo" type="button">Atender yo</button>`;
 }
 
+/**
+ * Ficha de la clienta: donde esta y que quiere.
+ *
+ * Se pide aparte del hilo y no entra en el refresco de cada 5 segundos: el resumen lo
+ * escribe un modelo y no tiene sentido pagarlo cada vez que se repintan los mensajes.
+ */
+async function cargarFicha(forzar) {
+  const jid = jidAbierto;
+  if (!jid) return;
+  const caja = $('hiloFicha');
+  if (forzar) caja.innerHTML = '<div class="lineas">Actualizando…</div>';
+
+  let d;
+  try {
+    d = await api(`/api/admin/whatsapp?tipo=ficha&jid=${encodeURIComponent(jid)}${forzar ? '&forzar=1' : ''}`);
+  } catch {
+    caja.classList.remove('on');
+    return; // sin ficha se sigue pudiendo chatear: no se estorba con un error
+  }
+  if (jid !== jidAbierto) return; // cambio de chat mientras cargaba
+
+  if (!d.resumen && !d.ubicacion && !d.clienta) { caja.classList.remove('on'); return; }
+
+  const resumen = d.resumen
+    ? escapar(d.resumen).replace(/^(Quiere|Cuando|Cuándo|Donde|Dónde|Pendiente):/gm, '<b>$1:</b>')
+    : '';
+
+  const u = d.ubicacion;
+  caja.innerHTML = `
+    ${d.clienta ? `<div style="margin-bottom:.55rem">
+        <span class="tag ${escapar(d.clienta.clave)}">${d.clienta.emoji} ${escapar(d.clienta.texto)}</span>
+        ${d.clienta.ultimoServicio ? `<div style="margin-top:.35rem;color:var(--muted);font-size:.75rem">Última vez: ${escapar(d.clienta.ultimoServicio)}</div>` : ''}
+        ${d.clienta.notas ? `<div style="margin-top:.25rem;font-size:.75rem">📝 ${escapar(d.clienta.notas)}</div>` : ''}
+      </div>` : ''}
+    <div class="cabecera">
+      <strong>Resumen</strong>
+      <button type="button" id="btnFicha">Actualizar</button>
+    </div>
+    ${resumen ? `<div class="lineas">${resumen}</div>` : ''}
+    ${u ? `<div class="gps">
+        <a href="${escapar(u.mapa)}" target="_blank" rel="noopener">📍 Ver su ubicación</a>
+        <span>${escapar(u.lugar || `${u.lat.toFixed(4)}, ${u.lon.toFixed(4)}`)}</span>
+      </div>` : ''}`;
+  caja.classList.add('on');
+}
+
+$('hiloFicha').addEventListener('click', (e) => {
+  if (e.target.closest('#btnFicha')) cargarFicha(true);
+});
+
 $('hiloAviso').addEventListener('click', async (e) => {
   if (!e.target.closest('#btnModo')) return;
   const chat = CHATS.find((c) => c.jid === jidAbierto);
@@ -747,7 +966,7 @@ $('hiloAviso').addEventListener('click', async (e) => {
   const b = e.target.closest('#btnModo');
   b.disabled = true;
   try {
-    await api('/api/admin/whatsapp/mensajes', {
+    await api('/api/admin/whatsapp?tipo=mensajes', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ jid: jidAbierto, modo: nuevo }),
@@ -780,7 +999,7 @@ async function enviarMensaje() {
   const boton = $('hiloEnviar');
   boton.disabled = true;
   try {
-    await api('/api/admin/whatsapp/mensajes', {
+    await api('/api/admin/whatsapp?tipo=mensajes', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ jid: jidAbierto, texto }),
@@ -798,9 +1017,158 @@ async function enviarMensaje() {
 }
 
 /* ============ Ajustes ============ */
+/* ============ Tienda ============ */
+let PRODUCTOS = [];
+let editandoProducto = null; // id del producto en edición, o null si el formulario está en modo "agregar"
+
+async function cargarProductos() {
+  try {
+    const d = await api('/api/productos');
+    PRODUCTOS = d.productos || [];
+  } catch (ex) {
+    $('tienda').innerHTML = `<div class="vacio"><strong>Sin conexión</strong>${escapar(ex.message)}</div>`;
+    return;
+  }
+  pintarProductos();
+}
+
+/** El archivo elegido, convertido a base64 listo para mandar en JSON. */
+function archivoABase64(file) {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => resolve(r.result);
+    r.onerror = () => reject(new Error('No se pudo leer la imagen'));
+    r.readAsDataURL(file);
+  });
+}
+
+function formularioProducto(producto) {
+  const p = producto || {};
+  return `
+    <form id="formProducto" class="agregar-producto">
+      <input type="hidden" id="prodId" value="${escapar(p.id || '')}">
+      <label>Nombre<input type="text" id="prodNombre" maxlength="80" placeholder="Kit de brochas profesional" value="${escapar(p.nombre || '')}" required></label>
+      <label>Precio<input type="number" id="prodPrecio" min="0" step="0.5" inputmode="decimal" placeholder="15" value="${p.precio ?? ''}" required></label>
+      <label>Descripción<textarea id="prodDescripcion" maxlength="500" rows="2" placeholder="Set de 6 brochas para rostro y ojos">${escapar(p.descripcion || '')}</textarea></label>
+      <label>Foto<input type="file" id="prodFoto" accept="image/jpeg,image/png,image/webp"></label>
+      ${p.foto ? `<img class="prod-preview" src="${escapar(p.foto)}" alt="">` : ''}
+      <div class="acciones">
+        <button class="btn btn-primary btn-sm" id="btnGuardarProducto" type="submit">${p.id ? 'Guardar cambios' : 'Agregar producto'}</button>
+        ${p.id ? '<button class="btn btn-ghost btn-sm" id="btnCancelarEdicion" type="button">Cancelar</button>' : ''}
+      </div>
+    </form>`;
+}
+
+function pintarProductos() {
+  const editando = editandoProducto ? PRODUCTOS.find((p) => p.id === editandoProducto) : null;
+
+  const lista = PRODUCTOS.length
+    ? `<div class="cards-producto">${PRODUCTOS.map((p) => `
+        <article class="card producto${p.visible === false ? ' oculto' : ''}">
+          ${p.foto ? `<img src="${escapar(p.foto)}" alt="" class="prod-thumb">` : '<div class="prod-thumb prod-sin-foto">Sin foto</div>'}
+          <div class="prod-info">
+            <div class="card-nombre">${escapar(p.nombre)}</div>
+            <div class="prod-precio">$${escapar(String(p.precio))}</div>
+            ${p.descripcion ? `<p class="prod-desc">${escapar(p.descripcion)}</p>` : ''}
+          </div>
+          <div class="acciones">
+            <button class="switch${p.visible !== false ? ' on' : ''}" data-visible="${p.id}" type="button"
+              role="switch" aria-checked="${p.visible !== false}" aria-label="Visible en la tienda"></button>
+            <button class="btn btn-ghost btn-sm" data-editar="${p.id}" type="button">Editar</button>
+            <button class="btn btn-ghost btn-sm" data-borrar="${p.id}" type="button">Eliminar</button>
+          </div>
+        </article>`).join('')}</div>`
+    : '<div class="vacio"><strong>Todavía no hay productos</strong>Agrega el primero con el formulario de abajo.</div>';
+
+  $('tienda').innerHTML = `
+    <div class="section-title"><h2>${editando ? 'Editar producto' : 'Nuevo producto'}</h2><span>${editando ? '' : 'aparece en la web al instante'}</span></div>
+    <div class="ajuste">${formularioProducto(editando)}</div>
+    <div class="section-title"><h2>Catálogo</h2><span>${PRODUCTOS.length} producto${PRODUCTOS.length === 1 ? '' : 's'}</span></div>
+    ${lista}`;
+}
+
+$('panel').addEventListener('submit', async (e) => {
+  const form = e.target.closest('#formProducto');
+  if (!form) return;
+  e.preventDefault();
+
+  const btn = $('btnGuardarProducto');
+  btn.disabled = true;
+  btn.textContent = 'Guardando…';
+
+  const id = $('prodId').value.trim();
+  try {
+    const cuerpo = {
+      nombre: $('prodNombre').value.trim(),
+      precio: $('prodPrecio').value,
+      descripcion: $('prodDescripcion').value.trim(),
+    };
+    const archivo = $('prodFoto').files[0];
+    if (archivo) {
+      cuerpo.fotoBase64 = await archivoABase64(archivo);
+      cuerpo.fotoTipo = archivo.type;
+    }
+    if (id) cuerpo.id = id;
+
+    await api('/api/productos', {
+      method: id ? 'PUT' : 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(cuerpo),
+    });
+    editandoProducto = null;
+    await cargarProductos();
+  } catch (ex) {
+    alert(ex.message);
+    btn.disabled = false;
+    btn.textContent = id ? 'Guardar cambios' : 'Agregar producto';
+  }
+});
+
+$('panel').addEventListener('click', async (e) => {
+  const editar = e.target.closest('[data-editar]');
+  if (editar) {
+    editandoProducto = editar.dataset.editar;
+    pintarProductos();
+    $('formProducto')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+
+  const cancelar = e.target.closest('#btnCancelarEdicion');
+  if (cancelar) {
+    editandoProducto = null;
+    pintarProductos();
+    return;
+  }
+
+  const visible = e.target.closest('[data-visible]');
+  if (visible) {
+    visible.disabled = true;
+    const p = PRODUCTOS.find((x) => x.id === visible.dataset.visible);
+    try {
+      await api('/api/productos', {
+        method: 'PUT', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: p.id, visible: p.visible === false }),
+      });
+      await cargarProductos();
+    } catch (ex) { alert(ex.message); visible.disabled = false; }
+    return;
+  }
+
+  const borrar = e.target.closest('[data-borrar]');
+  if (borrar) {
+    const p = PRODUCTOS.find((x) => x.id === borrar.dataset.borrar);
+    if (!confirm(`¿Eliminar "${p?.nombre || 'este producto'}" de la tienda?`)) return;
+    borrar.disabled = true;
+    try {
+      await api(`/api/productos?id=${encodeURIComponent(borrar.dataset.borrar)}`, { method: 'DELETE' });
+      await cargarProductos();
+    } catch (ex) { alert(ex.message); borrar.disabled = false; }
+  }
+});
+
 async function cargarAjustes() {
   try {
-    CONFIG = await api('/api/admin/whatsapp/config');
+    CONFIG = await api('/api/admin/whatsapp?tipo=config');
   } catch (ex) {
     $('ajustes').innerHTML = `<div class="vacio"><strong>Sin conexión</strong>${escapar(ex.message)}</div>`;
     return;
@@ -819,6 +1187,54 @@ function pintarAjustes() {
         </div>
         <button class="switch${c.botActivo ? ' on' : ''}" id="swBot" type="button"
           role="switch" aria-checked="${c.botActivo}" aria-label="Respuestas automáticas"></button>
+      </div>
+    </div>
+
+    <div class="ajuste">
+      <div class="ajuste-fila">
+        <div>
+          <strong>Avisos automáticos</strong>
+          <small>${c.recordatorios
+            ? `Se le recuerda la cita a cada clienta el día antes, y tu agenda del día te llega a las ${escapar(c.horaResumen || '08:00')}. Solo se recuerdan las citas que ya aceptaste.`
+            : 'Apagados. Nadie recibe recordatorio de su cita.'}</small>
+        </div>
+        <button class="switch${c.recordatorios ? ' on' : ''}" id="swAvisos" type="button"
+          role="switch" aria-checked="${Boolean(c.recordatorios)}" aria-label="Avisos automáticos"></button>
+      </div>
+      ${c.recordatorios ? `<div class="acciones" style="margin-top:.6rem">
+        <button class="mini" id="btnAvisosYa" type="button">Revisar y mandar ahora</button>
+      </div>` : ''}
+    </div>
+
+    <div class="ajuste">
+      <div class="ajuste-fila">
+        <div>
+          <strong>Horario de atención</strong>
+          <small>Solo se pueden agendar citas entre las ${escapar(c.horario?.apertura || '08:00')} y las ${escapar(c.horario?.cierre || '21:30')}, y ninguna puede terminar después del cierre. Se cambia desde WhatsApp con /horario.</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="ajuste">
+      <div class="ajuste-fila">
+        <div>
+          <strong>Servicio a domicilio</strong>
+          <small>${c.domicilio
+            ? 'El bot ofrece ir a casa de la clienta y le pide su ubicación. Nunca le dice cuánto es el pasaje: eso lo confirmas tú.'
+            : 'El bot atiende solo en el estudio. A quien pida domicilio se lo dice con cariño.'}</small>
+        </div>
+        <button class="switch${c.domicilio ? ' on' : ''}" id="swDomi" type="button"
+          role="switch" aria-checked="${Boolean(c.domicilio)}" aria-label="Servicio a domicilio"></button>
+      </div>
+      <div class="ajuste-fila" style="padding-top:.6rem;border-top:1px solid var(--border);margin-top:.6rem">
+        <div>
+          <strong>Tu ubicación</strong>
+          <small>${c.local
+            ? escapar(c.local.direccion) + ' — se la mando a quien pregunte cómo llegar.'
+            : 'Sin guardar. Mándale tu ubicación por WhatsApp al número del bot y queda guardada.'}</small>
+        </div>
+        ${c.local ? `<a class="btn btn-ghost btn-sm" target="_blank" rel="noopener"
+          href="https://www.google.com/maps/search/?api=1&query=${c.local.lat},${c.local.lon}">Ver</a>` : ''}
       </div>
     </div>
 
@@ -863,7 +1279,7 @@ $('ajustes').addEventListener('click', async (e) => {
     const activo = !CONFIG.botActivo;
     sw.disabled = true;
     try {
-      await api('/api/admin/whatsapp/config', {
+      await api('/api/admin/whatsapp?tipo=config', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ accion: 'bot', activo }),
       });
@@ -873,11 +1289,55 @@ $('ajustes').addEventListener('click', async (e) => {
     return;
   }
 
+  const swA = e.target.closest('#swAvisos');
+  if (swA) {
+    const activo = !CONFIG.recordatorios;
+    swA.disabled = true;
+    try {
+      await api('/api/admin/whatsapp?tipo=config', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ accion: 'recordatorios', activo }),
+      });
+      CONFIG.recordatorios = activo;
+      pintarAjustes();
+    } catch (ex) { alert(ex.message); swA.disabled = false; }
+    return;
+  }
+
+  const ya = e.target.closest('#btnAvisosYa');
+  if (ya) {
+    ya.disabled = true;
+    ya.textContent = 'Revisando…';
+    try {
+      await api('/api/admin/whatsapp?tipo=config', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ accion: 'recordatoriosAhora' }),
+      });
+      ya.textContent = 'Listo, revisando';
+    } catch (ex) { alert(ex.message); ya.disabled = false; ya.textContent = 'Revisar y mandar ahora'; }
+    return;
+  }
+
+  const swD = e.target.closest('#swDomi');
+  if (swD) {
+    const activo = !CONFIG.domicilio;
+    swD.disabled = true;
+    try {
+      await api('/api/admin/whatsapp?tipo=config', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ accion: 'domicilio', activo }),
+      });
+      CONFIG.domicilio = activo;
+      pintarAjustes();
+    } catch (ex) { alert(ex.message); swD.disabled = false; }
+    return;
+  }
+
   const borrar = e.target.closest('[data-regla]');
   if (borrar) {
     borrar.disabled = true;
     try {
-      const d = await api(`/api/admin/whatsapp/config?regla=${borrar.dataset.regla}`, { method: 'DELETE' });
+      const d = await api(`/api/admin/whatsapp?tipo=config&regla=${borrar.dataset.regla}`, { method: 'DELETE' });
       CONFIG.instrucciones = d.instrucciones || [];
       pintarAjustes();
     } catch (ex) { alert(ex.message); borrar.disabled = false; }
@@ -891,7 +1351,7 @@ $('ajustes').addEventListener('click', async (e) => {
     const b = e.target.closest('#btnRegla');
     b.disabled = true;
     try {
-      const d = await api('/api/admin/whatsapp/config', {
+      const d = await api('/api/admin/whatsapp?tipo=config', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ accion: 'regla', texto }),
       });
@@ -912,7 +1372,7 @@ $('ajustes').addEventListener('change', async (e) => {
   }
   campo.disabled = true;
   try {
-    const d = await api('/api/admin/whatsapp/config', {
+    const d = await api('/api/admin/whatsapp?tipo=config', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ accion: 'precio', clave: campo.dataset.clave, precio }),
     });

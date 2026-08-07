@@ -1,12 +1,12 @@
 /**
  * POST /api/booking — guarda una reserva.
  *
- * Cada cita se escribe como SU PROPIO archivo. Si dos clientas reservan en el mismo segundo,
- * ninguna pisa a la otra (guardar todo en un único archivo compartido sí tendría esa carrera).
- * El almacén es privado: nadie puede leer estos datos con una URL.
+ * Cada cita es su propia fila en Postgres (Supabase). Antes era un archivo JSON por cita en
+ * Vercel Blob; se migró porque ese store quedó suspendido (límite gratuito superado) y las
+ * citas dejaron de guardarse/leerse/mandar correo.
  */
 import crypto from 'node:crypto';
-import { put } from '@vercel/blob';
+import { crearCita, actualizarCita } from '../lib/db-citas.js';
 import { enviarCorreo, correoParaClienta, correoParaAdmin } from '../lib/email.js';
 
 const LARGOS = {
@@ -59,7 +59,7 @@ export default async function handler(req, res) {
   };
   const agente = String(h['user-agent'] || '');
 
-  const cita = {
+  const citaBase = {
     id: crypto.randomUUID(),
     creadaEn: new Date().toISOString(),
     nombre,
@@ -69,21 +69,13 @@ export default async function handler(req, res) {
     plan: campo('plan') || 'Consulta general',
     fecha: campo('fecha'),
     hora: campo('hora'),
-    // Fecha y hora normalizadas: lo de arriba es como lo dijo la clienta ("el sabado a
-    // las 4"), esto es lo que permite saber si un horario ya esta ocupado.
-    // Si no vienen normalizadas, se deducen: el formulario de la web ya manda la fecha en
-    // formato ISO porque usa un selector de fecha. La hora de la web es un rango aproximado
-    // ("Tarde 15:00-19:00"), asi que ahi no hay hora exacta que bloquear, y se deja vacia.
     fechaISO: normalizarFecha(campo('fechaISO')) || normalizarFecha(campo('fecha')),
     hora24: normalizarHora(campo('hora24')) || normalizarHora(campo('hora')),
     duracionMin: Number.parseInt(cuerpo.duracionMin, 10) > 0 ? Number.parseInt(cuerpo.duracionMin, 10) : 60,
     sector: campo('sector'),
-    // Toda cita nace SIN confirmar: la administradora la acepta desde el panel.
     estado: 'en_proceso',
     historial: [{ estado: 'en_proceso', en: new Date().toISOString() }],
     notas: campo('notas'),
-    // Vercel añade estas cabeceras: ubicación APROXIMADA (nivel ciudad) de la conexión.
-    // No es la dirección de la clienta y así se etiqueta en el panel.
     origen: {
       ciudad: safeDecode(h['x-vercel-ip-city']),
       region: safeDecode(h['x-vercel-ip-country-region']),
@@ -96,12 +88,9 @@ export default async function handler(req, res) {
     llegoDesde: String(h.referer || '').slice(0, 200),
   };
 
+  let cita;
   try {
-    await put(`citas/${cita.creadaEn}-${cita.id}.json`, JSON.stringify(cita), {
-      access: 'private',
-      contentType: 'application/json',
-      addRandomSuffix: false,
-    });
+    cita = await crearCita(citaBase);
   } catch (err) {
     console.error('[booking] no se pudo guardar la cita:', err);
     return res.status(500).json({ error: 'No se pudo guardar la reserva' });
@@ -110,18 +99,36 @@ export default async function handler(req, res) {
   // Los correos van DESPUÉS de guardar y no pueden tumbar la reserva: si el proveedor falla,
   // la cita ya está a salvo y la administradora la ve igual en el panel.
   const base = `https://${req.headers['x-forwarded-host'] || req.headers.host}`;
+  let correoEnviado = false;
+  let correoMotivo = '';
   try {
     const aClienta = correoParaClienta(cita);
     const aAdmin = correoParaAdmin(cita, `${base}/admin`);
-    await Promise.allSettled([
+    const [clienta] = await Promise.all([
       enviarCorreo({ para: cita.correo, ...aClienta }),
       enviarCorreo({ para: process.env.ADMIN_NOTIFY_EMAIL || process.env.ADMIN_EMAIL, ...aAdmin }),
     ]);
+    correoEnviado = Boolean(clienta?.ok);
+    correoMotivo = clienta?.ok ? '' : String(clienta?.motivo || 'no se pudo enviar');
   } catch (err) {
-    console.error('[booking] fallo al notificar por correo:', err);
+    correoMotivo = err?.message || String(err);
+    console.error('[booking] fallo al notificar por correo:', correoMotivo);
   }
 
-  return res.status(201).json({ ok: true, id: cita.id });
+  // Que el correo no salga no anula la reserva, pero SI tiene que quedar constancia: sin
+  // esto la cita se veia normal en el panel y nadie sabia que la clienta no fue avisada.
+  if (!correoEnviado) {
+    console.warn('[booking] la clienta NO recibio el correo:', cita.correo, '|', correoMotivo);
+    try {
+      await actualizarCita(cita.id, { correoEnviado, correoMotivo });
+    } catch (err) {
+      console.error('[booking] no se pudo anotar el fallo del correo:', err);
+    }
+  }
+
+  // Quien llama (el bot de WhatsApp) necesita saberlo para no prometerle a la clienta un
+  // correo que no le va a llegar, y para avisarla por WhatsApp en su lugar.
+  return res.status(201).json({ ok: true, id: cita.id, correoEnviado, correoMotivo });
 }
 
 function safeDecode(valor) {

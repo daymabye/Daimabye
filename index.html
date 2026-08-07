@@ -7,6 +7,10 @@
     <meta name="description" content="Maquillaje profesional y peinados para que luzcas espectacular.">
     <meta name="theme-color" content="#FCFBFA">
 
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+
     <!-- Fuentes por <link> y no por @import dentro del CSS: el @import obligaba al navegador
          a descargar style.css, analizarlo y solo entonces descubrir las fuentes — tres viajes
          encadenados antes de poder pintar texto. Aquí se descubren en el primer byte del HTML.
@@ -96,12 +100,13 @@
                 <li><a href="#home">Inicio</a></li>
                 <li><a href="#services">Servicios</a></li>
                 <li><a href="#pricing">Precios</a></li>
+                <li><a href="#store">Tienda</a></li>
                 <li><a href="#gallery">Portafolio</a></li>
                 <li><a href="#about">Sobre Mí</a></li>
-                <li class="nav-cta-mobile"><a href="https://wa.me/5930958757109?text=Hola%20Daima%20Belleza%2C%20quiero%20agendar%20mi%20cita." class="btn btn-primary" target="_blank">Agendar Cita</a></li>
+                <li class="nav-cta-mobile"><a href="https://wa.me/593958757109?text=Hola%20Daima%20Belleza%2C%20quiero%20agendar%20mi%20cita." class="btn btn-primary" target="_blank">Agendar Cita</a></li>
             </ul>
         </nav>
-        <a href="https://wa.me/5930958757109?text=Hola%20Daima%20Belleza%2C%20quiero%20agendar%20mi%20cita." class="btn btn-primary nav-cta-desktop" target="_blank">Agendar Cita</a>
+        <a href="https://wa.me/593958757109?text=Hola%20Daima%20Belleza%2C%20quiero%20agendar%20mi%20cita." class="btn btn-primary nav-cta-desktop" target="_blank">Agendar Cita</a>
         <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
             <span></span><span></span><span></span>
         </button>
@@ -116,7 +121,7 @@
                     <h1 class="title-xl">Realza tu belleza natural</h1>
                     <p>Experta en maquillaje profesional, novias y peinados. Un look impecable, duradero y fotogénico para tus momentos más importantes.</p>
                     <div class="hero-buttons">
-                        <a href="https://wa.me/5930958757109?text=Hola%20Daima%20Belleza%2C%20quiero%20agendar%20mi%20cita." class="btn btn-primary" target="_blank">Reservar Ahora</a>
+                        <a href="https://wa.me/593958757109?text=Hola%20Daima%20Belleza%2C%20quiero%20agendar%20mi%20cita." class="btn btn-primary" target="_blank">Reservar Ahora</a>
                         <a href="#gallery" class="btn btn-outline">Ver Portafolio</a>
                     </div>
                 </div>
@@ -225,6 +230,15 @@
             </p>
         </section>
 
+        <!-- Store Section: se llena sola desde /api/productos, no hay nada que tocar aquí a mano -->
+        <section id="store" class="section" style="background-color: var(--c-surface);" hidden>
+            <div class="section-header reveal">
+                <span class="text-small hero-subtitle">Para llevar a casa</span>
+                <h2 class="title-lg">Tienda</h2>
+            </div>
+            <div class="store-grid" id="storeGrid"></div>
+        </section>
+
         <!-- Gallery Section -->
         <section id="gallery" class="section">
             <div class="section-header reveal">
@@ -277,7 +291,7 @@
         </div>
         <div class="footer-links">
             <a href="https://www.instagram.com/daimabellezastudio/" target="_blank"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg></a>
-            <a href="https://wa.me/5930958757109?text=Hola%20Daima%20Belleza%2C%20quiero%20agendar%20mi%20cita." target="_blank"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg></a>
+            <a href="https://wa.me/593958757109?text=Hola%20Daima%20Belleza%2C%20quiero%20agendar%20mi%20cita." target="_blank"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg></a>
             <a href="https://www.tiktok.com/@daimapromakeup?_r=1&_t=ZS-97lUbR3bLSH" target="_blank"><svg class="icon" aria-hidden="true"><use href="#i-tiktok"/></svg></a>
         </div>
         <div class="footer-bottom">
@@ -286,7 +300,7 @@
     </footer>
 
     <!-- Sticky Mobile CTA -->
-    <a href="https://wa.me/5930958757109?text=Hola%20Daima%2C%20quiero%20agendar%20mi%20cita." class="sticky-wa" target="_blank">
+    <a href="https://wa.me/593958757109?text=Hola%20Daima%2C%20quiero%20agendar%20mi%20cita." class="sticky-wa" target="_blank">
         <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
     </a>
 
@@ -443,7 +457,7 @@
                          (sector ? `Sector: ${sector}\n` : '') +
                          `Fecha de cita: ${formattedDate}` +
                          (hora ? `\nHora preferida: ${hora}` : '');
-            const url = `https://wa.me/5930958757109?text=${encodeURIComponent(text)}`;
+            const url = `https://wa.me/593958757109?text=${encodeURIComponent(text)}`;
 
             boton.disabled = true;
             /* `keepalive` es lo que hace que esto funcione de verdad. Al abrir WhatsApp el
@@ -493,6 +507,44 @@
             // Fallback if IntersectionObserver is not supported
             document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
         }
+
+        // Tienda: se pide sin caché a propósito. Si Daima acaba de agregar un producto desde
+        // el panel, quien cargue la página ahora mismo ya lo ve — no hay build ni despliegue
+        // de por medio entre agregarlo y que aparezca aquí.
+        (function cargarTienda() {
+            const seccion = document.getElementById('store');
+            const grid = document.getElementById('storeGrid');
+            if (!seccion || !grid) return;
+
+            const escaparHtml = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+            }[c]));
+
+            fetch('/api/productos', { cache: 'no-store' })
+                .then((r) => r.json())
+                .then((data) => {
+                    const productos = Array.isArray(data.productos) ? data.productos : [];
+                    if (!productos.length) return; // la sección se queda oculta: una tienda vacía no vende, distrae
+
+                    grid.innerHTML = productos.map((p) => `
+                        <div class="store-card">
+                            ${p.foto
+                                ? `<img src="${escaparHtml(p.foto)}" alt="${escaparHtml(p.nombre)}" loading="lazy" decoding="async">`
+                                : '<div class="store-card-sin-foto"></div>'}
+                            <div class="store-card-body">
+                                <h3 class="title-md">${escaparHtml(p.nombre)}</h3>
+                                ${p.descripcion ? `<p class="store-card-desc">${escaparHtml(p.descripcion)}</p>` : ''}
+                                <p class="price">$${escaparHtml(String(p.precio))}</p>
+                                <a class="btn btn-outline" style="width:100%"
+                                   href="https://wa.me/593958757109?text=${encodeURIComponent(`Hola Daima! Quiero pedir: ${p.nombre} ($${p.precio})`)}"
+                                   target="_blank" rel="noopener">Pedir por WhatsApp</a>
+                            </div>
+                        </div>`).join('');
+
+                    seccion.hidden = false;
+                })
+                .catch(() => { /* la tienda es un extra: si falla, el resto de la página sigue intacta */ });
+        })();
     </script>
 
     <!-- Three.js NO se carga aquí. Son ~589 KB para un fondo decorativo: pedirlo por adelantado

@@ -662,6 +662,59 @@ footer {
 /* Only meaningful for the mobile swipe strip; the desktop grid shows everything. */
 .pricing-hint { display: none; }
 
+/* Tienda: la llena /api/productos por JS. Empieza oculta (hidden en el HTML) y solo se
+   muestra cuando hay al menos un producto — una tienda vacía no vende, distrae. */
+.store-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.store-card {
+  background: var(--c-bg);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .store-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+    border-color: var(--c-accent);
+  }
+}
+
+.store-card img,
+.store-card-sin-foto {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: var(--c-surface);
+}
+
+.store-card-body {
+  padding: 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.store-card-desc {
+  font-size: 0.9rem;
+  color: var(--c-text-muted);
+  margin: 0.5rem 0;
+}
+
+.store-card .price { font-size: 2rem; margin: 0.75rem 0; }
+.store-card .btn { margin-top: auto; }
+
 /* Sticky WhatsApp */
 .sticky-wa {
   position: fixed;

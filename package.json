@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Sitio de Daima Belleza Studio: landing estática + funciones para reservas y panel de administración.",
+  "description": "Sitio de Daima Belleza Studio: landing est\u00e1tica + funciones para reservas y panel de administraci\u00f3n.",
   "dependencies": {
-    "@vercel/blob": "^2.6.1",
-    "nodemailer": "^6.9.16"
+    "nodemailer": "^6.9.16",
+    "@supabase/supabase-js": "^2.45.0"
   }
 }

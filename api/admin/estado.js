@@ -4,7 +4,7 @@
  * Body: { id, estado } con estado ∈ confirmada | rechazada | en_proceso
  * Al confirmar o rechazar se avisa a la clienta por correo (si el correo está configurado).
  */
-import { list, get, put } from '@vercel/blob';
+import { buscarCitaPorId, actualizarCita } from '../../lib/db-citas.js';
 import { leerSesion } from '../../lib/auth.js';
 import {
   enviarCorreo,
@@ -59,26 +59,14 @@ export default async function handler(req, res) {
   if (!PERMITIDOS.has(estado)) return res.status(400).json({ error: 'Estado no válido' });
 
   try {
-    // El id va dentro del nombre del archivo, así que basta con localizarlo por ahí.
-    const { blobs } = await list({ prefix: 'citas/', limit: 1000 });
-    const encontrado = blobs.find((b) => b.pathname.includes(id));
-    if (!encontrado) return res.status(404).json({ error: 'Cita no encontrada' });
-
-    const actual = await get(encontrado.pathname, { access: 'private', useCache: false });
-    if (!actual?.stream) return res.status(404).json({ error: 'Cita no encontrada' });
-    const cita = await new Response(actual.stream).json();
+    const cita = await buscarCitaPorId(id);
+    if (!cita) return res.status(404).json({ error: 'Cita no encontrada' });
 
     const anterior = cita.estado;
     cita.estado = estado;
     cita.historial = [...(cita.historial || []), { estado, en: new Date().toISOString() }];
 
-    // Misma ruta = se sobrescribe. No hay carrera posible: solo la administradora escribe aquí.
-    await put(encontrado.pathname, JSON.stringify(cita), {
-      access: 'private',
-      contentType: 'application/json',
-      addRandomSuffix: false,
-      allowOverwrite: true,
-    });
+    await actualizarCita(id, { estado, historial: cita.historial });
 
     // Solo se avisa cuando el estado CAMBIA de verdad, para no repetir correos.
     if (estado !== anterior && cita.correo) {
