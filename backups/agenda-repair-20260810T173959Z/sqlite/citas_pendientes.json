@@ -1,0 +1,746 @@
+[
+  {
+    "id": 3,
+    "jid": "24636419010585@lid",
+    "creado_en": "2026-07-26T20:56:58.717Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Carlos Steven",
+      "correo": "carloswowmlgx@gmail.com",
+      "telefono": "593998155197",
+      "instagram": "",
+      "plan": "Planchado",
+      "fecha": "hoy",
+      "hora": "8:00 PM",
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 6,
+    "jid": "g0@lid",
+    "creado_en": "2026-07-26T21:53:04.264Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "MariaГ’s appointment",
+      "correo": "test@test.com",
+      "telefono": "5939000000",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "2026-08-10",
+      "hora": "10:00",
+      "fechaISO": "2026-08-10",
+      "hora24": "10:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 9,
+    "jid": "24636419010585@lid",
+    "creado_en": "2026-07-28T05:25:41.852Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Carlos",
+      "correo": "Carloswmlgx@gmail.com",
+      "telefono": "593998155197",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "miércoles 29 de julio",
+      "hora": "8:00 am",
+      "fechaISO": "2026-07-29",
+      "hora24": "08:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 10,
+    "jid": "prueba-integracion@test",
+    "creado_en": "2026-07-28T05:53:51.176Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Andrea Vera",
+      "correo": "andrea.vera@ejemplo.test",
+      "telefono": "593999999999",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "sábado 1 de agosto",
+      "hora": "4 de la tarde",
+      "fechaISO": "2026-08-01",
+      "hora24": "16:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 11,
+    "jid": "prueba-integracion@test",
+    "creado_en": "2026-07-28T05:54:28.328Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Andrea Vera",
+      "correo": "andrea.vera@ejemplo.test",
+      "telefono": "593999999999",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "sábado 1 de agosto",
+      "hora": "16:00",
+      "fechaISO": "2026-08-01",
+      "hora24": "16:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 12,
+    "jid": "prueba-integracion@test",
+    "creado_en": "2026-07-28T05:54:30.065Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Andrea Vera",
+      "correo": "andrea.vera@ejemplo.test",
+      "telefono": "593999999999",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "sábado 1 de agosto",
+      "hora": "16:00",
+      "fechaISO": "2026-08-01",
+      "hora24": "16:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 13,
+    "jid": "24636419010585@lid",
+    "creado_en": "2026-07-28T05:57:50.295Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Carlos Steve Venda García",
+      "correo": "carloswowmlgx@gmail.com",
+      "telefono": "593998155197",
+      "instagram": "",
+      "plan": "Planchado",
+      "fecha": "miércoles 29 de julio",
+      "hora": "10:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "10:00",
+      "duracionMin": 90,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 14,
+    "jid": "cli@test",
+    "creado_en": "2026-07-28T06:01:39.162Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Ana",
+      "correo": "ana@ejemplo.test",
+      "telefono": "593900000000",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "miércoles 29 de julio",
+      "hora": "16:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "16:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 15,
+    "jid": "cli@test",
+    "creado_en": "2026-07-28T06:01:39.182Z",
+    "sincronizada": 0,
+    "payload": {
+      "nombre": "Ana",
+      "correo": "ana@ejemplo.test",
+      "telefono": "593900000000",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "miércoles 29 de julio",
+      "hora": "16:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "16:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp",
+      "motivo": "fetch failed"
+    }
+  },
+  {
+    "id": 16,
+    "jid": "cli@test",
+    "creado_en": "2026-07-28T06:01:39.193Z",
+    "sincronizada": 0,
+    "payload": {
+      "nombre": "Ana",
+      "correo": "ana@ejemplo.test",
+      "telefono": "593900000000",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "miércoles 29 de julio",
+      "hora": "16:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "16:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp",
+      "motivo": "el sitio respondio 400: {\"error\":\"El correo no es válido\"}"
+    }
+  },
+  {
+    "id": 17,
+    "jid": "cli@test",
+    "creado_en": "2026-07-28T06:01:39.203Z",
+    "sincronizada": 0,
+    "payload": {
+      "nombre": "Ana",
+      "correo": "ana@ejemplo.test",
+      "telefono": "593900000000",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "miércoles 29 de julio",
+      "hora": "16:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "16:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp",
+      "motivo": "el sitio respondio 500: boom"
+    }
+  },
+  {
+    "id": 18,
+    "jid": "cli@test",
+    "creado_en": "2026-07-28T06:01:39.224Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Ana",
+      "correo": "ana@ejemplo.test",
+      "telefono": "593900000000",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "miércoles 29 de julio",
+      "hora": "03:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "03:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 19,
+    "jid": "cli@test",
+    "creado_en": "2026-07-28T06:01:39.239Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Ana",
+      "correo": "ana@ejemplo.test",
+      "telefono": "593900000000",
+      "instagram": "",
+      "plan": "Combo Pasarela (maquillaje a elección + ondas de reina)",
+      "fecha": "miércoles 29 de julio",
+      "hora": "21:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "21:00",
+      "duracionMin": 150,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 20,
+    "jid": "cli@test",
+    "creado_en": "2026-07-28T06:01:39.247Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Ana",
+      "correo": "ana@ejemplo.test",
+      "telefono": "593900000000",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "miércoles 29 de julio",
+      "hora": "16:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 21,
+    "jid": "cli-a@test",
+    "creado_en": "2026-07-28T06:01:39.264Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Ana",
+      "correo": "ana@ejemplo.test",
+      "telefono": "593900000001",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "miércoles 29 de julio",
+      "hora": "16:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "16:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 22,
+    "jid": "cli-b@test",
+    "creado_en": "2026-07-28T06:01:39.266Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Bea",
+      "correo": "ana@ejemplo.test",
+      "telefono": "593900000002",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "miércoles 29 de julio",
+      "hora": "16:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "16:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 23,
+    "jid": "cli@test",
+    "creado_en": "2026-07-28T06:03:26.387Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Ana",
+      "correo": "ana@ejemplo.test",
+      "telefono": "593900000000",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "miércoles 29 de julio",
+      "hora": "16:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "16:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 24,
+    "jid": "cli@test",
+    "creado_en": "2026-07-28T06:03:26.416Z",
+    "sincronizada": 0,
+    "payload": {
+      "nombre": "Ana",
+      "correo": "ana@ejemplo.test",
+      "telefono": "593900000000",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "miércoles 29 de julio",
+      "hora": "16:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "16:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp",
+      "motivo": "fetch failed"
+    }
+  },
+  {
+    "id": 25,
+    "jid": "cli@test",
+    "creado_en": "2026-07-28T06:03:26.448Z",
+    "sincronizada": 0,
+    "payload": {
+      "nombre": "Ana",
+      "correo": "ana@ejemplo.test",
+      "telefono": "593900000000",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "miércoles 29 de julio",
+      "hora": "16:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "16:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp",
+      "motivo": "el sitio respondio 400: {\"error\":\"El correo no es válido\"}"
+    }
+  },
+  {
+    "id": 26,
+    "jid": "cli@test",
+    "creado_en": "2026-07-28T06:03:26.468Z",
+    "sincronizada": 0,
+    "payload": {
+      "nombre": "Ana",
+      "correo": "ana@ejemplo.test",
+      "telefono": "593900000000",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "miércoles 29 de julio",
+      "hora": "16:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "16:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp",
+      "motivo": "el sitio respondio 500: boom"
+    }
+  },
+  {
+    "id": 27,
+    "jid": "cli-a@test",
+    "creado_en": "2026-07-28T06:03:26.505Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Ana",
+      "correo": "ana@ejemplo.test",
+      "telefono": "593900000001",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "miércoles 29 de julio",
+      "hora": "16:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "16:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 28,
+    "jid": "cli-b@test",
+    "creado_en": "2026-07-28T06:03:26.516Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Bea",
+      "correo": "ana@ejemplo.test",
+      "telefono": "593900000002",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "miércoles 29 de julio",
+      "hora": "16:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "16:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 29,
+    "jid": "cli@test",
+    "creado_en": "2026-07-28T06:03:39.631Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Ana",
+      "correo": "ana@ejemplo.test",
+      "telefono": "593900000000",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "miércoles 29 de julio",
+      "hora": "16:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "16:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 30,
+    "jid": "cli-a@test",
+    "creado_en": "2026-07-28T06:03:39.687Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Ana",
+      "correo": "ana@ejemplo.test",
+      "telefono": "593900000001",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "miércoles 29 de julio",
+      "hora": "16:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "16:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 31,
+    "jid": "c@t",
+    "creado_en": "2026-07-28T06:07:23.407Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Ana",
+      "correo": "a@ejemplo.test",
+      "telefono": "5939001",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "miércoles 29 de julio",
+      "hora": "16:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "16:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 32,
+    "jid": "a@t",
+    "creado_en": "2026-07-28T06:07:23.432Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Ana",
+      "correo": "a@ejemplo.test",
+      "telefono": "5939001",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "miércoles 29 de julio",
+      "hora": "16:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "16:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 33,
+    "jid": "c@t",
+    "creado_en": "2026-07-28T06:07:23.450Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Ana",
+      "correo": "a@ejemplo.test",
+      "telefono": "5939001",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "miércoles 29 de julio",
+      "hora": "16:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "16:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 34,
+    "jid": "c@t",
+    "creado_en": "2026-07-28T06:07:23.468Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Ana",
+      "correo": "a@ejemplo.test",
+      "telefono": "5939003",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "miércoles 29 de julio",
+      "hora": "18:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "18:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 35,
+    "jid": "c@t",
+    "creado_en": "2026-07-28T06:32:55.896Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Ana",
+      "correo": "a@ejemplo.test",
+      "telefono": "5939001",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "miércoles 29 de julio",
+      "hora": "16:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "16:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 36,
+    "jid": "a@t",
+    "creado_en": "2026-07-28T06:32:55.928Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Ana",
+      "correo": "a@ejemplo.test",
+      "telefono": "5939001",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "miércoles 29 de julio",
+      "hora": "16:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "16:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 37,
+    "jid": "c@t",
+    "creado_en": "2026-07-28T06:32:55.947Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Ana",
+      "correo": "a@ejemplo.test",
+      "telefono": "5939003",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "miércoles 29 de julio",
+      "hora": "18:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "18:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 38,
+    "jid": "212098554527767@lid",
+    "creado_en": "2026-07-28T13:39:09.089Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Vanessa Cedeño",
+      "correo": "luciacedenojw@gmail.com",
+      "telefono": "593988071881",
+      "instagram": "",
+      "plan": "Maquillaje Social Profesional",
+      "fecha": "martes 28 de julio",
+      "hora": "14:00",
+      "fechaISO": "2026-07-28",
+      "hora24": "14:00",
+      "duracionMin": 120,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 39,
+    "jid": "24636419010585@lid",
+    "creado_en": "2026-07-28T14:26:24.040Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Dayana",
+      "correo": "carloswowmlgx@gmail.com",
+      "telefono": "593998155197",
+      "instagram": "",
+      "plan": "Pestañas punto a punto estilo clásicas",
+      "fecha": "miércoles 29 de julio",
+      "hora": "08:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "08:00",
+      "duracionMin": 90,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 40,
+    "jid": "24636419010585@lid",
+    "creado_en": "2026-07-28T16:24:35.206Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Dayana",
+      "correo": "carloswowmlgx@gmail.com",
+      "telefono": "593998155197",
+      "instagram": "",
+      "plan": "Recogido",
+      "fecha": "miércoles 29 de julio",
+      "hora": "15:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "15:00",
+      "duracionMin": 90,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 41,
+    "jid": "44427678585041@lid",
+    "creado_en": "2026-07-28T19:27:30.318Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Angela",
+      "correo": "cofa8087@gmail.com",
+      "telefono": "593963792379",
+      "instagram": "",
+      "plan": "Maquillaje de Graduación Profesional + Recogido",
+      "fecha": "miércoles 29 de julio",
+      "hora": "13:00",
+      "fechaISO": "2026-07-29",
+      "hora24": "13:00",
+      "duracionMin": 120,
+      "sector": "Portoviejo (domicilio)",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 42,
+    "jid": "24636419010585@lid",
+    "creado_en": "2026-07-30T19:45:36.467Z",
+    "sincronizada": 1,
+    "payload": {
+      "nombre": "Dayana",
+      "correo": "carloswowmlgx@gmail.com",
+      "telefono": "593998155197",
+      "instagram": "",
+      "plan": "Pestañas punto a punto estilo clásicas",
+      "fecha": "jueves 30 de julio",
+      "hora": "15:00",
+      "fechaISO": "2026-07-30",
+      "hora24": "15:00",
+      "duracionMin": 90,
+      "sector": "",
+      "notas": "Agendada por WhatsApp"
+    }
+  },
+  {
+    "id": 43,
+    "jid": "24636419010585@lid",
+    "creado_en": "2026-08-07T18:32:03.492Z",
+    "sincronizada": 0,
+    "payload": {
+      "nombre": "Dayana",
+      "correo": "carloswowmlgx@gmail.com",
+      "telefono": "593998155197",
+      "instagram": "",
+      "plan": "Ondas normales",
+      "fecha": "sábado 8 de agosto",
+      "hora": "13:00",
+      "fechaISO": "2026-08-08",
+      "hora24": "13:00",
+      "duracionMin": 30,
+      "sector": "",
+      "notas": "Agendada por WhatsApp",
+      "motivo": "el sitio respondio 500: {\"error\":\"No se pudo guardar la reserva\"}"
+    }
+  }
+]

@@ -1,12 +1,12 @@
-﻿/* Las fuentes se piden con <link> desde el <head>. Un @import aquÃ­ encadenaba
-   HTML â†’ CSS â†’ CSS de fuentes â†’ woff2 antes de poder pintar una sola letra. */
+/* Las fuentes se piden con <link> desde el <head>. Un @import aquí encadenaba
+   HTML → CSS → CSS de fuentes → woff2 antes de poder pintar una sola letra. */
 
 :root {
   --c-bg: #FCFBFA;
   --c-surface: #FFFFFF;
   --c-text: #2D2926;
-  /* El gris de apoyo daba 4.41 sobre el fondo crema, justo por debajo del mÃ­nimo legible
-     de 4.5. Este tono es prÃ¡cticamente idÃ©ntico a la vista y ya cumple (4.53). */
+  /* El gris de apoyo daba 4.41 sobre el fondo crema, justo por debajo del mínimo legible
+     de 4.5. Este tono es prácticamente idéntico a la vista y ya cumple (4.53). */
   --c-text-muted: #78736F;
   --c-accent: #D1BBA4;
   --c-accent-dark: #B59C82;
@@ -14,8 +14,8 @@
      mucha gente. Se separan tres usos en vez de oscurecerlo todo (en el pie oscuro el dorado
      claro es justo el que funciona):
        --c-accent-dark  decorativo y sobre fondos oscuros
-       --c-accent-icon  iconos y trazos sobre crema  (3.02, el mÃ­nimo para grÃ¡ficos)
-       --c-accent-text  texto pequeÃ±o sobre crema     (4.51, el mÃ­nimo para texto) */
+       --c-accent-icon  iconos y trazos sobre crema  (3.02, el mínimo para gráficos)
+       --c-accent-text  texto pequeño sobre crema     (4.51, el mínimo para texto) */
   --c-accent-icon: #A58E76;
   --c-accent-text: #84715E;
   --c-border: #EBE6E0;
@@ -55,7 +55,7 @@ body {
 
 img {
   max-width: 100%;
-  /* Los atributos width/height del HTML (que reservan espacio y evitan saltos de maquetaciÃ³n)
+  /* Los atributos width/height del HTML (que reservan espacio y evitan saltos de maquetación)
      el navegador los aplica como CSS. Sin este `height: auto`, `max-width` encoge el ancho pero
      la altura se queda clavada en el valor del atributo y la imagen sale deformada. */
   height: auto;
@@ -81,7 +81,7 @@ h1, h2, h3, h4 {
 
 .text-small { font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; }
 
-/* Iconos SVG en lÃ­nea (sustituyen a Font Awesome). Escalan con font-size, igual que hacÃ­a
+/* Iconos SVG en línea (sustituyen a Font Awesome). Escalan con font-size, igual que hacía
    la fuente de iconos, para no tener que retocar cada sitio donde se usaban. */
 .icon {
   width: 1em;
@@ -253,11 +253,11 @@ header.scrolled {
   height: 1.5px;
   background-color: var(--c-text);
   border-radius: 2px;
-  /* TransiciÃ³n propia en vez de la genÃ©rica de 0.6s: en un control que respondes con el
+  /* Transición propia en vez de la genérica de 0.6s: en un control que respondes con el
      dedo, medio segundo se siente pastoso.
-     Solo se animan `transform` y `opacity`, que la GPU compone sin recalcular la maquetaciÃ³n.
-     Antes animaba `width` de la raya central y, si la transiciÃ³n se interrumpÃ­a, la raya se
-     quedaba colapsada y el icono aparecÃ­a con dos rayas en vez de tres. */
+     Solo se animan `transform` y `opacity`, que la GPU compone sin recalcular la maquetación.
+     Antes animaba `width` de la raya central y, si la transición se interrumpía, la raya se
+     quedaba colapsada y el icono aparecía con dos rayas en vez de tres. */
   transition:
     transform 0.34s cubic-bezier(0.16, 1, 0.3, 1),
     opacity 0.18s ease;
@@ -394,7 +394,7 @@ header.scrolled {
   margin: 0 auto;
 }
 
-/* Cada pieza del portafolio es un enlace a su publicaciÃ³n en Instagram. Es un <a>, asÃ­ que
+/* Cada pieza del portafolio es un enlace a su publicación en Instagram. Es un <a>, así que
    necesita `display: block` para comportarse como la tarjeta que era. */
 .gallery-item {
   display: block;
@@ -421,7 +421,7 @@ header.scrolled {
   inset: 0;
   background: linear-gradient(to top, rgba(0,0,0,0.68) 0%, rgba(0,0,0,0.15) 45%, transparent 70%);
   /* Visible by DEFAULT. Revealing the caption on :hover alone hid it forever on
-     touch devices â€” phones never fire hover, so the labels were dead weight. */
+     touch devices — phones never fire hover, so the labels were dead weight. */
   opacity: 1;
   transition: var(--transition);
   display: flex;
@@ -439,7 +439,7 @@ header.scrolled {
   line-height: 1.2;
 }
 
-/* Deja claro que la foto lleva a algÃºn sitio; sin esto parece decorativa. */
+/* Deja claro que la foto lleva a algún sitio; sin esto parece decorativa. */
 .gallery-cta {
   display: inline-flex;
   align-items: center;
@@ -489,9 +489,9 @@ header.scrolled {
   position: relative;
   z-index: 1;
   border-radius: var(--radius);
-  /* A diferencia del resto, esta imagen es un GRÃFICO CON TEXTO (la cita y el reconocimiento
-     de la AlcaldÃ­a de Portoviejo). Encajarla en un 4/5 con object-fit: cover se comÃ­a las
-     palabras por los lados, asÃ­ que aquÃ­ manda la proporciÃ³n real de la imagen: se ve entera. */
+  /* A diferencia del resto, esta imagen es un GRÁFICO CON TEXTO (la cita y el reconocimiento
+     de la Alcaldía de Portoviejo). Encajarla en un 4/5 con object-fit: cover se comía las
+     palabras por los lados, así que aquí manda la proporción real de la imagen: se ve entera. */
   width: 100%;
   height: auto;
 }
@@ -540,7 +540,7 @@ footer {
   font-size: 1.5rem;
   color: var(--c-bg);
   transition: var(--transition);
-  /* 44px minimum tap area â€” the bare glyphs were only 21px wide. */
+  /* 44px minimum tap area — the bare glyphs were only 21px wide. */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -572,7 +572,7 @@ footer {
 }
 
 /* Responsive */
-/* Pricing â€” flex-wrap + justify-center so an incomplete last row (e.g. 5 cards:
+/* Pricing — flex-wrap + justify-center so an incomplete last row (e.g. 5 cards:
    3 + 2) centers itself instead of hugging the left edge like a leftover CSS
    Grid row does. Fixed-ish basis (no grow) keeps every card the same width
    whether its row has 3 items or 2. */
@@ -663,7 +663,7 @@ footer {
 .pricing-hint { display: none; }
 
 /* Tienda: la llena /api/productos por JS. Empieza oculta (hidden en el HTML) y solo se
-   muestra cuando hay al menos un producto â€” una tienda vacÃ­a no vende, distrae. */
+   muestra cuando hay al menos un producto — una tienda vacía no vende, distrae. */
 .store-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -769,13 +769,13 @@ footer {
   .nav-cta-desktop { display: none; }
   .menu-toggle { display: flex; }
 
-  /* MenÃº a pantalla completa. Antes entraba deslizÃ¡ndose entero desde arriba y los enlaces
-     aparecÃ­an de golpe, apretados en el centro: se veÃ­a tosco. Ahora el panel aparece con un
+  /* Menú a pantalla completa. Antes entraba deslizándose entero desde arriba y los enlaces
+     aparecían de golpe, apretados en el centro: se veía tosco. Ahora el panel aparece con un
      fundido suave y cada enlace entra escalonado. */
   /* El header lleva `backdrop-filter`, y un filtro convierte al elemento en el marco de
-     referencia de sus hijos `position: fixed`. Por eso este menÃº se medÃ­a contra el header
+     referencia de sus hijos `position: fixed`. Por eso este menú se medía contra el header
      (77px de alto) en vez de contra la pantalla, y los primeros enlaces quedaban cortados
-     arriba. Con el menÃº abierto se quita el filtro â€”tapado por el panel, no se notaâ€” y el
+     arriba. Con el menú abierto se quita el filtro —tapado por el panel, no se nota— y el
      overlay vuelve a referirse a la ventana. */
   body.menu-abierto header {
     backdrop-filter: none;
@@ -787,8 +787,8 @@ footer {
     position: fixed;
     inset: 0;
     flex-direction: column;
-    /* Centrado con mÃ¡rgenes automÃ¡ticos en vez de `justify-content: center`: si la lista no
-       cabe, los mÃ¡rgenes se anulan y nada se sale por arriba (con `center` el desbordamiento
+    /* Centrado con márgenes automáticos en vez de `justify-content: center`: si la lista no
+       cabe, los márgenes se anulan y nada se sale por arriba (con `center` el desbordamiento
        se reparte a los dos lados y la parte de arriba queda inalcanzable). */
     justify-content: flex-start;
     align-items: stretch;
@@ -810,8 +810,8 @@ footer {
     pointer-events: auto;
   }
 
-  /* Cada enlace en su propia lÃ­nea, separado por un filete: se lee como una lista real
-     y da un objetivo tÃ¡ctil mucho mÃ¡s ancho que el texto suelto de antes. */
+  /* Cada enlace en su propia línea, separado por un filete: se lee como una lista real
+     y da un objetivo táctil mucho más ancho que el texto suelto de antes. */
   .nav-links > li {
     border-bottom: 1px solid var(--c-border);
     opacity: 0;
@@ -835,8 +835,8 @@ footer {
   }
 
   .nav-links > li.nav-cta-mobile { border-bottom: none; }
-  /* Filas amplias: el enlace ocupa todo el ancho, asÃ­ se puede tocar en cualquier parte
-     de la lÃ­nea y no solo sobre las letras. */
+  /* Filas amplias: el enlace ocupa todo el ancho, así se puede tocar en cualquier parte
+     de la línea y no solo sobre las letras. */
   .nav-links a {
     font-family: var(--f-serif);
     font-size: 1.6rem;
@@ -864,10 +864,10 @@ footer {
   .section { padding: 3.5rem 5%; }
   .section-header { margin-bottom: 2.5rem; }
 
-  /* El hero mÃ³vil medÃ­a 1084px en una pantalla de 844: se abrÃ­a el sitio y solo se veÃ­a un
-     hueco y la foto â€” el titular y los botones de reservar quedaban por debajo del borde.
+  /* El hero móvil medía 1084px en una pantalla de 844: se abría el sitio y solo se veía un
+     hueco y la foto — el titular y los botones de reservar quedaban por debajo del borde.
      Se recorta el relleno superior (el header ya ocupa 77px) y se limita la altura de la
-     foto para que el mensaje y al menos un botÃ³n entren en la primera pantalla. */
+     foto para que el mensaje y al menos un botón entren en la primera pantalla. */
   .hero {
     min-height: auto;
     padding: 4.75rem 5% 2rem;
@@ -876,22 +876,22 @@ footer {
   .hero-content p { margin: 0.85rem 0 1.35rem; font-size: 1rem; }
   .hero-subtitle { margin-bottom: 0.85rem; }
   /* Los dos botones comparten fila: apilados sumaban 124px y empujaban el de "Reservar"
-     fuera de la primera pantalla, que es justo la acciÃ³n que debe verse sin desplazar. */
+     fuera de la primera pantalla, que es justo la acción que debe verse sin desplazar. */
   .hero-buttons { gap: 0.6rem; flex-wrap: nowrap; }
   .hero-buttons .btn {
     flex: 1 1 0;
     /* `min-width: 0` es la pieza clave: por defecto un elemento flex no encoge por debajo
-       del ancho de su contenido, asÃ­ que con `nowrap` los dos botones sumaban 362px en
-       351 disponibles y la fila se salÃ­a por la derecha (20px de margen a la izquierda
+       del ancho de su contenido, así que con `nowrap` los dos botones sumaban 362px en
+       351 disponibles y la fila se salía por la derecha (20px de margen a la izquierda
        contra 9px a la derecha). Ahora pueden ceder y la fila queda centrada de verdad. */
     min-width: 0;
     width: auto;
     padding-inline: 0.7rem;
     white-space: nowrap;
   }
-  /* Al acortar el hero, la foto quedÃ³ en una caja APAISADA (351x280) y un retrato ahÃ­ se
-     recorta a la altura de la frente: se veÃ­a media cara. La soluciÃ³n no es estirarla de
-     alto â€”eso devolverÃ­a los botones fuera de pantallaâ€” sino ESTRECHARLA y darle forma
+  /* Al acortar el hero, la foto quedó en una caja APAISADA (351x280) y un retrato ahí se
+     recorta a la altura de la frente: se veía media cara. La solución no es estirarla de
+     alto —eso devolvería los botones fuera de pantalla— sino ESTRECHARLA y darle forma
      vertical: cabe el rostro entero y el hero sigue siendo corto. */
   .hero-image {
     width: min(64%, 250px);
@@ -900,10 +900,10 @@ footer {
     height: auto;
     min-height: 0;
     max-height: none;
-    /* 999px se recorta solo a la mitad del ancho: cÃºpula perfecta sea cual sea el tamaÃ±o. */
+    /* 999px se recorta solo a la mitad del ancho: cúpula perfecta sea cual sea el tamaño. */
     border-radius: 999px 999px 12px 12px;
   }
-  /* En una caja 4/5 el retrato entra casi completo, asÃ­ que se centra en vez de anclarlo
+  /* En una caja 4/5 el retrato entra casi completo, así que se centra en vez de anclarlo
      abajo (el 68% existe para las cajas anchas de escritorio). */
   .hero-image img { object-position: 50% 45%; }
 
@@ -926,7 +926,7 @@ footer {
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    /* overflow-x:auto also clips vertically, which beheaded the "MÃ¡s pedido"
+    /* overflow-x:auto also clips vertically, which beheaded the "Más pedido"
        badge sitting at top:-12px. This padding gives it room. */
     padding-top: 1.25rem;
     padding-bottom: 0.5rem;
@@ -939,32 +939,6 @@ footer {
     flex: 0 0 86%;
     scroll-snap-align: center;
   }
-
-  .store-grid.store-carousel,
-  #storeGrid.store-carousel {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: flex-start;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    gap: 1.25rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    margin: 0 -5%;
-    padding-left: 5%;
-    padding-right: 5%;
-  }
-  .store-grid.store-carousel::-webkit-scrollbar { display: none; }
-  .store-grid.store-carousel .store-card {
-    flex: 0 0 78%;
-    scroll-snap-align: center;
-    max-width: 320px;
-  }
-  .store-hint { display: flex !important; align-items: center; justify-content: center; gap: 0.4rem; }
-
   /* Let the CTA sit right under the last feature instead of being pushed to the
      bottom of an over-tall card. */
   .pricing-features {
@@ -1004,9 +978,9 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* El formulario creciÃ³ con los campos nuevos y ya no cabe en una pantalla de mÃ³vil:
-     sin este relleno (y sin el scroll de abajo) el tÃ­tulo y el botÃ³n quedaban pegados
-     a los bordes, incluso cortados. TambiÃ©n se respeta la zona segura del iPhone. */
+  /* El formulario creció con los campos nuevos y ya no cabe en una pantalla de móvil:
+     sin este relleno (y sin el scroll de abajo) el título y el botón quedaban pegados
+     a los bordes, incluso cortados. También se respeta la zona segura del iPhone. */
   padding: max(1.25rem, env(safe-area-inset-top)) 1rem max(1.25rem, env(safe-area-inset-bottom));
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -1029,7 +1003,7 @@ footer {
   padding: 2.5rem;
   position: relative;
   /* `margin: auto` centra la tarjeta cuando cabe y la deja crecer con aire arriba y abajo
-     cuando no; el scroll vive en el overlay, asÃ­ el botÃ³n nunca queda fuera de alcance. */
+     cuando no; el scroll vive en el overlay, así el botón nunca queda fuera de alcance. */
   margin: auto;
   transform: translateY(20px);
   transition: transform 0.3s ease;
@@ -1058,7 +1032,7 @@ footer {
   color: var(--c-text-muted);
   cursor: pointer;
   transition: color 0.3s;
-  /* Was a 14x27 hit area â€” too small to close reliably with a thumb. */
+  /* Was a 14x27 hit area — too small to close reliably with a thumb. */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1106,7 +1080,7 @@ footer {
   border: 1px solid var(--c-border);
   border-radius: 8px;
   font-family: var(--f-sans);
-  /* 1rem = 16px: por debajo de eso, iOS hace zoom automÃ¡tico al tocar el campo. */
+  /* 1rem = 16px: por debajo de eso, iOS hace zoom automático al tocar el campo. */
   font-size: 1rem;
   transition: border-color 0.3s;
   background: var(--c-bg);
@@ -1130,7 +1104,7 @@ footer {
   border-color: var(--c-accent-dark);
 }
 
-/* Fecha y hora comparten fila en pantallas con sitio; se apilan en mÃ³vil. */
+/* Fecha y hora comparten fila en pantallas con sitio; se apilan en móvil. */
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1161,9 +1135,9 @@ footer {
 }
 
 /* ============================================================
-   MICRO-ANIMACIONES â€” lenguaje de maquillaje
+   MICRO-ANIMACIONES — lenguaje de maquillaje
    Todo con transform/opacity (compositado en GPU) para que el
-   celular no sufra, y con estados :active porque en tÃ¡ctil no
+   celular no sufra, y con estados :active porque en táctil no
    existe :hover.
    ============================================================ */
 
@@ -1221,7 +1195,7 @@ footer {
 
 .brand:active .brand-wing { transform: rotate(10deg) scale(1.12); }
 
-/* --- Etiquetas de secciÃ³n: trazo de labial que se pinta al aparecer --- */
+/* --- Etiquetas de sección: trazo de labial que se pinta al aparecer --- */
 .hero-subtitle {
   position: relative;
 }
@@ -1256,7 +1230,7 @@ footer {
 .service-card:nth-child(2) .service-icon { animation-delay: 0.6s; }
 .service-card:nth-child(3) .service-icon { animation-delay: 1.2s; }
 
-/* --- Insignia "MÃ¡s pedido": latido suave para atraer la vista --- */
+/* --- Insignia "Más pedido": latido suave para atraer la vista --- */
 @keyframes badge-pulse {
   0%   { box-shadow: 0 0 0 0 rgba(181, 156, 130, 0.5); }
   70%  { box-shadow: 0 0 0 10px rgba(181, 156, 130, 0); }
@@ -1267,7 +1241,7 @@ footer {
   animation: badge-pulse 3s ease-out infinite;
 }
 
-/* --- GalerÃ­a: destello diagonal al tocar/pasar --- */
+/* --- Galería: destello diagonal al tocar/pasar --- */
 .gallery-item::after {
   content: '';
   position: absolute;
@@ -1306,7 +1280,7 @@ footer {
 .gallery-grid .reveal:nth-child(5) { transition-delay: 0.32s; }
 .gallery-grid .reveal:nth-child(6) { transition-delay: 0.40s; }
 
-/* RetroalimentaciÃ³n tÃ¡ctil en las tarjetas (en tÃ¡ctil no hay hover que las eleve). */
+/* Retroalimentación táctil en las tarjetas (en táctil no hay hover que las eleve). */
 .service-card:active,
 .pricing-card:active { transform: scale(0.985); }
 
@@ -1318,22 +1292,4 @@ footer {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-.agenda-publica { max-width: 40rem; margin: 3rem auto; padding: 0 1.25rem; }
-.agenda-publica ul { display: grid; grid-template-columns: repeat(auto-fill, minmax(5.5rem, 1fr)); gap: .5rem; list-style: none; padding: 0; }
-.agenda-publica li { border: 1px solid rgba(0,0,0,.15); padding: .5rem .25rem; text-align: center; }
-
-
-.price-list{list-style:none;padding:0;margin:0;text-align:left;display:flex;flex-direction:column;gap:.55rem;flex:1}
-.price-row{display:grid;grid-template-columns:1fr auto;gap:.65rem;align-items:baseline;padding-bottom:.45rem;border-bottom:1px solid var(--c-border);font-size:.92rem;line-height:1.3}
-.price-row:last-child{border-bottom:none;padding-bottom:0}
-.price-row-name{min-width:0;overflow-wrap:anywhere;word-break:break-word;color:var(--c-text)}
-.price-row-val{font-family:var(--f-serif);font-weight:600;font-size:1.05rem;white-space:nowrap}
-.pricing-card.pricing-group{text-align:left}
-.pricing-card.pricing-group .title-md{text-align:left}
-@media (max-width:768px){
-  .pricing-card.pricing-group{flex:0 0 88%}
-  .price-row{font-size:.86rem;gap:.45rem}
-  .price-row-val{font-size:.98rem}
 }

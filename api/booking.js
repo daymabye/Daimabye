@@ -1,4 +1,4 @@
-/**
+﻿/**
  * POST /api/booking — guarda una reserva.
  *
  * Cada cita es su propia fila en Postgres (Supabase). Antes era un archivo JSON por cita en
@@ -7,6 +7,7 @@
  */
 import crypto from 'node:crypto';
 import { crearCita, actualizarCita } from '../lib/db-citas.js';
+import { recoveryKeyFromWebId } from '../lib/recovery-key.js';
 import { enviarCorreo, correoParaClienta, correoParaAdmin } from '../lib/email.js';
 
 const LARGOS = {
@@ -16,7 +17,6 @@ const LARGOS = {
 };
 
 const CORREO_VALIDO = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
-
 
 /** Deja "2026-08-15" tal cual; cualquier otra cosa, vacia. */
 function normalizarFecha(v) {
@@ -37,6 +37,8 @@ function normalizarHora(v) {
   if (h > 23 || min > 59) return '';
   return `${String(h).padStart(2, '0')}:${String(min).padStart(2, '0')}`;
 }
+
+import { huecoLibre, esChoqueDeHorario } from '../lib/hueco-libre.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -59,8 +61,9 @@ export default async function handler(req, res) {
   };
   const agente = String(h['user-agent'] || '');
 
+  const id = crypto.randomUUID();
   const citaBase = {
-    id: crypto.randomUUID(),
+    id,
     creadaEn: new Date().toISOString(),
     nombre,
     correo,
@@ -86,24 +89,58 @@ export default async function handler(req, res) {
     dispositivo: /Mobi|Android|iPhone|iPad/i.test(agente) ? 'Móvil' : 'Escritorio',
     navegador: agente.slice(0, 180),
     llegoDesde: String(h.referer || '').slice(0, 200),
+    recoveryKey: recoveryKeyFromWebId(id),
+    sourceSystem: 'web',
   };
+
+  // Sin fecha y hora normalizadas no se puede comprobar nada, y una cita sin
+  // hueco definido no deberia entrar a la agenda.
+  if (!citaBase.fechaISO || !citaBase.hora24) {
+    return res.status(400).json({ error: 'Falta la fecha o la hora de la cita' });
+  }
+
+  // Antes se insertaba directo, sin mirar si la hora estaba tomada: dos
+  // clientas podian reservar el mismo turno y las dos recibian su correo de
+  // confirmacion. Se comprueba aca (para dar un mensaje util con alternativas)
+  // y ademas hay un indice unico en la base, que es lo unico que gana una
+  // carrera entre dos reservas simultaneas.
+  const hueco = await huecoLibre({
+    fechaISO: citaBase.fechaISO,
+    hora24: citaBase.hora24,
+    duracionMin: citaBase.duracionMin,
+  });
+  if (!hueco.libre) {
+    if (hueco.error) console.error('[booking] no se pudo comprobar la agenda:', hueco.error);
+    return res.status(409).json({
+      error: hueco.motivo,
+      code: 'hora_ocupada',
+      alternativas: hueco.alternativas || [],
+    });
+  }
 
   let cita;
   try {
     cita = await crearCita(citaBase);
   } catch (err) {
+    // El indice unico salto: alguien reservo esa misma hora entre el chequeo de
+    // arriba y este insert. Es la carrera que el chequeo solo no puede cerrar.
+    if (esChoqueDeHorario(err)) {
+      console.log('[booking] carrera por el mismo hueco:', citaBase.fechaISO, citaBase.hora24);
+      return res.status(409).json({
+        error: 'Alguien tomó esa hora hace un instante. Elegí otra, por favor.',
+        code: 'hora_ocupada',
+      });
+    }
     console.error('[booking] no se pudo guardar la cita:', err);
     return res.status(500).json({ error: 'No se pudo guardar la reserva' });
   }
 
-  // Los correos van DESPUÉS de guardar y no pueden tumbar la reserva: si el proveedor falla,
-  // la cita ya está a salvo y la administradora la ve igual en el panel.
-  const base = `https://${req.headers['x-forwarded-host'] || req.headers.host}`;
+  const baseUrl = `https://${req.headers['x-forwarded-host'] || req.headers.host}`;
   let correoEnviado = false;
   let correoMotivo = '';
   try {
     const aClienta = correoParaClienta(cita);
-    const aAdmin = correoParaAdmin(cita, `${base}/admin`);
+    const aAdmin = correoParaAdmin(cita, `${baseUrl}/admin`);
     const [clienta] = await Promise.all([
       enviarCorreo({ para: cita.correo, ...aClienta }),
       enviarCorreo({ para: process.env.ADMIN_NOTIFY_EMAIL || process.env.ADMIN_EMAIL, ...aAdmin }),
@@ -115,9 +152,6 @@ export default async function handler(req, res) {
     console.error('[booking] fallo al notificar por correo:', correoMotivo);
   }
 
-  // Se anota el resultado real del correo, salga bien o mal: con solo registrar los
-  // fallos, un envio exitoso se quedaba en el valor por defecto (false) en la base de
-  // datos, y el panel/consultas futuras no podian distinguir "se mando" de "nunca se supo".
   if (!correoEnviado) {
     console.warn('[booking] la clienta NO recibio el correo:', cita.correo, '|', correoMotivo);
   }
@@ -127,9 +161,7 @@ export default async function handler(req, res) {
     console.error('[booking] no se pudo anotar el resultado del correo:', err);
   }
 
-  // Quien llama (el bot de WhatsApp) necesita saberlo para no prometerle a la clienta un
-  // correo que no le va a llegar, y para avisarla por WhatsApp en su lugar.
-  return res.status(201).json({ ok: true, id: cita.id, correoEnviado, correoMotivo });
+  return res.status(201).json({ ok: true, id: cita.id, recoveryKey: cita.recoveryKey, correoEnviado, correoMotivo });
 }
 
 function safeDecode(valor) {

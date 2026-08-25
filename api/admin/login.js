@@ -12,7 +12,10 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Método no permitido' });
   }
 
-  const { correo = '', clave = '' } = (req.body && typeof req.body === 'object') ? req.body : {};
+  const bruto = (req.body && typeof req.body === 'object') ? req.body : {};
+  // Trim evita fallos por espacios al final (móvil / autocompletado).
+  const correo = String(bruto.correo ?? bruto.email ?? '').trim();
+  const clave = String(bruto.clave ?? bruto.password ?? '').trim();
   const { ADMIN_EMAIL, ADMIN_PASSWORD_HASH, SESSION_SECRET } = process.env;
 
   if (!ADMIN_EMAIL || !ADMIN_PASSWORD_HASH || !SESSION_SECRET) {
@@ -20,7 +23,7 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'El acceso no está configurado' });
   }
 
-  const correoOk = String(correo).trim().toLowerCase() === ADMIN_EMAIL.trim().toLowerCase();
+  const correoOk = correo.toLowerCase() === ADMIN_EMAIL.trim().toLowerCase();
   const claveOk = verificarClave(clave, ADMIN_PASSWORD_HASH);
 
   // Retardo fijo: encarece probar contraseñas a lo bruto y evita que el tiempo de

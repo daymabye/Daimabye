@@ -1,0 +1,261 @@
+[
+  {
+    "localId": 3,
+    "fechaISO": null,
+    "hora24": null,
+    "plan": "Planchado",
+    "hasPhone": true
+  },
+  {
+    "localId": 6,
+    "fechaISO": "2026-08-10",
+    "hora24": "10:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 9,
+    "fechaISO": "2026-07-29",
+    "hora24": "08:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 10,
+    "fechaISO": "2026-08-01",
+    "hora24": "16:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 11,
+    "fechaISO": "2026-08-01",
+    "hora24": "16:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 12,
+    "fechaISO": "2026-08-01",
+    "hora24": "16:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 13,
+    "fechaISO": "2026-07-29",
+    "hora24": "10:00",
+    "plan": "Planchado",
+    "hasPhone": true
+  },
+  {
+    "localId": 14,
+    "fechaISO": "2026-07-29",
+    "hora24": "16:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 15,
+    "fechaISO": "2026-07-29",
+    "hora24": "16:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 16,
+    "fechaISO": "2026-07-29",
+    "hora24": "16:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 17,
+    "fechaISO": "2026-07-29",
+    "hora24": "16:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 18,
+    "fechaISO": "2026-07-29",
+    "hora24": "03:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 19,
+    "fechaISO": "2026-07-29",
+    "hora24": "21:00",
+    "plan": "Combo Pasarela (maquillaje a elección + ondas de reina)",
+    "hasPhone": true
+  },
+  {
+    "localId": 20,
+    "fechaISO": "2026-07-29",
+    "hora24": null,
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 21,
+    "fechaISO": "2026-07-29",
+    "hora24": "16:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 22,
+    "fechaISO": "2026-07-29",
+    "hora24": "16:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 23,
+    "fechaISO": "2026-07-29",
+    "hora24": "16:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 24,
+    "fechaISO": "2026-07-29",
+    "hora24": "16:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 25,
+    "fechaISO": "2026-07-29",
+    "hora24": "16:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 26,
+    "fechaISO": "2026-07-29",
+    "hora24": "16:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 27,
+    "fechaISO": "2026-07-29",
+    "hora24": "16:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 28,
+    "fechaISO": "2026-07-29",
+    "hora24": "16:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 29,
+    "fechaISO": "2026-07-29",
+    "hora24": "16:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 30,
+    "fechaISO": "2026-07-29",
+    "hora24": "16:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 31,
+    "fechaISO": "2026-07-29",
+    "hora24": "16:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 32,
+    "fechaISO": "2026-07-29",
+    "hora24": "16:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 33,
+    "fechaISO": "2026-07-29",
+    "hora24": "16:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 34,
+    "fechaISO": "2026-07-29",
+    "hora24": "18:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 35,
+    "fechaISO": "2026-07-29",
+    "hora24": "16:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 36,
+    "fechaISO": "2026-07-29",
+    "hora24": "16:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 37,
+    "fechaISO": "2026-07-29",
+    "hora24": "18:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 38,
+    "fechaISO": "2026-07-28",
+    "hora24": "14:00",
+    "plan": "Maquillaje Social Profesional",
+    "hasPhone": true
+  },
+  {
+    "localId": 39,
+    "fechaISO": "2026-07-29",
+    "hora24": "08:00",
+    "plan": "Pestañas punto a punto estilo clásicas",
+    "hasPhone": true
+  },
+  {
+    "localId": 40,
+    "fechaISO": "2026-07-29",
+    "hora24": "15:00",
+    "plan": "Recogido",
+    "hasPhone": true
+  },
+  {
+    "localId": 41,
+    "fechaISO": "2026-07-29",
+    "hora24": "13:00",
+    "plan": "Maquillaje de Graduación Profesional + Recogido",
+    "hasPhone": true
+  },
+  {
+    "localId": 42,
+    "fechaISO": "2026-07-30",
+    "hora24": "15:00",
+    "plan": "Pestañas punto a punto estilo clásicas",
+    "hasPhone": true
+  },
+  {
+    "localId": 43,
+    "fechaISO": "2026-08-08",
+    "hora24": "13:00",
+    "plan": "Ondas normales",
+    "hasPhone": true
+  }
+]

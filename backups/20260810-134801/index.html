@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -12,14 +12,14 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
 
     <!-- Fuentes por <link> y no por @import dentro del CSS: el @import obligaba al navegador
-         a descargar style.css, analizarlo y solo entonces descubrir las fuentes — tres viajes
-         encadenados antes de poder pintar texto. Aquí se descubren en el primer byte del HTML.
+         a descargar style.css, analizarlo y solo entonces descubrir las fuentes â€” tres viajes
+         encadenados antes de poder pintar texto. AquÃ­ se descubren en el primer byte del HTML.
          Solo se piden los pesos que el CSS usa de verdad (Inter 400/500, Playfair 400/600,
-         Dancing Script 400); antes se pedían nueve, incluidas dos cursivas sin usar. -->
+         Dancing Script 400); antes se pedÃ­an nueve, incluidas dos cursivas sin usar. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:wght@400;600&display=swap">
-    <!-- Dancing Script solo dibuja el monograma "dm", así que se piden esos dos glifos y no el
+    <!-- Dancing Script solo dibuja el monograma "dm", asÃ­ que se piden esos dos glifos y no el
          alfabeto entero: 41 KB -> 1 KB. Si el monograma cambia, hay que actualizar `text=`. -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400&text=dm&display=swap">
 
@@ -44,8 +44,8 @@
     </style>
 </head>
 <body>
-    <!-- Iconos en línea. Antes venían de Font Awesome: ~100 KB de CSS más sus archivos de
-         fuente, todo para ocho glifos. Aquí van como sprite: cero peticiones y cero espera. -->
+    <!-- Iconos en lÃ­nea. Antes venÃ­an de Font Awesome: ~100 KB de CSS mÃ¡s sus archivos de
+         fuente, todo para ocho glifos. AquÃ­ van como sprite: cero peticiones y cero espera. -->
     <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
         <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4.5 12.5 9.5 17.5 19.5 6.5"/>
@@ -102,24 +102,24 @@
                 <li><a href="#pricing">Precios</a></li>
                 <li><a href="#store">Tienda</a></li>
                 <li><a href="#gallery">Portafolio</a></li>
-                <li><a href="#about">Sobre Mí</a></li>
+                <li><a href="#about">Sobre MÃ­</a></li>
                 <li class="nav-cta-mobile"><a href="https://wa.me/593958757109?text=Hola%20Daima%20Belleza%2C%20quiero%20agendar%20mi%20cita." class="btn btn-primary" target="_blank">Agendar Cita</a></li>
             </ul>
         </nav>
         <a href="https://wa.me/593958757109?text=Hola%20Daima%20Belleza%2C%20quiero%20agendar%20mi%20cita." class="btn btn-primary nav-cta-desktop" target="_blank">Agendar Cita</a>
-        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menÃº" aria-expanded="false">
             <span></span><span></span><span></span>
         </button>
     </header>
 
     <main>
         <!-- Hero Section -->
-        <section id="home" class="hero" data-cms-section="hero">
+        <section id="home" class="hero">
             <div class="hero-container">
                 <div class="hero-content reveal">
                     <span class="text-small hero-subtitle">Portoviejo, Ecuador</span>
                     <h1 class="title-xl">Realza tu belleza natural</h1>
-                    <p>Experta en maquillaje profesional, novias y peinados. Un look impecable, duradero y fotogénico para tus momentos más importantes.</p>
+                    <p>Experta en maquillaje profesional, novias y peinados. Un look impecable, duradero y fotogÃ©nico para tus momentos mÃ¡s importantes.</p>
                     <div class="hero-buttons">
                         <a href="https://wa.me/593958757109?text=Hola%20Daima%20Belleza%2C%20quiero%20agendar%20mi%20cita." class="btn btn-primary" target="_blank">Reservar Ahora</a>
                         <a href="#gallery" class="btn btn-outline">Ver Portafolio</a>
@@ -136,7 +136,7 @@
         </section>
 
         <!-- Services Section -->
-        <section id="services" class="section" data-cms-section="services">
+        <section id="services" class="section">
             <div class="section-header reveal">
                 <span class="text-small hero-subtitle">Lo que ofrezco</span>
                 <h2 class="title-lg">Servicios Exclusivos</h2>
@@ -145,25 +145,25 @@
                 <div class="service-card reveal">
                     <svg class="icon service-icon" aria-hidden="true"><use href="#i-sparkles"/></svg>
                     <h3 class="title-md">Maquillaje Social / Eventos</h3>
-                    <p>Ideal para eventos, graduaciones y fiestas. Un look duradero que resalta tus mejores facciones con productos de alta gama y técnicas avanzadas.</p>
+                    <p>Ideal para eventos, graduaciones y fiestas. Un look duradero que resalta tus mejores facciones con productos de alta gama y tÃ©cnicas avanzadas.</p>
                 </div>
                 <div class="service-card reveal">
                     <svg class="icon service-icon" aria-hidden="true"><use href="#i-ring"/></svg>
                     <h3 class="title-md">Novias</h3>
-                    <p>Diseño de imagen nupcial completo. Prueba de maquillaje y peinado para que brilles con luz propia, con acabado a prueba de lágrimas y fotos.</p>
+                    <p>DiseÃ±o de imagen nupcial completo. Prueba de maquillaje y peinado para que brilles con luz propia, con acabado a prueba de lÃ¡grimas y fotos.</p>
                 </div>
                 <div class="service-card reveal">
                     <svg class="icon service-icon" aria-hidden="true"><use href="#i-scissors"/></svg>
                     <h3 class="title-md">Peinados</h3>
-                    <p>Desde ondas glamorosas de Hollywood hasta recogidos elegantes y románticos. El complemento perfecto para un maquillaje impecable.</p>
+                    <p>Desde ondas glamorosas de Hollywood hasta recogidos elegantes y romÃ¡nticos. El complemento perfecto para un maquillaje impecable.</p>
                 </div>
             </div>
         </section>
 
         <!-- Pricing / Plans Section -->
-        <section id="pricing" class="section" data-cms-section="pricing" style="background-color: var(--c-surface);">
+        <section id="pricing" class="section" style="background-color: var(--c-surface);">
             <div class="section-header reveal">
-                <span class="text-small hero-subtitle">Inversión en ti</span>
+                <span class="text-small hero-subtitle">InversiÃ³n en ti</span>
                 <h2 class="title-lg">Planes & Paquetes</h2>
             </div>
             <div class="pricing-grid">
@@ -172,15 +172,15 @@
                     <h3 class="title-md">Maquillaje Social / Eventos</h3>
                     <p class="price">$25</p>
                     <ul class="pricing-features">
-                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Pestañas a elección</li>
-                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Técnica Halo o Foxy Eyes</li>
-                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Sellado de alta duración</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> PestaÃ±as a elecciÃ³n</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> TÃ©cnica Halo o Foxy Eyes</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Sellado de alta duraciÃ³n</li>
                     </ul>
                     <button class="btn btn-outline btn-book-plan" data-plan="Maquillaje Social / Eventos" style="width: 100%;">Elegir Plan</button>
                 </div>
                 <!-- Plan 2 -->
                 <div class="pricing-card popular reveal">
-                    <div class="popular-badge">Más pedido</div>
+                    <div class="popular-badge">MÃ¡s pedido</div>
                     <h3 class="title-md">Combo Consentidor (social + ondas sueltas)</h3>
                     <p class="price">$35</p>
                     <ul class="pricing-features">
@@ -192,10 +192,10 @@
                 </div>
                 <!-- Plan 3 -->
                 <div class="pricing-card reveal">
-                    <h3 class="title-md">Combo Pasarela (maquillaje a elección + ondas de reina)</h3>
+                    <h3 class="title-md">Combo Pasarela (maquillaje a elecciÃ³n + ondas de reina)</h3>
                     <p class="price">$45</p>
                     <ul class="pricing-features">
-                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Maquillaje técnica a elección</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Maquillaje tÃ©cnica a elecciÃ³n</li>
                         <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Peinado ondas de reina</li>
                         <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Look de impacto garantizado</li>
                     </ul>
@@ -203,14 +203,14 @@
                 </div>
                 <!-- Plan 4 -->
                 <div class="pricing-card reveal">
-                    <h3 class="title-md">Maquillaje de Graduación Profesional</h3>
+                    <h3 class="title-md">Maquillaje de GraduaciÃ³n Profesional</h3>
                     <p class="price">$30</p>
                     <ul class="pricing-features">
-                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Pestañas a elección</li>
-                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Triple sellado de duración</li>
-                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Acabado fotogénico flash</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> PestaÃ±as a elecciÃ³n</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Triple sellado de duraciÃ³n</li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Acabado fotogÃ©nico flash</li>
                     </ul>
-                    <button class="btn btn-outline btn-book-plan" data-plan="Maquillaje de Graduación Profesional" style="width: 100%;">Elegir Plan</button>
+                    <button class="btn btn-outline btn-book-plan" data-plan="Maquillaje de GraduaciÃ³n Profesional" style="width: 100%;">Elegir Plan</button>
                 </div>
                 <!-- Plan 5 -->
                 <div class="pricing-card reveal">
@@ -225,26 +225,26 @@
                     <button class="btn btn-outline btn-book-plan" data-plan="Peinados" style="width: 100%;">Elegir Plan</button>
                 </div>
                 <div class="pricing-card reveal">
-                    <h3 class="title-md">Pestañas</h3>
+                    <h3 class="title-md">PestaÃ±as</h3>
                     <p class="price" style="font-size: 2rem;">$5 - $8</p>
                     <ul class="pricing-features" style="text-align: left; padding-left: 2rem;">
-                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Clásicas: <strong>$5</strong></li>
-                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Muñeca: <strong>$6</strong></li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> ClÃ¡sicas: <strong>$5</strong></li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> MuÃ±eca: <strong>$6</strong></li>
                         <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Anime: <strong>$7</strong></li>
-                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Híbridas: <strong>$8</strong></li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> HÃ­bridas: <strong>$8</strong></li>
                     </ul>
-                    <button class="btn btn-outline btn-book-plan" data-plan="Pestañas punto a punto estilo clásicas" style="width: 100%;">Elegir Plan</button>
+                    <button class="btn btn-outline btn-book-plan" data-plan="PestaÃ±as punto a punto estilo clÃ¡sicas" style="width: 100%;">Elegir Plan</button>
                 </div>
                 <div class="pricing-card reveal">
                     <h3 class="title-md">Otros servicios</h3>
                     <p class="price" style="font-size: 2rem;">Desde $10</p>
                     <ul class="pricing-features" style="text-align: left; padding-left: 2rem;">
-                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Novia / Quinceañera: <strong>$60</strong></li>
-                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Hidratación capilar: <strong>$15</strong></li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Novia / QuinceaÃ±era: <strong>$60</strong></li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> HidrataciÃ³n capilar: <strong>$15</strong></li>
                         <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Keratina profesional: <strong>$40</strong></li>
                         <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Cejas con henna: <strong>$10</strong></li>
                     </ul>
-                    <button class="btn btn-outline btn-book-plan" data-plan="Maquillaje de Novia / Quinceañera" style="width: 100%;">Elegir Plan</button>
+                    <button class="btn btn-outline btn-book-plan" data-plan="Maquillaje de Novia / QuinceaÃ±era" style="width: 100%;">Elegir Plan</button>
                 </div>
             </div>
             <p class="pricing-hint" aria-hidden="true">
@@ -252,8 +252,8 @@
             </p>
         </section>
 
-        <!-- Store Section: se llena sola desde /api/productos, no hay nada que tocar aquí a mano -->
-        <section id="store" class="section" data-cms-section="store" style="background-color: var(--c-surface);" hidden>
+        <!-- Store Section: se llena sola desde /api/productos, no hay nada que tocar aquÃ­ a mano -->
+        <section id="store" class="section" style="background-color: var(--c-surface);" hidden>
             <div class="section-header reveal">
                 <span class="text-small hero-subtitle">Para llevar a casa</span>
                 <h2 class="title-lg">Tienda</h2>
@@ -262,26 +262,26 @@
         </section>
 
         <!-- Gallery Section -->
-        <section id="gallery" class="section" data-cms-section="gallery">
+        <section id="gallery" class="section">
             <div class="section-header reveal">
-                <span class="text-small hero-subtitle">Inspiración</span>
+                <span class="text-small hero-subtitle">InspiraciÃ³n</span>
                 <h2 class="title-lg">Mi Portafolio</h2>
             </div>
             <div class="gallery-grid">
-                <a class="gallery-item reveal" href="https://www.instagram.com/p/DXDd0majhX4/" target="_blank" rel="noopener noreferrer" aria-label="Look Social: ver esta publicación en el Instagram de Daima Belleza"><img src="assets/opt/g-DXDd0majhX4-900.webp" srcset="assets/opt/g-DXDd0majhX4-480.webp 480w, assets/opt/g-DXDd0majhX4-900.webp 900w" sizes="(max-width: 1024px) 46vw, 30vw" width="900" height="1200" loading="lazy" decoding="async" alt="Maquillaje social con acabado luminoso"><span class="gallery-overlay"><span class="gallery-label">Look Social</span><span class="gallery-cta"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg>Ver en Instagram</span></span></a>
-                <a class="gallery-item reveal" href="https://www.instagram.com/p/DR5aLNBjkOg/" target="_blank" rel="noopener noreferrer" aria-label="Ondas & Glam: ver esta publicación en el Instagram de Daima Belleza"><img src="assets/opt/g-DR5aLNBjkOg-900.webp" srcset="assets/opt/g-DR5aLNBjkOg-480.webp 480w, assets/opt/g-DR5aLNBjkOg-900.webp 900w" sizes="(max-width: 1024px) 46vw, 30vw" width="900" height="1200" loading="lazy" decoding="async" alt="Peinado en ondas glamorosas con maquillaje de evento"><span class="gallery-overlay"><span class="gallery-label">Ondas & Glam</span><span class="gallery-cta"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg>Ver en Instagram</span></span></a>
-                <a class="gallery-item reveal" href="https://www.instagram.com/p/DUHlmVQjnTy/" target="_blank" rel="noopener noreferrer" aria-label="Maquillaje de Grado: ver esta publicación en el Instagram de Daima Belleza"><img src="assets/opt/g-DUHlmVQjnTy-900.webp" srcset="assets/opt/g-DUHlmVQjnTy-480.webp 480w, assets/opt/g-DUHlmVQjnTy-900.webp 900w" sizes="(max-width: 1024px) 46vw, 30vw" width="900" height="1200" loading="lazy" decoding="async" alt="Maquillaje de graduación con pestañas y piel luminosa"><span class="gallery-overlay"><span class="gallery-label">Maquillaje de Grado</span><span class="gallery-cta"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg>Ver en Instagram</span></span></a>
-                <a class="gallery-item reveal" href="https://www.instagram.com/p/DRN0xM3DvT-/" target="_blank" rel="noopener noreferrer" aria-label="Elegancia: ver esta publicación en el Instagram de Daima Belleza"><img src="assets/opt/g-DRN0xM3DvT--900.webp" srcset="assets/opt/g-DRN0xM3DvT--480.webp 480w, assets/opt/g-DRN0xM3DvT--900.webp 900w" sizes="(max-width: 1024px) 46vw, 30vw" width="900" height="1199" loading="lazy" decoding="async" alt="Semirecogido elegante con maquillaje suave"><span class="gallery-overlay"><span class="gallery-label">Elegancia</span><span class="gallery-cta"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg>Ver en Instagram</span></span></a>
-                <a class="gallery-item reveal" href="https://www.instagram.com/p/DIiQG7Qu-cu/" target="_blank" rel="noopener noreferrer" aria-label="XV Años: ver esta publicación en el Instagram de Daima Belleza"><img src="assets/opt/g-DIiQG7Qu-cu-900.webp" srcset="assets/opt/g-DIiQG7Qu-cu-480.webp 480w, assets/opt/g-DIiQG7Qu-cu-900.webp 900w" sizes="(max-width: 1024px) 46vw, 30vw" width="900" height="1125" loading="lazy" decoding="async" alt="Look de XV años con mirada marcada"><span class="gallery-overlay"><span class="gallery-label">XV Años</span><span class="gallery-cta"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg>Ver en Instagram</span></span></a>
-                <a class="gallery-item reveal" href="https://www.instagram.com/p/DIMQ0MIOXAt/" target="_blank" rel="noopener noreferrer" aria-label="Piel Madura: ver esta publicación en el Instagram de Daima Belleza"><img src="assets/opt/g-DIMQ0MIOXAt-900.webp" srcset="assets/opt/g-DIMQ0MIOXAt-480.webp 480w, assets/opt/g-DIMQ0MIOXAt-900.webp 900w" sizes="(max-width: 1024px) 46vw, 30vw" width="900" height="1125" loading="lazy" decoding="async" alt="Maquillaje para piel madura con acabado natural"><span class="gallery-overlay"><span class="gallery-label">Piel Madura</span><span class="gallery-cta"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg>Ver en Instagram</span></span></a>
+                <a class="gallery-item reveal" href="https://www.instagram.com/p/DXDd0majhX4/" target="_blank" rel="noopener noreferrer" aria-label="Look Social: ver esta publicaciÃ³n en el Instagram de Daima Belleza"><img src="assets/opt/g-DXDd0majhX4-900.webp" srcset="assets/opt/g-DXDd0majhX4-480.webp 480w, assets/opt/g-DXDd0majhX4-900.webp 900w" sizes="(max-width: 1024px) 46vw, 30vw" width="900" height="1200" loading="lazy" decoding="async" alt="Maquillaje social con acabado luminoso"><span class="gallery-overlay"><span class="gallery-label">Look Social</span><span class="gallery-cta"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg>Ver en Instagram</span></span></a>
+                <a class="gallery-item reveal" href="https://www.instagram.com/p/DR5aLNBjkOg/" target="_blank" rel="noopener noreferrer" aria-label="Ondas & Glam: ver esta publicaciÃ³n en el Instagram de Daima Belleza"><img src="assets/opt/g-DR5aLNBjkOg-900.webp" srcset="assets/opt/g-DR5aLNBjkOg-480.webp 480w, assets/opt/g-DR5aLNBjkOg-900.webp 900w" sizes="(max-width: 1024px) 46vw, 30vw" width="900" height="1200" loading="lazy" decoding="async" alt="Peinado en ondas glamorosas con maquillaje de evento"><span class="gallery-overlay"><span class="gallery-label">Ondas & Glam</span><span class="gallery-cta"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg>Ver en Instagram</span></span></a>
+                <a class="gallery-item reveal" href="https://www.instagram.com/p/DUHlmVQjnTy/" target="_blank" rel="noopener noreferrer" aria-label="Maquillaje de Grado: ver esta publicaciÃ³n en el Instagram de Daima Belleza"><img src="assets/opt/g-DUHlmVQjnTy-900.webp" srcset="assets/opt/g-DUHlmVQjnTy-480.webp 480w, assets/opt/g-DUHlmVQjnTy-900.webp 900w" sizes="(max-width: 1024px) 46vw, 30vw" width="900" height="1200" loading="lazy" decoding="async" alt="Maquillaje de graduaciÃ³n con pestaÃ±as y piel luminosa"><span class="gallery-overlay"><span class="gallery-label">Maquillaje de Grado</span><span class="gallery-cta"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg>Ver en Instagram</span></span></a>
+                <a class="gallery-item reveal" href="https://www.instagram.com/p/DRN0xM3DvT-/" target="_blank" rel="noopener noreferrer" aria-label="Elegancia: ver esta publicaciÃ³n en el Instagram de Daima Belleza"><img src="assets/opt/g-DRN0xM3DvT--900.webp" srcset="assets/opt/g-DRN0xM3DvT--480.webp 480w, assets/opt/g-DRN0xM3DvT--900.webp 900w" sizes="(max-width: 1024px) 46vw, 30vw" width="900" height="1199" loading="lazy" decoding="async" alt="Semirecogido elegante con maquillaje suave"><span class="gallery-overlay"><span class="gallery-label">Elegancia</span><span class="gallery-cta"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg>Ver en Instagram</span></span></a>
+                <a class="gallery-item reveal" href="https://www.instagram.com/p/DIiQG7Qu-cu/" target="_blank" rel="noopener noreferrer" aria-label="XV AÃ±os: ver esta publicaciÃ³n en el Instagram de Daima Belleza"><img src="assets/opt/g-DIiQG7Qu-cu-900.webp" srcset="assets/opt/g-DIiQG7Qu-cu-480.webp 480w, assets/opt/g-DIiQG7Qu-cu-900.webp 900w" sizes="(max-width: 1024px) 46vw, 30vw" width="900" height="1125" loading="lazy" decoding="async" alt="Look de XV aÃ±os con mirada marcada"><span class="gallery-overlay"><span class="gallery-label">XV AÃ±os</span><span class="gallery-cta"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg>Ver en Instagram</span></span></a>
+                <a class="gallery-item reveal" href="https://www.instagram.com/p/DIMQ0MIOXAt/" target="_blank" rel="noopener noreferrer" aria-label="Piel Madura: ver esta publicaciÃ³n en el Instagram de Daima Belleza"><img src="assets/opt/g-DIMQ0MIOXAt-900.webp" srcset="assets/opt/g-DIMQ0MIOXAt-480.webp 480w, assets/opt/g-DIMQ0MIOXAt-900.webp 900w" sizes="(max-width: 1024px) 46vw, 30vw" width="900" height="1125" loading="lazy" decoding="async" alt="Maquillaje para piel madura con acabado natural"><span class="gallery-overlay"><span class="gallery-label">Piel Madura</span><span class="gallery-cta"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg>Ver en Instagram</span></span></a>
             </div>
             <div style="text-align: center; margin-top: 4rem;" class="reveal">
-                <a href="https://www.instagram.com/daimabellezastudio/" target="_blank" class="btn btn-outline">Ver más en Instagram</a>
+                <a href="https://www.instagram.com/daimabellezastudio/" target="_blank" class="btn btn-outline">Ver mÃ¡s en Instagram</a>
             </div>
         </section>
 
         <!-- About Section -->
-        <section id="about" class="section about" data-cms-section="about">
+        <section id="about" class="section about">
             <div class="about-container">
                 <div class="about-image reveal">
                     <img src="assets/opt/story-1100.webp"
@@ -291,11 +291,11 @@
                          alt="Daima Belleza Studio, maquilladora profesional en Portoviejo">
                 </div>
                 <div class="about-content reveal">
-                    <span class="text-small hero-subtitle">Conóceme</span>
+                    <span class="text-small hero-subtitle">ConÃ³ceme</span>
                     <h2 class="title-lg" style="margin-bottom: 2rem;">Hola, soy Daima</h2>
-                    <p>Con años de experiencia en el mundo de la belleza, mi verdadera pasión es hacer que cada mujer se sienta segura, empoderada y hermosa frente al espejo.</p>
-                    <p>Me especializo en técnicas modernas de maquillaje que <strong>realzan tu belleza natural</strong> en lugar de disfrazarla. Mi enfoque es crear pieles luminosas, miradas impactantes y peinados que duren toda la noche.</p>
-                    <p>Utilizo productos de la más alta calidad para garantizar un acabado perfecto y a prueba de fotos. ¡Estaré encantada de atenderte y crear el look de tus sueños en mi estudio en Portoviejo!</p>
+                    <p>Con aÃ±os de experiencia en el mundo de la belleza, mi verdadera pasiÃ³n es hacer que cada mujer se sienta segura, empoderada y hermosa frente al espejo.</p>
+                    <p>Me especializo en tÃ©cnicas modernas de maquillaje que <strong>realzan tu belleza natural</strong> en lugar de disfrazarla. Mi enfoque es crear pieles luminosas, miradas impactantes y peinados que duren toda la noche.</p>
+                    <p>Utilizo productos de la mÃ¡s alta calidad para garantizar un acabado perfecto y a prueba de fotos. Â¡EstarÃ© encantada de atenderte y crear el look de tus sueÃ±os en mi estudio en Portoviejo!</p>
                 </div>
             </div>
         </section>
@@ -337,10 +337,10 @@
             <form id="bookingForm">
                 <div class="form-group">
                     <label for="userName">Tu Nombre Completo</label>
-                    <input type="text" id="userName" placeholder="Ej: María Pérez" required>
+                    <input type="text" id="userName" placeholder="Ej: MarÃ­a PÃ©rez" required>
                 </div>
                 <div class="form-group">
-                    <label for="userEmail">Correo Electrónico</label>
+                    <label for="userEmail">Correo ElectrÃ³nico</label>
                     <input type="email" id="userEmail" placeholder="correo@ejemplo.com" required>
                 </div>
                 <div class="form-group">
@@ -350,23 +350,23 @@
                 <div class="form-group">
                     <label for="userPlan">Servicio</label>
                     <select id="userPlan" required>
-                        <option value="Maquillaje Social / Eventos">Maquillaje Social / Eventos — $25</option>
-                        <option value="Maquillaje de Graduación Profesional">Maquillaje de Graduación Profesional — $30</option>
-                        <option value="Combo Consentidor">Combo Consentidor — $35</option>
-                        <option value="Combo Pasarela">Combo Pasarela — $45</option>
-                        <option value="Planchado / Cepillado Exprés">Planchado / Cepillado Exprés — $10</option>
-                        <option value="Ondas normales">Ondas normales — $15</option>
-                        <option value="Ondas de reina / de agua">Ondas de reina / de agua — $20</option>
-                        <option value="Semirecogido">Semirecogido — $20</option>
-                        <option value="Recogido">Recogido — $20</option>
-                        <option value="Pestañas punto a punto estilo clásicas">Pestañas clásicas — $5</option>
-                        <option value="Pestañas punto a punto estilo muñeca">Pestañas muñeca — $6</option>
-                        <option value="Pestañas punto a punto estilo anime">Pestañas anime — $7</option>
-                        <option value="Pestañas punto a punto híbridas">Pestañas híbridas — $8</option>
-                        <option value="Maquillaje de Novia / Quinceañera">Novia / Quinceañera — $60</option>
-                        <option value="Hidratación Capilar Profunda">Hidratación Capilar Profunda — $15</option>
-                        <option value="Alisado de Keratina Profesional">Alisado de Keratina Profesional — $40</option>
-                        <option value="Cejas con Henna + Visagismo / Depilación">Cejas con Henna + Visagismo / Depilación — $10</option>
+                        <option value="Maquillaje Social / Eventos">Maquillaje Social / Eventos â€” $25</option>
+                        <option value="Maquillaje de GraduaciÃ³n Profesional">Maquillaje de GraduaciÃ³n Profesional â€” $30</option>
+                        <option value="Combo Consentidor">Combo Consentidor â€” $35</option>
+                        <option value="Combo Pasarela">Combo Pasarela â€” $45</option>
+                        <option value="Planchado / Cepillado ExprÃ©s">Planchado / Cepillado ExprÃ©s â€” $10</option>
+                        <option value="Ondas normales">Ondas normales â€” $15</option>
+                        <option value="Ondas de reina / de agua">Ondas de reina / de agua â€” $20</option>
+                        <option value="Semirecogido">Semirecogido â€” $20</option>
+                        <option value="Recogido">Recogido â€” $20</option>
+                        <option value="PestaÃ±as punto a punto estilo clÃ¡sicas">PestaÃ±as clÃ¡sicas â€” $5</option>
+                        <option value="PestaÃ±as punto a punto estilo muÃ±eca">PestaÃ±as muÃ±eca â€” $6</option>
+                        <option value="PestaÃ±as punto a punto estilo anime">PestaÃ±as anime â€” $7</option>
+                        <option value="PestaÃ±as punto a punto hÃ­bridas">PestaÃ±as hÃ­bridas â€” $8</option>
+                        <option value="Maquillaje de Novia / QuinceaÃ±era">Novia / QuinceaÃ±era â€” $60</option>
+                        <option value="HidrataciÃ³n Capilar Profunda">HidrataciÃ³n Capilar Profunda â€” $15</option>
+                        <option value="Alisado de Keratina Profesional">Alisado de Keratina Profesional â€” $40</option>
+                        <option value="Cejas con Henna + Visagismo / DepilaciÃ³n">Cejas con Henna + Visagismo / DepilaciÃ³n â€” $10</option>
                     </select>
                 </div>
                 <div class="form-row">
@@ -378,9 +378,9 @@
                         <label for="userTime">Hora <span class="opcional">(aprox.)</span></label>
                         <select id="userTime">
                             <option value="">Sin preferencia</option>
-                            <option>Mañana (8:00 – 12:00)</option>
-                            <option>Mediodía (12:00 – 15:00)</option>
-                            <option>Tarde (15:00 – 19:00)</option>
+                            <option>MaÃ±ana (8:00 â€“ 12:00)</option>
+                            <option>MediodÃ­a (12:00 â€“ 15:00)</option>
+                            <option>Tarde (15:00 â€“ 19:00)</option>
                             <option>Noche (19:00 en adelante)</option>
                         </select>
                     </div>
@@ -413,7 +413,7 @@
             menuToggle.classList.toggle('open', isOpen);
             menuToggle.setAttribute('aria-expanded', isOpen);
             // El CSS usa esta clase para quitarle el backdrop-filter al header mientras el
-            // menú está abierto; con el filtro puesto, el overlay se medía contra el header
+            // menÃº estÃ¡ abierto; con el filtro puesto, el overlay se medÃ­a contra el header
             // en vez de contra la pantalla y cortaba los primeros enlaces.
             document.body.classList.toggle('menu-abierto', isOpen);
             document.body.style.overflow = isOpen ? 'hidden' : '';
@@ -438,8 +438,8 @@
                 selectedPlan = this.getAttribute('data-plan');
                 modalPlanName.textContent = selectedPlan;
                 // El selector arranca en el plan de la tarjeta pulsada, pero la clienta puede
-                // cambiarlo sin cerrar el formulario. "Servicio de Peinado" no es una opción
-                // concreta: en ese caso se deja que elija cuál.
+                // cambiarlo sin cerrar el formulario. "Servicio de Peinado" no es una opciÃ³n
+                // concreta: en ese caso se deja que elija cuÃ¡l.
                 const sel = document.getElementById('userPlan');
                 const existe = [...sel.options].some(o => o.value === selectedPlan);
                 sel.value = existe ? selectedPlan : 'Planchado';
@@ -489,9 +489,9 @@
 
             boton.disabled = true;
             /* `keepalive` es lo que hace que esto funcione de verdad. Al abrir WhatsApp el
-               navegador congela esta página (en el móvil incluso cambia de app), y una petición
-               normal se cancelaba a medio camino: la cita se perdía. Con keepalive el navegador
-               se compromete a terminar el envío aunque la página deje de estar en primer plano.
+               navegador congela esta pÃ¡gina (en el mÃ³vil incluso cambia de app), y una peticiÃ³n
+               normal se cancelaba a medio camino: la cita se perdÃ­a. Con keepalive el navegador
+               se compromete a terminar el envÃ­o aunque la pÃ¡gina deje de estar en primer plano.
                Por eso tampoco se espera (`await`) antes de abrir WhatsApp. */
             try {
                 fetch('/api/booking', {
@@ -536,9 +536,9 @@
             document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
         }
 
-        // Tienda: se pide sin caché a propósito. Si Daima acaba de agregar un producto desde
-        // el panel, quien cargue la página ahora mismo ya lo ve — no hay build ni despliegue
-        // de por medio entre agregarlo y que aparezca aquí.
+        // Tienda: se pide sin cachÃ© a propÃ³sito. Si Daima acaba de agregar un producto desde
+        // el panel, quien cargue la pÃ¡gina ahora mismo ya lo ve â€” no hay build ni despliegue
+        // de por medio entre agregarlo y que aparezca aquÃ­.
         (function cargarTienda() {
             const seccion = document.getElementById('store');
             const grid = document.getElementById('storeGrid');
@@ -552,9 +552,8 @@
                 .then((r) => r.json())
                 .then((data) => {
                     const productos = Array.isArray(data.productos) ? data.productos : [];
-                    if (!productos.length) return; // la sección se queda oculta: una tienda vacía no vende, distrae
+                    if (!productos.length) return; // la secciÃ³n se queda oculta: una tienda vacÃ­a no vende, distrae
 
-                    grid.classList.add('store-carousel');
                     grid.innerHTML = productos.map((p) => `
                         <div class="store-card">
                             ${p.foto
@@ -564,228 +563,53 @@
                                 <h3 class="title-md">${escaparHtml(p.nombre)}</h3>
                                 ${p.descripcion ? `<p class="store-card-desc">${escaparHtml(p.descripcion)}</p>` : ''}
                                 <p class="price">$${escaparHtml(String(p.precio))}</p>
-                                <a class="btn btn-outline" style="width:100%" href="/tienda.html">Ver en tienda</a>
+                                <a class="btn btn-outline" style="width:100%"
+                                   href="https://wa.me/593958757109?text=${encodeURIComponent(`Hola Daima! Quiero pedir: ${p.nombre} ($${p.precio})`)}"
+                                   target="_blank" rel="noopener">Pedir por WhatsApp</a>
                             </div>
                         </div>`).join('');
-                    if (!seccion.querySelector('.store-hint')) {
-                        const hint = document.createElement('p');
-                        hint.className = 'store-hint pricing-hint';
-                        hint.setAttribute('aria-hidden', 'true');
-                        hint.textContent = 'Desliza para ver productos';
-                        grid.insertAdjacentElement('afterend', hint);
-                    }
-                    if (!seccion.querySelector('.store-cta')) {
-                        const cta = document.createElement('div');
-                        cta.className = 'store-cta';
-                        cta.style.cssText = 'text-align:center;margin-top:1.5rem';
-                        cta.innerHTML = '<a class="btn btn-primary" href="/tienda.html">Ver tienda</a>';
-                        seccion.appendChild(cta);
-                    }
+
                     seccion.hidden = false;
                 })
-                .catch(() => { /* la tienda es un extra: si falla, el resto de la página sigue intacta */ });
+                .catch(() => { /* la tienda es un extra: si falla, el resto de la pÃ¡gina sigue intacta */ });
         })();
 
-
-        (function cargarCmsLanding() {
-            const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
-            const setText = (sel, val) => {
-                const el = document.querySelector(sel);
-                if (el && val != null && String(val).trim() !== '') el.textContent = String(val);
-            };
-            fetch('/api/landing-catalog?cms=1', { cache: 'no-store' })
-                .then((r) => { if (!r.ok) throw new Error('cms'); return r.json(); })
-                .then((data) => {
-                    const c = data.content;
-                    if (!c) return;
-                    if (data.fontsHref) {
-                        let link = document.getElementById('cms-fonts');
-                        if (!link) {
-                            link = document.createElement('link');
-                            link.id = 'cms-fonts';
-                            link.rel = 'stylesheet';
-                            document.head.appendChild(link);
-                        }
-                        link.href = data.fontsHref;
-                    }
-                    const typ = c.typography || {};
-                    const fontMap = {
-                        'Playfair Display': "'Playfair Display', Georgia, serif",
-                        'Cormorant Garamond': "'Cormorant Garamond', Georgia, serif",
-                        'Lora': "'Lora', Georgia, serif",
-                        'Libre Baskerville': "'Libre Baskerville', Georgia, serif",
-                        'Inter': "'Inter', system-ui, sans-serif",
-                        'Source Sans 3': "'Source Sans 3', system-ui, sans-serif",
-                        'DM Sans': "'DM Sans', system-ui, sans-serif",
-                        'Nunito Sans': "'Nunito Sans', system-ui, sans-serif",
-                        'Montserrat': "'Montserrat', system-ui, sans-serif",
-                        'Outfit': "'Outfit', system-ui, sans-serif",
-                    };
-                    const root = document.documentElement;
-                    if (typ.headingFont && fontMap[typ.headingFont]) root.style.setProperty('--f-serif', fontMap[typ.headingFont]);
-                    if (typ.bodyFont && fontMap[typ.bodyFont]) root.style.setProperty('--f-sans', fontMap[typ.bodyFont]);
-                    if (typ.headingScale) root.style.setProperty('--cms-heading-scale', String(typ.headingScale));
-                    if (typ.bodyScale) root.style.setProperty('--cms-body-scale', String(typ.bodyScale));
-                    root.style.setProperty('font-size', `calc(100% * ${Number(typ.bodyScale) || 1})`);
-                    document.querySelectorAll('h1,h2,h3,.title-xl,.title-lg,.title-md').forEach((el) => {
-                        el.style.fontSize = '';
-                    });
-                    // Apply via CSS var on titles
-                    if (!document.getElementById('cms-scale-style')) {
-                        const st = document.createElement('style');
-                        st.id = 'cms-scale-style';
-                        st.textContent = '.title-xl,.title-lg,.title-md,h1,h2,h3{font-size: calc(1em * var(--cms-heading-scale, 1)) !important;} body{font-size: calc(16px * var(--cms-body-scale, 1));}';
-                        document.head.appendChild(st);
-                    }
-
-                    const hero = c.hero || {};
-                    setText('#home .hero-subtitle', hero.eyebrow);
-                    setText('#home .title-xl', hero.title);
-                    const heroP = document.querySelector('#home .hero-content > p');
-                    if (heroP && hero.subtitle) heroP.textContent = hero.subtitle;
-                    const heroCtas = document.querySelectorAll('#home .hero-buttons .btn');
-                    if (heroCtas[0] && hero.ctaPrimary) heroCtas[0].textContent = hero.ctaPrimary;
-                    if (heroCtas[1] && hero.ctaSecondary) heroCtas[1].textContent = hero.ctaSecondary;
-                    if (hero.imageUrl) {
-                        const img = document.querySelector('#home .hero-image img');
-                        if (img) { img.src = hero.imageUrl; img.removeAttribute('srcset'); }
-                    }
-
-                    const svc = c.services || {};
-                    setText('#services .section-header .hero-subtitle', svc.eyebrow);
-                    setText('#services .section-header .title-lg', svc.title);
-                    const cards = document.querySelectorAll('#services .service-card');
-                    (svc.cards || []).forEach((card, i) => {
-                        if (!cards[i]) return;
-                        const h = cards[i].querySelector('h3');
-                        const p = cards[i].querySelector('p');
-                        if (h && card.title) h.textContent = card.title;
-                        if (p && card.body) p.textContent = card.body;
-                    });
-
-                    setText('#pricing .section-header .hero-subtitle', (c.pricing || {}).eyebrow);
-                    setText('#pricing .section-header .title-lg', (c.pricing || {}).title);
-                    setText('#store .section-header .hero-subtitle', (c.store || {}).eyebrow);
-                    setText('#store .section-header .title-lg', (c.store || {}).title);
-                    setText('#gallery .section-header .hero-subtitle', (c.gallery || {}).eyebrow);
-                    setText('#gallery .section-header .title-lg', (c.gallery || {}).title);
-
-                    const about = c.about || {};
-                    setText('#about .hero-subtitle', about.eyebrow);
-                    setText('#about .title-lg', about.title);
-                    const aboutPs = document.querySelectorAll('#about .about-content > p');
-                    (about.paragraphs || []).forEach((p, i) => { if (aboutPs[i] && p) aboutPs[i].textContent = p; });
-                    if (about.imageUrl) {
-                        const img = document.querySelector('#about .about-image img');
-                        if (img) { img.src = about.imageUrl; img.removeAttribute('srcset'); }
-                    }
-                    if ((c.nav || {}).ctaLabel) {
-                        document.querySelectorAll('.nav-cta-desktop, .nav-cta-mobile .btn-primary').forEach((el) => {
-                            el.textContent = c.nav.ctaLabel;
-                        });
-                    }
-                })
-                .catch(() => {});
-        })();
-
-        // Catalogo: 3-4 tarjetas de categoria con todos los precios dentro.
+        // Catalogo canonico: si no responde, se conservan las tarjetas versionadas en este HTML.
         (function cargarCatalogoCanonico() {
             const grid = document.querySelector('#pricing .pricing-grid');
             if (!grid) return;
             const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
-            const money = (n) => {
-                const p = Number(n);
-                if (!Number.isFinite(p)) return esc(n);
-                return Number.isInteger(p) ? String(p) : p.toFixed(2).replace(/\.00$/, '');
-            };
-            const GROUPS = [
-                { title: 'Maquillaje', blurb: 'Looks completos para cada ocasión', keys: ['social', 'graduacion', 'novia'], popular: false },
-                { title: 'Combos', blurb: 'Maquillaje + peinado en un solo plan', keys: ['combo_consentidor', 'combo_pasarela'], popular: true },
-                { title: 'Peinados & cabello', blurb: 'Desde exprés hasta keratina', keys: ['planchado', 'ondas', 'ondas_reina', 'semirecogido', 'recogido', 'hidratacion', 'keratina'], popular: false },
-                { title: 'Pestañas & cejas', blurb: 'Detalles que terminan el look', keys: ['pestanas_clasicas', 'pestanas_muneca', 'pestanas_anime', 'pestanas_hibridas', 'cejas_henna'], popular: false },
-            ];
             fetch('/api/landing-catalog', { cache: 'no-store' })
                 .then((r) => { if (!r.ok) throw new Error('catalog unavailable'); return r.json(); })
                 .then((data) => {
-                    const services = (Array.isArray(data.services) ? data.services : []).filter((s) => s && s.visible !== false);
+                    const services = Array.isArray(data.services) ? data.services : [];
                     if (!services.length) return;
-                    const byKey = Object.fromEntries(services.map((s) => [s.key, s]));
-                    const used = new Set();
-                    const cards = GROUPS.map((g) => {
-                        const items = g.keys.map((k) => byKey[k]).filter(Boolean);
-                        items.forEach((s) => used.add(s.key));
-                        return { ...g, items };
-                    }).filter((g) => g.items.length);
-                    const rest = services.filter((s) => !used.has(s.key)).sort((a, b) => (a.display_order || 0) - (b.display_order || 0));
-                    if (rest.length) cards.push({ title: 'Más servicios', blurb: 'Otros tratamientos', keys: [], popular: false, items: rest });
-
-                    grid.innerHTML = cards.map((g) => {
-                        const rows = g.items.map((s) => `
-                            <li class="price-row">
-                                <span class="price-row-name">${esc(s.name)}</span>
-                                <span class="price-row-val">$${esc(money(s.price))}</span>
-                            </li>`).join('');
-                        const popular = g.popular ? ' popular' : '';
-                        const badge = g.popular ? '<div class="popular-badge">Más pedido</div>' : '';
-                        const first = g.items[0];
-                        const plan = first ? esc(first.name) : esc(g.title);
-                        return `<div class="pricing-card pricing-group reveal active${popular}">${badge}
-                            <h3 class="title-md">${esc(g.title)}</h3>
-                            <p class="text-small" style="margin:0 0 .75rem">${esc(g.blurb)}</p>
-                            <ul class="price-list">${rows}</ul>
-                            <button class="btn btn-outline btn-book-plan" data-plan="${plan}" style="width:100%;margin-top:1rem">Elegir</button>
-                        </div>`;
-                    }).join('');
-
-                    let more = document.getElementById('pricing-all-cta');
-                    if (!more) {
-                        more = document.createElement('div');
-                        more.id = 'pricing-all-cta';
-                        more.style.cssText = 'text-align:center;margin-top:1.75rem';
-                        more.innerHTML = '<a class="btn btn-primary" href="/planes.html">Ver todos los planes</a>';
-                        grid.parentElement.appendChild(more);
-                    }
+                    grid.innerHTML = services.map((s) => `
+                        <div class="pricing-card reveal">
+                            <h3 class="title-md">${esc(s.name)}</h3>
+                            <p class="price">$${esc(Number(s.price).toFixed(2).replace(/\.00$/, ''))}</p>
+                            ${s.description ? `<p>${esc(s.description)}</p>` : ''}
+                            <p class="text-small">DuraciÃ³n: ${esc(s.duration_minutes)} min</p>
+                            <button class="btn btn-outline btn-book-plan" data-plan="${esc(s.name)}" style="width:100%;">Elegir Plan</button>
+                        </div>`).join('');
                 })
-                .catch(() => {});
-        })();
-
-        // Admin WYSIWYG: enable click-to-select when ?cms_edit=1 inside iframe
-        (function cmsEditBridge() {
-            const params = new URLSearchParams(location.search);
-            if (params.get('cms_edit') !== '1') return;
-            document.documentElement.classList.add('cms-edit');
-            const style = document.createElement('style');
-            style.textContent = `
-              html.cms-edit [data-cms-section]{outline:2px dashed transparent;outline-offset:4px;cursor:pointer;transition:outline-color .15s}
-              html.cms-edit [data-cms-section]:hover{outline-color:rgba(181,156,130,.85)}
-              html.cms-edit [data-cms-section].cms-selected{outline-color:#B59C82;outline-style:solid;box-shadow:0 0 0 4px rgba(181,156,130,.2)}
-              html.cms-edit .sticky-wa, html.cms-edit #brush-canvas, html.cms-edit .modal-overlay{display:none!important}
-            `;
-            document.head.appendChild(style);
-            let selected = null;
-            document.addEventListener('click', (e) => {
-                const sec = e.target.closest('[data-cms-section]');
-                if (!sec) return;
-                e.preventDefault();
-                e.stopPropagation();
-                if (selected) selected.classList.remove('cms-selected');
-                selected = sec;
-                selected.classList.add('cms-selected');
-                selected.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                parent.postMessage({ type: 'daima-cms-select', section: sec.dataset.cmsSection }, '*');
-            }, true);
-            window.addEventListener('message', (ev) => {
-                if (!ev.data || ev.data.type !== 'daima-cms-reload') return;
-                location.reload();
-            });
-            parent.postMessage({ type: 'daima-cms-ready' }, '*');
+                .catch(() => { /* fallback: las tarjetas incluidas en el HTML siguen visibles */ });
         })();
     </script>
 
-    <!-- Three.js NO se carga aquí. Son ~589 KB para un fondo decorativo: pedirlo por adelantado
-         lo ponía a competir con la foto del hero por el ancho de banda. 3d-bg.js lo trae solo
-         cuando el navegador está libre, y se abstiene si el visitante pide ahorro de datos. -->
+    <!-- Three.js NO se carga aquÃ­. Son ~589 KB para un fondo decorativo: pedirlo por adelantado
+         lo ponÃ­a a competir con la foto del hero por el ancho de banda. 3d-bg.js lo trae solo
+         cuando el navegador estÃ¡ libre, y se abstiene si el visitante pide ahorro de datos. -->
     <script src="3d-bg.js" defer></script>
+
+<section id="agenda-publica" class="agenda-publica" data-duracion="60" aria-label="Horarios libres">
+  <h2>Horarios libres</h2>
+  <p>Solo se muestran huecos disponibles. Si la agenda no es confiable, no se ofrece ninguno.</p>
+  <label>Fecha <input type="date" name="fecha"></label>
+  <p data-estado></p>
+  <ul data-libres></ul>
+</section>
+<script src="/assets/agenda-publica.js" defer></script>
 </body>
 </html>
 

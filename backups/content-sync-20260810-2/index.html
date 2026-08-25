@@ -114,7 +114,7 @@
 
     <main>
         <!-- Hero Section -->
-        <section id="home" class="hero" data-cms-section="hero">
+        <section id="home" class="hero">
             <div class="hero-container">
                 <div class="hero-content reveal">
                     <span class="text-small hero-subtitle">Portoviejo, Ecuador</span>
@@ -136,7 +136,7 @@
         </section>
 
         <!-- Services Section -->
-        <section id="services" class="section" data-cms-section="services">
+        <section id="services" class="section">
             <div class="section-header reveal">
                 <span class="text-small hero-subtitle">Lo que ofrezco</span>
                 <h2 class="title-lg">Servicios Exclusivos</h2>
@@ -161,7 +161,7 @@
         </section>
 
         <!-- Pricing / Plans Section -->
-        <section id="pricing" class="section" data-cms-section="pricing" style="background-color: var(--c-surface);">
+        <section id="pricing" class="section" style="background-color: var(--c-surface);">
             <div class="section-header reveal">
                 <span class="text-small hero-subtitle">Inversión en ti</span>
                 <h2 class="title-lg">Planes & Paquetes</h2>
@@ -253,7 +253,7 @@
         </section>
 
         <!-- Store Section: se llena sola desde /api/productos, no hay nada que tocar aquí a mano -->
-        <section id="store" class="section" data-cms-section="store" style="background-color: var(--c-surface);" hidden>
+        <section id="store" class="section" style="background-color: var(--c-surface);" hidden>
             <div class="section-header reveal">
                 <span class="text-small hero-subtitle">Para llevar a casa</span>
                 <h2 class="title-lg">Tienda</h2>
@@ -262,7 +262,7 @@
         </section>
 
         <!-- Gallery Section -->
-        <section id="gallery" class="section" data-cms-section="gallery">
+        <section id="gallery" class="section">
             <div class="section-header reveal">
                 <span class="text-small hero-subtitle">Inspiración</span>
                 <h2 class="title-lg">Mi Portafolio</h2>
@@ -281,7 +281,7 @@
         </section>
 
         <!-- About Section -->
-        <section id="about" class="section about" data-cms-section="about">
+        <section id="about" class="section about">
             <div class="about-container">
                 <div class="about-image reveal">
                     <img src="assets/opt/story-1100.webp"
@@ -554,7 +554,6 @@
                     const productos = Array.isArray(data.productos) ? data.productos : [];
                     if (!productos.length) return; // la sección se queda oculta: una tienda vacía no vende, distrae
 
-                    grid.classList.add('store-carousel');
                     grid.innerHTML = productos.map((p) => `
                         <div class="store-card">
                             ${p.foto
@@ -564,221 +563,15 @@
                                 <h3 class="title-md">${escaparHtml(p.nombre)}</h3>
                                 ${p.descripcion ? `<p class="store-card-desc">${escaparHtml(p.descripcion)}</p>` : ''}
                                 <p class="price">$${escaparHtml(String(p.precio))}</p>
-                                <a class="btn btn-outline" style="width:100%" href="/tienda.html">Ver en tienda</a>
+                                <a class="btn btn-outline" style="width:100%"
+                                   href="https://wa.me/593958757109?text=${encodeURIComponent(`Hola Daima! Quiero pedir: ${p.nombre} ($${p.precio})`)}"
+                                   target="_blank" rel="noopener">Pedir por WhatsApp</a>
                             </div>
                         </div>`).join('');
-                    if (!seccion.querySelector('.store-hint')) {
-                        const hint = document.createElement('p');
-                        hint.className = 'store-hint pricing-hint';
-                        hint.setAttribute('aria-hidden', 'true');
-                        hint.textContent = 'Desliza para ver productos';
-                        grid.insertAdjacentElement('afterend', hint);
-                    }
-                    if (!seccion.querySelector('.store-cta')) {
-                        const cta = document.createElement('div');
-                        cta.className = 'store-cta';
-                        cta.style.cssText = 'text-align:center;margin-top:1.5rem';
-                        cta.innerHTML = '<a class="btn btn-primary" href="/tienda.html">Ver tienda</a>';
-                        seccion.appendChild(cta);
-                    }
+
                     seccion.hidden = false;
                 })
                 .catch(() => { /* la tienda es un extra: si falla, el resto de la página sigue intacta */ });
-        })();
-
-
-        (function cargarCmsLanding() {
-            const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
-            const setText = (sel, val) => {
-                const el = document.querySelector(sel);
-                if (el && val != null && String(val).trim() !== '') el.textContent = String(val);
-            };
-            fetch('/api/landing-catalog?cms=1', { cache: 'no-store' })
-                .then((r) => { if (!r.ok) throw new Error('cms'); return r.json(); })
-                .then((data) => {
-                    const c = data.content;
-                    if (!c) return;
-                    if (data.fontsHref) {
-                        let link = document.getElementById('cms-fonts');
-                        if (!link) {
-                            link = document.createElement('link');
-                            link.id = 'cms-fonts';
-                            link.rel = 'stylesheet';
-                            document.head.appendChild(link);
-                        }
-                        link.href = data.fontsHref;
-                    }
-                    const typ = c.typography || {};
-                    const fontMap = {
-                        'Playfair Display': "'Playfair Display', Georgia, serif",
-                        'Cormorant Garamond': "'Cormorant Garamond', Georgia, serif",
-                        'Lora': "'Lora', Georgia, serif",
-                        'Libre Baskerville': "'Libre Baskerville', Georgia, serif",
-                        'Inter': "'Inter', system-ui, sans-serif",
-                        'Source Sans 3': "'Source Sans 3', system-ui, sans-serif",
-                        'DM Sans': "'DM Sans', system-ui, sans-serif",
-                        'Nunito Sans': "'Nunito Sans', system-ui, sans-serif",
-                        'Montserrat': "'Montserrat', system-ui, sans-serif",
-                        'Outfit': "'Outfit', system-ui, sans-serif",
-                    };
-                    const root = document.documentElement;
-                    if (typ.headingFont && fontMap[typ.headingFont]) root.style.setProperty('--f-serif', fontMap[typ.headingFont]);
-                    if (typ.bodyFont && fontMap[typ.bodyFont]) root.style.setProperty('--f-sans', fontMap[typ.bodyFont]);
-                    if (typ.headingScale) root.style.setProperty('--cms-heading-scale', String(typ.headingScale));
-                    if (typ.bodyScale) root.style.setProperty('--cms-body-scale', String(typ.bodyScale));
-                    root.style.setProperty('font-size', `calc(100% * ${Number(typ.bodyScale) || 1})`);
-                    document.querySelectorAll('h1,h2,h3,.title-xl,.title-lg,.title-md').forEach((el) => {
-                        el.style.fontSize = '';
-                    });
-                    // Apply via CSS var on titles
-                    if (!document.getElementById('cms-scale-style')) {
-                        const st = document.createElement('style');
-                        st.id = 'cms-scale-style';
-                        st.textContent = '.title-xl,.title-lg,.title-md,h1,h2,h3{font-size: calc(1em * var(--cms-heading-scale, 1)) !important;} body{font-size: calc(16px * var(--cms-body-scale, 1));}';
-                        document.head.appendChild(st);
-                    }
-
-                    const hero = c.hero || {};
-                    setText('#home .hero-subtitle', hero.eyebrow);
-                    setText('#home .title-xl', hero.title);
-                    const heroP = document.querySelector('#home .hero-content > p');
-                    if (heroP && hero.subtitle) heroP.textContent = hero.subtitle;
-                    const heroCtas = document.querySelectorAll('#home .hero-buttons .btn');
-                    if (heroCtas[0] && hero.ctaPrimary) heroCtas[0].textContent = hero.ctaPrimary;
-                    if (heroCtas[1] && hero.ctaSecondary) heroCtas[1].textContent = hero.ctaSecondary;
-                    if (hero.imageUrl) {
-                        const img = document.querySelector('#home .hero-image img');
-                        if (img) { img.src = hero.imageUrl; img.removeAttribute('srcset'); }
-                    }
-
-                    const svc = c.services || {};
-                    setText('#services .section-header .hero-subtitle', svc.eyebrow);
-                    setText('#services .section-header .title-lg', svc.title);
-                    const cards = document.querySelectorAll('#services .service-card');
-                    (svc.cards || []).forEach((card, i) => {
-                        if (!cards[i]) return;
-                        const h = cards[i].querySelector('h3');
-                        const p = cards[i].querySelector('p');
-                        if (h && card.title) h.textContent = card.title;
-                        if (p && card.body) p.textContent = card.body;
-                    });
-
-                    setText('#pricing .section-header .hero-subtitle', (c.pricing || {}).eyebrow);
-                    setText('#pricing .section-header .title-lg', (c.pricing || {}).title);
-                    setText('#store .section-header .hero-subtitle', (c.store || {}).eyebrow);
-                    setText('#store .section-header .title-lg', (c.store || {}).title);
-                    setText('#gallery .section-header .hero-subtitle', (c.gallery || {}).eyebrow);
-                    setText('#gallery .section-header .title-lg', (c.gallery || {}).title);
-
-                    const about = c.about || {};
-                    setText('#about .hero-subtitle', about.eyebrow);
-                    setText('#about .title-lg', about.title);
-                    const aboutPs = document.querySelectorAll('#about .about-content > p');
-                    (about.paragraphs || []).forEach((p, i) => { if (aboutPs[i] && p) aboutPs[i].textContent = p; });
-                    if (about.imageUrl) {
-                        const img = document.querySelector('#about .about-image img');
-                        if (img) { img.src = about.imageUrl; img.removeAttribute('srcset'); }
-                    }
-                    if ((c.nav || {}).ctaLabel) {
-                        document.querySelectorAll('.nav-cta-desktop, .nav-cta-mobile .btn-primary').forEach((el) => {
-                            el.textContent = c.nav.ctaLabel;
-                        });
-                    }
-                })
-                .catch(() => {});
-        })();
-
-        // Catalogo: 3-4 tarjetas de categoria con todos los precios dentro.
-        (function cargarCatalogoCanonico() {
-            const grid = document.querySelector('#pricing .pricing-grid');
-            if (!grid) return;
-            const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
-            const money = (n) => {
-                const p = Number(n);
-                if (!Number.isFinite(p)) return esc(n);
-                return Number.isInteger(p) ? String(p) : p.toFixed(2).replace(/\.00$/, '');
-            };
-            const GROUPS = [
-                { title: 'Maquillaje', blurb: 'Looks completos para cada ocasión', keys: ['social', 'graduacion', 'novia'], popular: false },
-                { title: 'Combos', blurb: 'Maquillaje + peinado en un solo plan', keys: ['combo_consentidor', 'combo_pasarela'], popular: true },
-                { title: 'Peinados & cabello', blurb: 'Desde exprés hasta keratina', keys: ['planchado', 'ondas', 'ondas_reina', 'semirecogido', 'recogido', 'hidratacion', 'keratina'], popular: false },
-                { title: 'Pestañas & cejas', blurb: 'Detalles que terminan el look', keys: ['pestanas_clasicas', 'pestanas_muneca', 'pestanas_anime', 'pestanas_hibridas', 'cejas_henna'], popular: false },
-            ];
-            fetch('/api/landing-catalog', { cache: 'no-store' })
-                .then((r) => { if (!r.ok) throw new Error('catalog unavailable'); return r.json(); })
-                .then((data) => {
-                    const services = (Array.isArray(data.services) ? data.services : []).filter((s) => s && s.visible !== false);
-                    if (!services.length) return;
-                    const byKey = Object.fromEntries(services.map((s) => [s.key, s]));
-                    const used = new Set();
-                    const cards = GROUPS.map((g) => {
-                        const items = g.keys.map((k) => byKey[k]).filter(Boolean);
-                        items.forEach((s) => used.add(s.key));
-                        return { ...g, items };
-                    }).filter((g) => g.items.length);
-                    const rest = services.filter((s) => !used.has(s.key)).sort((a, b) => (a.display_order || 0) - (b.display_order || 0));
-                    if (rest.length) cards.push({ title: 'Más servicios', blurb: 'Otros tratamientos', keys: [], popular: false, items: rest });
-
-                    grid.innerHTML = cards.map((g) => {
-                        const rows = g.items.map((s) => `
-                            <li class="price-row">
-                                <span class="price-row-name">${esc(s.name)}</span>
-                                <span class="price-row-val">$${esc(money(s.price))}</span>
-                            </li>`).join('');
-                        const popular = g.popular ? ' popular' : '';
-                        const badge = g.popular ? '<div class="popular-badge">Más pedido</div>' : '';
-                        const first = g.items[0];
-                        const plan = first ? esc(first.name) : esc(g.title);
-                        return `<div class="pricing-card pricing-group reveal active${popular}">${badge}
-                            <h3 class="title-md">${esc(g.title)}</h3>
-                            <p class="text-small" style="margin:0 0 .75rem">${esc(g.blurb)}</p>
-                            <ul class="price-list">${rows}</ul>
-                            <button class="btn btn-outline btn-book-plan" data-plan="${plan}" style="width:100%;margin-top:1rem">Elegir</button>
-                        </div>`;
-                    }).join('');
-
-                    let more = document.getElementById('pricing-all-cta');
-                    if (!more) {
-                        more = document.createElement('div');
-                        more.id = 'pricing-all-cta';
-                        more.style.cssText = 'text-align:center;margin-top:1.75rem';
-                        more.innerHTML = '<a class="btn btn-primary" href="/planes.html">Ver todos los planes</a>';
-                        grid.parentElement.appendChild(more);
-                    }
-                })
-                .catch(() => {});
-        })();
-
-        // Admin WYSIWYG: enable click-to-select when ?cms_edit=1 inside iframe
-        (function cmsEditBridge() {
-            const params = new URLSearchParams(location.search);
-            if (params.get('cms_edit') !== '1') return;
-            document.documentElement.classList.add('cms-edit');
-            const style = document.createElement('style');
-            style.textContent = `
-              html.cms-edit [data-cms-section]{outline:2px dashed transparent;outline-offset:4px;cursor:pointer;transition:outline-color .15s}
-              html.cms-edit [data-cms-section]:hover{outline-color:rgba(181,156,130,.85)}
-              html.cms-edit [data-cms-section].cms-selected{outline-color:#B59C82;outline-style:solid;box-shadow:0 0 0 4px rgba(181,156,130,.2)}
-              html.cms-edit .sticky-wa, html.cms-edit #brush-canvas, html.cms-edit .modal-overlay{display:none!important}
-            `;
-            document.head.appendChild(style);
-            let selected = null;
-            document.addEventListener('click', (e) => {
-                const sec = e.target.closest('[data-cms-section]');
-                if (!sec) return;
-                e.preventDefault();
-                e.stopPropagation();
-                if (selected) selected.classList.remove('cms-selected');
-                selected = sec;
-                selected.classList.add('cms-selected');
-                selected.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                parent.postMessage({ type: 'daima-cms-select', section: sec.dataset.cmsSection }, '*');
-            }, true);
-            window.addEventListener('message', (ev) => {
-                if (!ev.data || ev.data.type !== 'daima-cms-reload') return;
-                location.reload();
-            });
-            parent.postMessage({ type: 'daima-cms-ready' }, '*');
         })();
     </script>
 
@@ -788,4 +581,3 @@
     <script src="3d-bg.js" defer></script>
 </body>
 </html>
-

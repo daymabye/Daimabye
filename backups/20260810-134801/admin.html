@@ -36,78 +36,18 @@ h1,h2,h3{font-family:var(--f-serif);font-weight:400;line-height:1.2}
 button{font-family:inherit;cursor:pointer;color:inherit}
 input,textarea,select{font-family:inherit;font-size:16px} /* 16px evita el zoom automatico en iOS */
 
-/* ---------- Acceso (marca Daima) ---------- */
-.gate{
-  position:relative;min-height:100dvh;display:grid;place-items:center;
-  padding:max(1.25rem, env(safe-area-inset-top)) 1.25rem max(1.25rem, env(safe-area-inset-bottom));
-  overflow:hidden;background:
-    radial-gradient(120% 80% at 50% -10%, rgba(209,187,164,.38) 0%, transparent 55%),
-    radial-gradient(90% 70% at 100% 100%, rgba(181,156,130,.22) 0%, transparent 50%),
-    linear-gradient(165deg, #FFFCF7 0%, #F7F0E6 48%, #FCFBFA 100%);
-}
-.gate-bg{
-  position:absolute;inset:0;pointer-events:none;
-  background-image:
-    radial-gradient(circle at 20% 30%, rgba(209,187,164,.12) 0 2px, transparent 2px),
-    radial-gradient(circle at 80% 70%, rgba(181,156,130,.10) 0 1px, transparent 1px);
-  background-size:28px 28px, 22px 22px;opacity:.55;
-}
-.gate-shell{position:relative;width:100%;max-width:420px;z-index:1}
-.gate-card{
-  width:100%;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);
-  border:1px solid rgba(209,187,164,.45);border-radius:22px;
-  padding:clamp(1.75rem, 5vw, 2.35rem) clamp(1.35rem, 4.5vw, 2rem);
-  box-shadow:
-    0 4px 6px rgba(45,41,38,.04),
-    0 24px 48px rgba(45,41,38,.08),
-    inset 0 1px 0 rgba(255,255,255,.85);
-}
-.gate-brand{text-align:center;margin-bottom:1.85rem}
-.gate-mark{
-  width:56px;height:56px;margin:0 auto .85rem;border-radius:50%;
-  display:grid;place-items:center;font-family:var(--f-serif);font-size:1.65rem;font-weight:600;
-  color:#5C4A3A;background:linear-gradient(145deg,#F5EBDD 0%,#E8D5BE 55%,#D1BBA4 100%);
-  border:1px solid rgba(181,156,130,.55);
-  box-shadow:0 8px 20px rgba(181,156,130,.28);
-}
-.gate-brand h1{font-size:clamp(1.65rem,5vw,2rem);letter-spacing:.01em;color:#2D2926;margin:0}
-.gate-tag{
-  margin:.55rem 0 0;font-size:.68rem;text-transform:uppercase;letter-spacing:.22em;
-  color:#9A8B7A;font-weight:500;
-}
-.gate-form{margin-top:.25rem}
-.field,.campo{margin-bottom:1.05rem}
-.field label,.campo label{
-  display:block;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
-  color:#8A8078;margin-bottom:.45rem;
-}
-.field input,.campo input{
-  width:100%;padding:.95rem 1rem;border:1px solid #E8DFD3;border-radius:12px;
-  background:#FDFBF8;color:var(--text);transition:border-color .2s, box-shadow .2s, background .2s;
-}
-.field input::placeholder,.campo input::placeholder{color:#B8AEA4}
-.field input:focus,.campo input:focus{
-  outline:none;border-color:#C9AE8F;background:#FFF;
-  box-shadow:0 0 0 3px rgba(209,187,164,.35);
-}
-.gate-alert{margin-bottom:.85rem}
-.login-status{min-height:1.25em;margin:.35rem 0 .85rem;font-size:.82rem;color:#8A8078;text-align:center;line-height:1.4}
-.login-status.err{color:#8C3A31;font-weight:600}
-.login-status.ok{color:#2F6B4F;font-weight:600}
-.btn-gate{
-  margin-top:.35rem;width:100%;min-height:50px;padding:.85rem 1.25rem;border:none;border-radius:100px;
-  font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
-  color:#3D3228;background:linear-gradient(135deg,#E8D5BE 0%,#D1BBA4 45%,#C4A88E 100%);
-  box-shadow:0 10px 24px rgba(181,156,130,.35), inset 0 1px 0 rgba(255,255,255,.45);
-  transition:transform .15s ease, box-shadow .2s ease, filter .2s ease;
-}
-.btn-gate:hover:not(:disabled){filter:brightness(1.03);box-shadow:0 12px 28px rgba(181,156,130,.42)}
-.btn-gate:active:not(:disabled){transform:translateY(1px)}
-.btn-gate:disabled{opacity:.6;cursor:not-allowed;filter:grayscale(.15)}
-.gate-foot{
-  margin-top:1.35rem;text-align:center;font-size:.68rem;letter-spacing:.08em;
-  text-transform:uppercase;color:#B0A498;
-}
+/* ---------- Acceso ---------- */
+.gate{min-height:100dvh;display:grid;place-items:center;padding:1.25rem}
+.gate-card{width:100%;max-width:400px;background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:2rem 1.5rem;box-shadow:0 24px 60px rgba(45,41,38,.07)}
+.gate-brand{text-align:center;margin-bottom:1.75rem}
+.gate-brand h1{font-size:1.6rem}
+.gate-brand p{font-size:.72rem;text-transform:uppercase;letter-spacing:.18em;color:var(--muted);margin-top:.35rem}
+.field{margin-bottom:1rem}
+.field label{display:block;font-size:.8rem;font-weight:500;margin-bottom:.4rem}
+.field input{width:100%;padding:.9rem 1rem;border:1px solid var(--border);border-radius:10px;
+  background:var(--bg);color:var(--text)}
+.field input:focus{outline:none;border-color:var(--accent-dark)}
 
 /* ---------- Botones ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
@@ -117,9 +57,7 @@ input,textarea,select{font-family:inherit;font-size:16px} /* 16px evita el zoom 
 .btn-primary{background:var(--text);color:var(--bg);width:100%}
 .btn-primary:disabled{opacity:.55;cursor:not-allowed}
 .btn-ghost{background:var(--surface);border-color:var(--border)}
-/* 44px es el minimo de Android y de iOS. En escritorio se puede apretar mas
-   porque se apunta con el mouse, no con el dedo. */
-.btn-sm{min-height:44px;padding:.5rem 1rem;font-size:.72rem}
+.btn-sm{min-height:40px;padding:.5rem 1rem;font-size:.72rem}
 .alert{background:var(--bad-bg);border:1px solid #E7C3C3;color:var(--bad);border-radius:10px;
   padding:.7rem .9rem;font-size:.85rem;margin-bottom:1rem}
 .alert.ok{background:var(--ok-bg);border-color:#BFE0CB;color:var(--ok)}
@@ -138,42 +76,17 @@ input,textarea,select{font-family:inherit;font-size:16px} /* 16px evita el zoom 
 .vista.on{display:block}
 
 /* ---------- Navegacion inferior (pulgar) ---------- */
-.nav{position:fixed;left:0;right:0;bottom:0;z-index:40;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:40;display:grid;grid-template-columns:repeat(4,1fr);
   background:rgba(252,251,250,.97);backdrop-filter:blur(12px);border-top:1px solid var(--border);
   padding-bottom:env(safe-area-inset-bottom)}
 .nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;
-  min-height:60px;background:none;border:none;font-size:.58rem;letter-spacing:.02em;color:var(--muted);
-  text-transform:uppercase;position:relative;padding:0 .15rem;min-width:0;overflow:hidden}
-.nav button span.nav-label{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  min-height:60px;background:none;border:none;font-size:.62rem;letter-spacing:.02em;color:var(--muted);
+  text-transform:uppercase;position:relative;padding:0 .2rem}
 .nav button svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.6}
 .nav button.on{color:var(--text)}
 .nav .badge{position:absolute;top:8px;right:calc(50% - 22px);min-width:17px;height:17px;padding:0 4px;
   border-radius:9px;background:var(--bad);color:#fff;font-size:.62rem;font-weight:600;
   display:grid;place-items:center;line-height:1}
-
-/* ---------- Mobile overflow lock (citas) ---------- */
-html,body{max-width:100%;overflow-x:hidden}
-.panel,.wrap,.vista,.vista.on,.cards-cita,#listaCitas,#stats,.toolbar{
-  max-width:100%;min-width:0}
-.stats{width:100%;min-width:0}
-.stat{min-width:0;overflow:hidden}
-.stat .n{white-space:normal;overflow-wrap:anywhere;word-break:break-word;
-  line-height:1.15;font-size:clamp(1rem,4.2vw,1.65rem)}
-.stat .l{overflow-wrap:anywhere;word-break:break-word}
-.card{max-width:100%;min-width:0;overflow:hidden}
-.card-top{min-width:0}
-.card-top>div{min-width:0;flex:1}
-.pill{display:inline-block;max-width:100%;white-space:normal;overflow-wrap:anywhere;
-  word-break:break-word;line-height:1.35}
-.card-datos{min-width:0}
-.card-datos div{min-width:0}
-.card-datos dd{min-width:0;overflow-wrap:anywhere;word-break:break-word}
-.acciones{min-width:0}
-#mapa{max-width:100%;overflow:hidden}
-.leaflet-container{width:100%!important;max-width:100%!important}
-.editor .par{min-width:0}
-.editor .par>div{min-width:0}
-.filtros{max-width:100%}
 
 /* ---------- Tarjetas y resumen ---------- */
 .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin-bottom:1.5rem}
@@ -243,7 +156,6 @@ a.enlace{color:var(--accent-dark);text-decoration:none;word-break:break-all;
 .codigo{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:1.85rem;letter-spacing:.16em;
   text-align:center;padding:1rem;background:var(--bg);border:1px dashed var(--accent-dark);
   border-radius:10px;margin:.85rem 0;font-weight:600;user-select:all;word-break:break-all}
-.conexion-nota{font-size:.82rem;color:var(--muted);margin:-.35rem 0 .6rem}
 
 /* ---------- WhatsApp: chats ---------- */
 .chat-item{display:flex;gap:.75rem;align-items:flex-start;width:100%;text-align:left;
@@ -394,11 +306,9 @@ a.enlace{color:var(--accent-dark);text-decoration:none;word-break:break-all;
   .toolbar{grid-template-columns:1fr auto;align-items:center}
   #mapa{height:360px}
   .panel.on{padding-bottom:0}
-  .nav{position:sticky;top:0;bottom:auto;grid-template-columns:repeat(5,auto);
+  .nav{position:sticky;top:0;bottom:auto;grid-template-columns:repeat(4,auto);
     justify-content:center;gap:.5rem;border-top:none;border-bottom:1px solid var(--border);z-index:29}
   .nav button{flex-direction:row;gap:.5rem;min-height:52px;padding:0 1.25rem;font-size:.72rem}
-  .btn-sm{min-height:38px}
-  .cms-tab{min-height:36px;padding:.4rem .85rem}
   .nav .badge{position:static;margin-left:.15rem}
   .hilo{position:static;display:none}
   .hilo.on{display:flex;height:70vh;border:1px solid var(--border);border-radius:var(--radius);
@@ -408,61 +318,29 @@ a.enlace{color:var(--accent-dark);text-decoration:none;word-break:break-all;
   .cards-cita{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:.75rem}
   .lista-chats{max-width:560px}
 }
-
-.cms-tabs{display:flex;gap:.35rem;overflow-x:auto;margin:0 0 1rem;padding-bottom:.2rem;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-.cms-tabs::-webkit-scrollbar{display:none}
-.cms-tab{flex-shrink:0;min-height:44px;padding:.4rem 1rem;border-radius:100px;border:1px solid var(--border);
-  background:var(--surface);font-size:.74rem;color:var(--muted)}
-.cms-tab.on{background:var(--text);border-color:var(--text);color:var(--bg)}
-.cms-panel{display:none}
-.cms-panel.on{display:block}
-.cms-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;margin-bottom:.85rem}
-.cms-block h3{font-size:1rem;margin:0 0 .75rem}
-.cms-preview-row{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin-bottom:1rem}
-.cms-img{width:100%;max-width:220px;border-radius:10px;border:1px solid var(--border);margin:.4rem 0 .6rem;aspect-ratio:3/4;object-fit:cover;background:var(--bg)}
-.cms-scale{display:grid;grid-template-columns:1fr auto;gap:.5rem;align-items:center}
-
-
-.cms-studio{display:flex;flex-direction:column;gap:.75rem}
-.cms-phone-wrap{display:flex;justify-content:center;background:#ebe6e0;border-radius:18px;padding:.75rem;border:1px solid var(--border)}
-.cms-phone{width:min(100%,360px);height:min(68vh,620px);border-radius:22px;overflow:hidden;background:#111;box-shadow:0 18px 40px rgba(0,0,0,.18);border:10px solid #2d2926;position:relative}
-.cms-phone iframe{width:100%;height:100%;border:0;background:#fff}
-.cms-hint{font-size:.78rem;color:var(--muted);text-align:center;margin:.15rem 0 .35rem}
-.cms-drawer{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;display:none}
-.cms-drawer.on{display:block}
-.cms-drawer h3{margin:0 0 .65rem;font-size:1.05rem}
-.cms-toolbar{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem}
-.cms-toolbar .btn{flex:1 1 auto}
-
 </style>
 </head>
 <body>
 
 <!-- ============ Acceso ============ -->
 <section class="gate" id="gate">
-  <div class="gate-bg" aria-hidden="true"></div>
-  <div class="gate-shell">
-    <div class="gate-card">
-      <div class="gate-brand">
-        <div class="gate-mark" aria-hidden="true">D</div>
-        <h1>Daima Belleza</h1>
-        <p class="gate-tag">Studio · Panel</p>
-      </div>
-      <div id="error" class="alert gate-alert" hidden role="alert"></div>
-      <p id="loginStatus" class="login-status" aria-live="polite"></p>
-      <form id="formLogin" class="gate-form" novalidate>
-        <div class="field">
-          <label for="correo">Correo</label>
-          <input type="email" id="correo" name="correo" autocomplete="username" placeholder="tu@correo.com" required autofocus>
-        </div>
-        <div class="field">
-          <label for="clave">Contraseña</label>
-          <input type="password" id="clave" name="clave" autocomplete="current-password" placeholder="••••••••" required>
-        </div>
-        <button class="btn btn-gate" id="btnEntrar" type="submit">Entrar al panel</button>
-      </form>
-      <p class="gate-foot">Acceso reservado · Belleza Studio</p>
+  <div class="gate-card">
+    <div class="gate-brand">
+      <h1>Daima Belleza</h1>
+      <p>Panel</p>
     </div>
+    <div id="error" class="alert" hidden></div>
+    <form id="formLogin" novalidate>
+      <div class="field">
+        <label for="correo">Correo</label>
+        <input type="email" id="correo" autocomplete="username" required autofocus>
+      </div>
+      <div class="field">
+        <label for="clave">Contraseña</label>
+        <input type="password" id="clave" autocomplete="current-password" required>
+      </div>
+      <button class="btn btn-primary" id="btnEntrar" type="submit">Entrar</button>
+    </form>
   </div>
 </section>
 
@@ -492,10 +370,6 @@ a.enlace{color:var(--accent-dark);text-decoration:none;word-break:break-all;
     <button type="button" data-vista="tienda">
       <svg viewBox="0 0 24 24"><path d="M3 9l1.5-5h15L21 9M3 9v11a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9M3 9h18M8 13a3 3 0 0 0 6 0"/></svg>
       Tienda
-    </button>
-    <button type="button" data-vista="servicios">
-      <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/><circle cx="18" cy="17" r="2"/></svg>
-      <span class="nav-label">Landing</span>
     </button>
     <button type="button" data-vista="ajustes">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-2.9 1.2 2 2 0 1 1-4 0 1.7 1.7 0 0 0-2.9-1.2l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.7 1.7 0 0 0 3 15a2 2 0 1 1 0-4 1.7 1.7 0 0 0 1.2-2.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1A1.7 1.7 0 0 0 10 4.6a2 2 0 1 1 4 0 1.7 1.7 0 0 0 2.9 1.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1A1.7 1.7 0 0 0 21 11a2 2 0 1 1 0 4z"/></svg>
@@ -555,11 +429,6 @@ a.enlace{color:var(--accent-dark);text-decoration:none;word-break:break-all;
       <div id="tienda"><div class="cargando">Cargando…</div></div>
     </section>
 
-    <!-- ---------- Vista: Editar landing ---------- -->
-    <section class="vista" id="vista-servicios">
-      <div id="serviciosLanding" data-cms-root><div class="cargando">Cargando editor…</div></div>
-    </section>
-
     <!-- ---------- Vista: Ajustes ---------- -->
     <section class="vista" id="vista-ajustes">
       <div id="ajustes"><div class="cargando">Cargando…</div></div>
@@ -587,18 +456,6 @@ a.enlace{color:var(--accent-dark);text-decoration:none;word-break:break-all;
   </div>
 </div>
 
-
-<script>
-window.addEventListener('error', function (ev) {
-  try {
-    var el = document.getElementById('error');
-    var st = document.getElementById('loginStatus');
-    var msg = 'Error en la página: ' + (ev && ev.message ? ev.message : 'script');
-    if (el && el.hidden !== false) { el.textContent = msg; el.hidden = false; }
-    if (st) { st.textContent = msg; st.className = 'login-status err'; }
-  } catch (_) {}
-});
-</script>
 <script>
 'use strict';
 const $ = (id) => document.getElementById(id);
@@ -633,8 +490,8 @@ function iniciales(nombre) {
   return (t[0] || '?').toUpperCase();
 }
 /** Toda llamada al servidor pasa por aqui: un solo lugar donde tratar los errores. */
-async function api(url, opciones = {}) {
-  const r = await fetch(url, { credentials: 'include', ...opciones });
+async function api(url, opciones) {
+  const r = await fetch(url, opciones);
   const datos = await r.json().catch(() => ({}));
   if (!r.ok) throw new Error(datos.error || 'Algo no salió bien');
   return datos;
@@ -643,68 +500,34 @@ async function api(url, opciones = {}) {
 /* ============ Acceso ============ */
 $('formLogin').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const btn = $('btnEntrar');
-  const err = $('error');
-  const status = $('loginStatus');
-  const showErr = (msg) => {
-    if (err) { err.textContent = msg; err.hidden = false; }
-    if (status) { status.textContent = msg; status.className = 'login-status err'; }
-  };
-  const showStatus = (msg, kind) => {
-    if (status) { status.textContent = msg; status.className = 'login-status' + (kind ? ' ' + kind : ''); }
-  };
-  if (err) err.hidden = true;
-  showStatus('Entrando…', '');
-  if (btn) { btn.disabled = true; btn.textContent = 'Entrando…'; }
+  const btn = $('btnEntrar'), err = $('error');
+  err.hidden = true;
+  btn.disabled = true; btn.textContent = 'Entrando…';
   try {
-    const correo = String(($('correo') && $('correo').value) || '').trim();
-    const clave = String(($('clave') && $('clave').value) || '').trim();
-    if ($('correo')) $('correo').value = correo;
-    if ($('clave')) $('clave').value = clave;
-    if (!correo || !clave) throw new Error('Escribe correo y contraseña');
-
-    let r;
-    try {
-      r = await fetch('/api/admin/login', {
-        method: 'POST',
-        credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ correo, clave }),
-      });
-    } catch (net) {
-      throw new Error('Sin conexión al servidor. Revisa la red e inténtalo otra vez.');
-    }
-    let data = {};
-    try { data = await r.json(); } catch { data = {}; }
-    if (!r.ok) throw new Error(data.error || ('No se pudo entrar (' + r.status + ')'));
-
-    const quien = $('quien');
-    if (quien) quien.textContent = data.correo || correo;
-    showStatus('Listo. Abriendo panel…', 'ok');
-    try {
-      await abrirPanel();
-    } catch (uiErr) {
-      console.error('[admin] panel UI', uiErr);
-      if ($('gate')) $('gate').style.display = 'none';
-      if ($('panel')) $('panel').classList.add('on');
-      showStatus('Sesión iniciada.', 'ok');
-    }
+    const data = await api('/api/admin/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ correo: $('correo').value, clave: $('clave').value }),
+    });
+    $('quien').textContent = data.correo || '';
+    await abrirPanel();
   } catch (ex) {
-    showErr(ex && ex.message ? ex.message : 'No se pudo entrar');
+    err.textContent = ex.message;
+    err.hidden = false;
   } finally {
-    if (btn) { btn.disabled = false; btn.textContent = 'Entrar'; }
+    btn.disabled = false; btn.textContent = 'Entrar';
   }
 });
 
 $('btnSalir').addEventListener('click', async () => {
-  try { await fetch('/api/admin/logout', { method: 'POST', credentials: 'include' }); } catch {}
+  try { await fetch('/api/admin/logout', { method: 'POST' }); } catch {}
   location.reload();
 });
 
 /* Si la cookie sigue viva se entra directo, sin volver a pedir la clave. */
 (async function sesionExistente() {
   try {
-    const r = await fetch('/api/admin/bookings', { credentials: 'include' });
+    const r = await fetch('/api/admin/bookings');
     if (r.ok) await abrirPanel(await r.json());
   } catch {}
 })();
@@ -726,7 +549,7 @@ async function abrirPanel(previo) {
 }
 
 /* ============ Navegación ============ */
-const TITULOS = { citas: 'Citas', whatsapp: 'WhatsApp', tienda: 'Tienda', servicios: 'Editar landing', ajustes: 'Ajustes' };
+const TITULOS = { citas: 'Citas', whatsapp: 'WhatsApp', tienda: 'Tienda', ajustes: 'Ajustes' };
 $('nav').addEventListener('click', (e) => {
   const b = e.target.closest('[data-vista]');
   if (!b) return;
@@ -737,7 +560,6 @@ $('nav').addEventListener('click', (e) => {
   $('btnCSV').hidden = v !== 'citas';
   if (v === 'whatsapp') { refrescarConexion(); refrescarChats(); }
   if (v === 'tienda') cargarProductos();
-  if (v === 'servicios') cargarServiciosLanding();
   if (v === 'ajustes') cargarAjustes();
   if (v === 'citas') setTimeout(() => mapa && mapa.invalidateSize(), 60);
   window.scrollTo(0, 0);
@@ -754,14 +576,12 @@ function pintarStats() {
   CITAS.forEach((c) => { porPlan[c.plan] = (porPlan[c.plan] || 0) + 1; });
   const favorito = Object.entries(porPlan).sort((a, b) => b[1] - a[1])[0];
 
-  const favNombre = favorito ? String(favorito[0] || '') : '—';
-  const favCorto = favNombre.length > 42 ? favNombre.slice(0, 40) + '…' : favNombre;
   $('stats').innerHTML = [
-    `<div class="stat"><div class="n">${CITAS.filter((c) => (c.estado || 'en_proceso') === 'en_proceso').length}</div><div class="l">Esperando</div></div>`,
-    `<div class="stat"><div class="n">${CITAS.filter((c) => c.estado === 'confirmada').length}</div><div class="l">Confirmadas</div></div>`,
-    `<div class="stat"><div class="n">${esteMes}</div><div class="l">Este mes</div></div>`,
-    `<div class="stat stat-fav"><div class="n" title="${escapar(favNombre)}">${escapar(favCorto)}</div><div class="l">Más pedido</div></div>`,
-  ].join('');
+    ['Esperando', CITAS.filter((c) => (c.estado || 'en_proceso') === 'en_proceso').length],
+    ['Confirmadas', CITAS.filter((c) => c.estado === 'confirmada').length],
+    ['Este mes', esteMes],
+    ['Más pedido', favorito ? favorito[0] : '—'],
+  ].map(([l, n]) => `<div class="stat"><div class="n">${escapar(String(n))}</div><div class="l">${l}</div></div>`).join('');
 }
 
 let filtroEstado = 'todas';
@@ -940,15 +760,6 @@ document.addEventListener('click', async (e) => {
 });
 
 /* ============ WhatsApp: conexión ============ */
-/** "95" -> "1 hora y 35 min". Un número de minutos suelto no se lee. */
-function duracionLegible(minutos) {
-  const m = Number(minutos) || 0;
-  if (m < 60) return `${m} minuto${m === 1 ? '' : 's'}`;
-  const h = Math.floor(m / 60);
-  const resto = m % 60;
-  return `${h} hora${h === 1 ? '' : 's'}${resto ? ` y ${resto} min` : ''}`;
-}
-
 async function refrescarConexion() {
   const caja = $('conexion');
   try {
@@ -968,31 +779,14 @@ async function refrescarConexion() {
     } else if (e.codigo) {
       caja.innerHTML = `
         <div class="conexion-cab"><span class="punto off"></span><strong>Falta vincular</strong></div>
-        <p>En tu teléfono, abre <strong>WhatsApp → Ajustes → Dispositivos vinculados →
-           Vincular dispositivo → Vincular con número de teléfono</strong>, y escribe este código:</p>
+        <p>En el teléfono: WhatsApp → Dispositivos vinculados → Vincular con número de teléfono.
+           Escribe este código:</p>
         <div class="codigo">${escapar(e.codigo)}</div>
-        <p class="conexion-nota">El código vence en unos minutos. Si se te pasa, pide uno nuevo.</p>
         <button class="btn btn-ghost btn-sm" id="btnCodigo" type="button">Pedir código nuevo</button>`;
     } else {
-      // Antes acá solo decía "Desconectado", que no le dice a nadie si hay que
-      // esperar o si hay que hacer algo. Ahora el servicio informa desde cuándo
-      // está caído y si la sesión murió de verdad, y eso se muestra.
-      const s = e.salud || {};
-      const desde = s.caido && s.minutos > 0 ? duracionLegible(s.minutos) : null;
-
-      const urgencia = s.necesitaEmparejar
-        ? `<div class="aviso-correo" style="margin-top:.6rem"><span>⚠️</span><span>
-             <strong>WhatsApp cerró la sesión.</strong> Esto no se arregla solo: hay que
-             vincular el número otra vez desde tu teléfono. Mientras tanto,
-             <strong>las clientas que escriban no reciben respuesta</strong>.</span></div>`
-        : `<div class="aviso-correo" style="margin-top:.6rem"><span>⏳</span><span>
-             Está intentando reconectarse solo. Si en un rato no vuelve, pide un código
-             y vincúlalo de nuevo.</span></div>`;
-
       caja.innerHTML = `
         <div class="conexion-cab"><span class="punto off"></span><strong>Desconectado</strong></div>
-        <p>${desde ? `Sin WhatsApp desde hace <strong>${escapar(desde)}</strong>.` : 'El WhatsApp del estudio no está vinculado.'}</p>
-        ${urgencia}
+        <p>El WhatsApp del estudio no está vinculado.</p>
         <button class="btn btn-ghost btn-sm" id="btnCodigo" type="button" style="margin-top:.75rem">Pedir código</button>`;
     }
   } catch (ex) {
@@ -1665,423 +1459,6 @@ document.addEventListener('visibilitychange', () => {
     if (jidAbierto) { cargarMensajes(); timerHilo = setInterval(cargarMensajes, 5000); }
   }
 });
-/* ============ Editar landing (CMS) + Precios ============ */
-let SERVICIOS_LANDING = [];
-let CMS = null;
-let CMS_FONTS = [];
-let cmsTab = 'studio';
-
-async function cargarServiciosLanding() {
-  const root = $('serviciosLanding');
-  root.innerHTML = '<div class="cargando">Cargando…</div>';
-  try {
-    const diagnostico = await api('/api/landing-catalog?diagnostic=1');
-    if (diagnostico.tableAvailable !== true) {
-      root.innerHTML = `<div class="vacio"><strong>Catálogo no disponible</strong>${escapar(diagnostico.message || 'La tabla landing_services no está disponible todavía.')}</div>`;
-      return;
-    }
-    const [data, cmsRes] = await Promise.all([
-      api('/api/landing-catalog'),
-      api('/api/landing-catalog', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'cms_get' }),
-      }).catch(() => null),
-    ]);
-    SERVICIOS_LANDING = data.services || [];
-    if (cmsRes && cmsRes.content) {
-      CMS = cmsRes.content;
-      CMS_FONTS = cmsRes.fonts || [];
-    } else {
-      CMS = null;
-    }
-    pintarLandingEditor();
-  } catch (error) {
-    root.innerHTML = `<div class="vacio"><strong>No se pudo cargar Editar landing</strong>${escapar(error.message || 'Revisa la configuración de Supabase.')}</div>`;
-  }
-}
-
-function cmsField(label, name, value, type='text') {
-  const v = escapar(value ?? '');
-  if (type === 'textarea') {
-    return `<label>${escapar(label)}<textarea name="${escapar(name)}" rows="3" maxlength="600">${v}</textarea></label>`;
-  }
-  return `<label>${escapar(label)}<input name="${escapar(name)}" type="${escapar(type)}" value="${v}"></label>`;
-}
-
-function fontOptions(selected, role) {
-  const list = (CMS_FONTS || []).filter((f) => !role || f.role === role || true);
-  const ids = list.length ? list : [
-    { id: 'Playfair Display', role: 'heading' }, { id: 'Cormorant Garamond', role: 'heading' },
-    { id: 'Lora', role: 'heading' }, { id: 'Libre Baskerville', role: 'heading' },
-    { id: 'Inter', role: 'body' }, { id: 'Source Sans 3', role: 'body' },
-    { id: 'DM Sans', role: 'body' }, { id: 'Nunito Sans', role: 'body' },
-    { id: 'Montserrat', role: 'body' }, { id: 'Outfit', role: 'body' },
-  ];
-  return ids.map((f) => `<option value="${escapar(f.id)}" ${f.id === selected ? 'selected' : ''}>${escapar(f.id)}</option>`).join('');
-}
-
-
-async function subirFotoCms(input) {
-  const file = input.files && input.files[0];
-  if (!file) return;
-  const field = input.dataset.cmsUpload;
-  const prevId = input.dataset.cmsPrev;
-  const reader = new FileReader();
-  reader.onload = async () => {
-    try {
-      const r = await api('/api/landing-catalog', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'cms_upload', fotoBase64: reader.result, fotoTipo: file.type }),
-      });
-      const form = input.closest('form');
-      const target = form && form.elements[field];
-      if (target) target.value = r.url;
-      const img = prevId && $(prevId);
-      if (img) { img.src = r.url; img.hidden = false; }
-    } catch (err) {
-      alert(err.message || 'No se pudo subir la foto');
-    }
-  };
-  reader.readAsDataURL(file);
-}
-
-function pintarLandingEditor() {
-  const root = $('serviciosLanding');
-  const c = CMS || {};
-  const typ = c.typography || {};
-  cmsSel = cmsSel || 'hero';
-
-  const preciosLista = SERVICIOS_LANDING.length
-    ? `<div class="cards-producto">${SERVICIOS_LANDING.map((s) => `
-        <article class="card" style="padding:1rem">
-          <form class="agregar-producto" data-servicio="${escapar(s.key)}">
-            <div class="section-title" style="margin:0">
-              <h3 style="margin:0;font-size:1rem">${escapar(s.name)}</h3>
-              <span>$${Number(s.price).toFixed(2)} · ${Number(s.duration_minutes)} min</span>
-            </div>
-            <label>Nombre<input name="name" value="${escapar(s.name)}" required maxlength="120"></label>
-            <label>Descripción<textarea name="description" maxlength="500" rows="2">${escapar(s.description || '')}</textarea></label>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:.7rem">
-              <label>Precio ($)<input name="price" type="number" min="0" step="0.01" value="${Number(s.price)}" required></label>
-              <label>Duración (min)<input name="duration_minutes" type="number" min="1" max="1440" step="1" value="${Number(s.duration_minutes)}" required></label>
-            </div>
-            <label>Orden<input name="display_order" type="number" step="1" value="${Number(s.display_order || 0)}"></label>
-            <label style="flex-direction:row;align-items:center;gap:.5rem"><input name="visible" type="checkbox" ${s.visible !== false ? 'checked' : ''}> Visible</label>
-            <input type="hidden" name="key" value="${escapar(s.key)}">
-            <input type="hidden" name="version" value="${Number(s.version || 0)}">
-            <button class="btn btn-primary btn-sm" type="submit">Guardar</button>
-            <span class="nota" data-servicio-mensaje></span>
-          </form>
-        </article>`).join('')}</div>`
-    : `<div class="vacio"><strong>Sin servicios</strong></div>`;
-
-  root.innerHTML = `
-    <div class="section-title"><h2>Editar landing</h2><span>toca la vista previa</span></div>
-    <div class="cms-tabs" id="cmsTabs">
-      <button type="button" class="cms-tab ${cmsTab==='studio'?'on':''}" data-cms-tab="studio">Diseño</button>
-      <button type="button" class="cms-tab ${cmsTab==='precios'?'on':''}" data-cms-tab="precios">Precios</button>
-    </div>
-    <div class="cms-panel ${cmsTab==='studio'?'on':''}" data-cms-panel="studio">
-      <div class="cms-studio">
-        <p class="cms-hint">Toca una sección en la preview (hero, servicios, planes…) para editarla abajo.</p>
-        <div class="cms-toolbar">
-          <button type="button" class="btn btn-outline btn-sm" data-cms-jump="typography">Tipografía</button>
-          <button type="button" class="btn btn-outline btn-sm" data-cms-jump="hero">Hero</button>
-          <button type="button" class="btn btn-outline btn-sm" data-cms-jump="pricing">Planes</button>
-          <a class="btn btn-outline btn-sm" href="/" target="_blank" rel="noopener">Abrir live</a>
-        </div>
-        <div class="cms-phone-wrap">
-          <div class="cms-phone">
-            <iframe id="cmsFrame" title="Preview landing" src="/?cms_edit=1&t=${Date.now()}"></iframe>
-          </div>
-        </div>
-        <div class="cms-drawer on" id="cmsDrawer">${cmsDrawerHtml(cmsSel)}</div>
-      </div>
-    </div>
-    <div class="cms-panel ${cmsTab==='precios'?'on':''}" data-cms-panel="precios">
-      <p class="nota">Edita precios individuales. En la landing se agrupan en 4 tarjetas. Lista completa: <a href="/planes.html" target="_blank">/planes.html</a></p>
-      <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem">
-        <button type="button" class="btn btn-outline btn-sm" id="btnImportarBot">Importar desde el bot</button>
-      </div>
-      ${preciosLista}
-      <div class="section-title" style="margin-top:1.25rem"><h2>Nuevo</h2></div>
-      <form class="agregar-producto" data-servicio="" data-nuevo-servicio>
-        <label>Clave<input name="key" pattern="[a-z0-9_]{2,80}" required></label>
-        <label>Nombre<input name="name" required maxlength="120"></label>
-        <label>Descripción<textarea name="description" maxlength="500" rows="2"></textarea></label>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.7rem">
-          <label>Precio ($)<input name="price" type="number" min="0" step="0.01" required></label>
-          <label>Duración (min)<input name="duration_minutes" type="number" min="1" max="1440" value="60" required></label>
-        </div>
-        <label>Orden<input name="display_order" type="number" value="${SERVICIOS_LANDING.length + 1}"></label>
-        <label style="flex-direction:row;align-items:center;gap:.5rem"><input name="visible" type="checkbox" checked> Visible</label>
-        <button class="btn btn-primary" type="submit">Agregar</button>
-        <span class="nota" data-servicio-mensaje></span>
-      </form>
-    </div>`;
-
-  root.querySelectorAll('[data-cms-tab]').forEach((btn) => {
-    btn.addEventListener('click', () => { cmsTab = btn.dataset.cmsTab; pintarLandingEditor(); });
-  });
-  root.querySelectorAll('[data-cms-jump]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      cmsSel = btn.dataset.cmsJump;
-      const drawer = $('cmsDrawer');
-      if (drawer) { drawer.innerHTML = cmsDrawerHtml(cmsSel); drawer.classList.add('on'); wireCmsDrawer(); }
-    });
-  });
-  root.querySelectorAll('form[data-servicio]').forEach((form) => form.addEventListener('submit', guardarServicioLanding));
-  const btnImport = $('btnImportarBot');
-  if (btnImport) btnImport.addEventListener('click', importarServiciosDesdeBot);
-  wireCmsDrawer();
-  wireCmsFrame();
-}
-
-let cmsSel = 'hero';
-// cmsTab already declared above — redeclare broke entire admin.js (silent login)
-
-function cmsDrawerHtml(section) {
-  const c = CMS || {};
-  const typ = c.typography || {};
-  const hero = c.hero || {};
-  const services = c.services || { cards: [{},{},{}] };
-  const pricing = c.pricing || {};
-  const store = c.store || {};
-  const gallery = c.gallery || {};
-  const about = c.about || { paragraphs: ['','',''] };
-  const nav = c.nav || {};
-  const cards = (services.cards || []).slice(0, 3);
-  while (cards.length < 3) cards.push({ title: '', body: '' });
-  const paras = (about.paragraphs || []).slice(0, 3);
-  while (paras.length < 3) paras.push('');
-
-  if (section === 'typography') {
-    return `<h3>Tipografía</h3>
-      <form id="formCmsDrawer" class="agregar-producto" data-section="typography">
-        <label>Fuente títulos<select name="headingFont">${fontOptions(typ.headingFont || 'Playfair Display')}</select></label>
-        <label>Fuente cuerpo<select name="bodyFont">${fontOptions(typ.bodyFont || 'Inter')}</select></label>
-        <label class="cms-scale">Tamaño títulos<input name="headingScale" type="range" min="0.85" max="1.25" step="0.05" value="${Number(typ.headingScale || 1)}"><span data-scale-out>${Number(typ.headingScale || 1).toFixed(2)}</span></label>
-        <label class="cms-scale">Tamaño cuerpo<input name="bodyScale" type="range" min="0.85" max="1.25" step="0.05" value="${Number(typ.bodyScale || 1)}"><span data-scale-out>${Number(typ.bodyScale || 1).toFixed(2)}</span></label>
-        <button class="btn btn-primary" type="submit">Guardar y ver</button>
-        <span class="nota" id="cmsMsg"></span>
-      </form>`;
-  }
-  if (section === 'hero') {
-    return `<h3>Hero</h3>
-      <form id="formCmsDrawer" class="agregar-producto" data-section="hero">
-        ${cmsField('Antetítulo', 'hero_eyebrow', hero.eyebrow)}
-        ${cmsField('Título', 'hero_title', hero.title)}
-        ${cmsField('Texto', 'hero_subtitle', hero.subtitle, 'textarea')}
-        ${cmsField('Botón principal', 'hero_ctaPrimary', hero.ctaPrimary)}
-        ${cmsField('Botón secundario', 'hero_ctaSecondary', hero.ctaSecondary)}
-        ${cmsField('URL foto', 'hero_imageUrl', hero.imageUrl)}
-        <img class="cms-img" id="cmsHeroPrev" src="${escapar(hero.imageUrl || '')}" alt="" ${hero.imageUrl ? '' : 'hidden'}>
-        <label>Subir foto<input type="file" accept="image/jpeg,image/png,image/webp" data-cms-upload="hero_imageUrl" data-cms-prev="cmsHeroPrev"></label>
-        <button class="btn btn-primary" type="submit">Guardar y ver</button>
-        <span class="nota" id="cmsMsg"></span>
-      </form>`;
-  }
-  if (section === 'services') {
-    return `<h3>Servicios</h3>
-      <form id="formCmsDrawer" class="agregar-producto" data-section="services">
-        ${cmsField('Antetítulo', 'services_eyebrow', services.eyebrow)}
-        ${cmsField('Título', 'services_title', services.title)}
-        ${cards.map((card, i) => `${cmsField('Tarjeta '+(i+1)+' título', 'card'+i+'_title', card.title)}${cmsField('Tarjeta '+(i+1)+' texto', 'card'+i+'_body', card.body, 'textarea')}`).join('')}
-        <button class="btn btn-primary" type="submit">Guardar y ver</button>
-        <span class="nota" id="cmsMsg"></span>
-      </form>`;
-  }
-  if (section === 'pricing') {
-    return `<h3>Planes & Paquetes</h3>
-      <form id="formCmsDrawer" class="agregar-producto" data-section="pricing">
-        ${cmsField('Antetítulo', 'pricing_eyebrow', pricing.eyebrow)}
-        ${cmsField('Título', 'pricing_title', pricing.title)}
-        <p class="nota">Los precios de cada servicio se editan en la pestaña Precios. En la landing se muestran agrupados.</p>
-        <button class="btn btn-primary" type="submit">Guardar y ver</button>
-        <span class="nota" id="cmsMsg"></span>
-      </form>`;
-  }
-  if (section === 'store') {
-    return `<h3>Tienda (landing)</h3>
-      <form id="formCmsDrawer" class="agregar-producto" data-section="store">
-        ${cmsField('Antetítulo', 'store_eyebrow', store.eyebrow)}
-        ${cmsField('Título', 'store_title', store.title)}
-        <button class="btn btn-primary" type="submit">Guardar y ver</button>
-        <span class="nota" id="cmsMsg"></span>
-      </form>`;
-  }
-  if (section === 'gallery') {
-    return `<h3>Portafolio</h3>
-      <form id="formCmsDrawer" class="agregar-producto" data-section="gallery">
-        ${cmsField('Antetítulo', 'gallery_eyebrow', gallery.eyebrow)}
-        ${cmsField('Título', 'gallery_title', gallery.title)}
-        <button class="btn btn-primary" type="submit">Guardar y ver</button>
-        <span class="nota" id="cmsMsg"></span>
-      </form>`;
-  }
-  if (section === 'about') {
-    return `<h3>Sobre mí</h3>
-      <form id="formCmsDrawer" class="agregar-producto" data-section="about">
-        ${cmsField('Antetítulo', 'about_eyebrow', about.eyebrow)}
-        ${cmsField('Título', 'about_title', about.title)}
-        ${paras.map((p, i) => cmsField('Párrafo '+(i+1), 'about_p'+i, p, 'textarea')).join('')}
-        ${cmsField('URL foto', 'about_imageUrl', about.imageUrl)}
-        <img class="cms-img" id="cmsAboutPrev" src="${escapar(about.imageUrl || '')}" alt="" ${about.imageUrl ? '' : 'hidden'}>
-        <label>Subir foto<input type="file" accept="image/jpeg,image/png,image/webp" data-cms-upload="about_imageUrl" data-cms-prev="cmsAboutPrev"></label>
-        ${cmsField('Botón nav Agendar', 'nav_ctaLabel', nav.ctaLabel)}
-        <button class="btn btn-primary" type="submit">Guardar y ver</button>
-        <span class="nota" id="cmsMsg"></span>
-      </form>`;
-  }
-  return `<h3>Sección</h3><p class="nota">Toca una zona de la preview para editarla.</p>`;
-}
-
-function wireCmsFrame() {
-  window.removeEventListener('message', onCmsFrameMessage);
-  window.addEventListener('message', onCmsFrameMessage);
-}
-function onCmsFrameMessage(ev) {
-  if (!ev.data || !String(ev.data.type || '').startsWith('daima-cms-')) return;
-  if (ev.data.type === 'daima-cms-select') {
-    cmsSel = ev.data.section || 'hero';
-    const drawer = $('cmsDrawer');
-    if (drawer) {
-      drawer.innerHTML = cmsDrawerHtml(cmsSel);
-      drawer.classList.add('on');
-      wireCmsDrawer();
-      drawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-  }
-}
-function reloadCmsPreview() {
-  const frame = $('cmsFrame');
-  if (frame) frame.src = '/?cms_edit=1&t=' + Date.now();
-}
-function wireCmsDrawer() {
-  const form = $('formCmsDrawer');
-  if (!form) return;
-  form.addEventListener('submit', guardarCmsDesdeDrawer);
-  form.querySelectorAll('input[type=range]').forEach((r) => {
-    const out = r.parentElement.querySelector('[data-scale-out]');
-    r.addEventListener('input', () => { if (out) out.textContent = Number(r.value).toFixed(2); });
-  });
-  form.querySelectorAll('[data-cms-upload]').forEach((input) => {
-    input.addEventListener('change', () => subirFotoCms(input));
-  });
-}
-
-function mergeCmsFromDrawer(form) {
-  const fd = new FormData(form);
-  const g = (k) => String(fd.get(k) || '').trim();
-  const section = form.dataset.section;
-  const base = JSON.parse(JSON.stringify(CMS || {}));
-  if (!base.typography) base.typography = { headingFont: 'Playfair Display', bodyFont: 'Inter', headingScale: 1, bodyScale: 1 };
-  if (!base.hero) base.hero = {};
-  if (!base.services) base.services = { cards: [{},{},{}] };
-  if (!base.pricing) base.pricing = {};
-  if (!base.store) base.store = {};
-  if (!base.gallery) base.gallery = {};
-  if (!base.about) base.about = { paragraphs: [] };
-  if (!base.nav) base.nav = {};
-  if (section === 'typography') {
-    base.typography = {
-      headingFont: g('headingFont') || base.typography.headingFont,
-      bodyFont: g('bodyFont') || base.typography.bodyFont,
-      headingScale: Number(fd.get('headingScale') || 1),
-      bodyScale: Number(fd.get('bodyScale') || 1),
-    };
-  } else if (section === 'hero') {
-    base.hero = {
-      eyebrow: g('hero_eyebrow'), title: g('hero_title'), subtitle: g('hero_subtitle'),
-      ctaPrimary: g('hero_ctaPrimary'), ctaSecondary: g('hero_ctaSecondary'), imageUrl: g('hero_imageUrl'),
-    };
-  } else if (section === 'services') {
-    base.services = {
-      eyebrow: g('services_eyebrow'), title: g('services_title'),
-      cards: [0,1,2].map((i) => ({ title: g('card'+i+'_title'), body: g('card'+i+'_body') })),
-    };
-  } else if (section === 'pricing') {
-    base.pricing = { eyebrow: g('pricing_eyebrow'), title: g('pricing_title') };
-  } else if (section === 'store') {
-    base.store = { eyebrow: g('store_eyebrow'), title: g('store_title') };
-  } else if (section === 'gallery') {
-    base.gallery = { eyebrow: g('gallery_eyebrow'), title: g('gallery_title') };
-  } else if (section === 'about') {
-    base.about = {
-      eyebrow: g('about_eyebrow'), title: g('about_title'),
-      paragraphs: [0,1,2].map((i) => g('about_p'+i)).filter(Boolean),
-      imageUrl: g('about_imageUrl'),
-    };
-    if (g('nav_ctaLabel')) base.nav.ctaLabel = g('nav_ctaLabel');
-  }
-  return base;
-}
-
-async function guardarCmsDesdeDrawer(e) {
-  e.preventDefault();
-  const msg = $('cmsMsg');
-  try {
-    const content = mergeCmsFromDrawer(e.currentTarget);
-    const r = await api('/api/landing-catalog', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'cms_save', content }),
-    });
-    CMS = r.content;
-    if (msg) msg.textContent = 'Guardado.';
-    reloadCmsPreview();
-  } catch (err) {
-    if (msg) msg.textContent = err.message || 'No se pudo guardar';
-  }
-}
-
-async function importarServiciosDesdeBot() {
-  const btn = $('btnImportarBot');
-  if (btn) { btn.disabled = true; btn.textContent = 'Importando…'; }
-  try {
-    const cfg = await api('/api/admin/whatsapp?tipo=config');
-    const precios = cfg.precios || [];
-    if (!precios.length) throw new Error('El bot no devolvió precios');
-    const services = precios.map((p, i) => ({
-      key: p.clave, name: p.nombre, description: '',
-      price: Number(p.precio), duration_minutes: Number(p.duracion) || 60,
-      display_order: Number(p.orden) || i + 1, visible: true,
-    }));
-    const r = await api('/api/landing-catalog', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'seed', services }),
-    });
-    SERVICIOS_LANDING = r.services || [];
-    cmsTab = 'precios';
-    pintarLandingEditor();
-  } catch (error) {
-    alert(error.message || 'No se pudo importar desde el bot');
-    if (btn) { btn.disabled = false; btn.textContent = 'Importar desde el bot'; }
-  }
-}
-async function guardarServicioLanding(event) {
-  event.preventDefault();
-  const form = event.currentTarget;
-  const body = Object.fromEntries(new FormData(form).entries());
-  body.key = form.dataset.servicio || body.key;
-  body.visible = form.elements.visible.checked;
-  body.price = Number(body.price);
-  body.duration_minutes = Number(body.duration_minutes);
-  body.display_order = Number(body.display_order) || 0;
-  body.version = Number(body.version);
-  const message = form.querySelector('[data-servicio-mensaje]');
-  try {
-    const method = form.dataset.nuevoServicio ? 'POST' : 'PUT';
-    await api('/api/landing-catalog', { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-    message.textContent = 'Guardado.';
-    await cargarServiciosLanding();
-    reloadCmsPreview();
-  } catch (error) {
-    message.textContent = error.message || 'No se pudo guardar.';
-  }
-}
-
-
 </script>
 </body>
 </html>
