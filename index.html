@@ -337,37 +337,20 @@
             <form id="bookingForm">
                 <div class="form-group">
                     <label for="userName">Tu Nombre Completo</label>
-                    <input type="text" id="userName" placeholder="Ej: María Pérez" required>
+                    <input type="text" id="userName" placeholder="Ej: María Pérez" autocomplete="name" enterkeyhint="next" required>
                 </div>
                 <div class="form-group">
                     <label for="userEmail">Correo Electrónico</label>
-                    <input type="email" id="userEmail" placeholder="correo@ejemplo.com" required>
+                    <input type="email" id="userEmail" placeholder="correo@ejemplo.com" autocomplete="email" inputmode="email" enterkeyhint="next" required>
                 </div>
                 <div class="form-group">
                     <label for="userPhone">Tu WhatsApp</label>
-                    <input type="tel" id="userPhone" placeholder="Ej: 0958757109" inputmode="tel" required>
+                    <input type="tel" id="userPhone" placeholder="Ej: 0958757109" inputmode="tel" autocomplete="tel" enterkeyhint="next" required>
                 </div>
                 <div class="form-group">
-                    <label for="userPlan">Servicio</label>
-                    <select id="userPlan" required>
-                        <option value="Maquillaje Social / Eventos">Maquillaje Social / Eventos — $25</option>
-                        <option value="Maquillaje de Graduación Profesional">Maquillaje de Graduación Profesional — $30</option>
-                        <option value="Combo Consentidor">Combo Consentidor — $35</option>
-                        <option value="Combo Pasarela">Combo Pasarela — $45</option>
-                        <option value="Planchado / Cepillado Exprés">Planchado / Cepillado Exprés — $10</option>
-                        <option value="Ondas normales">Ondas normales — $15</option>
-                        <option value="Ondas de reina / de agua">Ondas de reina / de agua — $20</option>
-                        <option value="Semirecogido">Semirecogido — $20</option>
-                        <option value="Recogido">Recogido — $20</option>
-                        <option value="Pestañas punto a punto estilo clásicas">Pestañas clásicas — $5</option>
-                        <option value="Pestañas punto a punto estilo muñeca">Pestañas muñeca — $6</option>
-                        <option value="Pestañas punto a punto estilo anime">Pestañas anime — $7</option>
-                        <option value="Pestañas punto a punto híbridas">Pestañas híbridas — $8</option>
-                        <option value="Maquillaje de Novia / Quinceañera">Novia / Quinceañera — $60</option>
-                        <option value="Hidratación Capilar Profunda">Hidratación Capilar Profunda — $15</option>
-                        <option value="Alisado de Keratina Profesional">Alisado de Keratina Profesional — $40</option>
-                        <option value="Cejas con Henna + Visagismo / Depilación">Cejas con Henna + Visagismo / Depilación — $10</option>
-                    </select>
+                    <label>Servicio</label>
+                    <div class="plan-picker" id="planPicker" role="listbox" aria-label="Elige tu servicio"></div>
+                    <input type="hidden" id="userPlan">
                 </div>
                 <div class="form-row">
                     <div class="form-group">
@@ -387,7 +370,7 @@
                 </div>
                 <div class="form-group">
                     <label for="userSector">Sector o barrio <span class="opcional">(opcional)</span></label>
-                    <input type="text" id="userSector" placeholder="Ej: Av. 15 de Abril, Los Tamarindos">
+                    <input type="text" id="userSector" placeholder="Ej: Av. 15 de Abril, Los Tamarindos" autocomplete="address-level2" enterkeyhint="done">
                 </div>
                 <button type="submit" class="btn btn-primary" id="bookingSubmit" style="width: 100%; margin-top: 1rem;">
                     <svg class="icon" aria-hidden="true" style="margin-right:0.5rem;font-size:1.2rem"><use href="#i-whatsapp"/></svg> Enviar a WhatsApp
@@ -432,20 +415,42 @@
         const modalPlanName = document.getElementById('modalPlanName');
         let selectedPlan = '';
 
-        document.querySelectorAll('.btn-book-plan').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                selectedPlan = this.getAttribute('data-plan');
-                modalPlanName.textContent = selectedPlan;
+        document.addEventListener('click', function(e) {
+            const btn = e.target.closest('.btn-book-plan');
+            if (!btn) return;
+            e.preventDefault();
+            selectedPlan = btn.getAttribute('data-plan');
+            modalPlanName.textContent = selectedPlan;
                 // El selector arranca en el plan de la tarjeta pulsada, pero la clienta puede
-                // cambiarlo sin cerrar el formulario. "Servicio de Peinado" no es una opción
-                // concreta: en ese caso se deja que elija cuál.
-                const sel = document.getElementById('userPlan');
-                const existe = [...sel.options].some(o => o.value === selectedPlan);
-                sel.value = existe ? selectedPlan : 'Planchado';
+                // cambiarlo sin cerrar el formulario. Se fija en el input oculto y se resalta
+                // esa opción dentro del selector visual (si el catálogo ya lo pintó).
+                const hidden = document.getElementById('userPlan');
+                if (hidden) hidden.value = selectedPlan;
+                const picker = document.getElementById('planPicker');
+                if (picker) {
+                    picker.querySelectorAll('.plan-option').forEach((o) => {
+                        const match = o.getAttribute('data-plan') === selectedPlan;
+                        o.classList.toggle('selected', match);
+                        if (match) o.scrollIntoView({ block: 'nearest' });
+                    });
+                }
                 modal.classList.add('active');
-                document.body.style.overflow = 'hidden'; // prevent background scrolling
-            });
+            document.body.style.overflow = 'hidden'; // prevent background scrolling
+        });
+
+        // Selector visual de servicio: cada opción (foto + nombre + precio) fija el
+        // servicio elegido en el input oculto y actualiza el título del modal.
+        document.addEventListener('click', function(e) {
+            const opt = e.target.closest('.plan-option');
+            if (!opt) return;
+            e.preventDefault();
+            const nombre = opt.getAttribute('data-plan');
+            selectedPlan = nombre;
+            const hidden = document.getElementById('userPlan');
+            if (hidden) hidden.value = nombre;
+            modalPlanName.textContent = nombre;
+            const picker = opt.closest('.plan-picker');
+            if (picker) picker.querySelectorAll('.plan-option').forEach((o) => o.classList.toggle('selected', o === opt));
         });
 
         const closeModal = () => {
@@ -507,10 +512,17 @@
                 console.warn('No se pudo registrar la cita:', err);
             }
 
-            boton.disabled = false;
-            window.open(url, '_blank');
+            const esMovil = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
             closeModal();
             bookingForm.reset();
+            boton.disabled = false;
+            if (esMovil) {
+                // En Android y móviles, window.open tras un fetch suele ser bloqueado por el navegador.
+                // Redirigir directamente invoca la app de WhatsApp de forma nativa e inmediata.
+                window.location.href = url;
+            } else {
+                window.open(url, '_blank');
+            }
         });
 
         // Reveal Animations
@@ -701,7 +713,7 @@
             const GROUPS = [
                 { title: 'Maquillaje', blurb: 'Looks completos para cada ocasión', keys: ['social', 'graduacion', 'novia'], popular: false },
                 { title: 'Combos', blurb: 'Maquillaje + peinado en un solo plan', keys: ['combo_consentidor', 'combo_pasarela'], popular: true },
-                { title: 'Peinados & cabello', blurb: 'Desde exprés hasta keratina', keys: ['planchado', 'ondas', 'ondas_reina', 'semirecogido', 'recogido', 'hidratacion', 'keratina'], popular: false },
+                { title: 'Peinados & cabello', blurb: 'Desde exprés hasta keratina', keys: ['planchado', 'ondas', 'ondas_reina', 'semirecogido', 'recogido', 'coleta_pulida', 'coleta_glam', 'hidratacion', 'keratina'], popular: false },
                 { title: 'Pestañas & cejas', blurb: 'Detalles que terminan el look', keys: ['pestanas_clasicas', 'pestanas_muneca', 'pestanas_anime', 'pestanas_hibridas', 'cejas_henna'], popular: false },
             ];
             fetch('/api/landing-catalog', { cache: 'no-store' })
@@ -722,6 +734,7 @@
                     grid.innerHTML = cards.map((g) => {
                         const rows = g.items.map((s) => `
                             <li class="price-row">
+                                <img class="price-row-img" src="/assets/servicios/${esc(s.key)}.jpg" alt="" loading="lazy" onerror="this.remove()">
                                 <span class="price-row-name">${esc(s.name)}</span>
                                 <span class="price-row-val">$${esc(money(s.price))}</span>
                             </li>`).join('');
@@ -736,6 +749,26 @@
                             <button class="btn btn-outline btn-book-plan" data-plan="${plan}" style="width:100%;margin-top:1rem">Elegir</button>
                         </div>`;
                     }).join('');
+
+                    // El selector del modal se arma con TODOS los servicios del catalogo,
+                    // en el mismo orden agrupado de las tarjetas, cada uno con su foto real.
+                    const picker = document.getElementById('planPicker');
+                    if (picker) {
+                        const vistos = new Set();
+                        const ordenados = cards.flatMap((g) => g.items).filter((s) => {
+                            if (vistos.has(s.key)) return false;
+                            vistos.add(s.key);
+                            return true;
+                        });
+                        picker.innerHTML = ordenados.map((s) => `
+                            <button type="button" class="plan-option" role="option" data-plan="${esc(s.name)}">
+                                <img class="plan-option-img" src="/assets/servicios/${esc(s.key)}.jpg" alt="" loading="lazy" onerror="this.style.visibility='hidden'">
+                                <span class="plan-option-txt">
+                                    <span class="plan-option-name">${esc(s.name)}</span>
+                                    <span class="plan-option-price">$${esc(money(s.price))}</span>
+                                </span>
+                            </button>`).join('');
+                    }
 
                     let more = document.getElementById('pricing-all-cta');
                     if (!more) {

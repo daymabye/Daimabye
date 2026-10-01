@@ -1326,7 +1326,8 @@ footer {
 
 
 .price-list{list-style:none;padding:0;margin:0;text-align:left;display:flex;flex-direction:column;gap:.55rem;flex:1}
-.price-row{display:grid;grid-template-columns:1fr auto;gap:.65rem;align-items:baseline;padding-bottom:.45rem;border-bottom:1px solid var(--c-border);font-size:.92rem;line-height:1.3}
+.price-row{display:grid;grid-template-columns:auto 1fr auto;gap:.7rem;align-items:center;padding-bottom:.5rem;border-bottom:1px solid var(--c-border);font-size:.92rem;line-height:1.3}
+.price-row-img{width:46px;height:46px;border-radius:10px;object-fit:cover;background:var(--c-border);box-shadow:0 1px 5px rgba(45,41,38,.14)}
 .price-row:last-child{border-bottom:none;padding-bottom:0}
 .price-row-name{min-width:0;overflow-wrap:anywhere;word-break:break-word;color:var(--c-text)}
 .price-row-val{font-family:var(--f-serif);font-weight:600;font-size:1.05rem;white-space:nowrap}
@@ -1334,6 +1335,75 @@ footer {
 .pricing-card.pricing-group .title-md{text-align:left}
 @media (max-width:768px){
   .pricing-card.pricing-group{flex:0 0 88%}
-  .price-row{font-size:.86rem;gap:.45rem}
+  .price-row{font-size:.86rem;gap:.55rem}
   .price-row-val{font-size:.98rem}
+  .price-row-img{width:42px;height:42px}
+}
+
+/* Selector visual de servicio dentro del modal de reserva: lista con foto,
+   nombre y precio de cada servicio; reemplaza al viejo <select> plano. */
+.plan-picker{display:flex;flex-direction:column;gap:.45rem;max-height:236px;overflow-y:auto;padding:.4rem;margin-top:.2rem;border:1px solid var(--c-border);border-radius:14px;background:var(--c-bg);-webkit-overflow-scrolling:touch}
+.plan-picker::-webkit-scrollbar{width:8px}
+.plan-picker::-webkit-scrollbar-thumb{background:var(--c-accent);border-radius:8px}
+.plan-option{display:flex;align-items:center;gap:.75rem;width:100%;text-align:left;padding:.4rem .5rem;border:1.5px solid transparent;border-radius:12px;background:var(--c-surface);cursor:pointer;transition:border-color .15s,box-shadow .15s;font:inherit;color:var(--c-text)}
+.plan-option:hover{border-color:var(--c-accent)}
+.plan-option.selected{border-color:var(--c-accent-dark);box-shadow:0 0 0 3px rgba(181,156,130,.18)}
+.plan-option-img{width:54px;height:54px;border-radius:10px;object-fit:cover;flex:none;background:var(--c-border)}
+.plan-option-txt{display:flex;flex-direction:column;gap:.15rem;min-width:0;flex:1}
+.plan-option-name{font-size:.9rem;line-height:1.25;overflow-wrap:anywhere}
+.plan-option-price{font-family:var(--f-serif);font-weight:600;color:var(--c-accent-text);font-size:.98rem}
+
+
+/* ============================================================
+   OPTIMIZACIONES MÓVILES Y ANDROID ESPECÍFICAS
+   ============================================================ */
+@media (max-width: 600px) {
+  .modal-overlay {
+    align-items: flex-start !important;
+    padding: max(1rem, env(safe-area-inset-top)) 0.75rem max(1rem, env(safe-area-inset-bottom)) !important;
+    min-height: 100dvh;
+    min-height: -webkit-fill-available;
+  }
+
+  .modal-content {
+    margin: 0.5rem auto 1.5rem !important;
+    padding: 1.5rem 1.15rem !important;
+    max-height: none !important;
+    width: 100% !important;
+  }
+
+  .modal-overlay.active ~ .sticky-wa,
+  body:has(.modal-overlay.active) .sticky-wa {
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  .form-group input,
+  .form-group select {
+    min-height: 48px;
+    font-size: 16px !important;
+    touch-action: manipulation;
+  }
+
+  .form-group input[type="date"] {
+    color-scheme: light;
+  }
+
+  .plan-picker {
+    max-height: 190px;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .plan-option {
+    min-height: 52px;
+    padding: 0.5rem 0.6rem;
+  }
+
+  .pricing-grid,
+  .store-grid.store-carousel,
+  #storeGrid.store-carousel {
+    overscroll-behavior-x: contain;
+  }
 }

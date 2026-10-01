@@ -6,3 +6,4 @@ package-lock.json
 *.bak-*
 *.pre-editar
 *.pre-gps
+.env*

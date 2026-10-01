@@ -1,10 +1,10 @@
 /**
- * POST /api/admin/estado — la administradora confirma o rechaza una cita. Exige sesión.
+ * POST /api/admin/estado — la administradora confirma, reprograma, rechaza o elimina una cita. Exige sesión.
  *
- * Body: { id, estado } con estado ∈ confirmada | rechazada | en_proceso
+ * Body: { id, estado } con estado ∈ confirmada | rechazada | en_proceso | reprogramar | eliminar
  * Al confirmar o rechazar se avisa a la clienta por correo (si el correo está configurado).
  */
-import { buscarCitaPorId, actualizarCita } from '../../lib/db-citas.js';
+import { buscarCitaPorId, actualizarCita, eliminarCitaPorId } from '../../lib/db-citas.js';
 import { leerSesion } from '../../lib/auth.js';
 import {
   enviarCorreo,
@@ -16,10 +16,6 @@ import { llamarServicio } from '../../lib/whatsapp.js';
 
 /**
  * Aviso por WhatsApp a la clienta, en paralelo al correo.
- *
- * Muchas clientas escriben por WhatsApp y nunca abren el correo: si solo se les avisa por
- * mail, se quedan sin saber si su cita quedo confirmada. Si falla, no pasa nada mas: el
- * estado de la cita ya esta guardado.
  */
 async function avisarPorWhatsapp(cita, estado) {
   const destino = String(cita.telefono || '').trim();
@@ -43,7 +39,7 @@ async function avisarPorWhatsapp(cita, estado) {
   }
 }
 
-const PERMITIDOS = new Set(['en_proceso', 'confirmada', 'rechazada', 'reprogramar']);
+const PERMITIDOS = new Set(['en_proceso', 'confirmada', 'rechazada', 'reprogramar', 'eliminar']);
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -52,8 +48,7 @@ export default async function handler(req, res) {
   }
 
   // Dos formas de entrar: sesión de navegador (panel) o el token interno que ya usa el
-  // bot de WhatsApp para /api/agenda - así /cancelar y /confirmar pueden escribir el
-  // estado real sin pedirle a Daima que abra el panel.
+  // bot de WhatsApp para /api/agenda
   const sesion = leerSesion(req, process.env.SESSION_SECRET || '');
   const tokenBot = String(req.headers.authorization || '').replace(/^Bearer\s+/i, '');
   const esBot = Boolean(process.env.WHATSAPP_API_TOKEN) && tokenBot === process.env.WHATSAPP_API_TOKEN;
@@ -64,6 +59,11 @@ export default async function handler(req, res) {
   if (!PERMITIDOS.has(estado)) return res.status(400).json({ error: 'Estado no válido' });
 
   try {
+    if (estado === 'eliminar') {
+      await eliminarCitaPorId(id);
+      return res.status(200).json({ ok: true, eliminado: true, id });
+    }
+
     const cita = await buscarCitaPorId(id);
     if (!cita) return res.status(404).json({ error: 'Cita no encontrada' });
 
@@ -85,8 +85,7 @@ export default async function handler(req, res) {
       }
     }
 
-    // El aviso por WhatsApp va aparte del correo: no depende de que la clienta haya
-    // dado un correo valido, solo de que tengamos su numero.
+    // El aviso por WhatsApp va aparte del correo
     if (estado !== anterior && estado !== 'en_proceso') {
       await avisarPorWhatsapp(cita, estado);
     }

@@ -434,6 +434,197 @@ a.enlace{color:var(--accent-dark);text-decoration:none;word-break:break-all;
 .cms-toolbar{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem}
 .cms-toolbar .btn{flex:1 1 auto}
 
+
+/* ---------- Mejoras Android / Mobile UX (Make Interfaces Feel Better) ---------- */
+.btn:active, .mini:active, .chat-item:active, .nav button:active, .wa-tab:active {
+  transform: scale(0.96);
+}
+.nav button {
+  min-height: 56px;
+  border-radius: 12px;
+  transition: transform 0.1s ease, background 0.15s ease, color 0.15s ease;
+}
+.nav button.on {
+  color: var(--text);
+  font-weight: 600;
+  background: rgba(209,187,164,0.15);
+}
+.nav button.on svg {
+  stroke-width: 2.2;
+}
+.mini.peligro {
+  background: var(--bad-bg);
+  border-color: rgba(140,47,47,0.3);
+  color: var(--bad);
+}
+.mini.peligro:hover, .mini.peligro:active {
+  background: var(--bad);
+  border-color: var(--bad);
+  color: #fff;
+}
+/* Modal de Confirmación */
+.modal-telon {
+  position: fixed;
+  inset: 0;
+  background: rgba(45,41,38,0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 120;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.modal-telon.on {
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal-caja {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  max-width: 400px;
+  width: 100%;
+  padding: 1.5rem;
+  box-shadow: 0 20px 48px rgba(45,41,38,0.16);
+  transform: translateY(12px) scale(0.98);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.modal-telon.on .modal-caja {
+  transform: translateY(0) scale(1);
+}
+.modal-caja h3 {
+  font-family: var(--f-serif);
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+.modal-caja p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: 1.35rem;
+}
+.modal-botones {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: flex-end;
+}
+/* WhatsApp Tabs & QR */
+.wa-tabs {
+  display: flex;
+  gap: 0.35rem;
+  background: var(--bg);
+  padding: 4px;
+  border-radius: 12px;
+  margin: 1rem 0 0.85rem;
+  border: 1px solid var(--border);
+}
+.wa-tab {
+  flex: 1;
+  min-height: 42px;
+  border: none;
+  border-radius: 9px;
+  background: none;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--muted);
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+.wa-tab.activo {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 2px 6px rgba(45,41,38,0.06);
+}
+.wa-qr-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.25rem 1rem;
+  background: var(--surface);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  margin: 0.5rem 0 0.75rem;
+  text-align: center;
+}
+.wa-qr-img {
+  width: 220px;
+  height: 220px;
+  border-radius: 12px;
+  background: #fff;
+  padding: 8px;
+  box-shadow: 0 4px 14px rgba(45,41,38,0.08);
+  border: 1px solid var(--border);
+  margin-bottom: 0.75rem;
+}
+.wa-pasos {
+  margin: 0.75rem 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.55;
+  padding-left: 1.2rem;
+  text-align: left;
+}
+.wa-pasos li {
+  margin-bottom: 0.4rem;
+}
+.wa-copiar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 100px;
+  background: var(--surface);
+  border: 1px solid var(--accent-dark);
+  color: var(--accent-dark);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.wa-copiar-btn:active {
+  transform: scale(0.96);
+}
+.wa-copiar-btn.copiado {
+  background: var(--ok);
+  border-color: var(--ok);
+  color: #fff;
+}
+/* Burbujas de mensajería Android / WhatsApp */
+.msg {
+  box-shadow: 0 1px 2px rgba(45,41,38,0.05);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+.msg.entrante {
+  background: #FFFFFF;
+  border: 1px solid rgba(235,230,224,0.85);
+  border-radius: 16px 16px 16px 4px;
+}
+.msg.saliente {
+  background: #DCF8C6;
+  border: 1px solid rgba(31,107,63,0.12);
+  border-radius: 16px 16px 4px 16px;
+  color: #133821;
+}
+.msg.saliente time {
+  color: #4B785A;
+}
+.punto.on {
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(31,107,63,0.4); }
+  70% { box-shadow: 0 0 0 6px rgba(31,107,63,0); }
+  100% { box-shadow: 0 0 0 0 rgba(31,107,63,0); }
+}
+
 </style>
 </head>
 <body>
@@ -801,13 +992,13 @@ function pintarCitas(lista) {
     const mover = `<button class="mini" data-accion="reprogramar" data-id="${escapar(c.id)}">Reprogramar</button>`;
     const rechazar = `<button class="mini" data-accion="rechazada" data-id="${escapar(c.id)}">Rechazar</button>`;
     const editar = `<button class="mini" data-editar="${escapar(c.id)}">Editar</button>`;
+    const eliminar = `<button class="mini peligro" data-eliminar="${escapar(c.id)}" data-nombre="${escapar(c.nombre || 'esta cita')}" type="button" title="Eliminar cita">Eliminar</button>`;
 
-    // Reprogramar se ofrece siempre que la cita siga viva: es lo que se necesita cuando
-    // hay que mover una hora sin perder a la clienta.
+    // Acciones ergonómicas adaptadas al estado de la cita
     const acciones = estado === 'confirmada' ? `${mover}${rechazar}`
-      : estado === 'rechazada' ? aceptar
-      : estado === 'reprogramar' ? `${aceptar}${rechazar}`
-      : `${aceptar}${mover}${rechazar}`;
+      : estado === 'rechazada' ? `${aceptar}${eliminar}`
+      : estado === 'reprogramar' ? `${aceptar}${rechazar}${eliminar}`
+      : `${aceptar}${mover}${rechazar}${eliminar}`;
 
     // El correo que tomo el bot pudo salir mal, o el proveedor pudo rechazarlo. Si la
     // clienta no fue avisada por mail hay que verlo aqui, no en los logs del servidor.
@@ -939,6 +1130,62 @@ document.addEventListener('click', async (e) => {
   }
 });
 
+
+/* ============ Modal de Confirmación y Eliminación ============ */
+let accionConfirmarModal = null;
+function abrirModalConfirmacion({ titulo, mensaje, btnTexto, onConfirm }) {
+  const t = $('modalTitulo');
+  const m = $('modalMensaje');
+  const b = $('modalBtnConfirmar');
+  if (t) t.textContent = titulo || '¿Confirmar acción?';
+  if (m) m.innerHTML = mensaje || '¿Estás seguro de continuar?';
+  if (b) b.textContent = btnTexto || 'Eliminar';
+  accionConfirmarModal = onConfirm;
+  const modal = $('modalConfirmacion');
+  if (modal) modal.classList.add('on');
+}
+function cerrarModalConfirmacion() {
+  const modal = $('modalConfirmacion');
+  if (modal) modal.classList.remove('on');
+  accionConfirmarModal = null;
+}
+if ($('modalBtnCancelar')) $('modalBtnCancelar').addEventListener('click', cerrarModalConfirmacion);
+if ($('modalBtnConfirmar')) $('modalBtnConfirmar').addEventListener('click', async () => {
+  if (typeof accionConfirmarModal === 'function') {
+    const fn = accionConfirmarModal;
+    cerrarModalConfirmacion();
+    await fn();
+  } else {
+    cerrarModalConfirmacion();
+  }
+});
+
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('[data-eliminar]');
+  if (!btn) return;
+  const id = btn.dataset.eliminar;
+  const nombre = btn.dataset.nombre || 'esta cita';
+  abrirModalConfirmacion({
+    titulo: '¿Eliminar cita?',
+    mensaje: `¿Estás seguro de que deseas eliminar permanentemente la cita de <strong>${escapar(nombre)}</strong>?<br><small style="color:var(--bad)">Esta acción borrará el registro de la base de datos.</small>`,
+    btnTexto: 'Sí, eliminar',
+    onConfirm: async () => {
+      try {
+        await api('/api/admin/estado', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id, estado: 'eliminar' }),
+        });
+        CITAS = CITAS.filter((c) => c.id !== id);
+        pintarStats();
+        aplicarFiltros();
+      } catch (err) {
+        alert('No se pudo eliminar: ' + err.message);
+      }
+    }
+  });
+});
+
 /* ============ WhatsApp: conexión ============ */
 /** "95" -> "1 hora y 35 min". Un número de minutos suelto no se lee. */
 function duracionLegible(minutos) {
@@ -949,51 +1196,90 @@ function duracionLegible(minutos) {
   return `${h} hora${h === 1 ? '' : 's'}${resto ? ` y ${resto} min` : ''}`;
 }
 
+let waTabActivo = 'qr';
 async function refrescarConexion() {
   const caja = $('conexion');
+  if (!caja) return;
   try {
     const e = await api('/api/admin/whatsapp?tipo=estado');
     if (e.conectado) {
-      // Un bloqueo de la protección antiban se nota solo en que el bot deja de contestar.
-      // Ya pasó una vez y no había forma de verlo sin entrar al servidor: ahora se avisa.
       const bloqueo = e.envios?.bloqueado
         ? `<div class="aviso-correo" style="margin-top:.6rem"><span>⚠️</span><span>
-             <strong>Los envíos están bloqueados.</strong> La protección antispam llegó a su
-             tope de ${escapar(String(e.envios.topeHoy))} mensajes hoy (${escapar(String(e.envios.enviadosHoy))} enviados).
-             El bot recibe pero no puede contestar.</span></div>`
+             <strong>Los envíos están pausados por seguridad.</strong> Límite de ${escapar(String(e.envios.topeHoy))} mensajes alcanzado hoy (${escapar(String(e.envios.enviadosHoy))} enviados).
+             El bot recibe mensajes pero no puede enviar respuestas automáticas.</span></div>`
         : '';
       caja.innerHTML = `
-        <div class="conexion-cab"><span class="punto on"></span><strong>Conectado</strong></div>
-        <p>Atendiendo desde el ${escapar(e.numero || 'número del estudio')}.</p>${bloqueo}`;
-    } else if (e.codigo) {
-      caja.innerHTML = `
-        <div class="conexion-cab"><span class="punto off"></span><strong>Falta vincular</strong></div>
-        <p>En tu teléfono, abre <strong>WhatsApp → Ajustes → Dispositivos vinculados →
-           Vincular dispositivo → Vincular con número de teléfono</strong>, y escribe este código:</p>
-        <div class="codigo">${escapar(e.codigo)}</div>
-        <p class="conexion-nota">El código vence en unos minutos. Si se te pasa, pide uno nuevo.</p>
-        <button class="btn btn-ghost btn-sm" id="btnCodigo" type="button">Pedir código nuevo</button>`;
+        <div class="conexion-cab"><span class="punto on"></span><strong>WhatsApp Conectado</strong></div>
+        <p style="font-size:0.95rem;color:var(--text);margin:.2rem 0">Línea activa: <strong>${escapar(e.numero || 'Estudio Daima')}</strong></p>
+        <p style="font-size:0.8rem;color:var(--muted)">El asistente virtual responde agendamientos y mensajes entrantes con normalidad.</p>
+        ${bloqueo}`;
     } else {
-      // Antes acá solo decía "Desconectado", que no le dice a nadie si hay que
-      // esperar o si hay que hacer algo. Ahora el servicio informa desde cuándo
-      // está caído y si la sesión murió de verdad, y eso se muestra.
       const s = e.salud || {};
       const desde = s.caido && s.minutos > 0 ? duracionLegible(s.minutos) : null;
-
       const urgencia = s.necesitaEmparejar
         ? `<div class="aviso-correo" style="margin-top:.6rem"><span>⚠️</span><span>
-             <strong>WhatsApp cerró la sesión.</strong> Esto no se arregla solo: hay que
-             vincular el número otra vez desde tu teléfono. Mientras tanto,
-             <strong>las clientas que escriban no reciben respuesta</strong>.</span></div>`
+             <strong>WhatsApp requiere vinculación.</strong> Escanea el código QR o ingresa el código de 8 dígitos para reactivar la atención automática.</span></div>`
         : `<div class="aviso-correo" style="margin-top:.6rem"><span>⏳</span><span>
-             Está intentando reconectarse solo. Si en un rato no vuelve, pide un código
-             y vincúlalo de nuevo.</span></div>`;
+             Verificando servicio de WhatsApp... Si no enlaza en unos segundos, escanea el QR o usa el código.</span></div>`;
+
+      const qrValido = e.qr ? e.qr : null;
+      const codigoValido = e.codigo ? e.codigo : null;
+
+      if (!qrValido && codigoValido) waTabActivo = 'codigo';
+
+      const qrHtml = qrValido ? `
+        <div class="wa-qr-box">
+          <img class="wa-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&margin=8&data=${encodeURIComponent(qrValido)}" alt="Código QR WhatsApp" />
+          <ol class="wa-pasos">
+            <li>Abre <strong>WhatsApp</strong> en tu teléfono.</li>
+            <li>Ve a <strong>Ajustes</strong> (o Menú ⋮) &rarr; <strong>Dispositivos vinculados</strong>.</li>
+            <li>Toca <strong>Vincular un dispositivo</strong> y apunta tu cámara a este código QR.</li>
+          </ol>
+          <button class="btn btn-ghost btn-sm" id="btnCodigo" type="button" style="margin-top:.5rem">Actualizar QR</button>
+        </div>
+      ` : `
+        <div class="wa-qr-box">
+          <p style="color:var(--muted);font-size:0.85rem;margin:1rem 0">El código QR está generándose...</p>
+          <button class="btn btn-ghost btn-sm" id="btnCodigo" type="button">Generar QR ahora</button>
+        </div>
+      `;
+
+      const codigoHtml = codigoValido ? `
+        <div class="wa-qr-box">
+          <div class="codigo" id="bloqueCodigo" style="font-size:1.85rem;letter-spacing:.18em">${escapar(codigoValido)}</div>
+          <button class="wa-copiar-btn" id="btnCopiarCodigo" type="button" data-codigo="${escapar(codigoValido)}">
+            <span>📋</span> <span id="txtCopiar">Copiar código</span>
+          </button>
+          <ol class="wa-pasos" style="margin-top:1rem">
+            <li>En WhatsApp ve a <strong>Dispositivos vinculados</strong>.</li>
+            <li>Toca <strong>Vincular un dispositivo</strong> &rarr; <strong>Vincular con número de teléfono</strong>.</li>
+            <li>Escribe este código de 8 dígitos.</li>
+          </ol>
+          <button class="btn btn-ghost btn-sm" id="btnCodigo" type="button" style="margin-top:.5rem">Pedir código nuevo</button>
+        </div>
+      ` : `
+        <div class="wa-qr-box">
+          <p style="color:var(--muted);font-size:0.85rem;margin:1rem 0">No hay código activo disponible.</p>
+          <button class="btn btn-ghost btn-sm" id="btnCodigo" type="button">Pedir código de 8 dígitos</button>
+        </div>
+      `;
 
       caja.innerHTML = `
-        <div class="conexion-cab"><span class="punto off"></span><strong>Desconectado</strong></div>
-        <p>${desde ? `Sin WhatsApp desde hace <strong>${escapar(desde)}</strong>.` : 'El WhatsApp del estudio no está vinculado.'}</p>
+        <div class="conexion-cab"><span class="punto off"></span><strong>Vincular WhatsApp de Daima</strong></div>
+        <p>${desde ? `Sin conexión desde hace <strong>${escapar(desde)}</strong>.` : 'El WhatsApp del estudio no está vinculado actualmente.'}</p>
         ${urgencia}
-        <button class="btn btn-ghost btn-sm" id="btnCodigo" type="button" style="margin-top:.75rem">Pedir código</button>`;
+        <div class="wa-tabs" id="waTabs">
+          <button class="wa-tab ${waTabActivo==='qr'?'activo':''}" data-tab="qr" type="button">
+            <span>📱</span> Escanear QR
+          </button>
+          <button class="wa-tab ${waTabActivo==='codigo'?'activo':''}" data-tab="codigo" type="button">
+            <span>🔢</span> Código de 8 dígitos
+          </button>
+        </div>
+        <div id="waContenidoTab">
+          ${waTabActivo === 'qr' ? qrHtml : codigoHtml}
+        </div>
+      `;
     }
   } catch (ex) {
     caja.innerHTML = `
@@ -1003,6 +1289,31 @@ async function refrescarConexion() {
 }
 
 $('conexion').addEventListener('click', async (e) => {
+  const tabBtn = e.target.closest('[data-tab]');
+  if (tabBtn) {
+    waTabActivo = tabBtn.dataset.tab;
+    refrescarConexion();
+    return;
+  }
+  const copyBtn = e.target.closest('#btnCopiarCodigo');
+  if (copyBtn) {
+    const cod = copyBtn.dataset.codigo;
+    if (cod) {
+      try {
+        await navigator.clipboard.writeText(cod);
+        copyBtn.classList.add('copiado');
+        const txt = $('txtCopiar');
+        if (txt) txt.textContent = '¡Copiado!';
+        setTimeout(() => {
+          copyBtn.classList.remove('copiado');
+          if ($('txtCopiar')) $('txtCopiar').textContent = 'Copiar código';
+        }, 2500);
+      } catch (_) {
+        alert('Código: ' + cod);
+      }
+    }
+    return;
+  }
   if (!e.target.closest('#btnCodigo')) return;
   const b = e.target.closest('#btnCodigo');
   b.disabled = true; b.textContent = 'Pidiendo…';
@@ -1013,7 +1324,7 @@ $('conexion').addEventListener('click', async (e) => {
     await refrescarConexion();
   } catch (ex) {
     alert(ex.message);
-    b.disabled = false; b.textContent = 'Pedir código';
+    b.disabled = false; b.textContent = 'Reintentar';
   }
 });
 
@@ -1788,7 +2099,11 @@ function pintarLandingEditor() {
         <div class="cms-toolbar">
           <button type="button" class="btn btn-outline btn-sm" data-cms-jump="typography">Tipografía</button>
           <button type="button" class="btn btn-outline btn-sm" data-cms-jump="hero">Hero</button>
+          <button type="button" class="btn btn-outline btn-sm" data-cms-jump="services">Servicios</button>
+          <button type="button" class="btn btn-outline btn-sm" data-cms-jump="about">Sobre mí</button>
           <button type="button" class="btn btn-outline btn-sm" data-cms-jump="pricing">Planes</button>
+          <button type="button" class="btn btn-outline btn-sm" data-cms-jump="store">Tienda</button>
+          <button type="button" class="btn btn-outline btn-sm" data-cms-jump="gallery">Galería</button>
           <a class="btn btn-outline btn-sm" href="/" target="_blank" rel="noopener">Abrir live</a>
         </div>
         <div class="cms-phone-wrap">
@@ -1944,8 +2259,12 @@ function wireCmsFrame() {
 function onCmsFrameMessage(ev) {
   if (!ev.data || !String(ev.data.type || '').startsWith('daima-cms-')) return;
   if (ev.data.type === 'daima-cms-select') {
-    cmsSel = ev.data.section || 'hero';
+    const nueva = ev.data.section || 'hero';
     const drawer = $('cmsDrawer');
+    // Si ya esta abierto ese mismo apartado, NO redibujar: recrear el <textarea>
+    // en medio de una edicion borra el foco y parece que "no deja editar".
+    if (drawer && nueva === cmsSel && drawer.querySelector('#formCmsDrawer')) return;
+    cmsSel = nueva;
     if (drawer) {
       drawer.innerHTML = cmsDrawerHtml(cmsSel);
       drawer.classList.add('on');
@@ -2083,5 +2402,18 @@ async function guardarServicioLanding(event) {
 
 
 </script>
+
+<!-- Modal de confirmación para eliminar citas u otras acciones críticas -->
+<div class="modal-telon" id="modalConfirmacion" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
+  <div class="modal-caja">
+    <h3 id="modalTitulo">¿Confirmar acción?</h3>
+    <p id="modalMensaje">¿Estás seguro de que deseas continuar?</p>
+    <div class="modal-botones">
+      <button class="mini" id="modalBtnCancelar" type="button">Cancelar</button>
+      <button class="mini peligro" id="modalBtnConfirmar" type="button">Eliminar</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
