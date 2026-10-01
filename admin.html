@@ -995,7 +995,8 @@ function pintarCitas(lista) {
     const eliminar = `<button class="mini peligro" data-eliminar="${escapar(c.id)}" data-nombre="${escapar(c.nombre || 'esta cita')}" type="button" title="Eliminar cita">Eliminar</button>`;
 
     // Acciones ergonómicas adaptadas al estado de la cita
-    const acciones = estado === 'confirmada' ? `${mover}${rechazar}`
+    // Permitir eliminar en cualquier estado si la administradora lo requiere
+    const acciones = estado === 'confirmada' ? `${mover}${rechazar}${eliminar}`
       : estado === 'rechazada' ? `${aceptar}${eliminar}`
       : estado === 'reprogramar' ? `${aceptar}${rechazar}${eliminar}`
       : `${aceptar}${mover}${rechazar}${eliminar}`;
@@ -1131,59 +1132,114 @@ document.addEventListener('click', async (e) => {
 });
 
 
-/* ============ Modal de Confirmación y Eliminación ============ */
+/* ============ Modal de Confirmación y Eliminación (Delegación Global Infalible) ============ */
 let accionConfirmarModal = null;
+
 function abrirModalConfirmacion({ titulo, mensaje, btnTexto, onConfirm }) {
   const t = $('modalTitulo');
   const m = $('modalMensaje');
   const b = $('modalBtnConfirmar');
   if (t) t.textContent = titulo || '¿Confirmar acción?';
   if (m) m.innerHTML = mensaje || '¿Estás seguro de continuar?';
-  if (b) b.textContent = btnTexto || 'Eliminar';
+  if (b) {
+    b.disabled = false;
+    b.textContent = btnTexto || 'Eliminar';
+  }
   accionConfirmarModal = onConfirm;
   const modal = $('modalConfirmacion');
   if (modal) modal.classList.add('on');
 }
+
 function cerrarModalConfirmacion() {
   const modal = $('modalConfirmacion');
   if (modal) modal.classList.remove('on');
   accionConfirmarModal = null;
 }
-if ($('modalBtnCancelar')) $('modalBtnCancelar').addEventListener('click', cerrarModalConfirmacion);
-if ($('modalBtnConfirmar')) $('modalBtnConfirmar').addEventListener('click', async () => {
-  if (typeof accionConfirmarModal === 'function') {
-    const fn = accionConfirmarModal;
-    cerrarModalConfirmacion();
-    await fn();
-  } else {
-    cerrarModalConfirmacion();
-  }
-});
 
-document.addEventListener('click', (e) => {
-  const btn = e.target.closest('[data-eliminar]');
-  if (!btn) return;
-  const id = btn.dataset.eliminar;
-  const nombre = btn.dataset.nombre || 'esta cita';
-  abrirModalConfirmacion({
-    titulo: '¿Eliminar cita?',
-    mensaje: `¿Estás seguro de que deseas eliminar permanentemente la cita de <strong>${escapar(nombre)}</strong>?<br><small style="color:var(--bad)">Esta acción borrará el registro de la base de datos.</small>`,
-    btnTexto: 'Sí, eliminar',
-    onConfirm: async () => {
+// Delegación global: no depende de cuándo se cargó el DOM
+document.addEventListener('click', async (e) => {
+  // Cancelar modal
+  if (e.target.closest('#modalBtnCancelar') || (e.target.id === 'modalConfirmacion')) {
+    cerrarModalConfirmacion();
+    return;
+  }
+
+  // Confirmar modal
+  if (e.target.closest('#modalBtnConfirmar')) {
+    const btn = e.target.closest('#modalBtnConfirmar');
+    btn.disabled = true;
+    btn.textContent = 'Eliminando…';
+    if (typeof accionConfirmarModal === 'function') {
       try {
-        await api('/api/admin/estado', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id, estado: 'eliminar' }),
-        });
-        CITAS = CITAS.filter((c) => c.id !== id);
-        pintarStats();
-        aplicarFiltros();
+        await accionConfirmarModal();
       } catch (err) {
-        alert('No se pudo eliminar: ' + err.message);
+        alert('Error: ' + (err?.message || err));
       }
     }
-  });
+    cerrarModalConfirmacion();
+    return;
+  }
+
+  // Clic en botón Eliminar de una tarjeta
+  const btnEliminar = e.target.closest('[data-eliminar]');
+  if (btnEliminar) {
+    e.preventDefault();
+    e.stopPropagation();
+    const id = btnEliminar.dataset.eliminar;
+    const nombre = btnEliminar.dataset.nombre || 'esta cita';
+    abrirModalConfirmacion({
+      titulo: '¿Eliminar cita?',
+      mensaje: `¿Estás seguro de que deseas eliminar permanentemente la cita de <strong>${escapar(nombre)}</strong>?<br><br><small style="color:var(--bad)">Esta acción borrará el registro de la base de datos y no se podrá recuperar.</small>`,
+      btnTexto: 'Sí, eliminar',
+      onConfirm: async () => {
+        const tarjeta = btnEliminar.closest('.card');
+        if (tarjeta) tarjeta.style.opacity = '0.35';
+        try {
+          await api('/api/admin/estado', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id, estado: 'eliminar' }),
+          });
+          CITAS = CITAS.filter((c) => c.id !== id);
+          pintarStats();
+          aplicarFiltros();
+        } catch (err) {
+          if (tarjeta) tarjeta.style.opacity = '1';
+          alert('No se pudo eliminar la cita: ' + (err?.message || err));
+        }
+      }
+    });
+    return;
+  }
+
+  // Pestañas WhatsApp (QR vs Código)
+  const tabBtn = e.target.closest('[data-tab]');
+  if (tabBtn) {
+    waTabActivo = tabBtn.dataset.tab;
+    refrescarConexion();
+    return;
+  }
+
+  // Copiar código WhatsApp al portapapeles
+  const copyBtn = e.target.closest('#btnCopiarCodigo');
+  if (copyBtn) {
+    const cod = copyBtn.dataset.codigo;
+    if (cod) {
+      try {
+        await navigator.clipboard.writeText(cod);
+        copyBtn.classList.add('copiado');
+        const txt = $('txtCopiar');
+        if (txt) txt.textContent = '¡Copiado!';
+        setTimeout(() => {
+          copyBtn.classList.remove('copiado');
+          if ($('txtCopiar')) $('txtCopiar').textContent = 'Copiar código';
+        }, 2500);
+      } catch (_) {
+        alert('Código para WhatsApp: ' + cod);
+      }
+    }
+    return;
+  }
 });
 
 /* ============ WhatsApp: conexión ============ */
