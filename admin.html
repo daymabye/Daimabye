@@ -1291,12 +1291,12 @@ async function refrescarConexion() {
             <li>Ve a <strong>Ajustes</strong> (o Menú ⋮) &rarr; <strong>Dispositivos vinculados</strong>.</li>
             <li>Toca <strong>Vincular un dispositivo</strong> y apunta tu cámara a este código QR.</li>
           </ol>
-          <button class="btn btn-ghost btn-sm" id="btnCodigo" type="button" style="margin-top:.5rem">Actualizar QR</button>
+          <button class="btn btn-ghost btn-sm" id="btnActualizarQr" type="button" style="margin-top:.5rem">🔄 Actualizar QR</button>
         </div>
       ` : `
         <div class="wa-qr-box">
           <p style="color:var(--muted);font-size:0.85rem;margin:1rem 0">El código QR está generándose...</p>
-          <button class="btn btn-ghost btn-sm" id="btnCodigo" type="button">Generar QR ahora</button>
+          <button class="btn btn-ghost btn-sm" id="btnActualizarQr" type="button">🔄 Generar QR ahora</button>
         </div>
       `;
 
@@ -1311,12 +1311,12 @@ async function refrescarConexion() {
             <li>Toca <strong>Vincular un dispositivo</strong> &rarr; <strong>Vincular con número de teléfono</strong>.</li>
             <li>Escribe este código de 8 dígitos.</li>
           </ol>
-          <button class="btn btn-ghost btn-sm" id="btnCodigo" type="button" style="margin-top:.5rem">Pedir código nuevo</button>
+          <button class="btn btn-ghost btn-sm" id="btnPedirCodigo" type="button" style="margin-top:.5rem">🔢 Pedir código nuevo</button>
         </div>
       ` : `
         <div class="wa-qr-box">
           <p style="color:var(--muted);font-size:0.85rem;margin:1rem 0">No hay código activo disponible.</p>
-          <button class="btn btn-ghost btn-sm" id="btnCodigo" type="button">Pedir código de 8 dígitos</button>
+          <button class="btn btn-ghost btn-sm" id="btnPedirCodigo" type="button">🔢 Pedir código de 8 dígitos</button>
         </div>
       `;
 
@@ -1370,17 +1370,34 @@ $('conexion').addEventListener('click', async (e) => {
     }
     return;
   }
-  if (!e.target.closest('#btnCodigo')) return;
-  const b = e.target.closest('#btnCodigo');
-  b.disabled = true; b.textContent = 'Pidiendo…';
-  try {
-    await api('/api/admin/whatsapp?tipo=estado', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}',
-    });
-    await refrescarConexion();
-  } catch (ex) {
-    alert(ex.message);
-    b.disabled = false; b.textContent = 'Reintentar';
+  const qrBtn = e.target.closest('#btnActualizarQr');
+  if (qrBtn) {
+    qrBtn.disabled = true; qrBtn.textContent = 'Actualizando QR…';
+    try {
+      await api('/api/admin/whatsapp?tipo=estado', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ accion: 'reconectar' }),
+      });
+      await new Promise(r => setTimeout(r, 1200));
+      await refrescarConexion();
+    } catch (ex) {
+      alert(ex.message);
+      qrBtn.disabled = false; qrBtn.textContent = 'Reintentar QR';
+    }
+    return;
+  }
+  const codBtn = e.target.closest('#btnPedirCodigo') || e.target.closest('#btnCodigo');
+  if (codBtn) {
+    codBtn.disabled = true; codBtn.textContent = 'Pidiendo…';
+    try {
+      await api('/api/admin/whatsapp?tipo=estado', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}',
+      });
+      await refrescarConexion();
+    } catch (ex) {
+      alert(ex.message);
+      codBtn.disabled = false; codBtn.textContent = 'Reintentar';
+    }
+    return;
   }
 });
 

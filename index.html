@@ -18,7 +18,7 @@
          Dancing Script 400); antes se pedían nueve, incluidas dos cursivas sin usar. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:wght@400;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap">
     <!-- Dancing Script solo dibuja el monograma "dm", así que se piden esos dos glifos y no el
          alfabeto entero: 41 KB -> 1 KB. Si el monograma cambia, hay que actualizar `text=`. -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400&text=dm&display=swap">
@@ -92,7 +92,7 @@
             </div>
             <div class="brand-text">
                 <span class="brand-title">Daima</span>
-                <span class="brand-subtitle">Belleza</span>
+                <span class="brand-subtitle">Belleza Studio</span>
             </div>
         </a>
         <nav>
@@ -117,20 +117,47 @@
         <section id="home" class="hero" data-cms-section="hero">
             <div class="hero-container">
                 <div class="hero-content reveal">
-                    <span class="text-small hero-subtitle">Portoviejo, Ecuador</span>
-                    <h1 class="title-xl">Realza tu belleza natural</h1>
-                    <p>Experta en maquillaje profesional, novias y peinados. Un look impecable, duradero y fotogénico para tus momentos más importantes.</p>
+                    <div class="hero-pill-badge">
+                        <span class="pill-sparkle">✨</span>
+                        <span>Studio de Maquillaje & Peinado • Portoviejo</span>
+                    </div>
+                    <h1 class="title-xl">Realza tu belleza <em class="serif-accent">natural</em></h1>
+                    <p class="hero-desc">Experta en maquillaje profesional blindado, novias y peinados de autor. Un look impecable, duradero y fotogénico diseñado para tus momentos más importantes.</p>
                     <div class="hero-buttons">
-                        <a href="https://wa.me/593958757109?text=Hola%20Daima%20Belleza%2C%20quiero%20agendar%20mi%20cita." class="btn btn-primary" target="_blank">Reservar Ahora</a>
-                        <a href="#gallery" class="btn btn-outline">Ver Portafolio</a>
+                        <a href="https://wa.me/593958757109?text=Hola%20Daima%20Belleza%2C%20quiero%20agendar%20mi%20cita." class="btn btn-primary btn-glow" target="_blank">Reservar Ahora</a>
+                        <a href="#pricing" class="btn btn-outline">Ver Planes</a>
+                    </div>
+                    <div class="hero-perks">
+                        <div class="hero-perk-item">
+                            <span class="perk-icon">💎</span>
+                            <span>Alta gama</span>
+                        </div>
+                        <div class="hero-perk-divider">•</div>
+                        <div class="hero-perk-item">
+                            <span class="perk-icon">✨</span>
+                            <span>A prueba de lágrimas & fotos</span>
+                        </div>
+                        <div class="hero-perk-divider">•</div>
+                        <div class="hero-perk-item">
+                            <span class="perk-icon">📍</span>
+                            <span>Estudio & Domicilio</span>
+                        </div>
                     </div>
                 </div>
                 <div class="hero-image reveal">
+                    <div class="hero-image-aura" aria-hidden="true"></div>
                     <img src="assets/opt/hero-1100.webp"
                          srcset="assets/opt/hero-700.webp 700w, assets/opt/hero-1100.webp 1100w"
                          sizes="(max-width: 1024px) 92vw, 42vw"
                          width="1100" height="1466" fetchpriority="high" decoding="async"
                          alt="Maquillaje de ojos en tonos rosados con acabado luminoso, trabajo de Daima Belleza Studio">
+                    <div class="hero-floating-card">
+                        <span class="floating-icon">✨</span>
+                        <div class="floating-text">
+                            <strong class="floating-title">Acabado Fotogénico</strong>
+                            <span class="floating-sub">Durabilidad garantizada</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -139,23 +166,32 @@
         <section id="services" class="section" data-cms-section="services">
             <div class="section-header reveal">
                 <span class="text-small hero-subtitle">Lo que ofrezco</span>
-                <h2 class="title-lg">Servicios Exclusivos</h2>
+                <h2 class="title-lg">Servicios <em class="serif-accent">Exclusivos</em></h2>
             </div>
             <div class="services-grid">
                 <div class="service-card reveal">
-                    <svg class="icon service-icon" aria-hidden="true"><use href="#i-sparkles"/></svg>
-                    <h3 class="title-md">Maquillaje Social / Eventos</h3>
-                    <p>Ideal para eventos, graduaciones y fiestas. Un look duradero que resalta tus mejores facciones con productos de alta gama y técnicas avanzadas.</p>
+                    <div class="service-icon-wrap">
+                        <svg class="icon service-icon" aria-hidden="true"><use href="#i-sparkles"/></svg>
+                    </div>
+                    <span class="service-tag">Eventos & Graduaciones</span>
+                    <h3 class="title-md">Maquillaje Social</h3>
+                    <p>Ideal para eventos, graduaciones y fiestas. Un look de larga duración con piel blindada, pestañas a tu elección y técnicas de alta gama que resaltan tus mejores facciones.</p>
                 </div>
                 <div class="service-card reveal">
-                    <svg class="icon service-icon" aria-hidden="true"><use href="#i-ring"/></svg>
-                    <h3 class="title-md">Novias</h3>
-                    <p>Diseño de imagen nupcial completo. Prueba de maquillaje y peinado para que brilles con luz propia, con acabado a prueba de lágrimas y fotos.</p>
+                    <div class="service-icon-wrap">
+                        <svg class="icon service-icon" aria-hidden="true"><use href="#i-ring"/></svg>
+                    </div>
+                    <span class="service-tag">Novias & Quinceañeras</span>
+                    <h3 class="title-md">Novias Exclusivas</h3>
+                    <p>Diseño de imagen nupcial completo y personalizado. Prueba previa para que brilles con luz propia, con acabado blindado a prueba de emociones, lágrimas y cámaras de alta definición.</p>
                 </div>
                 <div class="service-card reveal">
-                    <svg class="icon service-icon" aria-hidden="true"><use href="#i-scissors"/></svg>
-                    <h3 class="title-md">Peinados</h3>
-                    <p>Desde ondas glamorosas de Hollywood hasta recogidos elegantes y románticos. El complemento perfecto para un maquillaje impecable.</p>
+                    <div class="service-icon-wrap">
+                        <svg class="icon service-icon" aria-hidden="true"><use href="#i-scissors"/></svg>
+                    </div>
+                    <span class="service-tag">Peinados de Autor</span>
+                    <h3 class="title-md">Peinados & Ondas</h3>
+                    <p>Desde ondas glamorosas de Hollywood y ondas de reina hasta semirecogidos románticos y elegantes. El complemento perfecto para un look impecable, duradero y sin frizz.</p>
                 </div>
             </div>
         </section>
@@ -164,7 +200,7 @@
         <section id="pricing" class="section" data-cms-section="pricing" style="background-color: var(--c-surface);">
             <div class="section-header reveal">
                 <span class="text-small hero-subtitle">Inversión en ti</span>
-                <h2 class="title-lg">Planes & Paquetes</h2>
+                <h2 class="title-lg">Planes & <em class="serif-accent">Paquetes</em></h2>
             </div>
             <div class="pricing-grid">
                 <!-- Plan 1 -->
@@ -284,18 +320,45 @@
         <section id="about" class="section about" data-cms-section="about">
             <div class="about-container">
                 <div class="about-image reveal">
-                    <img src="assets/opt/story-1100.webp"
-                         srcset="assets/opt/story-640.webp 640w, assets/opt/story-1100.webp 1100w"
-                         sizes="(max-width: 1024px) 90vw, 45vw"
-                         width="1100" height="1541" loading="lazy" decoding="async"
-                         alt="Daima Belleza Studio, maquilladora profesional en Portoviejo">
+                    <div class="about-image-frame">
+                        <img src="assets/opt/story-1100.webp"
+                             srcset="assets/opt/story-640.webp 640w, assets/opt/story-1100.webp 1100w"
+                             sizes="(max-width: 1024px) 90vw, 45vw"
+                             width="1100" height="1541" loading="lazy" decoding="async"
+                             alt="Daima Belleza Studio, maquilladora profesional en Portoviejo">
+                    </div>
                 </div>
                 <div class="about-content reveal">
                     <span class="text-small hero-subtitle">Conóceme</span>
-                    <h2 class="title-lg" style="margin-bottom: 2rem;">Hola, soy Daima</h2>
+                    <h2 class="title-lg" style="margin-bottom: 1.5rem;">Hola, soy <em class="serif-accent">Daima</em></h2>
                     <p>Con años de experiencia en el mundo de la belleza, mi verdadera pasión es hacer que cada mujer se sienta segura, empoderada y hermosa frente al espejo.</p>
-                    <p>Me especializo en técnicas modernas de maquillaje que <strong>realzan tu belleza natural</strong> en lugar de disfrazarla. Mi enfoque es crear pieles luminosas, miradas impactantes y peinados que duren toda la noche.</p>
-                    <p>Utilizo productos de la más alta calidad para garantizar un acabado perfecto y a prueba de fotos. ¡Estaré encantada de atenderte y crear el look de tus sueños en mi estudio en Portoviejo!</p>
+                    <blockquote class="about-quote">
+                        "Mi enfoque es realzar tu belleza natural en lugar de disfrazarla: pieles luminosas, miradas de impacto y peinados que duran toda la noche."
+                    </blockquote>
+                    <p>Utilizo productos de la más alta gama para garantizar un acabado perfecto y a prueba de fotos. ¡Estaré encantada de atenderte y crear el look de tus sueños en mi estudio en Portoviejo o a domicilio!</p>
+                    <div class="about-badges">
+                        <div class="about-badge">
+                            <span class="badge-icon">✨</span>
+                            <div>
+                                <strong>Piel Blindada</strong>
+                                <span>Resistente al calor, lágrimas y flashes de cámara</span>
+                            </div>
+                        </div>
+                        <div class="about-badge">
+                            <span class="badge-icon">📍</span>
+                            <div>
+                                <strong>Estudio en Portoviejo</strong>
+                                <span>Atención personalizada con previa cita (Av. 15 de Abril)</span>
+                            </div>
+                        </div>
+                        <div class="about-badge">
+                            <span class="badge-icon">🚗</span>
+                            <div>
+                                <strong>Servicio a Domicilio</strong>
+                                <span>Comodidad absoluta en tu casa o lugar de evento</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -309,7 +372,8 @@
                     <path d="M74.7,2.1C70,0.8,65,0,59.8,0C41,0,25.3,10.4,14.9,26.1c-1.9,2.9-3.6,5.9-5,9C8.1,38.6,5.7,40,2.9,40c-0.8,0-1.5-0.1-2.2-0.4c-1.1-0.4-1-1.9,0.2-2.5c1.4-0.7,2.9-1.7,4.2-2.9C1.9,32.3,0,28.6,0,24.6c0-4.8,2.5-9.2,6.7-11.9C18.4,4.2,37.8,0.7,59.8,0.7c4.7,0,9.4,0.6,13.8,1.9C74.6,2.8,75,2.3,74.7,2.1z M6.7,14.5C3.6,16.5,1.8,20.3,1.8,24.6c0,3.3,1.5,6.4,3.9,8.4c-1,1-2.2,1.8-3.4,2.4c-0.2,0.1-0.2,0.2,0,0.2c0.4,0.2,0.8,0.2,1.2,0.2c2.1,0,4-1.1,5.6-3.4c1.3-2.9,2.9-5.7,4.6-8.4C26.1,11.5,41.4,1.8,59.8,1.8C38.2,1.8,18.5,5.2,6.7,14.5z"></path>
                 </svg>
             </div>
-            <h2 style="margin-top: 1rem; color: white;">Daima Belleza</h2>
+            <h2 style="margin-top: 1rem; color: white;">Daima Belleza <em class="serif-accent" style="color:var(--c-accent)">Studio</em></h2>
+            <p style="color: rgba(255,255,255,0.65); font-size: 0.8rem; margin-top: 0.35rem; letter-spacing: 0.14em; text-transform: uppercase;">Makeup • Hairstyle • Portoviejo</p>
         </div>
         <div class="footer-links">
             <a href="https://www.instagram.com/daimabellezastudio/" target="_blank"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg></a>

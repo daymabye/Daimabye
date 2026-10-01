@@ -61,6 +61,10 @@ async function estado(req, res) {
   if (req.method === 'GET') return reenviar(res, 'estado');
 
   if (req.method === 'POST') {
+    const accion = req.body?.accion;
+    if (accion === 'reconectar') {
+      return reenviar(res, 'reconectar', { metodo: 'POST', cuerpo: {} });
+    }
     const numero = String(req.body?.numero || '').trim();
     return reenviar(res, 'pair', { metodo: 'POST', cuerpo: numero ? { numero } : {} });
   }
